@@ -1,0 +1,13 @@
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ESD_Database.mdf
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ESD_Database_log.ldf
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ProjectESD.exe.config
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ProjectESD.exe
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ProjectESD.pdb
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ProjectESD.xml
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.vbprojResolveAssemblyReference.cache
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.Resources.resources
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.vbproj.GenerateResource.Cache
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.vbproj.CoreCompileInputs.cache
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.exe
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.xml
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.pdb
