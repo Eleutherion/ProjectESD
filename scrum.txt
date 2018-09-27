@@ -6,3 +6,11 @@ Some Rights Reserve
 Sept. 21, 2018
 -Created Entity-Data Model and Flowchart for program
 
+Sept. 22, 2018
+-Implemented database based on EDM
+-Initialized module for illumination design
+-Initialized module for wire sizing
+
+Sept. 25, 2018
+-Continued building module for illumination design
+-Implemented array listing

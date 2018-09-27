@@ -11,3 +11,4 @@ C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.vbpro
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.exe
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.xml
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.pdb
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.FormIllu.resources
