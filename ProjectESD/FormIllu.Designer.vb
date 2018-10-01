@@ -140,11 +140,20 @@ Partial Class FormIllu
         Me.TxtRCR = New System.Windows.Forms.TextBox()
         Me.Label62 = New System.Windows.Forms.Label()
         Me.BtnCompute = New System.Windows.Forms.Button()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.RadioP = New System.Windows.Forms.RadioButton()
+        Me.RadioLW = New System.Windows.Forms.RadioButton()
+        Me.RadioC = New System.Windows.Forms.RadioButton()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer1.Panel1.SuspendLayout()
+        Me.SplitContainer1.Panel2.SuspendLayout()
+        Me.SplitContainer1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -160,7 +169,7 @@ Partial Class FormIllu
         Me.GroupBox1.Controls.Add(Me.TxtFreq)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.TxtReplace)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(13, 12)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(314, 131)
         Me.GroupBox1.TabIndex = 0
@@ -260,6 +269,9 @@ Partial Class FormIllu
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.RadioC)
+        Me.GroupBox2.Controls.Add(Me.RadioLW)
+        Me.GroupBox2.Controls.Add(Me.RadioP)
         Me.GroupBox2.Controls.Add(Me.Label25)
         Me.GroupBox2.Controls.Add(Me.Label26)
         Me.GroupBox2.Controls.Add(Me.Txtpf)
@@ -291,9 +303,9 @@ Partial Class FormIllu
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.CboClean)
         Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 149)
+        Me.GroupBox2.Location = New System.Drawing.Point(13, 149)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(314, 365)
+        Me.GroupBox2.Size = New System.Drawing.Size(314, 411)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Area Specifications"
@@ -301,7 +313,7 @@ Partial Class FormIllu
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(248, 334)
+        Me.Label25.Location = New System.Drawing.Point(248, 384)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(15, 13)
         Me.Label25.TabIndex = 35
@@ -310,7 +322,7 @@ Partial Class FormIllu
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(6, 334)
+        Me.Label26.Location = New System.Drawing.Point(6, 384)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(34, 13)
         Me.Label26.TabIndex = 34
@@ -318,7 +330,7 @@ Partial Class FormIllu
         '
         'Txtpf
         '
-        Me.Txtpf.Location = New System.Drawing.Point(142, 331)
+        Me.Txtpf.Location = New System.Drawing.Point(142, 381)
         Me.Txtpf.Name = "Txtpf"
         Me.Txtpf.Size = New System.Drawing.Size(100, 20)
         Me.Txtpf.TabIndex = 33
@@ -326,7 +338,7 @@ Partial Class FormIllu
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(248, 308)
+        Me.Label23.Location = New System.Drawing.Point(248, 358)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(15, 13)
         Me.Label23.TabIndex = 32
@@ -335,7 +347,7 @@ Partial Class FormIllu
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(6, 308)
+        Me.Label24.Location = New System.Drawing.Point(6, 358)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(32, 13)
         Me.Label24.TabIndex = 31
@@ -343,7 +355,7 @@ Partial Class FormIllu
         '
         'Txtpw
         '
-        Me.Txtpw.Location = New System.Drawing.Point(142, 305)
+        Me.Txtpw.Location = New System.Drawing.Point(142, 355)
         Me.Txtpw.Name = "Txtpw"
         Me.Txtpw.Size = New System.Drawing.Size(100, 20)
         Me.Txtpw.TabIndex = 30
@@ -351,7 +363,7 @@ Partial Class FormIllu
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(248, 282)
+        Me.Label20.Location = New System.Drawing.Point(248, 332)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(15, 13)
         Me.Label20.TabIndex = 29
@@ -360,7 +372,7 @@ Partial Class FormIllu
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(6, 282)
+        Me.Label22.Location = New System.Drawing.Point(6, 332)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(42, 13)
         Me.Label22.TabIndex = 28
@@ -368,7 +380,7 @@ Partial Class FormIllu
         '
         'Txtpc
         '
-        Me.Txtpc.Location = New System.Drawing.Point(142, 279)
+        Me.Txtpc.Location = New System.Drawing.Point(142, 329)
         Me.Txtpc.Name = "Txtpc"
         Me.Txtpc.Size = New System.Drawing.Size(100, 20)
         Me.Txtpc.TabIndex = 27
@@ -376,7 +388,7 @@ Partial Class FormIllu
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(6, 256)
+        Me.Label21.Location = New System.Drawing.Point(6, 306)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(180, 13)
         Me.Label21.TabIndex = 26
@@ -394,7 +406,7 @@ Partial Class FormIllu
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(248, 230)
+        Me.Label17.Location = New System.Drawing.Point(248, 280)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(15, 13)
         Me.Label17.TabIndex = 22
@@ -403,7 +415,7 @@ Partial Class FormIllu
         'LblPerimeter
         '
         Me.LblPerimeter.AutoSize = True
-        Me.LblPerimeter.Location = New System.Drawing.Point(6, 230)
+        Me.LblPerimeter.Location = New System.Drawing.Point(6, 280)
         Me.LblPerimeter.Name = "LblPerimeter"
         Me.LblPerimeter.Size = New System.Drawing.Size(51, 13)
         Me.LblPerimeter.TabIndex = 21
@@ -411,7 +423,7 @@ Partial Class FormIllu
         '
         'TxtPerimeter
         '
-        Me.TxtPerimeter.Location = New System.Drawing.Point(142, 227)
+        Me.TxtPerimeter.Location = New System.Drawing.Point(142, 277)
         Me.TxtPerimeter.Name = "TxtPerimeter"
         Me.TxtPerimeter.ReadOnly = True
         Me.TxtPerimeter.Size = New System.Drawing.Size(100, 20)
@@ -420,7 +432,7 @@ Partial Class FormIllu
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(248, 204)
+        Me.Label15.Location = New System.Drawing.Point(248, 254)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(15, 13)
         Me.Label15.TabIndex = 19
@@ -429,7 +441,7 @@ Partial Class FormIllu
         'LblHeight
         '
         Me.LblHeight.AutoSize = True
-        Me.LblHeight.Location = New System.Drawing.Point(6, 204)
+        Me.LblHeight.Location = New System.Drawing.Point(6, 254)
         Me.LblHeight.Name = "LblHeight"
         Me.LblHeight.Size = New System.Drawing.Size(42, 13)
         Me.LblHeight.TabIndex = 18
@@ -437,7 +449,7 @@ Partial Class FormIllu
         '
         'TxtHeight
         '
-        Me.TxtHeight.Location = New System.Drawing.Point(142, 201)
+        Me.TxtHeight.Location = New System.Drawing.Point(142, 251)
         Me.TxtHeight.Name = "TxtHeight"
         Me.TxtHeight.Size = New System.Drawing.Size(100, 20)
         Me.TxtHeight.TabIndex = 17
@@ -445,7 +457,7 @@ Partial Class FormIllu
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(248, 178)
+        Me.Label13.Location = New System.Drawing.Point(248, 228)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(15, 13)
         Me.Label13.TabIndex = 16
@@ -454,7 +466,7 @@ Partial Class FormIllu
         'LblWidth
         '
         Me.LblWidth.AutoSize = True
-        Me.LblWidth.Location = New System.Drawing.Point(6, 178)
+        Me.LblWidth.Location = New System.Drawing.Point(6, 228)
         Me.LblWidth.Name = "LblWidth"
         Me.LblWidth.Size = New System.Drawing.Size(35, 13)
         Me.LblWidth.TabIndex = 15
@@ -462,7 +474,7 @@ Partial Class FormIllu
         '
         'TxtWidth
         '
-        Me.TxtWidth.Location = New System.Drawing.Point(142, 175)
+        Me.TxtWidth.Location = New System.Drawing.Point(142, 225)
         Me.TxtWidth.Name = "TxtWidth"
         Me.TxtWidth.Size = New System.Drawing.Size(100, 20)
         Me.TxtWidth.TabIndex = 14
@@ -470,7 +482,7 @@ Partial Class FormIllu
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(248, 152)
+        Me.Label11.Location = New System.Drawing.Point(248, 202)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(15, 13)
         Me.Label11.TabIndex = 13
@@ -479,7 +491,7 @@ Partial Class FormIllu
         'LblLength
         '
         Me.LblLength.AutoSize = True
-        Me.LblLength.Location = New System.Drawing.Point(6, 152)
+        Me.LblLength.Location = New System.Drawing.Point(6, 202)
         Me.LblLength.Name = "LblLength"
         Me.LblLength.Size = New System.Drawing.Size(40, 13)
         Me.LblLength.TabIndex = 12
@@ -487,7 +499,7 @@ Partial Class FormIllu
         '
         'TxtLength
         '
-        Me.TxtLength.Location = New System.Drawing.Point(142, 149)
+        Me.TxtLength.Location = New System.Drawing.Point(142, 199)
         Me.TxtLength.Name = "TxtLength"
         Me.TxtLength.Size = New System.Drawing.Size(100, 20)
         Me.TxtLength.TabIndex = 11
@@ -495,7 +507,7 @@ Partial Class FormIllu
         'ChkPerimeter
         '
         Me.ChkPerimeter.AutoSize = True
-        Me.ChkPerimeter.Location = New System.Drawing.Point(142, 126)
+        Me.ChkPerimeter.Location = New System.Drawing.Point(6, 121)
         Me.ChkPerimeter.Name = "ChkPerimeter"
         Me.ChkPerimeter.Size = New System.Drawing.Size(92, 17)
         Me.ChkPerimeter.TabIndex = 10
@@ -584,7 +596,7 @@ Partial Class FormIllu
         Me.GroupBox3.Controls.Add(Me.Label28)
         Me.GroupBox3.Controls.Add(Me.CboMount)
         Me.GroupBox3.Controls.Add(Me.Label27)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 520)
+        Me.GroupBox3.Location = New System.Drawing.Point(13, 566)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(314, 215)
         Me.GroupBox3.TabIndex = 2
@@ -773,7 +785,7 @@ Partial Class FormIllu
         Me.GroupBox4.Controls.Add(Me.Label42)
         Me.GroupBox4.Controls.Add(Me.TxtLAT)
         Me.GroupBox4.Controls.Add(Me.Label43)
-        Me.GroupBox4.Location = New System.Drawing.Point(332, 12)
+        Me.GroupBox4.Location = New System.Drawing.Point(333, 12)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(314, 285)
         Me.GroupBox4.TabIndex = 3
@@ -1037,7 +1049,7 @@ Partial Class FormIllu
         Me.GroupBox5.Controls.Add(Me.Label61)
         Me.GroupBox5.Controls.Add(Me.TxtRCR)
         Me.GroupBox5.Controls.Add(Me.Label62)
-        Me.GroupBox5.Location = New System.Drawing.Point(332, 303)
+        Me.GroupBox5.Location = New System.Drawing.Point(333, 303)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(314, 432)
         Me.GroupBox5.TabIndex = 4
@@ -1268,27 +1280,86 @@ Partial Class FormIllu
         '
         'BtnCompute
         '
-        Me.BtnCompute.Location = New System.Drawing.Point(525, 758)
+        Me.BtnCompute.Location = New System.Drawing.Point(1064, 801)
         Me.BtnCompute.Name = "BtnCompute"
         Me.BtnCompute.Size = New System.Drawing.Size(121, 33)
         Me.BtnCompute.TabIndex = 5
         Me.BtnCompute.Text = "Compute"
         Me.BtnCompute.UseVisualStyleBackColor = True
         '
+        'SplitContainer1
+        '
+        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer1.Name = "SplitContainer1"
+        '
+        'SplitContainer1.Panel1
+        '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox1)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox2)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox5)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox3)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox4)
+        '
+        'SplitContainer1.Panel2
+        '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox6)
+        Me.SplitContainer1.Size = New System.Drawing.Size(1005, 795)
+        Me.SplitContainer1.SplitterDistance = 660
+        Me.SplitContainer1.TabIndex = 6
+        '
+        'RadioP
+        '
+        Me.RadioP.AutoSize = True
+        Me.RadioP.Location = New System.Drawing.Point(104, 121)
+        Me.RadioP.Name = "RadioP"
+        Me.RadioP.Size = New System.Drawing.Size(91, 17)
+        Me.RadioP.TabIndex = 36
+        Me.RadioP.TabStop = True
+        Me.RadioP.Text = "Use Perimeter"
+        Me.RadioP.UseVisualStyleBackColor = True
+        '
+        'RadioLW
+        '
+        Me.RadioLW.AutoSize = True
+        Me.RadioLW.Location = New System.Drawing.Point(104, 144)
+        Me.RadioLW.Name = "RadioLW"
+        Me.RadioLW.Size = New System.Drawing.Size(132, 17)
+        Me.RadioLW.TabIndex = 37
+        Me.RadioLW.TabStop = True
+        Me.RadioLW.Text = "Use Length and Width"
+        Me.RadioLW.UseVisualStyleBackColor = True
+        '
+        'RadioC
+        '
+        Me.RadioC.AutoSize = True
+        Me.RadioC.Location = New System.Drawing.Point(104, 167)
+        Me.RadioC.Name = "RadioC"
+        Me.RadioC.Size = New System.Drawing.Size(115, 17)
+        Me.RadioC.TabIndex = 38
+        Me.RadioC.TabStop = True
+        Me.RadioC.Text = "Use Circumference"
+        Me.RadioC.UseVisualStyleBackColor = True
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Location = New System.Drawing.Point(13, 12)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(314, 309)
+        Me.GroupBox6.TabIndex = 0
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Outdoor"
+        '
         'FormIllu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(660, 803)
+        Me.ClientSize = New System.Drawing.Size(1005, 846)
+        Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.BtnCompute)
-        Me.Controls.Add(Me.GroupBox5)
-        Me.Controls.Add(Me.GroupBox4)
-        Me.Controls.Add(Me.GroupBox3)
-        Me.Controls.Add(Me.GroupBox2)
-        Me.Controls.Add(Me.GroupBox1)
         Me.Name = "FormIllu"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Illumination Design"
+        Me.Text = "Illumination Design Calculator"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -1299,6 +1370,10 @@ Partial Class FormIllu
         Me.GroupBox4.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
+        Me.SplitContainer1.Panel1.ResumeLayout(False)
+        Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1421,4 +1496,9 @@ Partial Class FormIllu
     Friend WithEvents BtnCompute As Button
     Friend WithEvents Label68 As Label
     Friend WithEvents TxtLLF As TextBox
+    Friend WithEvents RadioC As RadioButton
+    Friend WithEvents RadioLW As RadioButton
+    Friend WithEvents RadioP As RadioButton
+    Friend WithEvents SplitContainer1 As SplitContainer
+    Friend WithEvents GroupBox6 As GroupBox
 End Class

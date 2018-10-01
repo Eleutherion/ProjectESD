@@ -94,7 +94,14 @@
       <DependentUpon>FormIllu.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormMain.Designer.vb">
+      <DependentUpon>FormMain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ModIllu.vb" />
+    <Compile Include="ModInterpolate.vb" />
     <Compile Include="ModWire.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -115,6 +122,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FormIllu.resx">
       <DependentUpon>FormIllu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
