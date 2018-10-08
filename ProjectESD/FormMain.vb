@@ -43,10 +43,9 @@ Public Class FormMain
             Catch ex As ConstraintException
                 MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End Try
-        Else
-            Refresh()
         End If
     End Sub
+
 
 
 #End Region
@@ -115,6 +114,10 @@ Public Class FormMain
                 MessageBox.Show("Given motor phase only valid for three-phase system.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 GoTo ErrorLine
             End If
+
+        ElseIf TypeComboBox.SelectedIndex = 3 And PowerRatingTextBox.Text = "" Then
+            MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            GoTo ErrorLine
         End If
 
         'Computation for Lighting
@@ -215,7 +218,7 @@ Public Class FormMain
                 ConduitSizeTextBox1.Text = conduit
             End If
 
-            'Computation for Special Equipment
+            'Computation for Motors
         ElseIf TypeComboBox.SelectedIndex = 2 Then
             If CboRatingUnit.SelectedIndex = 0 Then
                 If PhaseComboBox.Text = "3" Then
@@ -234,21 +237,30 @@ Public Class FormMain
                     End If
                     FullLoadCurrentTextBox.Text = Math.Round(current, 4)
 
-                    power = current * CInt(VoltageComboBox.Text) * Math.Sqrt(3)
+                    power = current * CInt(VoltageComboBox.Text) * Math.Sqrt(3) * CInt(TxtMotorItem.Text)
                     PowerRatingTextBox.Text = Math.Round(power, 4)
                 Else
                     current = SinglePhaseCurrent(truerating, VoltageComboBox.SelectedIndex)
-                    power = CInt(VoltageComboBox.Text) * current
+                    power = CInt(VoltageComboBox.Text) * current * CInt(TxtMotorItem.Text)
                     FullLoadCurrentTextBox.Text = CStr(Math.Round(current, 4))
                     PowerRatingTextBox.Text = CStr(Math.Round(power, 4))
                 End If
-            Else
+            ElseIf CboRatingUnit.SelectedIndex = 1 Then
                 power = CDec(MotorRatingTextBox.Text) * 1000 * CInt(TxtMotorItem.Text)
                 current = power / CInt(VoltageComboBox.Text)
 
                 PowerRatingTextBox.Text = CStr(Math.Round(power, 4))
                 FullLoadCurrentTextBox.Text = CStr(Math.Round(current, 4))
+            Else
+                power = CDec(MotorRatingTextBox.Text) * CInt(TxtMotorItem.Text)
+                current = power / CInt(VoltageComboBox.Text)
+
+                PowerRatingTextBox.Text = CStr(Math.Round(power, 4))
+                FullLoadCurrentTextBox.Text = CStr(Math.Round(current, 4))
             End If
+
+            MotorRatingTextBox.Text = Math.Round(power / CInt(TxtMotorItem.Text), 4)
+            CboRatingUnit.SelectedIndex = 2
 
             If MotorTypeComboBox.SelectedIndex = 3 Or MotorTypeComboBox.SelectedIndex = 4 Then
                 MinimumAmpacityTextBox.Text = Math.Round(current * 1.15, 4)
@@ -296,6 +308,55 @@ Public Class FormMain
                 ConduitSizeTextBox1.Text = conduit
             End If
 
+            'Computation for Non-Motors
+        ElseIf TypeComboBox.SelectedIndex = 3 Then
+
+            power = CDec(PowerRatingTextBox.Text) * CInt(TxtMotorItem.Text)
+
+            current = power / CInt(VoltageComboBox.Text)
+            FullLoadCurrentTextBox.Text = Math.Round(current, 4)
+
+            MinimumAmpacityTextBox.Text = CStr(Math.Round(current * 1.25, 4))
+
+            ocpd = current * 1.5
+
+            If WireSet(ConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), ocpd, ConduitTypeComboBox.Text, WireTypeComboBox.Text) = 1 Then
+                wirenumber = SetTextBox.Text
+            ElseIf WireSet(ConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), ocpd, ConduitTypeComboBox.Text, WireTypeComboBox.Text) <= SetTextBox.Text Then
+                wirenumber = SetTextBox.Text
+            Else
+                wirenumber = WireSet(ConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), ocpd, ConduitTypeComboBox.Text, WireTypeComboBox.Text)
+                SetTextBox.Text = wirenumber
+            End If
+
+            setcurrent = ocpd / wirenumber
+
+            Dim Size As String = WireSize(ConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), setcurrent, ConduitTypeComboBox.Text, WireTypeComboBox.Text)
+            If Size = "2.0" And ConductorComboBox.Text = "Copper" Then
+                WireSizeTextBox1.Text = "3.5"
+            ElseIf Size = "3.5" And ConductorComboBox.Text IsNot "Copper" Then
+                WireSizeTextBox1.Text = "5.5"
+            Else
+                WireSizeTextBox1.Text = Size
+            End If
+
+            If ocpd < 20 Then
+                OCPDRatingTextBox1.Text = "20"
+            ElseIf ocpd > 6000 Then
+                MessageBox.Show("Required OCPD rating exceeds commercially-available rating. Suggested value indicated. Consider customizing")
+                OCPDRatingTextBox1.Text = Math.Truncate((ocpd / 1000) + 1) * 1000
+            Else
+                OCPDRatingTextBox1.Text = OCPDRating(ocpd)
+            End If
+
+            conduit = ConduitSize(WireTypeComboBox.Text, WireSizeTextBox1.Text, GroundWireCheckBox1.Checked, PhaseComboBox.Text, ConduitTypeComboBox.Text)
+
+            If conduit = -1 Then
+                MessageBox.Show("No conduit size available for given wire and conduit. Consider adding wire set.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                GoTo ErrorLine
+            Else
+                ConduitSizeTextBox1.Text = conduit
+            End If
         End If
 
 ErrorLine: End Sub
@@ -362,24 +423,76 @@ ErrorLine: End Sub
             GrpLighting.Enabled = False
             GrpPower.Enabled = False
             TxtMotorItem.Text = "1"
+            PowerRatingTextBox.ReadOnly = True
+
         Else
-            TxtMotorItem.ReadOnly = True
             MotorRatingTextBox.ReadOnly = True
             CboRatingUnit.SelectedIndex = -1
             CboRatingUnit.Enabled = False
             MotorTypeComboBox.SelectedIndex = -1
             MotorTypeComboBox.Enabled = False
-            TxtMotorItem.Text = ""
             If TypeComboBox.SelectedIndex = 0 Then
                 GrpPower.Enabled = False
                 GrpLighting.Enabled = True
+                PowerRatingTextBox.ReadOnly = True
+                TxtMotorItem.ReadOnly = True
+                TxtMotorItem.Text = ""
             ElseIf TypeComboBox.SelectedIndex = 1 Then
                 GrpPower.Enabled = True
                 GrpLighting.Enabled = False
+                PowerRatingTextBox.ReadOnly = True
+                TxtMotorItem.ReadOnly = True
+                TxtMotorItem.Text = ""
+            ElseIf TypeComboBox.SelectedIndex = 3 Then
+                GrpPower.Enabled = False
+                GrpLighting.Enabled = False
+                PowerRatingTextBox.ReadOnly = False
+                TxtMotorItem.ReadOnly = False
+                TxtMotorItem.Text = "1"
             End If
         End If
     End Sub
 
+    Private Sub BtnAddBranch_Click(sender As Object, e As EventArgs) Handles BtnAddBranch.Click
+        TblBranchBindingSource.AddNew()
+    End Sub
+
+    Private Sub BtnSaveBranch_Click(sender As Object, e As EventArgs) Handles BtnSaveBranch.Click
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                Validate()
+                TblBranchBindingSource.EndEdit()
+                TblBranchTableAdapter.Update(ESD_DatabaseDataSet)
+
+                MessageBox.Show("Record saved.")
+
+                TblBranchTableAdapter.Fill(ESD_DatabaseDataSet.tblBranch)
+            Catch ex As NoNullAllowedException
+                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Catch ex As ConstraintException
+                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End Try
+        Else
+
+        End If
+
+    End Sub
+
+    Private Sub BtnDeleteBranch_Click(sender As Object, e As EventArgs) Handles BtnDeleteBranch.Click
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to delete? Once deleted, the record will not be retrieved.", "Delete", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                TblBranchTableAdapter.DeleteByPrimary(CodeTextBox.Text)
+
+                MessageBox.Show("Record deleted.")
+
+                TblBranchTableAdapter.Fill(ESD_DatabaseDataSet.tblBranch)
+            Catch
+                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
 
 #End Region
 
@@ -471,6 +584,10 @@ ErrorLine: End Sub
             TypeComboBox.Enabled = True
         End If
     End Sub
+
+
+
+
 
 #End Region
 End Class
