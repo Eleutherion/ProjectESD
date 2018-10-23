@@ -1,4 +1,6 @@
-﻿Module ModWire
+﻿Imports System.Numerics
+
+Module ModWire
     Public Function WireSize(ByVal Conductor As String, ByVal NominalTemp As Integer, ByVal Current As Decimal, ByVal Conduit As String, ByVal Wire As String) As String
         Dim Ampacity(21) As Integer
         Dim Size(21) As String
@@ -233,7 +235,7 @@ ReturnLine: Return Size(v)
         Return v
     End Function
 
-    Public Function ConduitSize(ByVal WireType As String, ConductorSize As String, Ground As Boolean, Phase As String, ConduitType As String) As Integer
+    Public Function ConduitSize(ByVal WireType As String, ConductorSize As String, Ground As Boolean, Phase As String, ConduitType As String, Neutral As Boolean) As Integer
         Dim WireSize = {"2.0", "3.5", "5.5", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "150", "175", "200", "250", "325", "375", "400", "500"}
         Dim NominalSize = {10, 15, 20, 25, 32, 40, 50, 65, 80, 90, 100, 125, 150}
         Dim v, w, z As Integer
@@ -797,12 +799,14 @@ ReturnLine: Return Size(v)
             End Select
         End If
 
-        If (Phase IsNot "3" And Ground = True) Or (Phase = "3" And Ground = False) Then
+        If (Phase IsNot "3" And (Ground Xor Neutral)) Or (Phase = "3" And Ground = False And Neutral = False) Then
             z = 3
-        ElseIf Phase IsNot "3" And Ground = False Then
+        ElseIf Phase IsNot "3" And Ground = False And Neutral = False Then
             z = 2
-        ElseIf Phase = "3" And Ground = True Then
+        ElseIf (Phase = "3" And Ground = True And Neutral = False) Or (Phase = "3" And Ground = False And Neutral = True) Or (Phase IsNot "3" And Ground = True And Neutral = True) Then
             z = 4
+        ElseIf Phase = "3" And Ground = True And Neutral = True Then
+            z = 5
         End If
 
         For j As Integer = 1 To 12 Step 1
@@ -815,5 +819,81 @@ ReturnLine: Return Size(v)
         NominalSize(w) = -1
 
 ReturnLine: Return NominalSize(w)
+    End Function
+
+    Public Function GroundWire(ByVal CurrentRating As Decimal, Conductor As String) As String
+        Dim GroundSize(21) As String
+        Dim v, OCPD(21) As Integer
+
+        OCPD = {0, 15, 20, 30, 40, 60, 100, 200, 300, 400, 500, 600, 800, 1000, 1200, 1600, 2000, 2500, 3000, 4000, 5000, 6000}
+
+        If CurrentRating > 6000 Then
+            v = 21
+        Else
+            For i As Integer = 1 To 21
+                If CurrentRating <= OCPD(i) And CurrentRating > OCPD(i - 1) Then
+                    v = i
+                End If
+            Next i
+        End If
+
+        If Conductor = "Copper" Then
+            GroundSize = {"", "2.0", "3.5", "5.5", "5.5", "5.5", "8.0", "14", "22", "30", "30", "38", "50", "60", "80", "100", "125", "175", "200", "250", "375", "400"}
+        Else
+            GroundSize = {"", "3.5", "5.5", "8.0", "8.0", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "175", "200", "325", "325", "375", "600", "600"}
+        End If
+
+        Return GroundSize(v)
+    End Function
+
+    Public Function LineImpedance(ByVal Length As Decimal, Conduit As String, ByVal WireSize As Decimal, Conductor As String, ByVal Voltage As Integer, ByVal LineSet As Integer) As Complex
+        Dim Zline As Complex
+        Dim x As Integer
+
+        Dim Size(20), NominalXL(20), NominalR(20), TrueR, TrueXL, Zbase As Decimal
+        Size = {2.0, 3.5, 5.5, 8.0, 14, 22, 30, 38, 50, 60, 80, 100, 125, 150, 175, 200, 250, 325, 375, 400, 500}
+
+        For i As Integer = 0 To 20
+            If Size(i) = WireSize Then
+                x = i
+            End If
+        Next i
+
+        Select Case Conduit
+            Case "Rigid PVC 80", "Rigid PVC 40", "HDPE"
+                NominalXL = {0.058, 0.054, 0.05, 0.052, 0.051, 0.048, 0.045, 0.046, 0.044, 0.043, 0.042, 0.041, 0.041, 0.041, 0.04, 0.04, 0.039, 0.039, 0.038, 0.038, 0.037}
+                If Conductor = "Copper" Then
+                    NominalR = {3.1, 2.0, 1.2, 0.78, 0.49, 0.31, 0.19, 0.15, 0.12, 0.1, 0.077, 0.062, 0.052, 0.044, 0.038, 0.033, 0.027, 0.023, 0.019, 0.019, 0.015}
+                Else
+                    NominalR = {0, 3.2, 2.0, 1.3, 0.81, 0.51, 0.32, 0.25, 0.2, 0.16, 0.13, 0.1, 0.085, 0.071, 0.061, 0.054, 0.043, 0.036, 0.029, 0.029, 0.023}
+                End If
+            Case Else
+                NominalXL = {0.073, 0.068, 0.063, 0.065, 0.064, 0.06, 0.057, 0.057, 0.055, 0.054, 0.052, 0.051, 0.052, 0.051, 0.05, 0.049, 0.048, 0.048, 0.048, 0.048, 0.046}
+                If Conductor = "Copper" Then
+                    NominalR = {3.1, 2.0, 1.2, 0.78, 0.49, 0.31, 0.2, 0.16, 0.12, 0.1, 0.079, 0.063, 0.054, 0.045, 0.039, 0.035, 0.029, 0.025, 0.021, 0.021, 0.018}
+                Else
+                    NominalR = {0, 3.2, 2.0, 1.3, 0.81, 0.51, 0.32, 0.25, 0.2, 0.16, 0.13, 0.1, 0.086, 0.072, 0.063, 0.055, 0.045, 0.038, 0.031, 0.031, 0.025}
+                End If
+        End Select
+
+        TrueR = NominalR(x) * Length / 305
+        TrueXL = NominalXL(x) * Length / 305
+
+        Dim Zohms = New Complex(TrueR / LineSet, TrueXL / LineSet)
+
+        Zbase = (Voltage ^ 2) / 1000000
+
+        Zline = Zohms / Zbase
+
+        Return Zline
+    End Function
+
+    Public Function LoadImpedance(ByVal Load As Decimal) As Complex
+        Dim Zload As Complex
+        Dim Zmotor = New Complex(0.07, 0.24)
+
+        Zload = Zmotor * (1000000 / Load)
+
+        Return Zload
     End Function
 End Module

@@ -1,25 +1,22 @@
-﻿Imports System.Text.RegularExpressions
-Imports System.Data.SqlClient
+﻿Option Infer On
+Imports System.Text.RegularExpressions
+Imports System.Numerics
+Imports System.Linq
 
 Public Class FormMain
 
+    Private Balanced As Boolean = False
+
+    Private TCL As Decimal
+
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'ESD_DatabaseDataSet.tblWire' table. You can move, or remove it, as needed.
-        Me.TblWireTableAdapter.Fill(Me.ESD_DatabaseDataSet.tblWire)
+        TblWireTableAdapter.Fill(ESD_DatabaseDataSet.tblWire)
         'TODO: This line of code loads data into the 'ESD_DatabaseDataSet.tblConductor' table. You can move, or remove it, as needed.
-        Me.TblConductorTableAdapter.Fill(Me.ESD_DatabaseDataSet.tblConductor)
-        'TODO: This line of code loads data into the 'ESD_DatabaseDataSet.tblTransGen' table. You can move, or remove it, as needed.
-        Me.TblTransGenTableAdapter.Fill(Me.ESD_DatabaseDataSet.tblTransGen)
-        'TODO: This line of code loads data into the 'ESD_DatabaseDataSet.tblSubfeeder' table. You can move, or remove it, as needed.
-        Me.TblSubfeederTableAdapter.Fill(Me.ESD_DatabaseDataSet.tblSubfeeder)
-        'TODO: This line of code loads data into the 'ESD_DatabaseDataSet.tblBranch' table. You can move, or remove it, as needed.
-        Me.TblBranchTableAdapter.Fill(Me.ESD_DatabaseDataSet.tblBranch)
-        'TODO: This line of code loads data into the 'ESD_DatabaseDataSet.tblMainFeeder' table. You can move, or remove it, as needed.
-        Me.TblMainFeederTableAdapter.Fill(Me.ESD_DatabaseDataSet.tblMainFeeder)
-        'TODO: This line of code loads data into the 'ESD_DatabaseDataSet.tblProject' table. You can move, or remove it, as needed.
-        Me.TblProjectTableAdapter.Fill(Me.ESD_DatabaseDataSet.tblProject)
-
-        SetTextBox.Text = "1"
+        TblConductorTableAdapter.Fill(ESD_DatabaseDataSet.tblConductor)
+        TblProjectTableAdapter.Fill(ESD_DatabaseDataSet.tblProject)
+        TblDistributionTableAdapter.Fill(ESD_DatabaseDataSet.tblDistribution)
+        TblSubfeederTableAdapter.Fill(ESD_DatabaseDataSet.tblSubfeeder)
     End Sub
 
 #Region "Project"
@@ -51,10 +48,503 @@ Public Class FormMain
 #End Region
 
 #Region "Main Feeder"
+    Private Sub BtnCompute_Click(sender As Object, e As EventArgs) Handles BtnCompute.Click
+        Dim imf, hrml, phaseload(2), setcurrent As Decimal
+        Dim voltage As Integer = VoltageComboBoxMain.Text
+        Dim wirenumber As Integer
 
+        If PhaseTextBox.Text = "3" Then
+            If TblBranchTableAdapter.GetHRMLSinglePhaseProject(ProjectCodeTextBox.Text) > TblBranchTableAdapter.GetHRMLThreePhaseProject(ProjectCodeTextBox.Text) Then
+                hrml = TblBranchTableAdapter.GetHRMLSinglePhaseProject(ProjectCodeTextBox.Text)
+                imf = (TCL / (voltage * Math.Sqrt(3))) + ((Math.Sqrt(3) * hrml * 0.25) / voltage)
+            Else
+                hrml = TblBranchTableAdapter.GetHRMLThreePhaseProject(ProjectCodeTextBox.Text)
+                imf = (TCL + 0.25 * hrml) / (voltage * Math.Sqrt(3))
+            End If
+
+            LineCurrentTextBox.Text = Math.Round(imf, 4)
+
+            OCPDRatingTextBox.Text = OCPDRating(imf * 1.25)
+
+            If WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text) = 1 Then
+                wirenumber = SetTextBox1.Text
+            ElseIf WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text) <= SetTextBox.Text Then
+                wirenumber = SetTextBox1.Text
+            Else
+                wirenumber = WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text)
+                SetTextBox1.Text = wirenumber
+            End If
+
+            setcurrent = OCPDRatingTextBox.Text / wirenumber
+
+            WireSizeTextBox.Text = WireSize(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), setcurrent, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text)
+
+            ConduitSizeTextBox.Text = ConduitSize(WireTypeComboBoxMain.Text, ConductorComboBoxMain.Text, GroundWireCheckBox.Checked, "3", ConduitTypeComboBoxMain.Text, False)
+        Else
+            hrml = TblBranchTableAdapter.GetHRMLSinglePhaseProject(ProjectCodeTextBox.Text)
+            imf = (TCL / voltage) + (0.25 * hrml / voltage)
+
+            LineCurrentTextBox.Text = Math.Round(imf, 4)
+
+            If TypeComboBox1.SelectedIndex > 1 And OCPDRating(imf * 1.25) = 15 Then
+                OCPDRatingTextBox.Text = 20
+            Else
+                OCPDRatingTextBox.Text = OCPDRating(imf * 1.25)
+            End If
+
+            If WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text) = 1 Then
+                wirenumber = SetTextBox.Text
+            ElseIf WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text) <= SetTextBox.Text Then
+                wirenumber = SetTextBox.Text
+            Else
+                wirenumber = WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text)
+                SetTextBox.Text = wirenumber
+            End If
+
+            setcurrent = OCPDRatingTextBox.Text / wirenumber
+
+            WireSizeTextBox.Text = WireSize(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), setcurrent, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text)
+
+            ConduitSizeTextBox.Text = ConduitSize(WireTypeComboBoxMain.Text, ConductorComboBoxMain.Text, GroundWireCheckBox.Checked, "1", ConduitTypeComboBoxMain.Text, False)
+        End If
+
+        If GroundWireCheckBox.Checked Then
+            GroundWireSizeTextBoxMain.Text = GroundWire(OCPDRatingTextBox.Text, GroundConductorComboBoxMain.Text)
+        End If
+    End Sub
+
+    Private Sub BtnkAIC_Click(sender As Object, e As EventArgs) Handles BtnkAIC.Click
+        Dim count As Integer = TblDistributionTableAdapter.CountDP(ProjectCodeTextBox.Text)
+        Dim zreal(count - 1), zimag(count - 1) As Double
+
+        Dim z(count - 1), y(count - 1), ytotal, zeq, zline, zutility, ztrans, z1, y1, yeq As Complex
+
+        Dim dt As DataTable = ESD_DatabaseDataSet.tblDistribution
+
+        TblDistributionTableAdapter.FillImpedance(dt, ProjectCodeTextBox.Text)
+
+        zreal = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceReal")).ToArray()
+        zimag = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceImag")).ToArray()
+        zline = LineImpedance(DistancetoSETextBox.Text, ConduitTypeComboBoxMain.Text, WireSizeTextBox.Text, ConductorComboBoxMain.Text, VoltageComboBoxMain.Text, SetTextBox1.Text)
+
+        zutility = New Complex(1 / ShortCircuitCapTextBox.Text * Math.Cos(Math.Atan(XRRatioTextBox.Text)), 1 / ShortCircuitCapTextBox.Text * Math.Sin(Math.Atan(XRRatioTextBox.Text)))
+
+        ztrans = New Complex(TransformerZpuTextBox.Text / 100 * (1 / TransformerRatingTextBox.Text) * Math.Cos(Math.Atan(TransformerXRRatioTextBox.Text)),
+                             TransformerZpuTextBox.Text / 100 * (1 / TransformerRatingTextBox.Text) * Math.Sin(Math.Atan(TransformerXRRatioTextBox.Text)))
+
+        z1 = zline + zutility + ztrans
+        y1 = Complex.Reciprocal(z1)
+
+        For i As Integer = 0 To count - 1 Step 1
+            z(i) = New Complex(zreal(i), zimag(i))
+            y(i) = Complex.Reciprocal(z(i))
+        Next i
+
+        For Each item As Complex In y
+            ytotal += item
+        Next
+
+        yeq = ytotal + y1
+        zeq = Complex.Reciprocal(yeq)
+
+        ImpedanceRealTextBoxMain.Text = Math.Round(zeq.Real, 4)
+        ImpedanceImagTextBoxMain.Text = Math.Round(zeq.Imaginary, 4)
+
+        Dim ifpu As Complex = Complex.Reciprocal(zeq)
+        Dim ibase, iactual As Decimal
+
+        If PhaseTextBox.Text = "3" Then
+            ibase = 1000000 / (Math.Sqrt(3) * VoltageComboBoxMain.Text)
+        Else
+            ibase = 1000000 / VoltageComboBoxMain.Text
+        End If
+
+        iactual = ifpu.Magnitude * ibase
+
+        KAICRatingTextBox.Text = Math.Round(iactual / 1000, 4)
+
+    End Sub
+#End Region
+
+#Region "Distribution Panel"
+    Private Sub BtnComputeDP_Click(sender As Object, e As EventArgs) Handles BtnComputeDP.Click
+        Dim ThreePhase As Boolean = False
+        Dim voltage As Integer = VoltageComboBoxDP.Text
+        Dim idp, load, hrml, phaseload(2), setcurrent As Decimal
+        Dim wirenumber As Integer
+
+        If VoltageComboBoxDP.Text = "" Or WireTypeComboBoxDP.Text = "" Or ConductorComboBoxDP.Text = "" Or SetTextBoxDP.Text = "" Or ConduitTypeComboBoxDP.Text = "" Or DistancetoMainTextBoxDP.Text = "" Then
+            MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            GoTo ErrorLine
+        End If
+
+        If PhaseTextBox.Text = "3" Then
+            ThreePhase = True
+            If TblDistributionTableAdapter.CountThreePhaseLoad(CodeTextBoxDP.Text) > 0 Then
+                load = TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, 3)
+                hrml = TblDistributionTableAdapter.GetHRMLThreePhase(CodeTextBoxDP.Text)
+
+                idp = (load + (0.25 * hrml)) / (Math.Sqrt(3) * voltage)
+
+                CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
+
+            Else
+                phaseload = {TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "A"), TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "B"), TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "C")}
+                Array.Sort(phaseload)
+
+                hrml = TblDistributionTableAdapter.GetHRMLSinglePhase(CodeTextBoxDP.Text)
+
+                idp = (phaseload(2) + (0.25 * hrml)) / voltage
+
+                CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
+            End If
+
+            OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
+
+            If WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = 1 Then
+                wirenumber = SetTextBoxDP.Text
+            ElseIf WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) <= SetTextBoxDP.Text Then
+                wirenumber = SetTextBoxDP.Text
+            Else
+                wirenumber = WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+                SetTextBoxDP.Text = wirenumber
+            End If
+
+            setcurrent = OCPDRatingTextBoxDP.Text / wirenumber
+
+            WireSizeTextBoxDP.Text = WireSize(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+            ConduitSizeTextBoxDP.Text = ConduitSize(WireTypeComboBoxDP.Text, WireSizeTextBoxDP.Text, False, "3", ConduitTypeComboBoxDP.Text, False)
+
+        Else
+            load = TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "A")
+            hrml = TblDistributionTableAdapter.GetHRMLSinglePhase(CodeTextBoxDP.Text)
+
+            idp = (load + (0.25 * hrml)) / voltage
+
+            CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
+
+            OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
+            If TypeComboBox1.SelectedIndex > 1 And OCPDRating(idp * 1.25) = 15 Then
+                OCPDRatingTextBoxDP.Text = 20
+            Else
+                OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
+            End If
+
+            If WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = 1 Then
+                wirenumber = SetTextBoxDP.Text
+            ElseIf WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) <= SetTextBoxDP.Text Then
+                wirenumber = SetTextBoxDP.Text
+            Else
+                wirenumber = WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+                SetTextBoxDP.Text = wirenumber
+            End If
+
+            setcurrent = OCPDRatingTextBoxDP.Text / wirenumber
+
+            WireSizeTextBoxDP.Text = WireSize(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), setcurrent, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+            ConduitSizeTextBoxDP.Text = ConduitSize(WireTypeComboBoxDP.Text, WireSizeTextBoxDP.Text, False, "1", ConduitTypeComboBoxDP.Text, False)
+        End If
+
+        Dim count As Integer = TblSubfeederTableAdapter.CountSubfeeder(CodeTextBoxDP.Text)
+        Dim zreal(count - 1), zimag(count - 1) As Double
+
+        Dim z(count - 1), y(count - 1), ytotal, zeq, zline, ztotal As Complex
+
+        Dim dt As DataTable = ESD_DatabaseDataSet.tblSubfeeder
+
+        TblSubfeederTableAdapter.FillImpedance(dt, CodeTextBoxDP.Text)
+
+        zreal = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceReal")).ToArray()
+        zimag = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceImag")).ToArray()
+        zline = LineImpedance(DistancetoMainTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireSizeTextBoxDP.Text, ConductorComboBoxDP.Text, VoltageComboBoxDP.Text, SetTextBoxDP.Text)
+
+        For i As Integer = 0 To count - 1 Step 1
+            z(i) = New Complex(zreal(i), zimag(i))
+            y(i) = Complex.Reciprocal(z(i))
+        Next i
+
+        For Each item As Complex In y
+            ytotal += item
+        Next
+
+        zeq = Complex.Reciprocal(ytotal)
+
+        ztotal = zeq + zline
+
+        ImpedanceRealTextBoxDP.Text = Math.Round(ztotal.Real, 4)
+        ImpedanceImagTextBoxDP.Text = Math.Round(ztotal.Imaginary, 4)
+
+ErrorLine: End Sub
+
+    Private Sub BtnAddDP_Click(sender As Object, e As EventArgs) Handles BtnAddDP.Click
+        TblDistributionBindingSource.AddNew()
+        ProjectCodeTextBoxDP.Text = ProjectCodeTextBox.Text
+        SetTextBoxDP.Text = 1
+    End Sub
+
+    Private Sub BtnSaveDP_Click(sender As Object, e As EventArgs) Handles BtnSaveDP.Click
+        CodeTextBoxDP.Text = ProjectCodeTextBoxDP.Text + "-DP" + DPNumberTextBox.Text
+
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                Validate()
+                TblDistributionBindingSource.EndEdit()
+                TblDistributionTableAdapter.Update(ESD_DatabaseDataSet)
+
+                MessageBox.Show("Record saved.")
+
+                TblDistributionTableAdapter.Fill(ESD_DatabaseDataSet.tblDistribution)
+            Catch ex As NoNullAllowedException
+                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Catch ex As ConstraintException
+                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End Try
+        End If
+    End Sub
+
+    Private Sub BtnDeleteDP_Click(sender As Object, e As EventArgs) Handles BtnDeleteDP.Click
+
+    End Sub
 #End Region
 
 #Region "Subfeeder"
+    Private Sub BtnComputeSub_Click(sender As Object, e As EventArgs) Handles BtnComputeSub.Click
+        Dim ThreePhase As Boolean
+        Dim voltage As Integer = VoltageComboBoxSub.Text
+        Dim isf, load, hrml, phaseload(2), setcurrent, vd As Decimal
+        Dim wirenumber As Integer
+        Dim Z As Complex
+
+        If VoltageComboBoxSub.Text = "" Or WireTypeComboBoxSub.Text = "" Or ConductorComboBoxSub.Text = "" Or ConduitTypeComboBoxSub.Text = "" Or SetTextBoxSub.Text = "" Or DistancetoMainTextBox.Text = "" Then
+            MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            GoTo ErrorLine
+        ElseIf NeutralCheckBox.Checked And (NeutralConductorComboBox.Text = "" Or NeutralWireComboBox.Text = "") Then
+            MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            GoTo ErrorLine
+        End If
+
+        If Balanced = False Then
+            MessageBox.Show("Check balancing of subfeeder before proceeding.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            GoTo ErrorLine
+        End If
+
+        If PhaseTextBox.Text = "3" Then
+            ThreePhase = True
+        Else
+            ThreePhase = False
+        End If
+
+        If TblBranchTableAdapter.CountThreePhaseLoad(CodeTextBoxSub.Text) > 0 Then
+            load = TblBranchTableAdapter.TotalThreePhasePower(CodeTextBoxSub.Text)
+            hrml = TblBranchTableAdapter.GetHRMLThreePhase(CodeTextBoxSub.Text)
+
+            isf = (load + (0.25 * hrml)) / (Math.Sqrt(3) * voltage)
+
+            CurrentRatingTextBox.Text = Math.Round(isf, 4)
+            MinimumAmpacityTextBoxSub.Text = Math.Round(isf * 1.25, 4)
+
+            OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.25)
+
+            If WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = 1 Then
+                wirenumber = SetTextBoxSub.Text
+            ElseIf WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) <= SetTextBoxSub.Text Then
+                wirenumber = SetTextBoxSub.Text
+            Else
+                wirenumber = WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+                SetTextBoxSub.Text = wirenumber
+            End If
+
+            setcurrent = OCPDRatingTextBoxSub.Text / wirenumber
+
+            WireSizeTextBoxSub.Text = WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+
+            ConduitSizeTextBoxSub.Text = ConduitSize(WireTypeComboBoxSub.Text, ConductorComboBoxSub.Text, GroundWireCheckBoxSub.Checked, "3", ConduitTypeComboBoxSub.Text, True)
+        Else
+            phaseload = {TblBranchTableAdapter.TotalPhaseAPower(CodeTextBoxSub.Text), TblBranchTableAdapter.TotalPhaseBPower(CodeTextBoxSub.Text), TblBranchTableAdapter.TotalPhaseCPower(CodeTextBoxSub.Text)}
+            If IsNothing(TblBranchTableAdapter.GetHRMLSinglePhase(CodeTextBoxSub.Text)) Then
+                hrml = 0
+            Else
+                hrml = TblBranchTableAdapter.GetHRMLSinglePhase(CodeTextBoxSub.Text)
+            End If
+
+            Array.Sort(phaseload)
+
+            isf = (phaseload(2) + (0.25 * hrml)) / voltage
+
+            CurrentRatingTextBox.Text = Math.Round(isf, 4)
+            MinimumAmpacityTextBoxSub.Text = Math.Round(isf * 1.25, 4)
+
+            OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.25)
+
+            If WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRating(isf * 1.25), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = 1 Then
+                wirenumber = SetTextBoxSub.Text
+            ElseIf WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRating(isf * 1.25), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) <= SetTextBoxSub.Text Then
+                wirenumber = SetTextBoxSub.Text
+            Else
+                wirenumber = WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), OCPDRating(isf * 1.25), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+                SetTextBoxSub.Text = wirenumber
+            End If
+
+            setcurrent = OCPDRatingTextBoxSub.Text / wirenumber
+
+            If WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = "2.0" Then
+                WireSizeTextBoxSub.Text = "3.5"
+            Else
+                WireSizeTextBoxSub.Text = WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+            End If
+
+            ConduitSizeTextBoxSub.Text = ConduitSize(WireTypeComboBoxSub.Text, ConductorComboBoxSub.Text, GroundWireCheckBoxSub.Checked, "3", ConduitTypeComboBoxSub.Text, False)
+        End If
+
+        vd = VoltageDrop(isf / SetTextBoxSub.Text, DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, ThreePhase, VoltageComboBoxSub.Text)
+
+        Do While vd > 2
+            Dim size = {"2.0", "3.5", "5.5", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "150", "175", "200", "250", "325", "375", "400", "500"}
+            For i As Integer = 0 To 20 Step 1
+                If size(i) = WireSizeTextBoxSub.Text And i <> 20 Then
+                    WireSizeTextBoxSub.Text = size(i + 1)
+                    GoTo vdline
+                ElseIf i = 20 Then
+                    MessageBox.Show("Voltage drop exceeds standard voltage drop for largest available wire. Consider adding wire set.")
+                    GoTo ErrorLine
+                End If
+            Next
+vdline:     vd = VoltageDrop(isf / SetTextBoxSub.Text, DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, ThreePhase, VoltageComboBoxSub.Text)
+        Loop
+
+        If NeutralCheckBox.Checked Then
+            Dim ineutral As Decimal
+            Dim neutralset As Integer
+
+            ineutral = 0.7 * isf
+
+            If WireSet(NeutralConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(NeutralWireComboBox.Text), ineutral, ConduitTypeComboBoxSub.Text, NeutralWireComboBox.Text) = 1 Then
+                neutralset = NeutralSetTextBox.Text
+            ElseIf WireSet(NeutralConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(NeutralWireComboBox.Text), ineutral, ConduitTypeComboBoxSub.Text, NeutralWireComboBox.Text) <= SetTextBoxSub.Text Then
+                neutralset = NeutralSetTextBox.Text
+            Else
+                neutralset = WireSet(NeutralConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(NeutralWireComboBox.Text), ineutral, ConduitTypeComboBoxSub.Text, NeutralWireComboBox.Text)
+                NeutralSetTextBox.Text = wirenumber
+            End If
+
+            NeutralSizeTextBox.Text = WireSize(NeutralConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(NeutralWireComboBox.Text), ineutral / neutralset, ConduitTypeComboBoxSub.Text, NeutralWireComboBox.Text)
+        End If
+
+        VoltageDropTextBox.Text = Math.Round(vd, 4)
+
+        If GroundWireCheckBoxSub.Checked Then
+            GroundWireSizeTextBoxSub.Text = GroundWire(OCPDRatingTextBoxSub.Text, GroundConductorComboBoxSub.Text)
+        End If
+
+        Balanced = False
+
+        If PhaseTextBox.Text = "3" Then
+            Z = LineImpedance(DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, VoltageComboBoxSub.Text, SetTextBoxSub.Text) +
+                LoadImpedance(Math.Sqrt(3) * VoltageComboBoxSub.Text * CurrentRatingTextBox.Text)
+        Else
+            Z = LineImpedance(DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, VoltageComboBoxSub.Text, SetTextBoxSub.Text) +
+                LoadImpedance(VoltageComboBoxSub.Text * CurrentRatingTextBox.Text)
+        End If
+        ImpedanceRealTextBox.Text = Math.Round(Z.Real, 4)
+        ImpedanceImagTextBox.Text = Math.Round(Z.Imaginary, 4)
+ErrorLine: End Sub
+
+    Private Sub BtnBalance_Click(sender As Object, e As EventArgs) Handles BtnBalance.Click
+        TxtPhaseALoad.Text = TblBranchTableAdapter.TotalPhaseAPower(CodeTextBoxSub.Text)
+        TxtPhaseBLoad.Text = TblBranchTableAdapter.TotalPhaseBPower(CodeTextBoxSub.Text)
+        TxtPhaseCLoad.Text = TblBranchTableAdapter.TotalPhaseCPower(CodeTextBoxSub.Text)
+        TxtThreePhaseLoad.Text = TblBranchTableAdapter.TotalThreePhasePower(CodeTextBoxSub.Text)
+
+        If TxtPhaseALoad.Text = "" Then
+            TxtPhaseALoad.Text = 0
+        End If
+        If TxtPhaseBLoad.Text = "" Then
+            TxtPhaseBLoad.Text = 0
+        End If
+        If TxtPhaseCLoad.Text = "" Then
+            TxtPhaseCLoad.Text = 0
+        End If
+
+        Dim ave, tolerance(2) As Decimal
+
+        If PhaseTextBox.Text = "1" Or (PhaseTextBox.Text = "3" And TxtPhaseALoad.Text = "0" And TxtPhaseBLoad.Text = "0" And TxtPhaseCLoad.Text = "0") Then
+            MessageBox.Show("Balancing not necessary.")
+            Balanced = True
+        Else
+            ave = (CDec(TxtPhaseALoad.Text) + CDec(TxtPhaseALoad.Text) + CDec(TxtPhaseALoad.Text)) / 3
+
+            tolerance(0) = Math.Abs(ave - CDec(TxtPhaseALoad.Text)) / ave * 100
+            tolerance(1) = Math.Abs(ave - CDec(TxtPhaseBLoad.Text)) / ave * 100
+            tolerance(2) = Math.Abs(ave - CDec(TxtPhaseCLoad.Text)) / ave * 100
+
+            For i As Integer = 0 To 2
+                If tolerance(i) > 2 Then
+                    MessageBox.Show("Unbalanced subfeeder.")
+                    GoTo ErrorLine
+                End If
+            Next i
+
+            MessageBox.Show("Balanced subfeeder.")
+            Balanced = True
+        End If
+ErrorLine: End Sub
+
+    Private Sub BtnAddSub_Click(sender As Object, e As EventArgs) Handles BtnAddSub.Click
+        TblSubfeederBindingSource.AddNew()
+        ProjectCodeTextBoxSub.Text = ProjectTextBox.Text
+        DPCodeTextBox.Text = CodeTextBoxDP.Text
+        SetTextBoxSub.Text = "1"
+    End Sub
+
+    Private Sub BtnSaveSub_Click(sender As Object, e As EventArgs) Handles BtnSaveSub.Click
+        CodeTextBoxSub.Text = ProjectTextBox.Text + "-SF" + NumberTextBox.Text
+
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                Validate()
+                TblSubfeederBindingSource.EndEdit()
+                TblSubfeederTableAdapter.Update(ESD_DatabaseDataSet)
+
+                MessageBox.Show("Record saved.")
+
+                TblSubfeederTableAdapter.Fill(ESD_DatabaseDataSet.tblSubfeeder)
+            Catch ex As NoNullAllowedException
+                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Catch ex As ConstraintException
+                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End Try
+        Else
+
+        End If
+    End Sub
+
+    Private Sub BtnNextSub_Click(sender As Object, e As EventArgs) Handles BtnNextSub.Click
+        TblSubfeederBindingSource.MoveNext()
+        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+    End Sub
+
+    Private Sub BtnPreviousSub_Click(sender As Object, e As EventArgs) Handles BtnPreviousSub.Click
+        TblSubfeederBindingSource.MovePrevious()
+        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+    End Sub
+
+    Private Sub NeutralCheckBox_CheckStateChanged(sender As Object, e As EventArgs) Handles NeutralCheckBox.CheckStateChanged
+        If NeutralCheckBox.Checked = True Then
+            NeutralWireComboBox.Enabled = True
+            NeutralConductorComboBox.Enabled = True
+            NeutralSizeTextBox.ReadOnly = False
+            NeutralSetTextBox.ReadOnly = False
+            NeutralSetTextBox.Text = 1
+        Else
+            NeutralSizeTextBox.ReadOnly = True
+            NeutralWireComboBox.Enabled = False
+            NeutralConductorComboBox.Enabled = False
+            NeutralSetTextBox.ReadOnly = True
+            NeutralSetTextBox.Text = ""
+        End If
+    End Sub
 
 #End Region
 
@@ -66,7 +556,7 @@ Public Class FormMain
         Dim conduit As Integer
 
         'Do the data checking part
-        If TypeComboBox.Text = "" Or VoltageComboBox.Text = "" Or PhaseComboBox.Text = "" Or WireTypeComboBox.Text = "" Then
+        If TypeComboBox.Text = "" Or VoltageComboBox.Text = "" Or PhaseComboBox.Text = "" Or ((WireTypeComboBox.Text = "" Or ConductorComboBox.Text = "" Or ConduitTypeComboBox.Text = "") And TypeComboBox.SelectedIndex <> 4) Then
             MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             GoTo ErrorLine
 
@@ -209,7 +699,7 @@ Public Class FormMain
                 OCPDRatingTextBox1.Text = OCPDRating(ocpd)
             End If
 
-            conduit = ConduitSize(WireTypeComboBox.Text, WireSizeTextBox1.Text, GroundWireCheckBox1.Checked, PhaseComboBox.Text, ConduitTypeComboBox.Text)
+            conduit = ConduitSize(WireTypeComboBox.Text, WireSizeTextBox1.Text, GroundWireCheckBox1.Checked, PhaseComboBox.Text, ConduitTypeComboBox.Text, False)
 
             If conduit = -1 Then
                 MessageBox.Show("No conduit size available for given wire and conduit. Consider adding wire set.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -246,14 +736,24 @@ Public Class FormMain
                     PowerRatingTextBox.Text = CStr(Math.Round(power, 4))
                 End If
             ElseIf CboRatingUnit.SelectedIndex = 1 Then
-                power = CDec(MotorRatingTextBox.Text) * 1000 * CInt(TxtMotorItem.Text)
-                current = power / CInt(VoltageComboBox.Text)
+                If PhaseComboBox.Text = "3" Then
+                    power = CDec(MotorRatingTextBox.Text) * 1000 * CInt(TxtMotorItem.Text)
+                    current = power / (CInt(VoltageComboBox.Text) * Math.Sqrt(3))
+                Else
+                    power = CDec(MotorRatingTextBox.Text) * 1000 * CInt(TxtMotorItem.Text)
+                    current = power / CInt(VoltageComboBox.Text)
+                End If
 
                 PowerRatingTextBox.Text = CStr(Math.Round(power, 4))
                 FullLoadCurrentTextBox.Text = CStr(Math.Round(current, 4))
             Else
-                power = CDec(MotorRatingTextBox.Text) * CInt(TxtMotorItem.Text)
-                current = power / CInt(VoltageComboBox.Text)
+                If PhaseComboBox.Text = "3" Then
+                    power = CDec(MotorRatingTextBox.Text) * CInt(TxtMotorItem.Text)
+                    current = power / (CInt(VoltageComboBox.Text) * Math.Sqrt(3))
+                Else
+                    power = CDec(MotorRatingTextBox.Text) * CInt(TxtMotorItem.Text)
+                    current = power / CInt(VoltageComboBox.Text)
+                End If
 
                 PowerRatingTextBox.Text = CStr(Math.Round(power, 4))
                 FullLoadCurrentTextBox.Text = CStr(Math.Round(current, 4))
@@ -299,7 +799,7 @@ Public Class FormMain
                 OCPDRatingTextBox1.Text = OCPDRating(ocpd)
             End If
 
-            conduit = ConduitSize(WireTypeComboBox.Text, WireSizeTextBox1.Text, GroundWireCheckBox1.Checked, PhaseComboBox.Text, ConduitTypeComboBox.Text)
+            conduit = ConduitSize(WireTypeComboBox.Text, WireSizeTextBox1.Text, GroundWireCheckBox1.Checked, PhaseComboBox.Text, ConduitTypeComboBox.Text, False)
 
             If conduit = -1 Then
                 MessageBox.Show("No conduit size available for given wire and conduit. Consider adding wire set.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -349,7 +849,7 @@ Public Class FormMain
                 OCPDRatingTextBox1.Text = OCPDRating(ocpd)
             End If
 
-            conduit = ConduitSize(WireTypeComboBox.Text, WireSizeTextBox1.Text, GroundWireCheckBox1.Checked, PhaseComboBox.Text, ConduitTypeComboBox.Text)
+            conduit = ConduitSize(WireTypeComboBox.Text, WireSizeTextBox1.Text, GroundWireCheckBox1.Checked, PhaseComboBox.Text, ConduitTypeComboBox.Text, False)
 
             If conduit = -1 Then
                 MessageBox.Show("No conduit size available for given wire and conduit. Consider adding wire set.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -357,6 +857,17 @@ Public Class FormMain
             Else
                 ConduitSizeTextBox1.Text = conduit
             End If
+        ElseIf TypeComboBox.SelectedIndex = 4 Then
+            PowerRatingTextBox.Text = 1500
+            OCPDRatingTextBox1.Text = 20
+            FullLoadCurrentTextBox.Text = ""
+            MinimumAmpacityTextBox.Text = ""
+            WireSizeTextBox1.Text = ""
+            ConduitSizeTextBox1.Text = ""
+        End If
+
+        If GroundWireCheckBox1.Checked = True Then
+            GroundWireSizeTextBox.Text = GroundWire(CInt(OCPDRatingTextBox1.Text), GroundConductorComboBox.Text)
         End If
 
 ErrorLine: End Sub
@@ -449,15 +960,27 @@ ErrorLine: End Sub
                 PowerRatingTextBox.ReadOnly = False
                 TxtMotorItem.ReadOnly = False
                 TxtMotorItem.Text = "1"
+            ElseIf TypeComboBox.SelectedIndex = 4 Then
+                GrpPower.Enabled = False
+                GrpLighting.Enabled = False
+                WireTypeComboBox.Enabled = False
+                ConductorComboBox.Enabled = False
+                ConduitTypeComboBox.Enabled = False
             End If
         End If
     End Sub
 
     Private Sub BtnAddBranch_Click(sender As Object, e As EventArgs) Handles BtnAddBranch.Click
         TblBranchBindingSource.AddNew()
+        ProjectTextBox.Text = ProjectCodeTextBox.Text
+        SubfeederTextBox.Text = CodeTextBoxSub.Text
+        SetTextBox.Text = "1"
     End Sub
 
     Private Sub BtnSaveBranch_Click(sender As Object, e As EventArgs) Handles BtnSaveBranch.Click
+
+        CodeTextBox.Text = SubfeederTextBox.Text + "-BC" + CircuitNoTextBox.Text
+
         Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
         If dr = DialogResult.Yes Then
             Try
@@ -466,8 +989,6 @@ ErrorLine: End Sub
                 TblBranchTableAdapter.Update(ESD_DatabaseDataSet)
 
                 MessageBox.Show("Record saved.")
-
-                TblBranchTableAdapter.Fill(ESD_DatabaseDataSet.tblBranch)
             Catch ex As NoNullAllowedException
                 MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Catch ex As ConstraintException
@@ -494,10 +1015,77 @@ ErrorLine: End Sub
         End If
     End Sub
 
+    Private Sub BtnNextBranch_Click(sender As Object, e As EventArgs) Handles BtnNextBranch.Click
+        TblBranchBindingSource.MoveNext()
+        CboRatingUnit.SelectedIndex = 2
+    End Sub
+
+    Private Sub BtnPreviousBranch_Click(sender As Object, e As EventArgs) Handles BtnPreviousBranch.Click
+        TblBranchBindingSource.MovePrevious()
+        CboRatingUnit.SelectedIndex = 2
+    End Sub
+
+    Private Sub GroundWireCheckBox1_CheckStateChanged(sender As Object, e As EventArgs) Handles GroundWireCheckBox1.CheckStateChanged
+        If GroundWireCheckBox1.Checked = True Then
+            GroundConductorComboBox.Enabled = True
+            GroundConductorComboBox.SelectedIndex = 0
+        Else
+            GroundConductorComboBox.Enabled = False
+            GroundConductorComboBox.SelectedIndex = -1
+        End If
+    End Sub
 #End Region
 
 #Region "Transformer/Generator"
+    Private Sub BtnComputeTG_Click(sender As Object, e As EventArgs) Handles BtnComputeTG.Click
+        If DemandFactorTextBox.Text = "" Then
+            DemandFactorTextBox.Text = 0.6
+        End If
 
+        If DiversityFactorTextBox.Text = "" Then
+            DiversityFactorTextBox.Text = 1.3
+        End If
+
+        If TransformerXRRatioTextBox.Text = "" Then
+            TransformerXRRatioTextBox.Text = 10
+        End If
+
+        If TransformerZpuTextBox.Text = "" Then
+            TransformerZpuTextBox.Text = 5.75
+        End If
+
+        If NumberofGeneratorsTextBox.Text = "" Or NumberofGeneratorsTextBox.Text = "0" Then
+            NumberofGeneratorsTextBox.Text = 1
+        End If
+
+        Dim singlephaseload, threephaseload, phaseload(2) As Decimal
+        Dim voltage As Integer = VoltageComboBoxMain.Text
+
+        If PhaseTextBox.Text = "3" Then
+            phaseload = {TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "A"),
+                TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "B"),
+                TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "C")}
+
+            Array.Sort(phaseload)
+
+            singlephaseload = phaseload(2)
+
+            threephaseload = TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "3")
+
+            TCL = (3 * singlephaseload) + threephaseload
+
+            TotalLoadTextBox.Text = Math.Round(TCL, 4)
+        Else
+            singlephaseload = TblBranchTableAdapter.TotalLoadperPhase(ProjectTextBox.Text, "A")
+            TCL = singlephaseload
+            TotalLoadTextBox.Text = Math.Round(singlephaseload, 4)
+        End If
+
+        TransformerRatingTextBox.Text = CStr(TransformerRating(TCL * CDec(DemandFactorTextBox.Text) / CDec(DiversityFactorTextBox.Text)))
+
+        GeneratorRatingTextBox.Text = CStr(TransformerRating(TCL * 1.25 / CDec(NumberofGeneratorsTextBox.Text)))
+
+    End Sub
 #End Region
 
 #Region "Misc"
@@ -511,7 +1099,7 @@ ErrorLine: End Sub
             output = -1
         ElseIf InputNfo.Contains("/") And InputNfo.Contains(".") = False Then
             output = FractiontoDecimal(InputNfo)
-        ElseIf inputNfo = Nothing Or inputNfo = " " Then
+        ElseIf InputNfo = Nothing Or InputNfo = " " Then
             output = -2
         Else
             output = -3
@@ -585,9 +1173,48 @@ ErrorLine: End Sub
         End If
     End Sub
 
+    Private Sub NumericKeyPress(sender As Object, e As KeyPressEventArgs) Handles CircuitNoTextBox.KeyPress, TxtRatingLighting3.KeyPress, TxtRatingLighting2.KeyPress, TxtRatingLighting1.KeyPress, TxtItemsPower4.KeyPress, TxtItemsPower3.KeyPress, TxtItemsPower2.KeyPress, TxtItemsPower1.KeyPress, TxtItemsLighting3.KeyPress, TxtItemsLighting2.KeyPress, TxtItemsLighting1.KeyPress, SetTextBox.KeyPress
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso Not e.KeyChar = "." Then
+            e.Handled = True
+        End If
+    End Sub
 
+    Private Sub NumericTextChange(sender As Object, e As EventArgs) Handles CircuitNoTextBox.TextChanged, TxtRatingLighting3.TextChanged, TxtRatingLighting2.TextChanged, TxtRatingLighting1.TextChanged, TxtItemsPower4.TextChanged, TxtItemsPower3.TextChanged, TxtItemsPower2.TextChanged, TxtItemsPower1.TextChanged, TxtItemsLighting3.TextChanged, TxtItemsLighting2.TextChanged, TxtItemsLighting1.TextChanged, SetTextBox.TextChanged
+        Dim digitsOnly As Regex = New Regex("[^\d]")
+        sender.Text = digitsOnly.Replace(sender.Text, "")
+    End Sub
 
+    Private Sub IlluminationCalculatorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles IlluminationCalculatorToolStripMenuItem.Click
+        'MessageBox.Show("Under construction.")
 
+        Dim f As Form = FormIllu
+        f.Show()
+        Hide()
+
+    End Sub
+
+    Private Sub ManualToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManualToolStripMenuItem.Click
+        MessageBox.Show("Under construction.")
+    End Sub
+
+    Private Sub AboutUsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutUsToolStripMenuItem.Click
+        MessageBox.Show("Under construction.")
+    End Sub
+
+    Private Sub GenerateReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateReportToolStripMenuItem.Click
+        Dim f As New FormReport
+        f.ProjectCode = ProjectCodeTextBox.Text
+
+        f.Show()
+        Hide()
+    End Sub
+
+    Private Sub FormMain_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        Dim dr As DialogResult = MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        If dr = vbYes Then
+            Application.Exit()
+        End If
+    End Sub
 
 #End Region
 End Class

@@ -22,6 +22,7 @@ Partial Class FormIllu
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.BtnCompute = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label70 = New System.Windows.Forms.Label()
         Me.TxtRoom = New System.Windows.Forms.TextBox()
@@ -35,6 +36,9 @@ Partial Class FormIllu
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TxtReplace = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.RadioC = New System.Windows.Forms.RadioButton()
+        Me.RadioLW = New System.Windows.Forms.RadioButton()
+        Me.RadioP = New System.Windows.Forms.RadioButton()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Txtpf = New System.Windows.Forms.TextBox()
@@ -66,6 +70,33 @@ Partial Class FormIllu
         Me.Label8 = New System.Windows.Forms.Label()
         Me.CboClean = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.TxtLLF = New System.Windows.Forms.TextBox()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.TxtLuminaire = New System.Windows.Forms.TextBox()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.TxtLamp = New System.Windows.Forms.TextBox()
+        Me.Label56 = New System.Windows.Forms.Label()
+        Me.TxtCUF = New System.Windows.Forms.TextBox()
+        Me.Label69 = New System.Windows.Forms.Label()
+        Me.TxtCF = New System.Windows.Forms.TextBox()
+        Me.Label71 = New System.Windows.Forms.Label()
+        Me.TxtCU = New System.Windows.Forms.TextBox()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.Label64 = New System.Windows.Forms.Label()
+        Me.Txtpfc = New System.Windows.Forms.TextBox()
+        Me.Label65 = New System.Windows.Forms.Label()
+        Me.Label66 = New System.Windows.Forms.Label()
+        Me.Txtpcc = New System.Windows.Forms.TextBox()
+        Me.Label67 = New System.Windows.Forms.Label()
+        Me.Label57 = New System.Windows.Forms.Label()
+        Me.TxtFCR = New System.Windows.Forms.TextBox()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.TxtCCR = New System.Windows.Forms.TextBox()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.TxtRCR = New System.Windows.Forms.TextBox()
+        Me.Label62 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.CboLDT = New System.Windows.Forms.ComboBox()
         Me.Label55 = New System.Windows.Forms.Label()
@@ -112,49 +143,21 @@ Partial Class FormIllu
         Me.Label42 = New System.Windows.Forms.Label()
         Me.TxtLAT = New System.Windows.Forms.TextBox()
         Me.Label43 = New System.Windows.Forms.Label()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.Label68 = New System.Windows.Forms.Label()
-        Me.TxtLLF = New System.Windows.Forms.TextBox()
-        Me.Label58 = New System.Windows.Forms.Label()
-        Me.TxtLuminaire = New System.Windows.Forms.TextBox()
-        Me.Label60 = New System.Windows.Forms.Label()
-        Me.TxtLamp = New System.Windows.Forms.TextBox()
-        Me.Label56 = New System.Windows.Forms.Label()
-        Me.TxtCUF = New System.Windows.Forms.TextBox()
-        Me.Label69 = New System.Windows.Forms.Label()
-        Me.TxtCF = New System.Windows.Forms.TextBox()
-        Me.Label71 = New System.Windows.Forms.Label()
-        Me.TxtCU = New System.Windows.Forms.TextBox()
-        Me.Label63 = New System.Windows.Forms.Label()
-        Me.Label64 = New System.Windows.Forms.Label()
-        Me.Txtpfc = New System.Windows.Forms.TextBox()
-        Me.Label65 = New System.Windows.Forms.Label()
-        Me.Label66 = New System.Windows.Forms.Label()
-        Me.Txtpcc = New System.Windows.Forms.TextBox()
-        Me.Label67 = New System.Windows.Forms.Label()
-        Me.Label57 = New System.Windows.Forms.Label()
-        Me.TxtFCR = New System.Windows.Forms.TextBox()
-        Me.Label59 = New System.Windows.Forms.Label()
-        Me.TxtCCR = New System.Windows.Forms.TextBox()
-        Me.Label61 = New System.Windows.Forms.Label()
-        Me.TxtRCR = New System.Windows.Forms.TextBox()
-        Me.Label62 = New System.Windows.Forms.Label()
-        Me.BtnCompute = New System.Windows.Forms.Button()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.RadioP = New System.Windows.Forms.RadioButton()
-        Me.RadioLW = New System.Windows.Forms.RadioButton()
-        Me.RadioC = New System.Windows.Forms.RadioButton()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SplitContainer1.Panel1.SuspendLayout()
-        Me.SplitContainer1.Panel2.SuspendLayout()
-        Me.SplitContainer1.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'BtnCompute
+        '
+        Me.BtnCompute.Location = New System.Drawing.Point(525, 747)
+        Me.BtnCompute.Name = "BtnCompute"
+        Me.BtnCompute.Size = New System.Drawing.Size(121, 33)
+        Me.BtnCompute.TabIndex = 5
+        Me.BtnCompute.Text = "Compute"
+        Me.BtnCompute.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -169,10 +172,10 @@ Partial Class FormIllu
         Me.GroupBox1.Controls.Add(Me.TxtFreq)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.TxtReplace)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 12)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(314, 131)
-        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Design Objectives"
         '
@@ -303,12 +306,45 @@ Partial Class FormIllu
         Me.GroupBox2.Controls.Add(Me.Label8)
         Me.GroupBox2.Controls.Add(Me.CboClean)
         Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Location = New System.Drawing.Point(13, 149)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 149)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(314, 411)
-        Me.GroupBox2.TabIndex = 1
+        Me.GroupBox2.TabIndex = 7
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Area Specifications"
+        '
+        'RadioC
+        '
+        Me.RadioC.AutoSize = True
+        Me.RadioC.Location = New System.Drawing.Point(104, 167)
+        Me.RadioC.Name = "RadioC"
+        Me.RadioC.Size = New System.Drawing.Size(115, 17)
+        Me.RadioC.TabIndex = 38
+        Me.RadioC.TabStop = True
+        Me.RadioC.Text = "Use Circumference"
+        Me.RadioC.UseVisualStyleBackColor = True
+        '
+        'RadioLW
+        '
+        Me.RadioLW.AutoSize = True
+        Me.RadioLW.Location = New System.Drawing.Point(104, 144)
+        Me.RadioLW.Name = "RadioLW"
+        Me.RadioLW.Size = New System.Drawing.Size(132, 17)
+        Me.RadioLW.TabIndex = 37
+        Me.RadioLW.TabStop = True
+        Me.RadioLW.Text = "Use Length and Width"
+        Me.RadioLW.UseVisualStyleBackColor = True
+        '
+        'RadioP
+        '
+        Me.RadioP.AutoSize = True
+        Me.RadioP.Location = New System.Drawing.Point(104, 121)
+        Me.RadioP.Name = "RadioP"
+        Me.RadioP.Size = New System.Drawing.Size(91, 17)
+        Me.RadioP.TabIndex = 36
+        Me.RadioP.TabStop = True
+        Me.RadioP.Text = "Use Perimeter"
+        Me.RadioP.UseVisualStyleBackColor = True
         '
         'Label25
         '
@@ -468,9 +504,9 @@ Partial Class FormIllu
         Me.LblWidth.AutoSize = True
         Me.LblWidth.Location = New System.Drawing.Point(6, 228)
         Me.LblWidth.Name = "LblWidth"
-        Me.LblWidth.Size = New System.Drawing.Size(35, 13)
+        Me.LblWidth.Size = New System.Drawing.Size(39, 13)
         Me.LblWidth.TabIndex = 15
-        Me.LblWidth.Text = "Width"
+        Me.LblWidth.Text = "Width*"
         '
         'TxtWidth
         '
@@ -493,9 +529,9 @@ Partial Class FormIllu
         Me.LblLength.AutoSize = True
         Me.LblLength.Location = New System.Drawing.Point(6, 202)
         Me.LblLength.Name = "LblLength"
-        Me.LblLength.Size = New System.Drawing.Size(40, 13)
+        Me.LblLength.Size = New System.Drawing.Size(44, 13)
         Me.LblLength.TabIndex = 12
-        Me.LblLength.Text = "Length"
+        Me.LblLength.Text = "Length*"
         '
         'TxtLength
         '
@@ -576,6 +612,263 @@ Partial Class FormIllu
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Cleanliness*"
         '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.Label68)
+        Me.GroupBox5.Controls.Add(Me.TxtLLF)
+        Me.GroupBox5.Controls.Add(Me.Label58)
+        Me.GroupBox5.Controls.Add(Me.TxtLuminaire)
+        Me.GroupBox5.Controls.Add(Me.Label60)
+        Me.GroupBox5.Controls.Add(Me.TxtLamp)
+        Me.GroupBox5.Controls.Add(Me.Label56)
+        Me.GroupBox5.Controls.Add(Me.TxtCUF)
+        Me.GroupBox5.Controls.Add(Me.Label69)
+        Me.GroupBox5.Controls.Add(Me.TxtCF)
+        Me.GroupBox5.Controls.Add(Me.Label71)
+        Me.GroupBox5.Controls.Add(Me.TxtCU)
+        Me.GroupBox5.Controls.Add(Me.Label63)
+        Me.GroupBox5.Controls.Add(Me.Label64)
+        Me.GroupBox5.Controls.Add(Me.Txtpfc)
+        Me.GroupBox5.Controls.Add(Me.Label65)
+        Me.GroupBox5.Controls.Add(Me.Label66)
+        Me.GroupBox5.Controls.Add(Me.Txtpcc)
+        Me.GroupBox5.Controls.Add(Me.Label67)
+        Me.GroupBox5.Controls.Add(Me.Label57)
+        Me.GroupBox5.Controls.Add(Me.TxtFCR)
+        Me.GroupBox5.Controls.Add(Me.Label59)
+        Me.GroupBox5.Controls.Add(Me.TxtCCR)
+        Me.GroupBox5.Controls.Add(Me.Label61)
+        Me.GroupBox5.Controls.Add(Me.TxtRCR)
+        Me.GroupBox5.Controls.Add(Me.Label62)
+        Me.GroupBox5.Location = New System.Drawing.Point(332, 303)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(314, 432)
+        Me.GroupBox5.TabIndex = 10
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Calculations"
+        '
+        'Label68
+        '
+        Me.Label68.AutoSize = True
+        Me.Label68.Location = New System.Drawing.Point(6, 308)
+        Me.Label68.Name = "Label68"
+        Me.Label68.Size = New System.Drawing.Size(88, 13)
+        Me.Label68.TabIndex = 80
+        Me.Label68.Text = "Light Loss Factor"
+        '
+        'TxtLLF
+        '
+        Me.TxtLLF.Location = New System.Drawing.Point(142, 305)
+        Me.TxtLLF.Name = "TxtLLF"
+        Me.TxtLLF.ReadOnly = True
+        Me.TxtLLF.Size = New System.Drawing.Size(100, 20)
+        Me.TxtLLF.TabIndex = 79
+        '
+        'Label58
+        '
+        Me.Label58.AutoSize = True
+        Me.Label58.Location = New System.Drawing.Point(6, 386)
+        Me.Label58.Name = "Label58"
+        Me.Label58.Size = New System.Drawing.Size(112, 13)
+        Me.Label58.TabIndex = 78
+        Me.Label58.Text = "NO. OF LUMINAIRES"
+        '
+        'TxtLuminaire
+        '
+        Me.TxtLuminaire.Location = New System.Drawing.Point(142, 383)
+        Me.TxtLuminaire.Name = "TxtLuminaire"
+        Me.TxtLuminaire.ReadOnly = True
+        Me.TxtLuminaire.Size = New System.Drawing.Size(100, 20)
+        Me.TxtLuminaire.TabIndex = 77
+        '
+        'Label60
+        '
+        Me.Label60.AutoSize = True
+        Me.Label60.Location = New System.Drawing.Point(6, 360)
+        Me.Label60.Name = "Label60"
+        Me.Label60.Size = New System.Drawing.Size(83, 13)
+        Me.Label60.TabIndex = 76
+        Me.Label60.Text = "Lamp/Luminaire"
+        '
+        'TxtLamp
+        '
+        Me.TxtLamp.Location = New System.Drawing.Point(142, 357)
+        Me.TxtLamp.Name = "TxtLamp"
+        Me.TxtLamp.Size = New System.Drawing.Size(100, 20)
+        Me.TxtLamp.TabIndex = 75
+        '
+        'Label56
+        '
+        Me.Label56.AutoSize = True
+        Me.Label56.Location = New System.Drawing.Point(6, 282)
+        Me.Label56.Name = "Label56"
+        Me.Label56.Size = New System.Drawing.Size(71, 13)
+        Me.Label56.TabIndex = 72
+        Me.Label56.Text = "Corrected CU"
+        '
+        'TxtCUF
+        '
+        Me.TxtCUF.Location = New System.Drawing.Point(142, 279)
+        Me.TxtCUF.Name = "TxtCUF"
+        Me.TxtCUF.ReadOnly = True
+        Me.TxtCUF.Size = New System.Drawing.Size(100, 20)
+        Me.TxtCUF.TabIndex = 71
+        '
+        'Label69
+        '
+        Me.Label69.AutoSize = True
+        Me.Label69.Location = New System.Drawing.Point(6, 256)
+        Me.Label69.Name = "Label69"
+        Me.Label69.Size = New System.Drawing.Size(88, 13)
+        Me.Label69.TabIndex = 69
+        Me.Label69.Text = "Correction Factor"
+        '
+        'TxtCF
+        '
+        Me.TxtCF.Location = New System.Drawing.Point(142, 253)
+        Me.TxtCF.Name = "TxtCF"
+        Me.TxtCF.ReadOnly = True
+        Me.TxtCF.Size = New System.Drawing.Size(100, 20)
+        Me.TxtCF.TabIndex = 68
+        '
+        'Label71
+        '
+        Me.Label71.AutoSize = True
+        Me.Label71.Location = New System.Drawing.Point(6, 230)
+        Me.Label71.Name = "Label71"
+        Me.Label71.Size = New System.Drawing.Size(117, 13)
+        Me.Label71.TabIndex = 66
+        Me.Label71.Text = "Coefficient of Utilization"
+        '
+        'TxtCU
+        '
+        Me.TxtCU.Location = New System.Drawing.Point(142, 227)
+        Me.TxtCU.Name = "TxtCU"
+        Me.TxtCU.ReadOnly = True
+        Me.TxtCU.Size = New System.Drawing.Size(100, 20)
+        Me.TxtCU.TabIndex = 65
+        '
+        'Label63
+        '
+        Me.Label63.AutoSize = True
+        Me.Label63.Location = New System.Drawing.Point(248, 178)
+        Me.Label63.Name = "Label63"
+        Me.Label63.Size = New System.Drawing.Size(15, 13)
+        Me.Label63.TabIndex = 63
+        Me.Label63.Text = "%"
+        '
+        'Label64
+        '
+        Me.Label64.AutoSize = True
+        Me.Label64.Location = New System.Drawing.Point(6, 178)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(30, 13)
+        Me.Label64.TabIndex = 62
+        Me.Label64.Text = "Floor"
+        '
+        'Txtpfc
+        '
+        Me.Txtpfc.Location = New System.Drawing.Point(142, 175)
+        Me.Txtpfc.Name = "Txtpfc"
+        Me.Txtpfc.ReadOnly = True
+        Me.Txtpfc.Size = New System.Drawing.Size(100, 20)
+        Me.Txtpfc.TabIndex = 61
+        '
+        'Label65
+        '
+        Me.Label65.AutoSize = True
+        Me.Label65.Location = New System.Drawing.Point(248, 152)
+        Me.Label65.Name = "Label65"
+        Me.Label65.Size = New System.Drawing.Size(15, 13)
+        Me.Label65.TabIndex = 60
+        Me.Label65.Text = "%"
+        '
+        'Label66
+        '
+        Me.Label66.AutoSize = True
+        Me.Label66.Location = New System.Drawing.Point(6, 152)
+        Me.Label66.Name = "Label66"
+        Me.Label66.Size = New System.Drawing.Size(38, 13)
+        Me.Label66.TabIndex = 59
+        Me.Label66.Text = "Ceiling"
+        '
+        'Txtpcc
+        '
+        Me.Txtpcc.Location = New System.Drawing.Point(142, 149)
+        Me.Txtpcc.Name = "Txtpcc"
+        Me.Txtpcc.ReadOnly = True
+        Me.Txtpcc.Size = New System.Drawing.Size(100, 20)
+        Me.Txtpcc.TabIndex = 58
+        '
+        'Label67
+        '
+        Me.Label67.AutoSize = True
+        Me.Label67.Location = New System.Drawing.Point(6, 126)
+        Me.Label67.Name = "Label67"
+        Me.Label67.Size = New System.Drawing.Size(151, 13)
+        Me.Label67.TabIndex = 57
+        Me.Label67.Text = "EFFECTIVE REFLECTANCES"
+        '
+        'Label57
+        '
+        Me.Label57.AutoSize = True
+        Me.Label57.Location = New System.Drawing.Point(6, 100)
+        Me.Label57.Name = "Label57"
+        Me.Label57.Size = New System.Drawing.Size(30, 13)
+        Me.Label57.TabIndex = 54
+        Me.Label57.Text = "Floor"
+        '
+        'TxtFCR
+        '
+        Me.TxtFCR.Location = New System.Drawing.Point(142, 97)
+        Me.TxtFCR.Name = "TxtFCR"
+        Me.TxtFCR.ReadOnly = True
+        Me.TxtFCR.Size = New System.Drawing.Size(100, 20)
+        Me.TxtFCR.TabIndex = 53
+        '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.Location = New System.Drawing.Point(6, 74)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(38, 13)
+        Me.Label59.TabIndex = 51
+        Me.Label59.Text = "Ceiling"
+        '
+        'TxtCCR
+        '
+        Me.TxtCCR.Location = New System.Drawing.Point(142, 71)
+        Me.TxtCCR.Name = "TxtCCR"
+        Me.TxtCCR.ReadOnly = True
+        Me.TxtCCR.Size = New System.Drawing.Size(100, 20)
+        Me.TxtCCR.TabIndex = 50
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Location = New System.Drawing.Point(6, 48)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(35, 13)
+        Me.Label61.TabIndex = 48
+        Me.Label61.Text = "Room"
+        '
+        'TxtRCR
+        '
+        Me.TxtRCR.Location = New System.Drawing.Point(142, 45)
+        Me.TxtRCR.Name = "TxtRCR"
+        Me.TxtRCR.ReadOnly = True
+        Me.TxtRCR.Size = New System.Drawing.Size(100, 20)
+        Me.TxtRCR.TabIndex = 47
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.Location = New System.Drawing.Point(6, 22)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(88, 13)
+        Me.Label62.TabIndex = 46
+        Me.Label62.Text = "CAVITY RATIOS"
+        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.CboLDT)
@@ -596,10 +889,10 @@ Partial Class FormIllu
         Me.GroupBox3.Controls.Add(Me.Label28)
         Me.GroupBox3.Controls.Add(Me.CboMount)
         Me.GroupBox3.Controls.Add(Me.Label27)
-        Me.GroupBox3.Location = New System.Drawing.Point(13, 566)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 566)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(314, 215)
-        Me.GroupBox3.TabIndex = 2
+        Me.GroupBox3.TabIndex = 8
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Luminaire Selection"
         '
@@ -785,10 +1078,10 @@ Partial Class FormIllu
         Me.GroupBox4.Controls.Add(Me.Label42)
         Me.GroupBox4.Controls.Add(Me.TxtLAT)
         Me.GroupBox4.Controls.Add(Me.Label43)
-        Me.GroupBox4.Location = New System.Drawing.Point(333, 12)
+        Me.GroupBox4.Location = New System.Drawing.Point(332, 12)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(314, 285)
-        Me.GroupBox4.TabIndex = 3
+        Me.GroupBox4.TabIndex = 9
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Light Loss Factor"
         '
@@ -1021,341 +1314,16 @@ Partial Class FormIllu
         Me.Label43.TabIndex = 36
         Me.Label43.Text = "NOT TO BE RECOVERED"
         '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.Label68)
-        Me.GroupBox5.Controls.Add(Me.TxtLLF)
-        Me.GroupBox5.Controls.Add(Me.Label58)
-        Me.GroupBox5.Controls.Add(Me.TxtLuminaire)
-        Me.GroupBox5.Controls.Add(Me.Label60)
-        Me.GroupBox5.Controls.Add(Me.TxtLamp)
-        Me.GroupBox5.Controls.Add(Me.Label56)
-        Me.GroupBox5.Controls.Add(Me.TxtCUF)
-        Me.GroupBox5.Controls.Add(Me.Label69)
-        Me.GroupBox5.Controls.Add(Me.TxtCF)
-        Me.GroupBox5.Controls.Add(Me.Label71)
-        Me.GroupBox5.Controls.Add(Me.TxtCU)
-        Me.GroupBox5.Controls.Add(Me.Label63)
-        Me.GroupBox5.Controls.Add(Me.Label64)
-        Me.GroupBox5.Controls.Add(Me.Txtpfc)
-        Me.GroupBox5.Controls.Add(Me.Label65)
-        Me.GroupBox5.Controls.Add(Me.Label66)
-        Me.GroupBox5.Controls.Add(Me.Txtpcc)
-        Me.GroupBox5.Controls.Add(Me.Label67)
-        Me.GroupBox5.Controls.Add(Me.Label57)
-        Me.GroupBox5.Controls.Add(Me.TxtFCR)
-        Me.GroupBox5.Controls.Add(Me.Label59)
-        Me.GroupBox5.Controls.Add(Me.TxtCCR)
-        Me.GroupBox5.Controls.Add(Me.Label61)
-        Me.GroupBox5.Controls.Add(Me.TxtRCR)
-        Me.GroupBox5.Controls.Add(Me.Label62)
-        Me.GroupBox5.Location = New System.Drawing.Point(333, 303)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(314, 432)
-        Me.GroupBox5.TabIndex = 4
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Calculations"
-        '
-        'Label68
-        '
-        Me.Label68.AutoSize = True
-        Me.Label68.Location = New System.Drawing.Point(6, 308)
-        Me.Label68.Name = "Label68"
-        Me.Label68.Size = New System.Drawing.Size(88, 13)
-        Me.Label68.TabIndex = 80
-        Me.Label68.Text = "Light Loss Factor"
-        '
-        'TxtLLF
-        '
-        Me.TxtLLF.Location = New System.Drawing.Point(142, 305)
-        Me.TxtLLF.Name = "TxtLLF"
-        Me.TxtLLF.ReadOnly = True
-        Me.TxtLLF.Size = New System.Drawing.Size(100, 20)
-        Me.TxtLLF.TabIndex = 79
-        '
-        'Label58
-        '
-        Me.Label58.AutoSize = True
-        Me.Label58.Location = New System.Drawing.Point(6, 386)
-        Me.Label58.Name = "Label58"
-        Me.Label58.Size = New System.Drawing.Size(112, 13)
-        Me.Label58.TabIndex = 78
-        Me.Label58.Text = "NO. OF LUMINAIRES"
-        '
-        'TxtLuminaire
-        '
-        Me.TxtLuminaire.Location = New System.Drawing.Point(142, 383)
-        Me.TxtLuminaire.Name = "TxtLuminaire"
-        Me.TxtLuminaire.ReadOnly = True
-        Me.TxtLuminaire.Size = New System.Drawing.Size(100, 20)
-        Me.TxtLuminaire.TabIndex = 77
-        '
-        'Label60
-        '
-        Me.Label60.AutoSize = True
-        Me.Label60.Location = New System.Drawing.Point(6, 360)
-        Me.Label60.Name = "Label60"
-        Me.Label60.Size = New System.Drawing.Size(83, 13)
-        Me.Label60.TabIndex = 76
-        Me.Label60.Text = "Lamp/Luminaire"
-        '
-        'TxtLamp
-        '
-        Me.TxtLamp.Location = New System.Drawing.Point(142, 357)
-        Me.TxtLamp.Name = "TxtLamp"
-        Me.TxtLamp.Size = New System.Drawing.Size(100, 20)
-        Me.TxtLamp.TabIndex = 75
-        '
-        'Label56
-        '
-        Me.Label56.AutoSize = True
-        Me.Label56.Location = New System.Drawing.Point(6, 282)
-        Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(71, 13)
-        Me.Label56.TabIndex = 72
-        Me.Label56.Text = "Corrected CU"
-        '
-        'TxtCUF
-        '
-        Me.TxtCUF.Location = New System.Drawing.Point(142, 279)
-        Me.TxtCUF.Name = "TxtCUF"
-        Me.TxtCUF.ReadOnly = True
-        Me.TxtCUF.Size = New System.Drawing.Size(100, 20)
-        Me.TxtCUF.TabIndex = 71
-        '
-        'Label69
-        '
-        Me.Label69.AutoSize = True
-        Me.Label69.Location = New System.Drawing.Point(6, 256)
-        Me.Label69.Name = "Label69"
-        Me.Label69.Size = New System.Drawing.Size(88, 13)
-        Me.Label69.TabIndex = 69
-        Me.Label69.Text = "Correction Factor"
-        '
-        'TxtCF
-        '
-        Me.TxtCF.Location = New System.Drawing.Point(142, 253)
-        Me.TxtCF.Name = "TxtCF"
-        Me.TxtCF.ReadOnly = True
-        Me.TxtCF.Size = New System.Drawing.Size(100, 20)
-        Me.TxtCF.TabIndex = 68
-        '
-        'Label71
-        '
-        Me.Label71.AutoSize = True
-        Me.Label71.Location = New System.Drawing.Point(6, 230)
-        Me.Label71.Name = "Label71"
-        Me.Label71.Size = New System.Drawing.Size(117, 13)
-        Me.Label71.TabIndex = 66
-        Me.Label71.Text = "Coefficient of Utilization"
-        '
-        'TxtCU
-        '
-        Me.TxtCU.Location = New System.Drawing.Point(142, 227)
-        Me.TxtCU.Name = "TxtCU"
-        Me.TxtCU.ReadOnly = True
-        Me.TxtCU.Size = New System.Drawing.Size(100, 20)
-        Me.TxtCU.TabIndex = 65
-        '
-        'Label63
-        '
-        Me.Label63.AutoSize = True
-        Me.Label63.Location = New System.Drawing.Point(248, 178)
-        Me.Label63.Name = "Label63"
-        Me.Label63.Size = New System.Drawing.Size(15, 13)
-        Me.Label63.TabIndex = 63
-        Me.Label63.Text = "%"
-        '
-        'Label64
-        '
-        Me.Label64.AutoSize = True
-        Me.Label64.Location = New System.Drawing.Point(6, 178)
-        Me.Label64.Name = "Label64"
-        Me.Label64.Size = New System.Drawing.Size(30, 13)
-        Me.Label64.TabIndex = 62
-        Me.Label64.Text = "Floor"
-        '
-        'Txtpfc
-        '
-        Me.Txtpfc.Location = New System.Drawing.Point(142, 175)
-        Me.Txtpfc.Name = "Txtpfc"
-        Me.Txtpfc.ReadOnly = True
-        Me.Txtpfc.Size = New System.Drawing.Size(100, 20)
-        Me.Txtpfc.TabIndex = 61
-        '
-        'Label65
-        '
-        Me.Label65.AutoSize = True
-        Me.Label65.Location = New System.Drawing.Point(248, 152)
-        Me.Label65.Name = "Label65"
-        Me.Label65.Size = New System.Drawing.Size(15, 13)
-        Me.Label65.TabIndex = 60
-        Me.Label65.Text = "%"
-        '
-        'Label66
-        '
-        Me.Label66.AutoSize = True
-        Me.Label66.Location = New System.Drawing.Point(6, 152)
-        Me.Label66.Name = "Label66"
-        Me.Label66.Size = New System.Drawing.Size(38, 13)
-        Me.Label66.TabIndex = 59
-        Me.Label66.Text = "Ceiling"
-        '
-        'Txtpcc
-        '
-        Me.Txtpcc.Location = New System.Drawing.Point(142, 149)
-        Me.Txtpcc.Name = "Txtpcc"
-        Me.Txtpcc.ReadOnly = True
-        Me.Txtpcc.Size = New System.Drawing.Size(100, 20)
-        Me.Txtpcc.TabIndex = 58
-        '
-        'Label67
-        '
-        Me.Label67.AutoSize = True
-        Me.Label67.Location = New System.Drawing.Point(6, 126)
-        Me.Label67.Name = "Label67"
-        Me.Label67.Size = New System.Drawing.Size(151, 13)
-        Me.Label67.TabIndex = 57
-        Me.Label67.Text = "EFFECTIVE REFLECTANCES"
-        '
-        'Label57
-        '
-        Me.Label57.AutoSize = True
-        Me.Label57.Location = New System.Drawing.Point(6, 100)
-        Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(30, 13)
-        Me.Label57.TabIndex = 54
-        Me.Label57.Text = "Floor"
-        '
-        'TxtFCR
-        '
-        Me.TxtFCR.Location = New System.Drawing.Point(142, 97)
-        Me.TxtFCR.Name = "TxtFCR"
-        Me.TxtFCR.ReadOnly = True
-        Me.TxtFCR.Size = New System.Drawing.Size(100, 20)
-        Me.TxtFCR.TabIndex = 53
-        '
-        'Label59
-        '
-        Me.Label59.AutoSize = True
-        Me.Label59.Location = New System.Drawing.Point(6, 74)
-        Me.Label59.Name = "Label59"
-        Me.Label59.Size = New System.Drawing.Size(38, 13)
-        Me.Label59.TabIndex = 51
-        Me.Label59.Text = "Ceiling"
-        '
-        'TxtCCR
-        '
-        Me.TxtCCR.Location = New System.Drawing.Point(142, 71)
-        Me.TxtCCR.Name = "TxtCCR"
-        Me.TxtCCR.ReadOnly = True
-        Me.TxtCCR.Size = New System.Drawing.Size(100, 20)
-        Me.TxtCCR.TabIndex = 50
-        '
-        'Label61
-        '
-        Me.Label61.AutoSize = True
-        Me.Label61.Location = New System.Drawing.Point(6, 48)
-        Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(35, 13)
-        Me.Label61.TabIndex = 48
-        Me.Label61.Text = "Room"
-        '
-        'TxtRCR
-        '
-        Me.TxtRCR.Location = New System.Drawing.Point(142, 45)
-        Me.TxtRCR.Name = "TxtRCR"
-        Me.TxtRCR.ReadOnly = True
-        Me.TxtRCR.Size = New System.Drawing.Size(100, 20)
-        Me.TxtRCR.TabIndex = 47
-        '
-        'Label62
-        '
-        Me.Label62.AutoSize = True
-        Me.Label62.Location = New System.Drawing.Point(6, 22)
-        Me.Label62.Name = "Label62"
-        Me.Label62.Size = New System.Drawing.Size(88, 13)
-        Me.Label62.TabIndex = 46
-        Me.Label62.Text = "CAVITY RATIOS"
-        '
-        'BtnCompute
-        '
-        Me.BtnCompute.Location = New System.Drawing.Point(1064, 801)
-        Me.BtnCompute.Name = "BtnCompute"
-        Me.BtnCompute.Size = New System.Drawing.Size(121, 33)
-        Me.BtnCompute.TabIndex = 5
-        Me.BtnCompute.Text = "Compute"
-        Me.BtnCompute.UseVisualStyleBackColor = True
-        '
-        'SplitContainer1
-        '
-        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer1.Name = "SplitContainer1"
-        '
-        'SplitContainer1.Panel1
-        '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox1)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox2)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox5)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox3)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox4)
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox6)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1005, 795)
-        Me.SplitContainer1.SplitterDistance = 660
-        Me.SplitContainer1.TabIndex = 6
-        '
-        'RadioP
-        '
-        Me.RadioP.AutoSize = True
-        Me.RadioP.Location = New System.Drawing.Point(104, 121)
-        Me.RadioP.Name = "RadioP"
-        Me.RadioP.Size = New System.Drawing.Size(91, 17)
-        Me.RadioP.TabIndex = 36
-        Me.RadioP.TabStop = True
-        Me.RadioP.Text = "Use Perimeter"
-        Me.RadioP.UseVisualStyleBackColor = True
-        '
-        'RadioLW
-        '
-        Me.RadioLW.AutoSize = True
-        Me.RadioLW.Location = New System.Drawing.Point(104, 144)
-        Me.RadioLW.Name = "RadioLW"
-        Me.RadioLW.Size = New System.Drawing.Size(132, 17)
-        Me.RadioLW.TabIndex = 37
-        Me.RadioLW.TabStop = True
-        Me.RadioLW.Text = "Use Length and Width"
-        Me.RadioLW.UseVisualStyleBackColor = True
-        '
-        'RadioC
-        '
-        Me.RadioC.AutoSize = True
-        Me.RadioC.Location = New System.Drawing.Point(104, 167)
-        Me.RadioC.Name = "RadioC"
-        Me.RadioC.Size = New System.Drawing.Size(115, 17)
-        Me.RadioC.TabIndex = 38
-        Me.RadioC.TabStop = True
-        Me.RadioC.Text = "Use Circumference"
-        Me.RadioC.UseVisualStyleBackColor = True
-        '
-        'GroupBox6
-        '
-        Me.GroupBox6.Location = New System.Drawing.Point(13, 12)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(314, 309)
-        Me.GroupBox6.TabIndex = 0
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Outdoor"
-        '
         'FormIllu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1005, 846)
-        Me.Controls.Add(Me.SplitContainer1)
+        Me.ClientSize = New System.Drawing.Size(664, 792)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBox5)
+        Me.Controls.Add(Me.GroupBox3)
+        Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.BtnCompute)
         Me.Name = "FormIllu"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -1364,21 +1332,19 @@ Partial Class FormIllu
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
-        Me.SplitContainer1.Panel1.ResumeLayout(False)
-        Me.SplitContainer1.Panel2.ResumeLayout(False)
-        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.SplitContainer1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
-
+    Friend WithEvents BtnCompute As Button
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents Label70 As Label
+    Friend WithEvents TxtRoom As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
@@ -1389,6 +1355,9 @@ Partial Class FormIllu
     Friend WithEvents Label1 As Label
     Friend WithEvents TxtReplace As TextBox
     Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents RadioC As RadioButton
+    Friend WithEvents RadioLW As RadioButton
+    Friend WithEvents RadioP As RadioButton
     Friend WithEvents Label25 As Label
     Friend WithEvents Label26 As Label
     Friend WithEvents Txtpf As TextBox
@@ -1420,7 +1389,36 @@ Partial Class FormIllu
     Friend WithEvents Label8 As Label
     Friend WithEvents CboClean As ComboBox
     Friend WithEvents Label7 As Label
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents Label68 As Label
+    Friend WithEvents TxtLLF As TextBox
+    Friend WithEvents Label58 As Label
+    Friend WithEvents TxtLuminaire As TextBox
+    Friend WithEvents Label60 As Label
+    Friend WithEvents TxtLamp As TextBox
+    Friend WithEvents Label56 As Label
+    Friend WithEvents TxtCUF As TextBox
+    Friend WithEvents Label69 As Label
+    Friend WithEvents TxtCF As TextBox
+    Friend WithEvents Label71 As Label
+    Friend WithEvents TxtCU As TextBox
+    Friend WithEvents Label63 As Label
+    Friend WithEvents Label64 As Label
+    Friend WithEvents Txtpfc As TextBox
+    Friend WithEvents Label65 As Label
+    Friend WithEvents Label66 As Label
+    Friend WithEvents Txtpcc As TextBox
+    Friend WithEvents Label67 As Label
+    Friend WithEvents Label57 As Label
+    Friend WithEvents TxtFCR As TextBox
+    Friend WithEvents Label59 As Label
+    Friend WithEvents TxtCCR As TextBox
+    Friend WithEvents Label61 As Label
+    Friend WithEvents TxtRCR As TextBox
+    Friend WithEvents Label62 As Label
     Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents CboLDT As ComboBox
+    Friend WithEvents Label55 As Label
     Friend WithEvents Label35 As Label
     Friend WithEvents Label36 As Label
     Friend WithEvents TxthFC As TextBox
@@ -1438,8 +1436,6 @@ Partial Class FormIllu
     Friend WithEvents CboMount As ComboBox
     Friend WithEvents Label27 As Label
     Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents CboLDT As ComboBox
-    Friend WithEvents Label55 As Label
     Friend WithEvents Label46 As Label
     Friend WithEvents Label47 As Label
     Friend WithEvents TxtRSDD As TextBox
@@ -1466,39 +1462,4 @@ Partial Class FormIllu
     Friend WithEvents Label42 As Label
     Friend WithEvents TxtLAT As TextBox
     Friend WithEvents Label43 As Label
-    Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents Label58 As Label
-    Friend WithEvents TxtLuminaire As TextBox
-    Friend WithEvents Label60 As Label
-    Friend WithEvents TxtLamp As TextBox
-    Friend WithEvents Label56 As Label
-    Friend WithEvents TxtCUF As TextBox
-    Friend WithEvents Label69 As Label
-    Friend WithEvents TxtCF As TextBox
-    Friend WithEvents Label71 As Label
-    Friend WithEvents TxtCU As TextBox
-    Friend WithEvents Label63 As Label
-    Friend WithEvents Label64 As Label
-    Friend WithEvents Txtpfc As TextBox
-    Friend WithEvents Label65 As Label
-    Friend WithEvents Label66 As Label
-    Friend WithEvents Txtpcc As TextBox
-    Friend WithEvents Label67 As Label
-    Friend WithEvents Label57 As Label
-    Friend WithEvents TxtFCR As TextBox
-    Friend WithEvents Label59 As Label
-    Friend WithEvents TxtCCR As TextBox
-    Friend WithEvents Label61 As Label
-    Friend WithEvents TxtRCR As TextBox
-    Friend WithEvents Label62 As Label
-    Friend WithEvents Label70 As Label
-    Friend WithEvents TxtRoom As TextBox
-    Friend WithEvents BtnCompute As Button
-    Friend WithEvents Label68 As Label
-    Friend WithEvents TxtLLF As TextBox
-    Friend WithEvents RadioC As RadioButton
-    Friend WithEvents RadioLW As RadioButton
-    Friend WithEvents RadioP As RadioButton
-    Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents GroupBox6 As GroupBox
 End Class

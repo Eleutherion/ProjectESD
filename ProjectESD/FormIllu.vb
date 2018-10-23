@@ -1,38 +1,10 @@
 ﻿Public Class FormIllu
-    Private Sub ChkPerimeter_CheckStateChanged(sender As Object, e As EventArgs) Handles ChkPerimeter.CheckStateChanged
-        'Toggle area/perimeter activity
-        If ChkPerimeter.Checked = True Then
-            TxtLength.ReadOnly = True
-            TxtWidth.ReadOnly = True
-            TxtPerimeter.ReadOnly = False
-            TxtArea.ReadOnly = False
+    Private Sub ChkPerimeter_CheckStateChanged(sender As Object, e As EventArgs)
 
-            LblArea.Text = "Area*"
-            LblPerimeter.Text = "Perimeter*"
-            LblLength.Text = "Length"
-            LblWidth.Text = "Width"
-
-            TxtLength.Text = ""
-            TxtWidth.Text = ""
-
-        ElseIf ChkPerimeter.Checked = False Then
-            TxtLength.ReadOnly = False
-            TxtWidth.ReadOnly = False
-            TxtPerimeter.ReadOnly = True
-            TxtArea.ReadOnly = True
-
-            LblArea.Text = "Area"
-            LblPerimeter.Text = "Perimeter"
-            LblLength.Text = "Length*"
-            LblWidth.Text = "Width*"
-
-            TxtPerimeter.Text = ""
-            TxtArea.Text = ""
-        End If
     End Sub
 
     Private Sub BtnCompute_Click(sender As Object, e As EventArgs) Handles BtnCompute.Click
-        Dim area, perimeter, length, width, height, replacement, hrc, hcc, hfc, cu, cf, cuf, lat, lv, bf, lsd, lbo, ldd, rsdd, ld, llf As Decimal
+        Dim area, perimeter, length, width, radius, height, replacement, hrc, hcc, hfc, cu, cf, cuf, lat, lv, bf, lsd, lbo, ldd, rsdd, ld, llf As Decimal
         Dim lamp As Integer = TxtLamp.Text
         Dim lum As Integer
         Dim rating As Integer = TxtRating.Text
@@ -49,18 +21,40 @@
             GoTo ErrorLine
         Else
             'Compute for area and perimeter if needed
-            If ChkPerimeter.Checked = False Then
+            'If ChkPerimeter.Checked = False Then
+            '    length = TxtLength.Text
+            '    width = TxtWidth.Text
+
+            '    area = Math.Round(length * width, 4)
+            '    perimeter = Math.Round((2 * length) + (2 * width), 4)
+
+            '    TxtArea.Text = area
+            '    TxtPerimeter.Text = perimeter
+            'Else
+            '    area = TxtArea.Text
+            '    perimeter = TxtPerimeter.Text
+            'End If
+
+            If RadioP.Checked Then
+                area = TxtArea.Text
+                perimeter = TxtPerimeter.Text
+            ElseIf RadioLW.Checked Then
                 length = TxtLength.Text
                 width = TxtWidth.Text
 
-                area = Math.Round(length * width, 4)
-                perimeter = Math.Round((2 * length) + (2 * width), 4)
+                area = length * width
+                perimeter = (2 * length) + (2 * width)
 
-                TxtArea.Text = area
-                TxtPerimeter.Text = perimeter
-            Else
-                area = TxtArea.Text
-                perimeter = TxtPerimeter.Text
+                TxtArea.Text = Math.Round(area, 4)
+                TxtPerimeter.Text = Math.Round(perimeter, 4)
+            ElseIf RadioC.Checked Then
+                radius = TxtLength.Text
+
+                area = Math.PI * radius ^ 2
+                perimeter = 2 * Math.PI * radius
+
+                TxtArea.Text = Math.Round(area, 4)
+                TxtPerimeter.Text = Math.Round(perimeter, 4)
             End If
 
             'Acquire value of ballast factor
@@ -139,5 +133,51 @@ ErrorLine: End Sub
             TxthCC.ReadOnly = True
             TxthCC.Text = 0
         End If
+    End Sub
+
+    Private Sub RadioP_CheckedChanged(sender As Object, e As EventArgs) Handles RadioP.CheckedChanged
+        TxtArea.ReadOnly = False
+        TxtPerimeter.ReadOnly = False
+        TxtLength.ReadOnly = True
+        TxtWidth.Enabled = True
+        TxtWidth.ReadOnly = True
+
+        LblLength.Text = "Length"
+        LblWidth.Text = "Width"
+        LblArea.Text = "Area*"
+        LblPerimeter.Text = "Perimeter*"
+    End Sub
+
+    Private Sub RadioLW_CheckedChanged(sender As Object, e As EventArgs) Handles RadioLW.CheckedChanged
+        TxtArea.ReadOnly = True
+        TxtPerimeter.ReadOnly = True
+        TxtLength.ReadOnly = False
+        TxtWidth.Enabled = True
+        TxtWidth.ReadOnly = False
+
+        LblLength.Text = "Length*"
+        LblWidth.Text = "Width*"
+        LblArea.Text = "Area"
+        LblPerimeter.Text = "Perimeter"
+    End Sub
+
+    Private Sub RadioC_CheckedChanged(sender As Object, e As EventArgs) Handles RadioC.CheckedChanged
+        TxtArea.ReadOnly = True
+        TxtPerimeter.ReadOnly = True
+        TxtLength.ReadOnly = False
+        TxtWidth.ReadOnly = True
+        TxtWidth.Enabled = False
+
+        LblLength.Text = "Radius*"
+        LblWidth.Text = ""
+        LblArea.Text = "Area"
+        LblPerimeter.Text = "Perimeter"
+    End Sub
+
+    Private Sub FormIllu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        Dim f As Form = FormMain
+        f.Show()
+
+        Dispose()
     End Sub
 End Class
