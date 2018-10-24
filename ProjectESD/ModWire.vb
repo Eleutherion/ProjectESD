@@ -10,7 +10,7 @@ Module ModWire
 
         If Conduit = "Air" Then
             Select Case Conductor
-                Case "Copper"
+                Case "Cu"
                     Select Case NominalTemp
                         Case 60
                             Ampacity = {0, 25, 30, 40, 55, 80, 105, 125, 145, 180, 200, 245, 285, 335, 375, 410, 440, 510, 600, 645, 660, 755}
@@ -31,7 +31,7 @@ Module ModWire
             End Select
         Else
             Select Case Conductor
-                Case "Copper"
+                Case "Cu"
                     Select Case NominalTemp
                         Case 60
                             Ampacity = {0, 15, 20, 30, 40, 55, 70, 85, 100, 115, 130, 155, 185, 210, 240, 260, 275, 315, 370, 395, 400, 445}
@@ -83,7 +83,7 @@ ReturnLine: Return Size(v)
 
         If (Wire = "FEP" Or Wire = "FEPB") And Conduit = "Air" Then
             Select Case Conductor
-                Case "Copper"
+                Case "Cu"
                     If Current > 165 Then
                         v = Math.Truncate(Current / 165) + 1
                     Else
@@ -98,7 +98,7 @@ ReturnLine: Return Size(v)
             End Select
         ElseIf (Wire = "FEP" Or Wire = "FEPB") And Conduit IsNot "Air" Then
             Select Case Conductor
-                Case "Copper"
+                Case "Cu"
                     If Current > 115 Then
                         v = Math.Truncate(Current / 115) + 1
                     Else
@@ -113,7 +113,7 @@ ReturnLine: Return Size(v)
             End Select
         ElseIf Wire = "ZW" And Conduit = "Air" Then
             Select Case Conductor
-                Case "Copper"
+                Case "Cu"
                     If Current > 150 Then
                         v = Math.Truncate(Current / 150) + 1
                     Else
@@ -128,7 +128,7 @@ ReturnLine: Return Size(v)
             End Select
         ElseIf Wire = "ZW" And Conduit IsNot "Air" Then
             Select Case Conductor
-                Case "Copper"
+                Case "Cu"
                     If Current > 100 Then
                         v = Math.Truncate(Current / 100) + 1
                     Else
@@ -142,7 +142,7 @@ ReturnLine: Return Size(v)
                     End If
             End Select
         Else
-            If Conduit IsNot "Air" And Conductor = "Copper" Then
+            If Conduit IsNot "Air" And Conductor = "Cu" Then
                 Select Case NominalTemp
                     Case 60
                         If Current > 445 Then
@@ -164,7 +164,7 @@ ReturnLine: Return Size(v)
                         End If
                 End Select
 
-            ElseIf Conduit IsNot "Air" And Conductor IsNot "Copper" Then
+            ElseIf Conduit IsNot "Air" And Conductor IsNot "Cu" Then
                 Select Case NominalTemp
                     Case 60
                         If Current > 365 Then
@@ -186,7 +186,7 @@ ReturnLine: Return Size(v)
                         End If
                 End Select
 
-            ElseIf Conduit = "Air" And Conductor = "Copper" Then
+            ElseIf Conduit = "Air" And Conductor = "Cu" Then
                 Select Case NominalTemp
                     Case 60
                         If Current > 755 Then
@@ -208,7 +208,7 @@ ReturnLine: Return Size(v)
                         End If
                 End Select
 
-            ElseIf Conduit = "Air" And Conductor IsNot "Copper" Then
+            ElseIf Conduit = "Air" And Conductor IsNot "Cu" Then
                 Select Case NominalTemp
                     Case 60
                         If Current > 605 Then
@@ -837,7 +837,7 @@ ReturnLine: Return NominalSize(w)
             Next i
         End If
 
-        If Conductor = "Copper" Then
+        If Conductor = "Cu" Then
             GroundSize = {"", "2.0", "3.5", "5.5", "5.5", "5.5", "8.0", "14", "22", "30", "30", "38", "50", "60", "80", "100", "125", "175", "200", "250", "375", "400"}
         Else
             GroundSize = {"", "3.5", "5.5", "8.0", "8.0", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "175", "200", "325", "325", "375", "600", "600"}
@@ -862,14 +862,14 @@ ReturnLine: Return NominalSize(w)
         Select Case Conduit
             Case "Rigid PVC 80", "Rigid PVC 40", "HDPE"
                 NominalXL = {0.058, 0.054, 0.05, 0.052, 0.051, 0.048, 0.045, 0.046, 0.044, 0.043, 0.042, 0.041, 0.041, 0.041, 0.04, 0.04, 0.039, 0.039, 0.038, 0.038, 0.037}
-                If Conductor = "Copper" Then
+                If Conductor = "Cu" Then
                     NominalR = {3.1, 2.0, 1.2, 0.78, 0.49, 0.31, 0.19, 0.15, 0.12, 0.1, 0.077, 0.062, 0.052, 0.044, 0.038, 0.033, 0.027, 0.023, 0.019, 0.019, 0.015}
                 Else
                     NominalR = {0, 3.2, 2.0, 1.3, 0.81, 0.51, 0.32, 0.25, 0.2, 0.16, 0.13, 0.1, 0.085, 0.071, 0.061, 0.054, 0.043, 0.036, 0.029, 0.029, 0.023}
                 End If
             Case Else
                 NominalXL = {0.073, 0.068, 0.063, 0.065, 0.064, 0.06, 0.057, 0.057, 0.055, 0.054, 0.052, 0.051, 0.052, 0.051, 0.05, 0.049, 0.048, 0.048, 0.048, 0.048, 0.046}
-                If Conductor = "Copper" Then
+                If Conductor = "Cu" Then
                     NominalR = {3.1, 2.0, 1.2, 0.78, 0.49, 0.31, 0.2, 0.16, 0.12, 0.1, 0.079, 0.063, 0.054, 0.045, 0.039, 0.035, 0.029, 0.025, 0.021, 0.021, 0.018}
                 Else
                     NominalR = {0, 3.2, 2.0, 1.3, 0.81, 0.51, 0.32, 0.25, 0.2, 0.16, 0.13, 0.1, 0.086, 0.072, 0.063, 0.055, 0.045, 0.038, 0.031, 0.031, 0.025}

@@ -11,7 +11,6 @@ C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.exe
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.xml
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.pdb
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.FormIllu.resources
-C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.vbprojAssemblyReference.cache
 C:\Users\ambal\Documents\Visual Studio 2017\Projects\ProjectESD\ProjectESD\bin\Debug\ESD_Database.mdf
 C:\Users\ambal\Documents\Visual Studio 2017\Projects\ProjectESD\ProjectESD\bin\Debug\ESD_Database_log.ldf
 C:\Users\ambal\Documents\Visual Studio 2017\Projects\ProjectESD\ProjectESD\bin\Debug\ProjectESD.exe.config
@@ -65,5 +64,9 @@ C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\CrystalDecisions
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ShockwaveFlashObjects.dll
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\stdole.dll
-C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.FormReport.resources
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.vbproj.CopyComplete
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ReportSub.rpt
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ReportBranch.rpt
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ReportSub.vb
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\Debug\ReportBranch.vb
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\Debug\ProjectESD.FormReport.resources

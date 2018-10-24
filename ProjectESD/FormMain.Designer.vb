@@ -126,6 +126,7 @@ Partial Class FormMain
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.IlluminationCalculatorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadRecordsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutUsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -328,7 +329,6 @@ Partial Class FormMain
         Me.NameTextBox = New System.Windows.Forms.TextBox()
         Me.ProjectCodeTextBox = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.BtnkAIC = New System.Windows.Forms.Button()
         Me.XRRatioTextBox = New System.Windows.Forms.TextBox()
         Me.TblMainFeederBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ShortCircuitCapTextBox = New System.Windows.Forms.TextBox()
@@ -347,9 +347,9 @@ Partial Class FormMain
         Me.WireTypeComboBoxMain = New System.Windows.Forms.ComboBox()
         Me.TblWireBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.BtnCompute = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
+        Me.BtnDeleteMain = New System.Windows.Forms.Button()
+        Me.BtnSaveMain = New System.Windows.Forms.Button()
+        Me.BtnAddMain = New System.Windows.Forms.Button()
         Me.GroundWireCheckBox = New System.Windows.Forms.CheckBox()
         Me.BreakerTypeTextBox = New System.Windows.Forms.TextBox()
         Me.OCPDRatingTextBox = New System.Windows.Forms.TextBox()
@@ -368,6 +368,7 @@ Partial Class FormMain
         Me.TblDistributionTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblDistributionTableAdapter()
         Me.TblSubfeederTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblSubfeederTableAdapter()
         Me.TblBranchTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblBranchTableAdapter()
+        Me.TblConductorBindingSource7 = New System.Windows.Forms.BindingSource(Me.components)
         ProjectCodeLabel = New System.Windows.Forms.Label()
         NameLabel = New System.Windows.Forms.Label()
         OwnerLabel = New System.Windows.Forms.Label()
@@ -496,6 +497,7 @@ Partial Class FormMain
         CType(Me.TblMainFeederBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TblConductorBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TblWireBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TblConductorBindingSource7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ProjectCodeLabel
@@ -609,30 +611,30 @@ Partial Class FormMain
         'CodeLabel
         '
         CodeLabel.AutoSize = True
-        CodeLabel.Location = New System.Drawing.Point(108, 34)
+        CodeLabel.Location = New System.Drawing.Point(112, 34)
         CodeLabel.Name = "CodeLabel"
-        CodeLabel.Size = New System.Drawing.Size(39, 13)
+        CodeLabel.Size = New System.Drawing.Size(35, 13)
         CodeLabel.TabIndex = 0
-        CodeLabel.Text = "Code:*"
+        CodeLabel.Text = "Code:"
         '
         'SubfeederLabel
         '
         SubfeederLabel.AutoSize = True
-        SubfeederLabel.Location = New System.Drawing.Point(84, 139)
+        SubfeederLabel.Location = New System.Drawing.Point(88, 139)
         SubfeederLabel.Name = "SubfeederLabel"
-        SubfeederLabel.Size = New System.Drawing.Size(63, 13)
+        SubfeederLabel.Size = New System.Drawing.Size(59, 13)
         SubfeederLabel.TabIndex = 4
-        SubfeederLabel.Text = "Subfeeder:*"
+        SubfeederLabel.Text = "Subfeeder:"
         Me.ToolTip1.SetToolTip(SubfeederLabel, "Code of subfeeder on which it is connected to")
         '
         'PowerRatingLabel
         '
         PowerRatingLabel.AutoSize = True
-        PowerRatingLabel.Location = New System.Drawing.Point(46, 192)
+        PowerRatingLabel.Location = New System.Drawing.Point(50, 192)
         PowerRatingLabel.Name = "PowerRatingLabel"
-        PowerRatingLabel.Size = New System.Drawing.Size(101, 13)
+        PowerRatingLabel.Size = New System.Drawing.Size(97, 13)
         PowerRatingLabel.TabIndex = 8
-        PowerRatingLabel.Text = "Power Rating (VA):*"
+        PowerRatingLabel.Text = "Power Rating (VA):"
         '
         'MotorRatingLabel
         '
@@ -647,20 +649,20 @@ Partial Class FormMain
         'FullLoadCurrentLabel
         '
         FullLoadCurrentLabel.AutoSize = True
-        FullLoadCurrentLabel.Location = New System.Drawing.Point(53, 324)
+        FullLoadCurrentLabel.Location = New System.Drawing.Point(57, 324)
         FullLoadCurrentLabel.Name = "FullLoadCurrentLabel"
-        FullLoadCurrentLabel.Size = New System.Drawing.Size(94, 13)
+        FullLoadCurrentLabel.Size = New System.Drawing.Size(90, 13)
         FullLoadCurrentLabel.TabIndex = 14
-        FullLoadCurrentLabel.Text = "Full Load Current:*"
+        FullLoadCurrentLabel.Text = "Full Load Current:"
         '
         'MinimumAmpacityLabel
         '
         MinimumAmpacityLabel.AutoSize = True
-        MinimumAmpacityLabel.Location = New System.Drawing.Point(46, 350)
+        MinimumAmpacityLabel.Location = New System.Drawing.Point(50, 350)
         MinimumAmpacityLabel.Name = "MinimumAmpacityLabel"
-        MinimumAmpacityLabel.Size = New System.Drawing.Size(101, 13)
+        MinimumAmpacityLabel.Size = New System.Drawing.Size(97, 13)
         MinimumAmpacityLabel.TabIndex = 16
-        MinimumAmpacityLabel.Text = "Minimum Ampacity:*"
+        MinimumAmpacityLabel.Text = "Minimum Ampacity:"
         '
         'WireTypeLabel1
         '
@@ -675,11 +677,11 @@ Partial Class FormMain
         'WireSizeLabel1
         '
         WireSizeLabel1.AutoSize = True
-        WireSizeLabel1.Location = New System.Drawing.Point(57, 403)
+        WireSizeLabel1.Location = New System.Drawing.Point(61, 403)
         WireSizeLabel1.Name = "WireSizeLabel1"
-        WireSizeLabel1.Size = New System.Drawing.Size(90, 13)
+        WireSizeLabel1.Size = New System.Drawing.Size(86, 13)
         WireSizeLabel1.TabIndex = 20
-        WireSizeLabel1.Text = "Wire Size (mm2):*"
+        WireSizeLabel1.Text = "Wire Size (mm2):"
         '
         'ConductorLabel1
         '
@@ -704,20 +706,20 @@ Partial Class FormMain
         'ConduitSizeLabel1
         '
         ConduitSizeLabel1.AutoSize = True
-        ConduitSizeLabel1.Location = New System.Drawing.Point(40, 509)
+        ConduitSizeLabel1.Location = New System.Drawing.Point(44, 509)
         ConduitSizeLabel1.Name = "ConduitSizeLabel1"
-        ConduitSizeLabel1.Size = New System.Drawing.Size(107, 13)
+        ConduitSizeLabel1.Size = New System.Drawing.Size(103, 13)
         ConduitSizeLabel1.TabIndex = 26
-        ConduitSizeLabel1.Text = "Conduit Size (mm d):*"
+        ConduitSizeLabel1.Text = "Conduit Size (mm d):"
         '
         'OCPDRatingLabel1
         '
         OCPDRatingLabel1.AutoSize = True
-        OCPDRatingLabel1.Location = New System.Drawing.Point(69, 535)
+        OCPDRatingLabel1.Location = New System.Drawing.Point(73, 535)
         OCPDRatingLabel1.Name = "OCPDRatingLabel1"
-        OCPDRatingLabel1.Size = New System.Drawing.Size(78, 13)
+        OCPDRatingLabel1.Size = New System.Drawing.Size(74, 13)
         OCPDRatingLabel1.TabIndex = 28
-        OCPDRatingLabel1.Text = "OCPD Rating:*"
+        OCPDRatingLabel1.Text = "OCPD Rating:"
         '
         'BreakerTypeLabel1
         '
@@ -751,20 +753,20 @@ Partial Class FormMain
         'DemandFactorLabel
         '
         DemandFactorLabel.AutoSize = True
-        DemandFactorLabel.Location = New System.Drawing.Point(60, 86)
+        DemandFactorLabel.Location = New System.Drawing.Point(56, 86)
         DemandFactorLabel.Name = "DemandFactorLabel"
-        DemandFactorLabel.Size = New System.Drawing.Size(83, 13)
+        DemandFactorLabel.Size = New System.Drawing.Size(87, 13)
         DemandFactorLabel.TabIndex = 4
-        DemandFactorLabel.Text = "Demand Factor:"
+        DemandFactorLabel.Text = "Demand Factor:*"
         '
         'DiversityFactorLabel
         '
         DiversityFactorLabel.AutoSize = True
-        DiversityFactorLabel.Location = New System.Drawing.Point(60, 112)
+        DiversityFactorLabel.Location = New System.Drawing.Point(56, 112)
         DiversityFactorLabel.Name = "DiversityFactorLabel"
-        DiversityFactorLabel.Size = New System.Drawing.Size(83, 13)
+        DiversityFactorLabel.Size = New System.Drawing.Size(87, 13)
         DiversityFactorLabel.TabIndex = 6
-        DiversityFactorLabel.Text = "Diversity Factor:"
+        DiversityFactorLabel.Text = "Diversity Factor:*"
         '
         'TransformerRatingLabel
         '
@@ -833,11 +835,11 @@ Partial Class FormMain
         'ProjectLabel
         '
         ProjectLabel.AutoSize = True
-        ProjectLabel.Location = New System.Drawing.Point(100, 60)
+        ProjectLabel.Location = New System.Drawing.Point(104, 60)
         ProjectLabel.Name = "ProjectLabel"
-        ProjectLabel.Size = New System.Drawing.Size(47, 13)
+        ProjectLabel.Size = New System.Drawing.Size(43, 13)
         ProjectLabel.TabIndex = 45
-        ProjectLabel.Text = "Project:*"
+        ProjectLabel.Text = "Project:"
         '
         'VoltageLabel
         '
@@ -905,11 +907,11 @@ Partial Class FormMain
         'NumberLabel
         '
         NumberLabel.AutoSize = True
-        NumberLabel.Location = New System.Drawing.Point(96, 86)
+        NumberLabel.Location = New System.Drawing.Point(92, 86)
         NumberLabel.Name = "NumberLabel"
-        NumberLabel.Size = New System.Drawing.Size(47, 13)
+        NumberLabel.Size = New System.Drawing.Size(51, 13)
         NumberLabel.TabIndex = 4
-        NumberLabel.Text = "Number:"
+        NumberLabel.Text = "Number:*"
         '
         'CurrentRatingLabel
         '
@@ -932,11 +934,11 @@ Partial Class FormMain
         'WireTypeLabel2
         '
         WireTypeLabel2.AutoSize = True
-        WireTypeLabel2.Location = New System.Drawing.Point(84, 217)
+        WireTypeLabel2.Location = New System.Drawing.Point(80, 217)
         WireTypeLabel2.Name = "WireTypeLabel2"
-        WireTypeLabel2.Size = New System.Drawing.Size(59, 13)
+        WireTypeLabel2.Size = New System.Drawing.Size(63, 13)
         WireTypeLabel2.TabIndex = 10
-        WireTypeLabel2.Text = "Wire Type:"
+        WireTypeLabel2.Text = "Wire Type:*"
         '
         'WireSizeLabel2
         '
@@ -950,20 +952,20 @@ Partial Class FormMain
         'ConductorLabel2
         '
         ConductorLabel2.AutoSize = True
-        ConductorLabel2.Location = New System.Drawing.Point(84, 270)
+        ConductorLabel2.Location = New System.Drawing.Point(80, 270)
         ConductorLabel2.Name = "ConductorLabel2"
-        ConductorLabel2.Size = New System.Drawing.Size(59, 13)
+        ConductorLabel2.Size = New System.Drawing.Size(63, 13)
         ConductorLabel2.TabIndex = 14
-        ConductorLabel2.Text = "Conductor:"
+        ConductorLabel2.Text = "Conductor:*"
         '
         'ConduitTypeLabel2
         '
         ConduitTypeLabel2.AutoSize = True
-        ConduitTypeLabel2.Location = New System.Drawing.Point(70, 459)
+        ConduitTypeLabel2.Location = New System.Drawing.Point(66, 459)
         ConduitTypeLabel2.Name = "ConduitTypeLabel2"
-        ConduitTypeLabel2.Size = New System.Drawing.Size(73, 13)
+        ConduitTypeLabel2.Size = New System.Drawing.Size(77, 13)
         ConduitTypeLabel2.TabIndex = 16
-        ConduitTypeLabel2.Text = "Conduit Type:"
+        ConduitTypeLabel2.Text = "Conduit Type:*"
         '
         'ConduitSizeLabel2
         '
@@ -995,11 +997,11 @@ Partial Class FormMain
         'DistancetoMainLabel
         '
         DistancetoMainLabel.AutoSize = True
-        DistancetoMainLabel.Location = New System.Drawing.Point(56, 564)
+        DistancetoMainLabel.Location = New System.Drawing.Point(49, 564)
         DistancetoMainLabel.Name = "DistancetoMainLabel"
-        DistancetoMainLabel.Size = New System.Drawing.Size(90, 13)
+        DistancetoMainLabel.Size = New System.Drawing.Size(94, 13)
         DistancetoMainLabel.TabIndex = 24
-        DistancetoMainLabel.Text = "Distance to Main:"
+        DistancetoMainLabel.Text = "Distance to Main:*"
         '
         'VoltageDropLabel
         '
@@ -1013,20 +1015,20 @@ Partial Class FormMain
         'GroundWireLabel2
         '
         GroundWireLabel2.AutoSize = True
-        GroundWireLabel2.Location = New System.Drawing.Point(73, 618)
+        GroundWireLabel2.Location = New System.Drawing.Point(69, 618)
         GroundWireLabel2.Name = "GroundWireLabel2"
-        GroundWireLabel2.Size = New System.Drawing.Size(70, 13)
+        GroundWireLabel2.Size = New System.Drawing.Size(74, 13)
         GroundWireLabel2.TabIndex = 28
-        GroundWireLabel2.Text = "Ground Wire:"
+        GroundWireLabel2.Text = "Ground Wire:*"
         '
         'SetLabel1
         '
         SetLabel1.AutoSize = True
-        SetLabel1.Location = New System.Drawing.Point(117, 297)
+        SetLabel1.Location = New System.Drawing.Point(113, 297)
         SetLabel1.Name = "SetLabel1"
-        SetLabel1.Size = New System.Drawing.Size(26, 13)
+        SetLabel1.Size = New System.Drawing.Size(30, 13)
         SetLabel1.TabIndex = 30
-        SetLabel1.Text = "Set:"
+        SetLabel1.Text = "Set:*"
         '
         'GroundWireSizeLabel
         '
@@ -1049,11 +1051,11 @@ Partial Class FormMain
         'VoltageLabel1
         '
         VoltageLabel1.AutoSize = True
-        VoltageLabel1.Location = New System.Drawing.Point(97, 138)
+        VoltageLabel1.Location = New System.Drawing.Point(93, 138)
         VoltageLabel1.Name = "VoltageLabel1"
-        VoltageLabel1.Size = New System.Drawing.Size(46, 13)
+        VoltageLabel1.Size = New System.Drawing.Size(50, 13)
         VoltageLabel1.TabIndex = 41
-        VoltageLabel1.Text = "Voltage:"
+        VoltageLabel1.Text = "Voltage:*"
         '
         'DPCodeLabel
         '
@@ -1096,9 +1098,9 @@ Partial Class FormMain
         WireTypeLabel3.AutoSize = True
         WireTypeLabel3.Location = New System.Drawing.Point(84, 165)
         WireTypeLabel3.Name = "WireTypeLabel3"
-        WireTypeLabel3.Size = New System.Drawing.Size(59, 13)
+        WireTypeLabel3.Size = New System.Drawing.Size(63, 13)
         WireTypeLabel3.TabIndex = 6
-        WireTypeLabel3.Text = "Wire Type:"
+        WireTypeLabel3.Text = "Wire Type:*"
         '
         'WireSizeLabel3
         '
@@ -1114,27 +1116,27 @@ Partial Class FormMain
         SetLabel2.AutoSize = True
         SetLabel2.Location = New System.Drawing.Point(117, 218)
         SetLabel2.Name = "SetLabel2"
-        SetLabel2.Size = New System.Drawing.Size(26, 13)
+        SetLabel2.Size = New System.Drawing.Size(30, 13)
         SetLabel2.TabIndex = 10
-        SetLabel2.Text = "Set:"
+        SetLabel2.Text = "Set:*"
         '
         'ConductorLabel3
         '
         ConductorLabel3.AutoSize = True
         ConductorLabel3.Location = New System.Drawing.Point(84, 244)
         ConductorLabel3.Name = "ConductorLabel3"
-        ConductorLabel3.Size = New System.Drawing.Size(59, 13)
+        ConductorLabel3.Size = New System.Drawing.Size(63, 13)
         ConductorLabel3.TabIndex = 12
-        ConductorLabel3.Text = "Conductor:"
+        ConductorLabel3.Text = "Conductor:*"
         '
         'ConduitTypeLabel3
         '
         ConduitTypeLabel3.AutoSize = True
         ConduitTypeLabel3.Location = New System.Drawing.Point(70, 271)
         ConduitTypeLabel3.Name = "ConduitTypeLabel3"
-        ConduitTypeLabel3.Size = New System.Drawing.Size(73, 13)
+        ConduitTypeLabel3.Size = New System.Drawing.Size(77, 13)
         ConduitTypeLabel3.TabIndex = 14
-        ConduitTypeLabel3.Text = "Conduit Type:"
+        ConduitTypeLabel3.Text = "Conduit Type:*"
         '
         'ConduitSizeLabel3
         '
@@ -1168,18 +1170,18 @@ Partial Class FormMain
         DPNumberLabel.AutoSize = True
         DPNumberLabel.Location = New System.Drawing.Point(78, 60)
         DPNumberLabel.Name = "DPNumberLabel"
-        DPNumberLabel.Size = New System.Drawing.Size(65, 13)
+        DPNumberLabel.Size = New System.Drawing.Size(69, 13)
         DPNumberLabel.TabIndex = 22
-        DPNumberLabel.Text = "DP Number:"
+        DPNumberLabel.Text = "DP Number:*"
         '
         'NeutralLabel
         '
         NeutralLabel.AutoSize = True
-        NeutralLabel.Location = New System.Drawing.Point(99, 325)
+        NeutralLabel.Location = New System.Drawing.Point(95, 325)
         NeutralLabel.Name = "NeutralLabel"
-        NeutralLabel.Size = New System.Drawing.Size(44, 13)
+        NeutralLabel.Size = New System.Drawing.Size(48, 13)
         NeutralLabel.TabIndex = 58
-        NeutralLabel.Text = "Neutral:"
+        NeutralLabel.Text = "Neutral:*"
         '
         'NeutralSizeLabel
         '
@@ -1222,18 +1224,18 @@ Partial Class FormMain
         DistancetoMainLabel1.AutoSize = True
         DistancetoMainLabel1.Location = New System.Drawing.Point(53, 376)
         DistancetoMainLabel1.Name = "DistancetoMainLabel1"
-        DistancetoMainLabel1.Size = New System.Drawing.Size(90, 13)
+        DistancetoMainLabel1.Size = New System.Drawing.Size(94, 13)
         DistancetoMainLabel1.TabIndex = 64
-        DistancetoMainLabel1.Text = "Distance to Main:"
+        DistancetoMainLabel1.Text = "Distance to Main:*"
         '
         'VoltageLabel2
         '
         VoltageLabel2.AutoSize = True
         VoltageLabel2.Location = New System.Drawing.Point(97, 112)
         VoltageLabel2.Name = "VoltageLabel2"
-        VoltageLabel2.Size = New System.Drawing.Size(46, 13)
+        VoltageLabel2.Size = New System.Drawing.Size(50, 13)
         VoltageLabel2.TabIndex = 65
-        VoltageLabel2.Text = "Voltage:"
+        VoltageLabel2.Text = "Voltage:*"
         '
         'VoltageLabel3
         '
@@ -1265,11 +1267,11 @@ Partial Class FormMain
         'NumberofGeneratorsLabel
         '
         NumberofGeneratorsLabel.AutoSize = True
-        NumberofGeneratorsLabel.Location = New System.Drawing.Point(29, 242)
+        NumberofGeneratorsLabel.Location = New System.Drawing.Point(25, 242)
         NumberofGeneratorsLabel.Name = "NumberofGeneratorsLabel"
-        NumberofGeneratorsLabel.Size = New System.Drawing.Size(114, 13)
+        NumberofGeneratorsLabel.Size = New System.Drawing.Size(118, 13)
         NumberofGeneratorsLabel.TabIndex = 13
-        NumberofGeneratorsLabel.Text = "Number of Generators:"
+        NumberofGeneratorsLabel.Text = "Number of Generators:*"
         '
         'GroundWireSizeLabel1
         '
@@ -1346,11 +1348,11 @@ Partial Class FormMain
         'ShortCircuitCapLabel
         '
         ShortCircuitCapLabel.AutoSize = True
-        ShortCircuitCapLabel.Location = New System.Drawing.Point(5, 91)
+        ShortCircuitCapLabel.Location = New System.Drawing.Point(53, 91)
         ShortCircuitCapLabel.Name = "ShortCircuitCapLabel"
-        ShortCircuitCapLabel.Size = New System.Drawing.Size(111, 13)
+        ShortCircuitCapLabel.Size = New System.Drawing.Size(63, 13)
         ShortCircuitCapLabel.TabIndex = 72
-        ShortCircuitCapLabel.Text = "Short Circuit Capacity:"
+        ShortCircuitCapLabel.Text = "SCC (MVA):"
         '
         'XRRatioLabel
         '
@@ -1364,20 +1366,20 @@ Partial Class FormMain
         'TransformerXRRatioLabel
         '
         TransformerXRRatioLabel.AutoSize = True
-        TransformerXRRatioLabel.Location = New System.Drawing.Point(28, 164)
+        TransformerXRRatioLabel.Location = New System.Drawing.Point(24, 164)
         TransformerXRRatioLabel.Name = "TransformerXRRatioLabel"
-        TransformerXRRatioLabel.Size = New System.Drawing.Size(115, 13)
+        TransformerXRRatioLabel.Size = New System.Drawing.Size(119, 13)
         TransformerXRRatioLabel.TabIndex = 14
-        TransformerXRRatioLabel.Text = "Transformer X-R Ratio:"
+        TransformerXRRatioLabel.Text = "Transformer X-R Ratio:*"
         '
         'TransformerZpuLabel
         '
         TransformerZpuLabel.AutoSize = True
-        TransformerZpuLabel.Location = New System.Drawing.Point(55, 190)
+        TransformerZpuLabel.Location = New System.Drawing.Point(51, 190)
         TransformerZpuLabel.Name = "TransformerZpuLabel"
-        TransformerZpuLabel.Size = New System.Drawing.Size(88, 13)
+        TransformerZpuLabel.Size = New System.Drawing.Size(92, 13)
         TransformerZpuLabel.TabIndex = 15
-        TransformerZpuLabel.Text = "Transformer Zpu:"
+        TransformerZpuLabel.Text = "Transformer Zpu:*"
         '
         'MenuStrip1
         '
@@ -1409,7 +1411,7 @@ Partial Class FormMain
         '
         'ViewToolStripMenuItem
         '
-        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IlluminationCalculatorToolStripMenuItem})
+        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.IlluminationCalculatorToolStripMenuItem, Me.LoadRecordsToolStripMenuItem})
         Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.ViewToolStripMenuItem.Text = "View"
@@ -1419,6 +1421,12 @@ Partial Class FormMain
         Me.IlluminationCalculatorToolStripMenuItem.Name = "IlluminationCalculatorToolStripMenuItem"
         Me.IlluminationCalculatorToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
         Me.IlluminationCalculatorToolStripMenuItem.Text = "Illumination Calculator"
+        '
+        'LoadRecordsToolStripMenuItem
+        '
+        Me.LoadRecordsToolStripMenuItem.Name = "LoadRecordsToolStripMenuItem"
+        Me.LoadRecordsToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.LoadRecordsToolStripMenuItem.Text = "Load Records"
         '
         'HelpToolStripMenuItem
         '
@@ -1676,7 +1684,7 @@ Partial Class FormMain
         '
         Me.ConductorComboBoxDP.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblDistributionBindingSource, "Conductor", True))
         Me.ConductorComboBoxDP.DataSource = Me.TblConductorBindingSource5
-        Me.ConductorComboBoxDP.DisplayMember = "Name"
+        Me.ConductorComboBoxDP.DisplayMember = "Code"
         Me.ConductorComboBoxDP.FormattingEnabled = True
         Me.ConductorComboBoxDP.Location = New System.Drawing.Point(167, 241)
         Me.ConductorComboBoxDP.Name = "ConductorComboBoxDP"
@@ -1843,7 +1851,7 @@ Partial Class FormMain
         '
         Me.GroundConductorComboBoxSub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "GroundConductor", True))
         Me.GroundConductorComboBoxSub.DataSource = Me.TblConductorBindingSource6
-        Me.GroundConductorComboBoxSub.DisplayMember = "Name"
+        Me.GroundConductorComboBoxSub.DisplayMember = "Code"
         Me.GroundConductorComboBoxSub.FormattingEnabled = True
         Me.GroundConductorComboBoxSub.Location = New System.Drawing.Point(167, 669)
         Me.GroundConductorComboBoxSub.Name = "GroundConductorComboBoxSub"
@@ -1878,7 +1886,7 @@ Partial Class FormMain
         '
         Me.NeutralConductorComboBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "NeutralConductor", True))
         Me.NeutralConductorComboBox.DataSource = Me.TblConductorBindingSource4
-        Me.NeutralConductorComboBox.DisplayMember = "Name"
+        Me.NeutralConductorComboBox.DisplayMember = "Code"
         Me.NeutralConductorComboBox.Enabled = False
         Me.NeutralConductorComboBox.FormattingEnabled = True
         Me.NeutralConductorComboBox.Location = New System.Drawing.Point(167, 377)
@@ -1982,6 +1990,7 @@ Partial Class FormMain
         '
         Me.TextBox5.Location = New System.Drawing.Point(164, 72)
         Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.ReadOnly = True
         Me.TextBox5.Size = New System.Drawing.Size(100, 20)
         Me.TextBox5.TabIndex = 7
         '
@@ -1998,6 +2007,7 @@ Partial Class FormMain
         '
         Me.TextBox6.Location = New System.Drawing.Point(164, 46)
         Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.ReadOnly = True
         Me.TextBox6.Size = New System.Drawing.Size(100, 20)
         Me.TextBox6.TabIndex = 5
         '
@@ -2031,6 +2041,7 @@ Partial Class FormMain
         '
         Me.TxtThreePhaseLoad.Location = New System.Drawing.Point(164, 100)
         Me.TxtThreePhaseLoad.Name = "TxtThreePhaseLoad"
+        Me.TxtThreePhaseLoad.ReadOnly = True
         Me.TxtThreePhaseLoad.Size = New System.Drawing.Size(100, 20)
         Me.TxtThreePhaseLoad.TabIndex = 7
         Me.TxtThreePhaseLoad.Text = "0"
@@ -2048,6 +2059,7 @@ Partial Class FormMain
         '
         Me.TxtPhaseCLoad.Location = New System.Drawing.Point(164, 74)
         Me.TxtPhaseCLoad.Name = "TxtPhaseCLoad"
+        Me.TxtPhaseCLoad.ReadOnly = True
         Me.TxtPhaseCLoad.Size = New System.Drawing.Size(100, 20)
         Me.TxtPhaseCLoad.TabIndex = 5
         Me.TxtPhaseCLoad.Text = "0"
@@ -2065,6 +2077,7 @@ Partial Class FormMain
         '
         Me.TxtPhaseBLoad.Location = New System.Drawing.Point(164, 48)
         Me.TxtPhaseBLoad.Name = "TxtPhaseBLoad"
+        Me.TxtPhaseBLoad.ReadOnly = True
         Me.TxtPhaseBLoad.Size = New System.Drawing.Size(100, 20)
         Me.TxtPhaseBLoad.TabIndex = 3
         Me.TxtPhaseBLoad.Text = "0"
@@ -2082,6 +2095,7 @@ Partial Class FormMain
         '
         Me.TxtPhaseALoad.Location = New System.Drawing.Point(164, 22)
         Me.TxtPhaseALoad.Name = "TxtPhaseALoad"
+        Me.TxtPhaseALoad.ReadOnly = True
         Me.TxtPhaseALoad.Size = New System.Drawing.Size(100, 20)
         Me.TxtPhaseALoad.TabIndex = 1
         Me.TxtPhaseALoad.Text = "0"
@@ -2215,7 +2229,7 @@ Partial Class FormMain
         '
         Me.ConductorComboBoxSub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "Conductor", True))
         Me.ConductorComboBoxSub.DataSource = Me.TblConductorBindingSource3
-        Me.ConductorComboBoxSub.DisplayMember = "Name"
+        Me.ConductorComboBoxSub.DisplayMember = "Code"
         Me.ConductorComboBoxSub.FormattingEnabled = True
         Me.ConductorComboBoxSub.Location = New System.Drawing.Point(167, 267)
         Me.ConductorComboBoxSub.Name = "ConductorComboBoxSub"
@@ -2389,7 +2403,7 @@ Partial Class FormMain
         '
         Me.GroundConductorComboBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "GroundConductor", True))
         Me.GroundConductorComboBox.DataSource = Me.TblConductorBindingSource2
-        Me.GroundConductorComboBox.DisplayMember = "Name"
+        Me.GroundConductorComboBox.DisplayMember = "Code"
         Me.GroundConductorComboBox.Enabled = False
         Me.GroundConductorComboBox.FormattingEnabled = True
         Me.GroundConductorComboBox.Location = New System.Drawing.Point(167, 640)
@@ -3114,7 +3128,7 @@ Partial Class FormMain
         '
         Me.ConductorComboBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "Conductor", True))
         Me.ConductorComboBox.DataSource = Me.TblConductorBindingSource1
-        Me.ConductorComboBox.DisplayMember = "Name"
+        Me.ConductorComboBox.DisplayMember = "Code"
         Me.ConductorComboBox.FormattingEnabled = True
         Me.ConductorComboBox.Location = New System.Drawing.Point(167, 452)
         Me.ConductorComboBox.Name = "ConductorComboBox"
@@ -3428,7 +3442,6 @@ Partial Class FormMain
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.BtnkAIC)
         Me.GroupBox2.Controls.Add(XRRatioLabel)
         Me.GroupBox2.Controls.Add(Me.XRRatioTextBox)
         Me.GroupBox2.Controls.Add(ShortCircuitCapLabel)
@@ -3456,9 +3469,9 @@ Partial Class FormMain
         Me.GroupBox2.Controls.Add(WireTypeLabel)
         Me.GroupBox2.Controls.Add(Me.WireTypeComboBoxMain)
         Me.GroupBox2.Controls.Add(Me.BtnCompute)
-        Me.GroupBox2.Controls.Add(Me.Button4)
-        Me.GroupBox2.Controls.Add(Me.Button5)
-        Me.GroupBox2.Controls.Add(Me.Button6)
+        Me.GroupBox2.Controls.Add(Me.BtnDeleteMain)
+        Me.GroupBox2.Controls.Add(Me.BtnSaveMain)
+        Me.GroupBox2.Controls.Add(Me.BtnAddMain)
         Me.GroupBox2.Controls.Add(GroundWireLabel)
         Me.GroupBox2.Controls.Add(Me.GroundWireCheckBox)
         Me.GroupBox2.Controls.Add(BreakerTypeLabel)
@@ -3481,15 +3494,6 @@ Partial Class FormMain
         Me.GroupBox2.TabIndex = 4
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Main Feeder"
-        '
-        'BtnkAIC
-        '
-        Me.BtnkAIC.Location = New System.Drawing.Point(362, 136)
-        Me.BtnkAIC.Name = "BtnkAIC"
-        Me.BtnkAIC.Size = New System.Drawing.Size(75, 23)
-        Me.BtnkAIC.TabIndex = 75
-        Me.BtnkAIC.Text = "kAIC"
-        Me.BtnkAIC.UseVisualStyleBackColor = True
         '
         'XRRatioTextBox
         '
@@ -3551,6 +3555,7 @@ Partial Class FormMain
         'GroundWireSizeTextBoxMain
         '
         Me.GroundWireSizeTextBoxMain.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "GroundWireSize", True))
+        Me.GroundWireSizeTextBoxMain.Enabled = False
         Me.GroundWireSizeTextBoxMain.Location = New System.Drawing.Point(126, 459)
         Me.GroundWireSizeTextBoxMain.Name = "GroundWireSizeTextBoxMain"
         Me.GroundWireSizeTextBoxMain.ReadOnly = True
@@ -3560,11 +3565,15 @@ Partial Class FormMain
         'GroundConductorComboBoxMain
         '
         Me.GroundConductorComboBoxMain.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "GroundConductor", True))
+        Me.GroundConductorComboBoxMain.DataSource = Me.TblConductorBindingSource7
+        Me.GroundConductorComboBoxMain.DisplayMember = "Code"
+        Me.GroundConductorComboBoxMain.Enabled = False
         Me.GroundConductorComboBoxMain.FormattingEnabled = True
         Me.GroundConductorComboBoxMain.Location = New System.Drawing.Point(126, 485)
         Me.GroundConductorComboBoxMain.Name = "GroundConductorComboBoxMain"
         Me.GroundConductorComboBoxMain.Size = New System.Drawing.Size(121, 21)
         Me.GroundConductorComboBoxMain.TabIndex = 33
+        Me.GroundConductorComboBoxMain.ValueMember = "Code"
         '
         'SetTextBox1
         '
@@ -3605,7 +3614,7 @@ Partial Class FormMain
         '
         Me.ConductorComboBoxMain.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "Conductor", True))
         Me.ConductorComboBoxMain.DataSource = Me.TblConductorBindingSource
-        Me.ConductorComboBoxMain.DisplayMember = "Name"
+        Me.ConductorComboBoxMain.DisplayMember = "Code"
         Me.ConductorComboBoxMain.FormattingEnabled = True
         Me.ConductorComboBoxMain.Location = New System.Drawing.Point(126, 245)
         Me.ConductorComboBoxMain.Name = "ConductorComboBoxMain"
@@ -3644,32 +3653,32 @@ Partial Class FormMain
         Me.BtnCompute.Text = "Compute"
         Me.BtnCompute.UseVisualStyleBackColor = True
         '
-        'Button4
+        'BtnDeleteMain
         '
-        Me.Button4.Location = New System.Drawing.Point(362, 225)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 23)
-        Me.Button4.TabIndex = 24
-        Me.Button4.Text = "Delete"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.BtnDeleteMain.Location = New System.Drawing.Point(362, 196)
+        Me.BtnDeleteMain.Name = "BtnDeleteMain"
+        Me.BtnDeleteMain.Size = New System.Drawing.Size(75, 23)
+        Me.BtnDeleteMain.TabIndex = 24
+        Me.BtnDeleteMain.Text = "Delete"
+        Me.BtnDeleteMain.UseVisualStyleBackColor = True
         '
-        'Button5
+        'BtnSaveMain
         '
-        Me.Button5.Location = New System.Drawing.Point(362, 195)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(75, 23)
-        Me.Button5.TabIndex = 23
-        Me.Button5.Text = "Save"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.BtnSaveMain.Location = New System.Drawing.Point(362, 166)
+        Me.BtnSaveMain.Name = "BtnSaveMain"
+        Me.BtnSaveMain.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSaveMain.TabIndex = 23
+        Me.BtnSaveMain.Text = "Save"
+        Me.BtnSaveMain.UseVisualStyleBackColor = True
         '
-        'Button6
+        'BtnAddMain
         '
-        Me.Button6.Location = New System.Drawing.Point(362, 165)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 23)
-        Me.Button6.TabIndex = 22
-        Me.Button6.Text = "Add"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.BtnAddMain.Location = New System.Drawing.Point(362, 136)
+        Me.BtnAddMain.Name = "BtnAddMain"
+        Me.BtnAddMain.Size = New System.Drawing.Size(75, 23)
+        Me.BtnAddMain.TabIndex = 22
+        Me.BtnAddMain.Text = "Add"
+        Me.BtnAddMain.UseVisualStyleBackColor = True
         '
         'GroundWireCheckBox
         '
@@ -3788,6 +3797,11 @@ Partial Class FormMain
         '
         Me.TblBranchTableAdapter.ClearBeforeFill = True
         '
+        'TblConductorBindingSource7
+        '
+        Me.TblConductorBindingSource7.DataMember = "tblConductor"
+        Me.TblConductorBindingSource7.DataSource = Me.ESD_DatabaseDataSet
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3842,6 +3856,7 @@ Partial Class FormMain
         CType(Me.TblMainFeederBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TblConductorBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TblWireBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TblConductorBindingSource7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3866,9 +3881,9 @@ Partial Class FormMain
     Friend WithEvents ProjectCodeTextBox As TextBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents TblMainFeederBindingSource As BindingSource
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button6 As Button
+    Friend WithEvents BtnDeleteMain As Button
+    Friend WithEvents BtnSaveMain As Button
+    Friend WithEvents BtnAddMain As Button
     Friend WithEvents GroundWireCheckBox As CheckBox
     Friend WithEvents BreakerTypeTextBox As TextBox
     Friend WithEvents OCPDRatingTextBox As TextBox
@@ -4086,7 +4101,6 @@ Partial Class FormMain
     Friend WithEvents TransformerXRRatioTextBox As TextBox
     Friend WithEvents XRRatioTextBox As TextBox
     Friend WithEvents ShortCircuitCapTextBox As TextBox
-    Friend WithEvents BtnkAIC As Button
     Friend WithEvents TransformerZpuTextBox As TextBox
     Friend WithEvents BtnComputeTG As Button
     Friend WithEvents BtnDeleteTG As Button
@@ -4094,4 +4108,6 @@ Partial Class FormMain
     Friend WithEvents BtnAddTG As Button
     Friend WithEvents GenerateReportToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LoadRecordsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TblConductorBindingSource7 As BindingSource
 End Class

@@ -24,10 +24,8 @@ Partial Class FormReport
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
-        Me.ReportESD1 = New ProjectESD.ReportESD()
-        Me.tblProjectBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.reportProject1 = New ProjectESD.ReportProject()
         Me.ESD_DatabaseDataSet = New ProjectESD.ESD_DatabaseDataSet()
-        Me.TblProjectTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblProjectTableAdapter()
         Me.tblBranchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TblBranchTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblBranchTableAdapter()
         Me.tblSubfeederBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -38,13 +36,15 @@ Partial Class FormReport
         Me.TblMainFeederTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblMainFeederTableAdapter()
         Me.tblTransGenBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TblTransGenTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblTransGenTableAdapter()
-        CType(Me.tblProjectBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tblProjectBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TblProjectTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblProjectTableAdapter()
         CType(Me.ESD_DatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tblBranchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tblSubfeederBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tblDistributionBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tblMainFeederBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tblTransGenBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblProjectBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CrystalReportViewer1
@@ -55,23 +55,14 @@ Partial Class FormReport
         Me.CrystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CrystalReportViewer1.Location = New System.Drawing.Point(0, 0)
         Me.CrystalReportViewer1.Name = "CrystalReportViewer1"
-        Me.CrystalReportViewer1.ReportSource = Me.ReportESD1
-        Me.CrystalReportViewer1.Size = New System.Drawing.Size(1169, 714)
+        Me.CrystalReportViewer1.ReportSource = Me.reportProject1
+        Me.CrystalReportViewer1.Size = New System.Drawing.Size(1305, 784)
         Me.CrystalReportViewer1.TabIndex = 0
-        '
-        'tblProjectBindingSource
-        '
-        Me.tblProjectBindingSource.DataMember = "tblProject"
-        Me.tblProjectBindingSource.DataSource = Me.ESD_DatabaseDataSet
         '
         'ESD_DatabaseDataSet
         '
         Me.ESD_DatabaseDataSet.DataSetName = "ESD_DatabaseDataSet"
         Me.ESD_DatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'TblProjectTableAdapter
-        '
-        Me.TblProjectTableAdapter.ClearBeforeFill = True
         '
         'tblBranchBindingSource
         '
@@ -118,30 +109,37 @@ Partial Class FormReport
         '
         Me.TblTransGenTableAdapter.ClearBeforeFill = True
         '
+        'tblProjectBindingSource
+        '
+        Me.tblProjectBindingSource.DataMember = "tblProject"
+        Me.tblProjectBindingSource.DataSource = Me.ESD_DatabaseDataSet
+        '
+        'TblProjectTableAdapter
+        '
+        Me.TblProjectTableAdapter.ClearBeforeFill = True
+        '
         'FormReport
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1169, 714)
+        Me.ClientSize = New System.Drawing.Size(1305, 784)
         Me.Controls.Add(Me.CrystalReportViewer1)
         Me.Name = "FormReport"
         Me.Text = "FormReport"
-        CType(Me.tblProjectBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ESD_DatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tblBranchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tblSubfeederBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tblDistributionBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tblMainFeederBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tblTransGenBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblProjectBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents CrystalReportViewer1 As CrystalDecisions.Windows.Forms.CrystalReportViewer
-    Friend WithEvents ReportESD1 As ReportESD
-    Friend WithEvents tblProjectBindingSource As BindingSource
+    Friend WithEvents reportProject1 As ReportProject
     Friend WithEvents ESD_DatabaseDataSet As ESD_DatabaseDataSet
-    Friend WithEvents TblProjectTableAdapter As ESD_DatabaseDataSetTableAdapters.tblProjectTableAdapter
     Friend WithEvents tblBranchBindingSource As BindingSource
     Friend WithEvents TblBranchTableAdapter As ESD_DatabaseDataSetTableAdapters.tblBranchTableAdapter
     Friend WithEvents tblSubfeederBindingSource As BindingSource
@@ -152,4 +150,6 @@ Partial Class FormReport
     Friend WithEvents TblMainFeederTableAdapter As ESD_DatabaseDataSetTableAdapters.tblMainFeederTableAdapter
     Friend WithEvents tblTransGenBindingSource As BindingSource
     Friend WithEvents TblTransGenTableAdapter As ESD_DatabaseDataSetTableAdapters.tblTransGenTableAdapter
+    Friend WithEvents tblProjectBindingSource As BindingSource
+    Friend WithEvents TblProjectTableAdapter As ESD_DatabaseDataSetTableAdapters.tblProjectTableAdapter
 End Class

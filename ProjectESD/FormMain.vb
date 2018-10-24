@@ -10,13 +10,9 @@ Public Class FormMain
     Private TCL As Decimal
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'ESD_DatabaseDataSet.tblWire' table. You can move, or remove it, as needed.
         TblWireTableAdapter.Fill(ESD_DatabaseDataSet.tblWire)
-        'TODO: This line of code loads data into the 'ESD_DatabaseDataSet.tblConductor' table. You can move, or remove it, as needed.
         TblConductorTableAdapter.Fill(ESD_DatabaseDataSet.tblConductor)
         TblProjectTableAdapter.Fill(ESD_DatabaseDataSet.tblProject)
-        TblDistributionTableAdapter.Fill(ESD_DatabaseDataSet.tblDistribution)
-        TblSubfeederTableAdapter.Fill(ESD_DatabaseDataSet.tblSubfeeder)
     End Sub
 
 #Region "Project"
@@ -42,16 +38,33 @@ Public Class FormMain
             End Try
         End If
     End Sub
-
-
-
 #End Region
 
 #Region "Main Feeder"
     Private Sub BtnCompute_Click(sender As Object, e As EventArgs) Handles BtnCompute.Click
-        Dim imf, hrml, phaseload(2), setcurrent As Decimal
+        Dim imf, hrml, phaseload(2), singlephaseload, threephaseload, setcurrent As Decimal
         Dim voltage As Integer = VoltageComboBoxMain.Text
         Dim wirenumber As Integer
+
+        If PhaseTextBox.Text = "3" Then
+            phaseload = {TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "A"),
+                TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "B"),
+                TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "C")}
+
+            Array.Sort(phaseload)
+
+            singlephaseload = phaseload(2)
+
+            threephaseload = TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "3")
+
+            TCL = (3 * singlephaseload) + threephaseload
+
+            TotalLoadTextBox.Text = Math.Round(TCL, 4)
+        Else
+            singlephaseload = TblBranchTableAdapter.TotalLoadperPhase(ProjectTextBox.Text, "A")
+            TCL = singlephaseload
+            TotalLoadTextBox.Text = Math.Round(singlephaseload, 4)
+        End If
 
         If PhaseTextBox.Text = "3" Then
             If TblBranchTableAdapter.GetHRMLSinglePhaseProject(ProjectCodeTextBox.Text) > TblBranchTableAdapter.GetHRMLThreePhaseProject(ProjectCodeTextBox.Text) Then
@@ -111,9 +124,7 @@ Public Class FormMain
         If GroundWireCheckBox.Checked Then
             GroundWireSizeTextBoxMain.Text = GroundWire(OCPDRatingTextBox.Text, GroundConductorComboBoxMain.Text)
         End If
-    End Sub
 
-    Private Sub BtnkAIC_Click(sender As Object, e As EventArgs) Handles BtnkAIC.Click
         Dim count As Integer = TblDistributionTableAdapter.CountDP(ProjectCodeTextBox.Text)
         Dim zreal(count - 1), zimag(count - 1) As Double
 
@@ -162,7 +173,56 @@ Public Class FormMain
         iactual = ifpu.Magnitude * ibase
 
         KAICRatingTextBox.Text = Math.Round(iactual / 1000, 4)
+    End Sub
 
+    Private Sub BtnAddMain_Click(sender As Object, e As EventArgs) Handles BtnAddMain.Click
+        TblMainFeederBindingSource.AddNew()
+        ProjectCodeTextBox1.Text = ProjectCodeTextBox.Text
+        SetTextBox1.Text = "1"
+    End Sub
+
+    Private Sub BtnSaveMain_Click(sender As Object, e As EventArgs) Handles BtnSaveMain.Click
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                Validate()
+                TblMainFeederBindingSource.EndEdit()
+                TblMainFeederTableAdapter.Update(ESD_DatabaseDataSet)
+
+                MessageBox.Show("Record saved.")
+            Catch ex As NoNullAllowedException
+                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As ConstraintException
+                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch
+                MessageBox.Show("An error has occurred", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub BtnDeleteMain_Click(sender As Object, e As EventArgs) Handles BtnDeleteMain.Click
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to delete? Once deleted, the record will not be retrieved.", "Delete", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                TblMainFeederTableAdapter.DeletebyPrimary(ProjectCodeTextBox1.Text)
+
+                MessageBox.Show("Record deleted.")
+            Catch
+                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub GroundWireCheckBox_CheckStateChanged(sender As Object, e As EventArgs) Handles GroundWireCheckBox.CheckStateChanged
+        If GroundWireCheckBox.Checked Then
+            GroundWireSizeTextBoxMain.Enabled = True
+            GroundConductorComboBoxMain.Enabled = True
+        Else
+            GroundWireSizeTextBoxMain.Enabled = False
+            GroundConductorComboBoxMain.Enabled = False
+
+            GroundConductorComboBoxMain.SelectedIndex = -1
+        End If
     End Sub
 #End Region
 
@@ -280,6 +340,8 @@ ErrorLine: End Sub
         TblDistributionBindingSource.AddNew()
         ProjectCodeTextBoxDP.Text = ProjectCodeTextBox.Text
         SetTextBoxDP.Text = 1
+
+        TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
     End Sub
 
     Private Sub BtnSaveDP_Click(sender As Object, e As EventArgs) Handles BtnSaveDP.Click
@@ -293,18 +355,39 @@ ErrorLine: End Sub
                 TblDistributionTableAdapter.Update(ESD_DatabaseDataSet)
 
                 MessageBox.Show("Record saved.")
-
-                TblDistributionTableAdapter.Fill(ESD_DatabaseDataSet.tblDistribution)
             Catch ex As NoNullAllowedException
-                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As ConstraintException
-                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch
+                MessageBox.Show("An error has occurred", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
 
     Private Sub BtnDeleteDP_Click(sender As Object, e As EventArgs) Handles BtnDeleteDP.Click
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to delete? Once deleted, the record will not be retrieved.", "Delete", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                TblDistributionTableAdapter.DeletebyPrimary(CodeTextBoxDP.Text)
 
+                MessageBox.Show("Record deleted.")
+            Catch
+                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub BtnPreviousDP_Click(sender As Object, e As EventArgs) Handles BtnPreviousDP.Click
+        TblDistributionBindingSource.MovePrevious()
+        TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+    End Sub
+
+    Private Sub BtnNextDP_Click(sender As Object, e As EventArgs) Handles BtnNextDP.Click
+        TblDistributionBindingSource.MoveNext()
+        TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
     End Sub
 #End Region
 
@@ -495,6 +578,8 @@ ErrorLine: End Sub
         ProjectCodeTextBoxSub.Text = ProjectTextBox.Text
         DPCodeTextBox.Text = CodeTextBoxDP.Text
         SetTextBoxSub.Text = "1"
+
+        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
     End Sub
 
     Private Sub BtnSaveSub_Click(sender As Object, e As EventArgs) Handles BtnSaveSub.Click
@@ -508,12 +593,12 @@ ErrorLine: End Sub
                 TblSubfeederTableAdapter.Update(ESD_DatabaseDataSet)
 
                 MessageBox.Show("Record saved.")
-
-                TblSubfeederTableAdapter.Fill(ESD_DatabaseDataSet.tblSubfeeder)
             Catch ex As NoNullAllowedException
-                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As ConstraintException
-                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch
+                MessageBox.Show("An error has occurred", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         Else
 
@@ -543,6 +628,21 @@ ErrorLine: End Sub
             NeutralConductorComboBox.Enabled = False
             NeutralSetTextBox.ReadOnly = True
             NeutralSetTextBox.Text = ""
+        End If
+    End Sub
+
+    Private Sub BtnDeleteSub_Click(sender As Object, e As EventArgs) Handles BtnDeleteSub.Click
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to delete? Once deleted, the record will not be retrieved.", "Delete", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                TblSubfeederTableAdapter.DeleteByPrimary(CodeTextBoxSub.Text)
+
+                MessageBox.Show("Record deleted.")
+
+                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+            Catch
+                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
     End Sub
 
@@ -682,9 +782,9 @@ ErrorLine: End Sub
             setcurrent = ocpd / wirenumber
 
             Dim Size As String = WireSize(ConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), setcurrent, ConduitTypeComboBox.Text, WireTypeComboBox.Text)
-            If Size = "2.0" And ConductorComboBox.Text = "Copper" Then
+            If Size = "2.0" And ConductorComboBox.Text = "Cu" Then
                 WireSizeTextBox1.Text = "3.5"
-            ElseIf Size = "3.5" And ConductorComboBox.Text IsNot "Copper" Then
+            ElseIf Size = "3.5" And ConductorComboBox.Text IsNot "Cu" Then
                 WireSizeTextBox1.Text = "5.5"
             Else
                 WireSizeTextBox1.Text = Size
@@ -782,9 +882,9 @@ ErrorLine: End Sub
             setcurrent = ocpd / wirenumber
 
             Dim Size As String = WireSize(ConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), setcurrent, ConduitTypeComboBox.Text, WireTypeComboBox.Text)
-            If Size = "2.0" And ConductorComboBox.Text = "Copper" Then
+            If Size = "2.0" And ConductorComboBox.Text = "Cu" Then
                 WireSizeTextBox1.Text = "3.5"
-            ElseIf Size = "3.5" And ConductorComboBox.Text IsNot "Copper" Then
+            ElseIf Size = "3.5" And ConductorComboBox.Text IsNot "Cu" Then
                 WireSizeTextBox1.Text = "5.5"
             Else
                 WireSizeTextBox1.Text = Size
@@ -832,9 +932,9 @@ ErrorLine: End Sub
             setcurrent = ocpd / wirenumber
 
             Dim Size As String = WireSize(ConductorComboBox.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), setcurrent, ConduitTypeComboBox.Text, WireTypeComboBox.Text)
-            If Size = "2.0" And ConductorComboBox.Text = "Copper" Then
+            If Size = "2.0" And ConductorComboBox.Text = "Cu" Then
                 WireSizeTextBox1.Text = "3.5"
-            ElseIf Size = "3.5" And ConductorComboBox.Text IsNot "Copper" Then
+            ElseIf Size = "3.5" And ConductorComboBox.Text IsNot "Cu" Then
                 WireSizeTextBox1.Text = "5.5"
             Else
                 WireSizeTextBox1.Text = Size
@@ -978,7 +1078,6 @@ ErrorLine: End Sub
     End Sub
 
     Private Sub BtnSaveBranch_Click(sender As Object, e As EventArgs) Handles BtnSaveBranch.Click
-
         CodeTextBox.Text = SubfeederTextBox.Text + "-BC" + CircuitNoTextBox.Text
 
         Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
@@ -990,9 +1089,11 @@ ErrorLine: End Sub
 
                 MessageBox.Show("Record saved.")
             Catch ex As NoNullAllowedException
-                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As ConstraintException
-                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch
+                MessageBox.Show("An error has occurred", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         Else
 
@@ -1008,7 +1109,7 @@ ErrorLine: End Sub
 
                 MessageBox.Show("Record deleted.")
 
-                TblBranchTableAdapter.Fill(ESD_DatabaseDataSet.tblBranch)
+                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
             Catch
                 MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
@@ -1085,6 +1186,45 @@ ErrorLine: End Sub
 
         GeneratorRatingTextBox.Text = CStr(TransformerRating(TCL * 1.25 / CDec(NumberofGeneratorsTextBox.Text)))
 
+    End Sub
+
+    Private Sub BtnAddTG_Click(sender As Object, e As EventArgs) Handles BtnAddTG.Click
+        TblTransGenBindingSource.AddNew()
+        ProjectCodeTextBox3.Text = ProjectCodeTextBox.Text
+    End Sub
+
+    Private Sub BtnSaveTG_Click(sender As Object, e As EventArgs) Handles BtnSaveTG.Click
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                Validate()
+                TblTransGenBindingSource.EndEdit()
+                TblTransGenTableAdapter.Update(ESD_DatabaseDataSet)
+
+                MessageBox.Show("Record saved.")
+            Catch ex As NoNullAllowedException
+                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As ConstraintException
+                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch
+                MessageBox.Show("An error has occurred", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        Else
+
+        End If
+    End Sub
+
+    Private Sub BtnDeleteTG_Click(sender As Object, e As EventArgs) Handles BtnDeleteTG.Click
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to delete? Once deleted, the record will not be retrieved.", "Delete", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                TblTransGenTableAdapter.DeletebyPrimary(ProjectCodeTextBox3.Text)
+
+                MessageBox.Show("Record deleted.")
+            Catch
+                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
     End Sub
 #End Region
 
@@ -1173,13 +1313,19 @@ ErrorLine: End Sub
         End If
     End Sub
 
-    Private Sub NumericKeyPress(sender As Object, e As KeyPressEventArgs) Handles CircuitNoTextBox.KeyPress, TxtRatingLighting3.KeyPress, TxtRatingLighting2.KeyPress, TxtRatingLighting1.KeyPress, TxtItemsPower4.KeyPress, TxtItemsPower3.KeyPress, TxtItemsPower2.KeyPress, TxtItemsPower1.KeyPress, TxtItemsLighting3.KeyPress, TxtItemsLighting2.KeyPress, TxtItemsLighting1.KeyPress, SetTextBox.KeyPress
+    Private Sub IntegerKeyPress(sender As Object, e As KeyPressEventArgs) Handles PhaseTextBox.KeyPress, SetTextBoxDP.KeyPress, SetTextBox1.KeyPress, DPNumberTextBox.KeyPress, TxtItemsPower4.KeyPress, TxtItemsPower3.KeyPress, TxtItemsPower2.KeyPress, TxtItemsPower1.KeyPress, TxtItemsLighting3.KeyPress, TxtItemsLighting2.KeyPress, TxtItemsLighting1.KeyPress, SetTextBoxSub.KeyPress, SetTextBox.KeyPress, NumberTextBox.KeyPress, NumberofGeneratorsTextBox.KeyPress, CircuitNoTextBox.KeyPress
+        If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub NumericKeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtRatingLighting3.KeyPress, TxtRatingLighting2.KeyPress, TxtRatingLighting1.KeyPress, ShortCircuitCapTextBox.KeyPress, XRRatioTextBox.KeyPress, DistancetoSETextBox.KeyPress, TransformerZpuTextBox.KeyPress, TransformerXRRatioTextBox.KeyPress, DiversityFactorTextBox.KeyPress, DistancetoMainTextBoxDP.KeyPress, DistancetoMainTextBox.KeyPress, DemandFactorTextBox.KeyPress
         If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso Not e.KeyChar = "." Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub NumericTextChange(sender As Object, e As EventArgs) Handles CircuitNoTextBox.TextChanged, TxtRatingLighting3.TextChanged, TxtRatingLighting2.TextChanged, TxtRatingLighting1.TextChanged, TxtItemsPower4.TextChanged, TxtItemsPower3.TextChanged, TxtItemsPower2.TextChanged, TxtItemsPower1.TextChanged, TxtItemsLighting3.TextChanged, TxtItemsLighting2.TextChanged, TxtItemsLighting1.TextChanged, SetTextBox.TextChanged
+    Private Sub NumericTextChange(sender As Object, e As EventArgs) Handles CircuitNoTextBox.TextChanged, TxtItemsPower4.TextChanged, TxtItemsPower3.TextChanged, TxtItemsPower2.TextChanged, TxtItemsPower1.TextChanged, TxtItemsLighting3.TextChanged, TxtItemsLighting2.TextChanged, TxtItemsLighting1.TextChanged, SetTextBox.TextChanged, PhaseTextBox.TextChanged, SetTextBox1.TextChanged, SetTextBoxDP.TextChanged, DPNumberTextBox.TextChanged, SetTextBoxSub.TextChanged, NumberTextBox.TextChanged, NumberofGeneratorsTextBox.TextChanged
         Dim digitsOnly As Regex = New Regex("[^\d]")
         sender.Text = digitsOnly.Replace(sender.Text, "")
     End Sub
@@ -1201,20 +1347,33 @@ ErrorLine: End Sub
         MessageBox.Show("Under construction.")
     End Sub
 
-    Private Sub GenerateReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateReportToolStripMenuItem.Click
-        Dim f As New FormReport
-        f.ProjectCode = ProjectCodeTextBox.Text
+    Private Report As FormReport
 
-        f.Show()
+    Private Sub GenerateReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GenerateReportToolStripMenuItem.Click
+        'Dim f As New FormReport
+        'f.ProjectCode = ProjectCodeTextBox.Text
+
+        'f.Show()
+        'Hide()
+        Dim initialValue As String
+        initialValue = ProjectCodeTextBox.Text
+
+        Report = New FormReport(initialValue)
+
+        Report.Show()
         Hide()
     End Sub
 
     Private Sub FormMain_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        Dim dr As DialogResult = MessageBox.Show("Are you sure you want to exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
-        If dr = vbYes Then
-            Application.Exit()
-        End If
+        Application.Exit()
     End Sub
 
+    Private Sub LoadRecordsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadRecordsToolStripMenuItem.Click
+        TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+        TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+        TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+        TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+    End Sub
 #End Region
 End Class
