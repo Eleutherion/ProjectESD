@@ -1,8 +1,4 @@
 ﻿Public Class FormIllu
-    Private Sub ChkPerimeter_CheckStateChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub BtnCompute_Click(sender As Object, e As EventArgs) Handles BtnCompute.Click
         Dim area, perimeter, length, width, radius, height, replacement, hrc, hcc, hfc, cu, cf, cuf, lat, lv, bf, lsd, lbo, ldd, rsdd, ld, llf As Decimal
         Dim lamp As Integer = TxtLamp.Text
@@ -10,31 +6,105 @@
         Dim rating As Integer = TxtRating.Text
         Dim lux As Decimal = TxtIllu.Text
 
-        hrc = TxthRC.Text
-        hcc = TxthCC.Text
-        hfc = TxthFC.Text
+        If RdoIndoor.Checked Then
+            hrc = TxthRC.Text
+            hcc = TxthCC.Text
+            hfc = TxthFC.Text
 
-        height = TxtHeight.Text
+            height = TxtHeight.Text
 
-        If hrc + hcc + hfc <> height Then
-            MessageBox.Show("Sum of cavities must be equal to room height.", "Error")
-            GoTo ErrorLine
-        Else
-            'Compute for area and perimeter if needed
-            'If ChkPerimeter.Checked = False Then
-            '    length = TxtLength.Text
-            '    width = TxtWidth.Text
+            If hrc + hcc + hfc <> height Then
+                MessageBox.Show("Sum of cavities must be equal to room height.", "Error")
+                GoTo ErrorLine
+            Else
+                If RadioP.Checked Then
+                    area = TxtArea.Text
+                    perimeter = TxtPerimeter.Text
+                ElseIf RadioLW.Checked Then
+                    length = TxtLength.Text
+                    width = TxtWidth.Text
 
-            '    area = Math.Round(length * width, 4)
-            '    perimeter = Math.Round((2 * length) + (2 * width), 4)
+                    area = length * width
+                    perimeter = (2 * length) + (2 * width)
 
-            '    TxtArea.Text = area
-            '    TxtPerimeter.Text = perimeter
-            'Else
-            '    area = TxtArea.Text
-            '    perimeter = TxtPerimeter.Text
-            'End If
+                    TxtArea.Text = Math.Round(area, 4)
+                    TxtPerimeter.Text = Math.Round(perimeter, 4)
+                ElseIf RadioC.Checked Then
+                    radius = TxtLength.Text
 
+                    area = Math.PI * radius ^ 2
+                    perimeter = 2 * Math.PI * radius
+
+                    TxtArea.Text = Math.Round(area, 4)
+                    TxtPerimeter.Text = Math.Round(perimeter, 4)
+                End If
+
+                'Acquire value of ballast factor
+                If CboLampType.Text = "General Service Incandescent" Or CboLampType.Text = "Halogen Incandescent" Then
+                    TxtBF.Text = 100
+                Else
+                    TxtBF.Text = 95
+                End If
+
+                'Acquire value of lamp burnout factor
+                replacement = TxtReplace.Text
+                TxtLBO.Text = Math.Round(100 - replacement, 4)
+
+                'Acquire value of lamp lumen depreciation
+                TxtLLD.Text = LLD(CboLampType.Text)
+
+                'Acquire value of luminaire depreciation
+                TxtLDD.Text = LDDRating(CboLumCat.Text, CboClean.Text, TxtFreq.Text)
+
+                'Acquire cavity ratio values
+                TxtRCR.Text = Math.Round(2.5 * hrc * (perimeter / area), 4)
+                TxtCCR.Text = Math.Round(2.5 * hcc * (perimeter / area), 4)
+                TxtFCR.Text = Math.Round(2.5 * hfc * (perimeter / area), 4)
+
+                Dim CRFactor As Decimal = TxtFCR.Text * 10
+
+                'Acquire RSDD value
+                rsdd = TrueRSDD(TxtRCR.Text, TxtLDD.Text, CboLDT.Text)
+                TxtRSDD.Text = Math.Round(rsdd * 100, 4)
+
+                lat = TxtLAT.Text / 100
+                lv = TxtLV.Text / 100
+                bf = TxtBF.Text / 100
+                lsd = TxtLSD.Text / 100
+                lbo = TxtLBO.Text / 100
+                ld = TxtLLD.Text / 100
+                ldd = TxtLDD.Text / 100
+
+                'Acquire effective reflectance values
+                Txtpcc.Text = TrueER(TxtCCR.Text, Txtpc.Text, Txtpw.Text)
+                Txtpfc.Text = TrueER(TxtFCR.Text, Txtpf.Text, Txtpw.Text)
+
+                'Acquire coefficient of utilization
+                cu = TrueCU(TxtRCR.Text, Txtpw.Text, Txtpcc.Text)
+                TxtCU.Text = Math.Round(cu, 4)
+
+                'Acquire correction factor
+                cf = TrueCF(TxtRCR.Text, Txtpcc.Text, Txtpw.Text, Txtpfc.Text)
+                TxtCF.Text = Math.Round(cf, 4)
+
+                'Acquire final coefficient of utilization
+                cuf = cu * cf
+                TxtCUF.Text = Math.Round(cuf, 4)
+
+                llf = lat * lv * bf * lsd * lbo * ld * ldd * rsdd
+                TxtLLF.Text = Math.Round(llf, 4)
+
+                lum = Math.Truncate((lux * area / (rating * cuf * llf * lamp)) + 1)
+                'TxtLuminaire.Text = Math.Truncate(lum + 1)
+
+                If lum Mod 2 = 0 Then
+                    TxtLuminaire.Text = lum
+                Else
+                    TxtLuminaire.Text = lum + 1
+                End If
+
+            End If
+        ElseIf RdoOutdoor.Checked Then
             If RadioP.Checked Then
                 area = TxtArea.Text
                 perimeter = TxtPerimeter.Text
@@ -76,11 +146,6 @@
 
             'Acquire cavity ratio values
             TxtRCR.Text = Math.Round(2.5 * hrc * (perimeter / area), 4)
-            TxtCCR.Text = Math.Round(2.5 * hcc * (perimeter / area), 4)
-            TxtFCR.Text = Math.Round(2.5 * hfc * (perimeter / area), 4)
-
-            Dim CRFactor As Decimal = TxtFCR.Text * 10
-
             'Acquire RSDD value
             rsdd = TrueRSDD(TxtRCR.Text, TxtLDD.Text, CboLDT.Text)
             TxtRSDD.Text = Math.Round(rsdd * 100, 4)
@@ -93,26 +158,10 @@
             ld = TxtLLD.Text / 100
             ldd = TxtLDD.Text / 100
 
-            'Acquire effective reflectance values
-            Txtpcc.Text = TrueER(TxtCCR.Text, Txtpc.Text, Txtpw.Text)
-            Txtpfc.Text = TrueER(TxtFCR.Text, Txtpf.Text, Txtpw.Text)
-
-            'Acquire coefficient of utilization
-            cu = TrueCU(TxtRCR.Text, Txtpw.Text, Txtpcc.Text)
-            TxtCU.Text = Math.Round(cu, 4)
-
-            'Acquire correction factor
-            cf = TrueCF(TxtRCR.Text, Txtpcc.Text, Txtpw.Text, Txtpfc.Text)
-            TxtCF.Text = Math.Round(cf, 4)
-
-            'Acquire final coefficient of utilization
-            cuf = cu * cf
-            TxtCUF.Text = Math.Round(cuf, 4)
-
             llf = lat * lv * bf * lsd * lbo * ld * ldd * rsdd
             TxtLLF.Text = Math.Round(llf, 4)
 
-            lum = Math.Truncate((lux * area / (rating * cuf * llf * lamp)) + 1)
+            lum = Math.Truncate((lux * area / (rating * llf * lamp)) + 1)
             'TxtLuminaire.Text = Math.Truncate(lum + 1)
 
             If lum Mod 2 = 0 Then
@@ -120,9 +169,7 @@
             Else
                 TxtLuminaire.Text = lum + 1
             End If
-
         End If
-
 ErrorLine: End Sub
 
     Private Sub CboMount_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboMount.SelectedIndexChanged
@@ -175,9 +222,41 @@ ErrorLine: End Sub
     End Sub
 
     Private Sub FormIllu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        Dim f As Form = FormMain
-        f.Show()
+        'Dim f As Form = FormMain
+        'f.Show()
 
         Dispose()
+    End Sub
+
+    Private Sub RdoOutdoor_CheckedChanged(sender As Object, e As EventArgs) Handles RdoOutdoor.CheckedChanged
+        Txtpc.Enabled = False
+        Txtpw.Enabled = False
+        Txtpf.Enabled = False
+        TxthRC.Enabled = False
+        TxthCC.Enabled = False
+        TxthFC.Enabled = False
+
+        Lblpc.Text = "Ceiling"
+        Lblpw.Text = "Wall"
+        Lblpf.Text = "Floor"
+        LblhRC.Text = "hRC"
+        LblhCC.Text = "hCC"
+        LblhFC.Text = "hFC"
+    End Sub
+
+    Private Sub RdoIndoor_CheckedChanged(sender As Object, e As EventArgs) Handles RdoIndoor.CheckedChanged
+        Txtpc.Enabled = True
+        Txtpw.Enabled = True
+        Txtpf.Enabled = True
+        TxthRC.Enabled = True
+        TxthCC.Enabled = True
+        TxthFC.Enabled = True
+
+        Lblpc.Text = "Ceiling*"
+        Lblpw.Text = "Wall*"
+        Lblpf.Text = "Floor*"
+        LblhRC.Text = "hRC*"
+        LblhCC.Text = "hCC*"
+        LblhFC.Text = "hFC*"
     End Sub
 End Class

@@ -1334,8 +1334,8 @@ ErrorLine: End Sub
         'MessageBox.Show("Under construction.")
 
         Dim f As Form = FormIllu
-        f.Show()
-        Hide()
+        f.ShowDialog()
+        'Hide()
 
     End Sub
 
