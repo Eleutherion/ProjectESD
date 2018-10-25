@@ -36,9 +36,6 @@
     End Sub
 
     Private Sub FormReport_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        Dim f As New FormMain
-        f.Show()
-
         Dispose()
     End Sub
 End Class

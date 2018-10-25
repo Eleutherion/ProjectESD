@@ -1360,7 +1360,7 @@ ErrorLine: End Sub
 
         Report = New FormReport(initialValue)
 
-        Report.Show()
+        Report.ShowDialog()
         Hide()
     End Sub
 

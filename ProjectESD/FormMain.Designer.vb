@@ -338,6 +338,7 @@ Partial Class FormMain
         Me.ImpedanceRealTextBoxMain = New System.Windows.Forms.TextBox()
         Me.GroundWireSizeTextBoxMain = New System.Windows.Forms.TextBox()
         Me.GroundConductorComboBoxMain = New System.Windows.Forms.ComboBox()
+        Me.TblConductorBindingSource7 = New System.Windows.Forms.BindingSource(Me.components)
         Me.SetTextBox1 = New System.Windows.Forms.TextBox()
         Me.DistancetoSETextBox = New System.Windows.Forms.TextBox()
         Me.VoltageComboBoxMain = New System.Windows.Forms.ComboBox()
@@ -368,7 +369,6 @@ Partial Class FormMain
         Me.TblDistributionTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblDistributionTableAdapter()
         Me.TblSubfeederTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblSubfeederTableAdapter()
         Me.TblBranchTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblBranchTableAdapter()
-        Me.TblConductorBindingSource7 = New System.Windows.Forms.BindingSource(Me.components)
         ProjectCodeLabel = New System.Windows.Forms.Label()
         NameLabel = New System.Windows.Forms.Label()
         OwnerLabel = New System.Windows.Forms.Label()
@@ -495,9 +495,9 @@ Partial Class FormMain
         CType(Me.TblProjectBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         CType(Me.TblMainFeederBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TblConductorBindingSource7, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TblConductorBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TblWireBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TblConductorBindingSource7, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ProjectCodeLabel
@@ -3575,6 +3575,11 @@ Partial Class FormMain
         Me.GroundConductorComboBoxMain.TabIndex = 33
         Me.GroundConductorComboBoxMain.ValueMember = "Code"
         '
+        'TblConductorBindingSource7
+        '
+        Me.TblConductorBindingSource7.DataMember = "tblConductor"
+        Me.TblConductorBindingSource7.DataSource = Me.ESD_DatabaseDataSet
+        '
         'SetTextBox1
         '
         Me.SetTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "Set", True))
@@ -3797,11 +3802,6 @@ Partial Class FormMain
         '
         Me.TblBranchTableAdapter.ClearBeforeFill = True
         '
-        'TblConductorBindingSource7
-        '
-        Me.TblConductorBindingSource7.DataMember = "tblConductor"
-        Me.TblConductorBindingSource7.DataSource = Me.ESD_DatabaseDataSet
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3813,7 +3813,9 @@ Partial Class FormMain
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Name = "FormMain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Electrical System Design"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
@@ -3854,9 +3856,9 @@ Partial Class FormMain
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.TblMainFeederBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TblConductorBindingSource7, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TblConductorBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TblWireBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TblConductorBindingSource7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
