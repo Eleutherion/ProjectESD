@@ -120,6 +120,7 @@ Partial Class FormMain
         Dim XRRatioLabel As System.Windows.Forms.Label
         Dim TransformerXRRatioLabel As System.Windows.Forms.Label
         Dim TransformerZpuLabel As System.Windows.Forms.Label
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GenerateReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -317,8 +318,8 @@ Partial Class FormMain
         Me.TransformerRatingTextBox = New System.Windows.Forms.TextBox()
         Me.GeneratorRatingTextBox = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.BtnPreviousProject = New System.Windows.Forms.Button()
+        Me.BtnNextProject = New System.Windows.Forms.Button()
         Me.TypeComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TblProjectBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.BtnDeleteProject = New System.Windows.Forms.Button()
@@ -367,8 +368,8 @@ Partial Class FormMain
         Me.TblConductorTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblConductorTableAdapter()
         Me.TblWireTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblWireTableAdapter()
         Me.TblDistributionTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblDistributionTableAdapter()
-        Me.TblSubfeederTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblSubfeederTableAdapter()
         Me.TblBranchTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblBranchTableAdapter()
+        Me.TblSubfeederTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblSubfeederTableAdapter()
         ProjectCodeLabel = New System.Windows.Forms.Label()
         NameLabel = New System.Windows.Forms.Label()
         OwnerLabel = New System.Windows.Forms.Label()
@@ -3326,8 +3327,8 @@ Partial Class FormMain
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.Button1)
-        Me.GroupBox1.Controls.Add(Me.Button2)
+        Me.GroupBox1.Controls.Add(Me.BtnPreviousProject)
+        Me.GroupBox1.Controls.Add(Me.BtnNextProject)
         Me.GroupBox1.Controls.Add(TypeLabel)
         Me.GroupBox1.Controls.Add(Me.TypeComboBox1)
         Me.GroupBox1.Controls.Add(Me.BtnDeleteProject)
@@ -3348,23 +3349,23 @@ Partial Class FormMain
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Project"
         '
-        'Button1
+        'BtnPreviousProject
         '
-        Me.Button1.Location = New System.Drawing.Point(281, 121)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 60
-        Me.Button1.Text = "Previous"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.BtnPreviousProject.Location = New System.Drawing.Point(281, 121)
+        Me.BtnPreviousProject.Name = "BtnPreviousProject"
+        Me.BtnPreviousProject.Size = New System.Drawing.Size(75, 23)
+        Me.BtnPreviousProject.TabIndex = 60
+        Me.BtnPreviousProject.Text = "Previous"
+        Me.BtnPreviousProject.UseVisualStyleBackColor = True
         '
-        'Button2
+        'BtnNextProject
         '
-        Me.Button2.Location = New System.Drawing.Point(362, 121)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 59
-        Me.Button2.Text = "Next"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.BtnNextProject.Location = New System.Drawing.Point(362, 121)
+        Me.BtnNextProject.Name = "BtnNextProject"
+        Me.BtnNextProject.Size = New System.Drawing.Size(75, 23)
+        Me.BtnNextProject.TabIndex = 59
+        Me.BtnNextProject.Text = "Next"
+        Me.BtnNextProject.UseVisualStyleBackColor = True
         '
         'TypeComboBox1
         '
@@ -3608,6 +3609,7 @@ Partial Class FormMain
         '
         'ConduitTypeComboBoxMain
         '
+        Me.ConduitTypeComboBoxMain.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "ConduitType", True))
         Me.ConduitTypeComboBoxMain.FormattingEnabled = True
         Me.ConduitTypeComboBoxMain.Items.AddRange(New Object() {"Air", "EMT", "RMC", "Rigid PVC 80", "Rigid PVC 40"})
         Me.ConduitTypeComboBoxMain.Location = New System.Drawing.Point(126, 298)
@@ -3794,13 +3796,13 @@ Partial Class FormMain
         '
         Me.TblDistributionTableAdapter.ClearBeforeFill = True
         '
-        'TblSubfeederTableAdapter
-        '
-        Me.TblSubfeederTableAdapter.ClearBeforeFill = True
-        '
         'TblBranchTableAdapter
         '
         Me.TblBranchTableAdapter.ClearBeforeFill = True
+        '
+        'TblSubfeederTableAdapter
+        '
+        Me.TblSubfeederTableAdapter.ClearBeforeFill = True
         '
         'FormMain
         '
@@ -3812,6 +3814,7 @@ Partial Class FormMain
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Electrical System Design"
@@ -3909,7 +3912,6 @@ Partial Class FormMain
     Friend WithEvents OCPDRatingTextBox1 As TextBox
     Friend WithEvents BreakerTypeTextBox1 As TextBox
     Friend WithEvents GroundWireCheckBox1 As CheckBox
-    Friend WithEvents TblSubfeederBindingSource As BindingSource
     Friend WithEvents TblTransGenTableAdapter As ESD_DatabaseDataSetTableAdapters.tblTransGenTableAdapter
     Friend WithEvents TblTransGenBindingSource As BindingSource
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
@@ -4055,7 +4057,6 @@ Partial Class FormMain
     Friend WithEvents OCPDRatingTextBoxDP As TextBox
     Friend WithEvents BreakerTypeTextBoxDP As TextBox
     Friend WithEvents DPNumberTextBox As TextBox
-    Friend WithEvents TblSubfeederTableAdapter As ESD_DatabaseDataSetTableAdapters.tblSubfeederTableAdapter
     Friend WithEvents BtnPreviousBranch As Button
     Friend WithEvents BtnNextBranch As Button
     Friend WithEvents BtnPreviousSub As Button
@@ -4067,8 +4068,8 @@ Partial Class FormMain
     Friend WithEvents TblWireBindingSource3 As BindingSource
     Friend WithEvents NeutralConductorComboBox As ComboBox
     Friend WithEvents NeutralSetTextBox As TextBox
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents BtnPreviousProject As Button
+    Friend WithEvents BtnNextProject As Button
     Friend WithEvents TblConductorBindingSource4 As BindingSource
     Friend WithEvents BtnPreviousDP As Button
     Friend WithEvents BtnNextDP As Button
@@ -4112,4 +4113,6 @@ Partial Class FormMain
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LoadRecordsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TblConductorBindingSource7 As BindingSource
+    Friend WithEvents TblSubfeederBindingSource As BindingSource
+    Friend WithEvents TblSubfeederTableAdapter As ESD_DatabaseDataSetTableAdapters.tblSubfeederTableAdapter
 End Class

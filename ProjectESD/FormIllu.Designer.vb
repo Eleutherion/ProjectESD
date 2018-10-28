@@ -22,8 +22,11 @@ Partial Class FormIllu
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormIllu))
         Me.BtnCompute = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.RdoOutdoor = New System.Windows.Forms.RadioButton()
+        Me.RdoIndoor = New System.Windows.Forms.RadioButton()
         Me.Label70 = New System.Windows.Forms.Label()
         Me.TxtRoom = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -142,8 +145,7 @@ Partial Class FormIllu
         Me.Label42 = New System.Windows.Forms.Label()
         Me.TxtLAT = New System.Windows.Forms.TextBox()
         Me.Label43 = New System.Windows.Forms.Label()
-        Me.RdoIndoor = New System.Windows.Forms.RadioButton()
-        Me.RdoOutdoor = New System.Windows.Forms.RadioButton()
+        Me.TxtLuminaireItem = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -181,6 +183,28 @@ Partial Class FormIllu
         Me.GroupBox1.TabIndex = 6
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Design Objectives"
+        '
+        'RdoOutdoor
+        '
+        Me.RdoOutdoor.AutoSize = True
+        Me.RdoOutdoor.Location = New System.Drawing.Point(76, 102)
+        Me.RdoOutdoor.Name = "RdoOutdoor"
+        Me.RdoOutdoor.Size = New System.Drawing.Size(63, 17)
+        Me.RdoOutdoor.TabIndex = 12
+        Me.RdoOutdoor.TabStop = True
+        Me.RdoOutdoor.Text = "Outdoor"
+        Me.RdoOutdoor.UseVisualStyleBackColor = True
+        '
+        'RdoIndoor
+        '
+        Me.RdoIndoor.AutoSize = True
+        Me.RdoIndoor.Location = New System.Drawing.Point(15, 102)
+        Me.RdoIndoor.Name = "RdoIndoor"
+        Me.RdoIndoor.Size = New System.Drawing.Size(55, 17)
+        Me.RdoIndoor.TabIndex = 11
+        Me.RdoIndoor.TabStop = True
+        Me.RdoIndoor.Text = "Indoor"
+        Me.RdoIndoor.UseVisualStyleBackColor = True
         '
         'Label70
         '
@@ -606,6 +630,7 @@ Partial Class FormIllu
         '
         'GroupBox5
         '
+        Me.GroupBox5.Controls.Add(Me.TxtLuminaireItem)
         Me.GroupBox5.Controls.Add(Me.Label68)
         Me.GroupBox5.Controls.Add(Me.TxtLLF)
         Me.GroupBox5.Controls.Add(Me.Label58)
@@ -634,7 +659,7 @@ Partial Class FormIllu
         Me.GroupBox5.Controls.Add(Me.Label62)
         Me.GroupBox5.Location = New System.Drawing.Point(652, 12)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(314, 432)
+        Me.GroupBox5.Size = New System.Drawing.Size(314, 444)
         Me.GroupBox5.TabIndex = 10
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Calculations"
@@ -1307,27 +1332,13 @@ Partial Class FormIllu
         Me.Label43.TabIndex = 36
         Me.Label43.Text = "NOT TO BE RECOVERED"
         '
-        'RdoIndoor
+        'TxtLuminaireItem
         '
-        Me.RdoIndoor.AutoSize = True
-        Me.RdoIndoor.Location = New System.Drawing.Point(15, 102)
-        Me.RdoIndoor.Name = "RdoIndoor"
-        Me.RdoIndoor.Size = New System.Drawing.Size(55, 17)
-        Me.RdoIndoor.TabIndex = 11
-        Me.RdoIndoor.TabStop = True
-        Me.RdoIndoor.Text = "Indoor"
-        Me.RdoIndoor.UseVisualStyleBackColor = True
-        '
-        'RdoOutdoor
-        '
-        Me.RdoOutdoor.AutoSize = True
-        Me.RdoOutdoor.Location = New System.Drawing.Point(76, 102)
-        Me.RdoOutdoor.Name = "RdoOutdoor"
-        Me.RdoOutdoor.Size = New System.Drawing.Size(63, 17)
-        Me.RdoOutdoor.TabIndex = 12
-        Me.RdoOutdoor.TabStop = True
-        Me.RdoOutdoor.Text = "Outdoor"
-        Me.RdoOutdoor.UseVisualStyleBackColor = True
+        Me.TxtLuminaireItem.Location = New System.Drawing.Point(142, 409)
+        Me.TxtLuminaireItem.Name = "TxtLuminaireItem"
+        Me.TxtLuminaireItem.ReadOnly = True
+        Me.TxtLuminaireItem.Size = New System.Drawing.Size(100, 20)
+        Me.TxtLuminaireItem.TabIndex = 81
         '
         'FormIllu
         '
@@ -1341,6 +1352,7 @@ Partial Class FormIllu
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.BtnCompute)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormIllu"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Illumination Design Calculator"
@@ -1479,4 +1491,5 @@ Partial Class FormIllu
     Friend WithEvents Label43 As Label
     Friend WithEvents RdoOutdoor As RadioButton
     Friend WithEvents RdoIndoor As RadioButton
+    Friend WithEvents TxtLuminaireItem As TextBox
 End Class

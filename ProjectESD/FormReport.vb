@@ -34,8 +34,4 @@
 
         reportProject1.SetDataSource(ESD_DatabaseDataSet)
     End Sub
-
-    Private Sub FormReport_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
-        Dispose()
-    End Sub
 End Class

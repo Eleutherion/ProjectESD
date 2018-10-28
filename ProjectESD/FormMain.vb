@@ -2,9 +2,9 @@
 Imports System.Text.RegularExpressions
 Imports System.Numerics
 Imports System.Linq
+Imports System.Configuration
 
 Public Class FormMain
-
     Private Balanced As Boolean = False
 
     Private TCL As Decimal
@@ -30,13 +30,55 @@ Public Class FormMain
 
                 MessageBox.Show("Record saved.")
 
-                TblProjectTableAdapter.Fill(ESD_DatabaseDataSet.tblProject)
+                TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+                TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+                TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
             Catch ex As NoNullAllowedException
                 MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Catch ex As ConstraintException
                 MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End Try
         End If
+    End Sub
+
+    Private Sub BtnDeleteProject_Click(sender As Object, e As EventArgs) Handles BtnDeleteProject.Click
+        Dim dr As DialogResult = MessageBox.Show("Do you wish to delete? Once deleted, the record will not be retrieved.", "Delete", MessageBoxButtons.YesNo)
+        If dr = DialogResult.Yes Then
+            Try
+                TblProjectTableAdapter.DeleteByPrimary(ProjectCodeTextBox.Text)
+
+                MessageBox.Show("Record deleted.")
+
+                TblProjectTableAdapter.Fill(ESD_DatabaseDataSet.tblProject)
+                TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+                TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+                TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+            Catch
+                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub BtnNextProject_Click(sender As Object, e As EventArgs) Handles BtnNextProject.Click
+        TblProjectBindingSource.MoveNext()
+        TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+        TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+        TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+        TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+    End Sub
+
+    Private Sub BtnPreviousProject_Click(sender As Object, e As EventArgs) Handles BtnPreviousProject.Click
+        TblProjectBindingSource.MovePrevious()
+        TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+        TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+        TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+        TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
     End Sub
 #End Region
 
@@ -125,54 +167,58 @@ Public Class FormMain
             GroundWireSizeTextBoxMain.Text = GroundWire(OCPDRatingTextBox.Text, GroundConductorComboBoxMain.Text)
         End If
 
-        Dim count As Integer = TblDistributionTableAdapter.CountDP(ProjectCodeTextBox.Text)
-        Dim zreal(count - 1), zimag(count - 1) As Double
+        If ShortCircuitCapTextBox.Text = "" Or XRRatioTextBox.Text = "" Then
 
-        Dim z(count - 1), y(count - 1), ytotal, zeq, zline, zutility, ztrans, z1, y1, yeq As Complex
-
-        Dim dt As DataTable = ESD_DatabaseDataSet.tblDistribution
-
-        TblDistributionTableAdapter.FillImpedance(dt, ProjectCodeTextBox.Text)
-
-        zreal = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceReal")).ToArray()
-        zimag = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceImag")).ToArray()
-        zline = LineImpedance(DistancetoSETextBox.Text, ConduitTypeComboBoxMain.Text, WireSizeTextBox.Text, ConductorComboBoxMain.Text, VoltageComboBoxMain.Text, SetTextBox1.Text)
-
-        zutility = New Complex(1 / ShortCircuitCapTextBox.Text * Math.Cos(Math.Atan(XRRatioTextBox.Text)), 1 / ShortCircuitCapTextBox.Text * Math.Sin(Math.Atan(XRRatioTextBox.Text)))
-
-        ztrans = New Complex(TransformerZpuTextBox.Text / 100 * (1 / TransformerRatingTextBox.Text) * Math.Cos(Math.Atan(TransformerXRRatioTextBox.Text)),
-                             TransformerZpuTextBox.Text / 100 * (1 / TransformerRatingTextBox.Text) * Math.Sin(Math.Atan(TransformerXRRatioTextBox.Text)))
-
-        z1 = zline + zutility + ztrans
-        y1 = Complex.Reciprocal(z1)
-
-        For i As Integer = 0 To count - 1 Step 1
-            z(i) = New Complex(zreal(i), zimag(i))
-            y(i) = Complex.Reciprocal(z(i))
-        Next i
-
-        For Each item As Complex In y
-            ytotal += item
-        Next
-
-        yeq = ytotal + y1
-        zeq = Complex.Reciprocal(yeq)
-
-        ImpedanceRealTextBoxMain.Text = Math.Round(zeq.Real, 4)
-        ImpedanceImagTextBoxMain.Text = Math.Round(zeq.Imaginary, 4)
-
-        Dim ifpu As Complex = Complex.Reciprocal(zeq)
-        Dim ibase, iactual As Decimal
-
-        If PhaseTextBox.Text = "3" Then
-            ibase = 1000000 / (Math.Sqrt(3) * VoltageComboBoxMain.Text)
         Else
-            ibase = 1000000 / VoltageComboBoxMain.Text
+            Dim count As Integer = TblDistributionTableAdapter.CountDP(ProjectCodeTextBox.Text)
+            Dim zreal(count - 1), zimag(count - 1) As Double
+
+            Dim z(count - 1), y(count - 1), ytotal, zeq, zline, zutility, ztrans, z1, y1, yeq As Complex
+
+            Dim dt As DataTable = ESD_DatabaseDataSet.tblDistribution
+
+            TblDistributionTableAdapter.FillImpedance(dt, ProjectCodeTextBox.Text)
+
+            zreal = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceReal")).ToArray()
+            zimag = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceImag")).ToArray()
+            zline = LineImpedance(DistancetoSETextBox.Text, ConduitTypeComboBoxMain.Text, WireSizeTextBox.Text, ConductorComboBoxMain.Text, VoltageComboBoxMain.Text, SetTextBox1.Text)
+
+            zutility = New Complex(1 / ShortCircuitCapTextBox.Text * Math.Cos(Math.Atan(XRRatioTextBox.Text)), 1 / ShortCircuitCapTextBox.Text * Math.Sin(Math.Atan(XRRatioTextBox.Text)))
+
+            ztrans = New Complex(TransformerZpuTextBox.Text / 100 * (1 / TransformerRatingTextBox.Text) * Math.Cos(Math.Atan(TransformerXRRatioTextBox.Text)),
+                                 TransformerZpuTextBox.Text / 100 * (1 / TransformerRatingTextBox.Text) * Math.Sin(Math.Atan(TransformerXRRatioTextBox.Text)))
+
+            z1 = zline + zutility + ztrans
+            y1 = Complex.Reciprocal(z1)
+
+            For i As Integer = 0 To count - 1 Step 1
+                z(i) = New Complex(zreal(i), zimag(i))
+                y(i) = Complex.Reciprocal(z(i))
+            Next i
+
+            For Each item As Complex In y
+                ytotal += item
+            Next
+
+            yeq = ytotal + y1
+            zeq = Complex.Reciprocal(yeq)
+
+            ImpedanceRealTextBoxMain.Text = Math.Round(zeq.Real, 4)
+            ImpedanceImagTextBoxMain.Text = Math.Round(zeq.Imaginary, 4)
+
+            Dim ifpu As Complex = Complex.Reciprocal(zeq)
+            Dim ibase, iactual As Decimal
+
+            If PhaseTextBox.Text = "3" Then
+                ibase = 1000000 / (Math.Sqrt(3) * VoltageComboBoxMain.Text)
+            Else
+                ibase = 1000000 / VoltageComboBoxMain.Text
+            End If
+
+            iactual = ifpu.Magnitude * ibase
+
+            KAICRatingTextBox.Text = InterruptingCap(iactual / 1000)
         End If
-
-        iactual = ifpu.Magnitude * ibase
-
-        KAICRatingTextBox.Text = Math.Round(iactual / 1000, 4)
     End Sub
 
     Private Sub BtnAddMain_Click(sender As Object, e As EventArgs) Handles BtnAddMain.Click
@@ -187,11 +233,11 @@ Public Class FormMain
             Try
                 Validate()
                 TblMainFeederBindingSource.EndEdit()
-                TblMainFeederTableAdapter.Update(ESD_DatabaseDataSet)
+                TblMainFeederTableAdapter.Update(ESD_DatabaseDataSet.tblMainFeeder)
 
                 MessageBox.Show("Record saved.")
             Catch ex As NoNullAllowedException
-                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(ex.ToString(), "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As ConstraintException
                 MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch
@@ -352,7 +398,7 @@ ErrorLine: End Sub
             Try
                 Validate()
                 TblDistributionBindingSource.EndEdit()
-                TblDistributionTableAdapter.Update(ESD_DatabaseDataSet)
+                TblDistributionTableAdapter.Update(ESD_DatabaseDataSet.tblDistribution)
 
                 MessageBox.Show("Record saved.")
             Catch ex As NoNullAllowedException
@@ -372,6 +418,8 @@ ErrorLine: End Sub
                 TblDistributionTableAdapter.DeletebyPrimary(CodeTextBoxDP.Text)
 
                 MessageBox.Show("Record deleted.")
+
+                TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
             Catch
                 MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
@@ -575,33 +623,35 @@ ErrorLine: End Sub
 
     Private Sub BtnAddSub_Click(sender As Object, e As EventArgs) Handles BtnAddSub.Click
         TblSubfeederBindingSource.AddNew()
-        ProjectCodeTextBoxSub.Text = ProjectTextBox.Text
+
+        ProjectCodeTextBoxSub.Text = ProjectCodeTextBox.Text
         DPCodeTextBox.Text = CodeTextBoxDP.Text
         SetTextBoxSub.Text = "1"
 
-        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+        NeutralCheckBox.Checked = False
+        GroundWireCheckBoxSub.Checked = False
     End Sub
 
     Private Sub BtnSaveSub_Click(sender As Object, e As EventArgs) Handles BtnSaveSub.Click
-        CodeTextBoxSub.Text = ProjectTextBox.Text + "-SF" + NumberTextBox.Text
+        CodeTextBoxSub.Text = ProjectCodeTextBoxSub.Text + "-SF" + NumberTextBox.Text
 
         Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
         If dr = DialogResult.Yes Then
             Try
                 Validate()
                 TblSubfeederBindingSource.EndEdit()
-                TblSubfeederTableAdapter.Update(ESD_DatabaseDataSet)
+                TblSubfeederTableAdapter.Update(ESD_DatabaseDataSet.tblSubfeeder)
 
                 MessageBox.Show("Record saved.")
-            Catch ex As NoNullAllowedException
-                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch ex As ConstraintException
-                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch
-                MessageBox.Show("An error has occurred", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        Else
 
+                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                'Catch ex As NoNullAllowedException
+                '    MessageBox.Show(ex.ToString(), "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                'Catch ex As ConstraintException
+                '    MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString(), "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
     End Sub
 
@@ -635,7 +685,7 @@ ErrorLine: End Sub
         Dim dr As DialogResult = MessageBox.Show("Do you wish to delete? Once deleted, the record will not be retrieved.", "Delete", MessageBoxButtons.YesNo)
         If dr = DialogResult.Yes Then
             Try
-                TblSubfeederTableAdapter.DeleteByPrimary(CodeTextBoxSub.Text)
+                TblSubfeederTableAdapter.DeletebyPrimary(CodeTextBoxSub.Text)
 
                 MessageBox.Show("Record deleted.")
 
@@ -1092,8 +1142,8 @@ ErrorLine: End Sub
                 MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As ConstraintException
                 MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch
-                MessageBox.Show("An error has occurred", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString(), "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         Else
 
@@ -1199,15 +1249,15 @@ ErrorLine: End Sub
             Try
                 Validate()
                 TblTransGenBindingSource.EndEdit()
-                TblTransGenTableAdapter.Update(ESD_DatabaseDataSet)
+                TblTransGenTableAdapter.Update(ESD_DatabaseDataSet.tblTransGen)
 
                 MessageBox.Show("Record saved.")
             Catch ex As NoNullAllowedException
                 MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As ConstraintException
                 MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch
-                MessageBox.Show("An error has occurred", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.ToString(), "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         Else
 
@@ -1361,7 +1411,6 @@ ErrorLine: End Sub
         Report = New FormReport(initialValue)
 
         Report.ShowDialog()
-        Hide()
     End Sub
 
     Private Sub FormMain_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
@@ -1374,6 +1423,10 @@ ErrorLine: End Sub
         TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
         TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
         TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+    End Sub
+
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Application.Exit()
     End Sub
 #End Region
 End Class

@@ -23,6 +23,7 @@ Partial Class FormReport
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormReport))
         Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.reportProject1 = New ProjectESD.ReportProject()
         Me.ESD_DatabaseDataSet = New ProjectESD.ESD_DatabaseDataSet()
@@ -124,8 +125,9 @@ Partial Class FormReport
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1305, 784)
         Me.Controls.Add(Me.CrystalReportViewer1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormReport"
-        Me.Text = "FormReport"
+        Me.Text = "Report"
         CType(Me.ESD_DatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tblBranchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tblSubfeederBindingSource, System.ComponentModel.ISupportInitialize).EndInit()

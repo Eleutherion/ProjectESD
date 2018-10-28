@@ -94,15 +94,16 @@
                 llf = lat * lv * bf * lsd * lbo * ld * ldd * rsdd
                 TxtLLF.Text = Math.Round(llf, 4)
 
-                lum = Math.Truncate((lux * area / (rating * cuf * llf * lamp)) + 1)
+                TxtLuminaire.Text = Math.Round(lux * area / (rating * llf * lamp), 4)
+
+                lum = Math.Truncate((lux * area / (rating * llf * lamp)) + 1)
                 'TxtLuminaire.Text = Math.Truncate(lum + 1)
 
                 If lum Mod 2 = 0 Then
-                    TxtLuminaire.Text = lum
+                    TxtLuminaireItem.Text = lum
                 Else
-                    TxtLuminaire.Text = lum + 1
+                    TxtLuminaireItem.Text = lum + 1
                 End If
-
             End If
         ElseIf RdoOutdoor.Checked Then
             If RadioP.Checked Then
@@ -161,13 +162,15 @@
             llf = lat * lv * bf * lsd * lbo * ld * ldd * rsdd
             TxtLLF.Text = Math.Round(llf, 4)
 
+            TxtLuminaire.Text = Math.Round(lux * area / (rating * llf * lamp), 4)
+
             lum = Math.Truncate((lux * area / (rating * llf * lamp)) + 1)
             'TxtLuminaire.Text = Math.Truncate(lum + 1)
 
             If lum Mod 2 = 0 Then
-                TxtLuminaire.Text = lum
+                TxtLuminaireItem.Text = lum
             Else
-                TxtLuminaire.Text = lum + 1
+                TxtLuminaireItem.Text = lum + 1
             End If
         End If
 ErrorLine: End Sub
@@ -221,7 +224,7 @@ ErrorLine: End Sub
         LblPerimeter.Text = "Perimeter"
     End Sub
 
-    Private Sub FormIllu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub FormIllu_FormClosing(sender As Object, e As FormClosingEventArgs)
         'Dim f As Form = FormMain
         'f.Show()
 

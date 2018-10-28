@@ -18,4 +18,18 @@ NextLine: Next i
 
 ReturnLine: Return OCPD(v)
     End Function
+
+    Public Function InterruptingCap(ByVal ShortCircuit As Decimal) As Integer
+        Dim kAIC(11), v As Integer
+
+        kAIC = {0, 10, 18, 22, 42, 65, 100, 200, 300, 400, 500, 600}
+
+        For i As Integer = 1 To 11 Step 1
+            If ShortCircuit > kAIC(i - 1) And ShortCircuit <= kAIC(i) Then
+                v = i
+                GoTo ReturnLine
+            End If
+        Next i
+ReturnLine: Return kAIC(v)
+    End Function
 End Module
