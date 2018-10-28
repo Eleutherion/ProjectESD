@@ -93,3 +93,4 @@ G:\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.vbproj.CopyComplete
 G:\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.exe
 G:\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.xml
 G:\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.pdb
+G:\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.vbprojAssemblyReference.cache

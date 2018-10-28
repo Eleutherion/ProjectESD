@@ -20,6 +20,13 @@ Public Class FormMain
         TblProjectBindingSource.AddNew()
     End Sub
 
+    Private Sub PhaseTextBox_Leave(sender As Object, e As EventArgs) Handles PhaseTextBox.Leave
+        If PhaseTextBox.Text = "1" Then
+            PhaseComboBox.SelectedIndex = 0
+            PhaseComboBox.Enabled = False
+        End If
+    End Sub
+
     Private Sub BtnSaveProject_Click(sender As Object, e As EventArgs) Handles BtnSaveProject.Click
         Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
         If dr = DialogResult.Yes Then
@@ -276,7 +283,7 @@ Public Class FormMain
     Private Sub BtnComputeDP_Click(sender As Object, e As EventArgs) Handles BtnComputeDP.Click
         Dim ThreePhase As Boolean = False
         Dim voltage As Integer = VoltageComboBoxDP.Text
-        Dim idp, load, hrml, phaseload(2), setcurrent As Decimal
+        Dim idp, load, hrml, phaseload(2), setcurrent, lighting, power, demandload, equip As Decimal
         Dim wirenumber As Integer
 
         If VoltageComboBoxDP.Text = "" Or WireTypeComboBoxDP.Text = "" Or ConductorComboBoxDP.Text = "" Or SetTextBoxDP.Text = "" Or ConduitTypeComboBoxDP.Text = "" Or DistancetoMainTextBoxDP.Text = "" Then
@@ -284,72 +291,123 @@ Public Class FormMain
             GoTo ErrorLine
         End If
 
-        If PhaseTextBox.Text = "3" Then
-            ThreePhase = True
-            If TblDistributionTableAdapter.CountThreePhaseLoad(CodeTextBoxDP.Text) > 0 Then
-                load = TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, 3)
-                hrml = TblDistributionTableAdapter.GetHRMLThreePhase(CodeTextBoxDP.Text)
+        If TypeComboBox1.SelectedIndex <= 1 Then
+            lighting = TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Lighting")
+            power = TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Power")
 
-                idp = (load + (0.25 * hrml)) / (Math.Sqrt(3) * voltage)
+            If lighting + power <= 3000 Then
+                demandload = lighting + power
+            ElseIf lighting + power > 3000 And lighting + power <= 120000 Then
+                demandload = 3000 + ((lighting + power - 3000) * 0.35)
+            Else
+                demandload = 3000 + ((lighting + power - 3000) * 0.35) + ((lighting + power - 120000) * 0.25)
+            End If
 
-                CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
+            equip = TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Motor Equipment") +
+                TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Non-Motor Equipment") +
+                TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Spare")
+
+            load = equip + demandload
+
+            idp = load / VoltageComboBoxDP.Text
+
+            CurrentRatingTextBoxDP.Text = Math.Round(idp * 1.25, 4)
+
+            OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.5)
+
+            If WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = 1 Then
+                wirenumber = SetTextBoxDP.Text
+            ElseIf WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) <= SetTextBoxDP.Text Then
+                wirenumber = SetTextBoxDP.Text
+            Else
+                wirenumber = WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+                SetTextBoxDP.Text = wirenumber
+            End If
+
+            setcurrent = OCPDRatingTextBoxDP.Text / wirenumber
+
+            If WireSize(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = "2.0" Then
+                WireSizeTextBoxDP.Text = "3.5"
+            Else
+                WireSizeTextBoxDP.Text = WireSize(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+            End If
+            ConduitSizeTextBoxDP.Text = ConduitSize(WireTypeComboBoxDP.Text, WireSizeTextBoxDP.Text, False, "1", ConduitTypeComboBoxDP.Text, False)
+        Else
+            If PhaseTextBox.Text = "3" Then
+                ThreePhase = True
+                If TblDistributionTableAdapter.CountThreePhaseLoad(CodeTextBoxDP.Text) > 0 Then
+                    load = TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, 3)
+                    hrml = TblDistributionTableAdapter.GetHRMLThreePhase(CodeTextBoxDP.Text)
+
+                    idp = (load + (0.25 * hrml)) / (Math.Sqrt(3) * voltage)
+
+                    CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
+
+                Else
+                    phaseload = {TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "A"), TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "B"), TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "C")}
+                    Array.Sort(phaseload)
+
+                    hrml = TblDistributionTableAdapter.GetHRMLSinglePhase(CodeTextBoxDP.Text)
+
+                    idp = (phaseload(2) + (0.25 * hrml)) / voltage
+
+                    CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
+                End If
+
+                OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
+
+                If WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = 1 Then
+                    wirenumber = SetTextBoxDP.Text
+                ElseIf WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) <= SetTextBoxDP.Text Then
+                    wirenumber = SetTextBoxDP.Text
+                Else
+                    wirenumber = WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+                    SetTextBoxDP.Text = wirenumber
+                End If
+
+                setcurrent = OCPDRatingTextBoxDP.Text / wirenumber
+
+                If WireSize(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = "2.0" Then
+                    WireSizeTextBoxDP.Text = "3.5"
+                Else
+                    WireSizeTextBoxDP.Text = WireSize(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+                End If
+
+                WireSizeTextBoxDP.Text = WireSize(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+                ConduitSizeTextBoxDP.Text = ConduitSize(WireTypeComboBoxDP.Text, WireSizeTextBoxDP.Text, False, "3", ConduitTypeComboBoxDP.Text, False)
 
             Else
-                phaseload = {TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "A"), TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "B"), TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "C")}
-                Array.Sort(phaseload)
-
+                load = TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "A")
                 hrml = TblDistributionTableAdapter.GetHRMLSinglePhase(CodeTextBoxDP.Text)
 
-                idp = (phaseload(2) + (0.25 * hrml)) / voltage
+                idp = (load + (0.25 * hrml)) / voltage
 
                 CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
-            End If
 
-            OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
-
-            If WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = 1 Then
-                wirenumber = SetTextBoxDP.Text
-            ElseIf WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) <= SetTextBoxDP.Text Then
-                wirenumber = SetTextBoxDP.Text
-            Else
-                wirenumber = WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
-                SetTextBoxDP.Text = wirenumber
-            End If
-
-            setcurrent = OCPDRatingTextBoxDP.Text / wirenumber
-
-            WireSizeTextBoxDP.Text = WireSize(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
-            ConduitSizeTextBoxDP.Text = ConduitSize(WireTypeComboBoxDP.Text, WireSizeTextBoxDP.Text, False, "3", ConduitTypeComboBoxDP.Text, False)
-
-        Else
-            load = TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "A")
-            hrml = TblDistributionTableAdapter.GetHRMLSinglePhase(CodeTextBoxDP.Text)
-
-            idp = (load + (0.25 * hrml)) / voltage
-
-            CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
-
-            OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
-            If TypeComboBox1.SelectedIndex > 1 And OCPDRating(idp * 1.25) = 15 Then
-                OCPDRatingTextBoxDP.Text = 20
-            Else
                 OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
+                If TypeComboBox1.SelectedIndex > 1 And OCPDRating(idp * 1.25) = 15 Then
+                    OCPDRatingTextBoxDP.Text = 20
+                Else
+                    OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
+                End If
+
+                If WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = 1 Then
+                    wirenumber = SetTextBoxDP.Text
+                ElseIf WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) <= SetTextBoxDP.Text Then
+                    wirenumber = SetTextBoxDP.Text
+                Else
+                    wirenumber = WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+                    SetTextBoxDP.Text = wirenumber
+                End If
+
+                setcurrent = OCPDRatingTextBoxDP.Text / wirenumber
+
+                WireSizeTextBoxDP.Text = WireSize(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), setcurrent, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
+                ConduitSizeTextBoxDP.Text = ConduitSize(WireTypeComboBoxDP.Text, WireSizeTextBoxDP.Text, False, "1", ConduitTypeComboBoxDP.Text, False)
             End If
-
-            If WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = 1 Then
-                wirenumber = SetTextBoxDP.Text
-            ElseIf WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) <= SetTextBoxDP.Text Then
-                wirenumber = SetTextBoxDP.Text
-            Else
-                wirenumber = WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
-                SetTextBoxDP.Text = wirenumber
-            End If
-
-            setcurrent = OCPDRatingTextBoxDP.Text / wirenumber
-
-            WireSizeTextBoxDP.Text = WireSize(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), setcurrent, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text)
-            ConduitSizeTextBoxDP.Text = ConduitSize(WireTypeComboBoxDP.Text, WireSizeTextBoxDP.Text, False, "1", ConduitTypeComboBoxDP.Text, False)
         End If
+
+
 
         Dim count As Integer = TblSubfeederTableAdapter.CountSubfeeder(CodeTextBoxDP.Text)
         Dim zreal(count - 1), zimag(count - 1) As Double
@@ -586,6 +644,8 @@ ErrorLine: End Sub
         TxtPhaseBLoad.Text = TblBranchTableAdapter.TotalPhaseBPower(CodeTextBoxSub.Text)
         TxtPhaseCLoad.Text = TblBranchTableAdapter.TotalPhaseCPower(CodeTextBoxSub.Text)
         TxtThreePhaseLoad.Text = TblBranchTableAdapter.TotalThreePhasePower(CodeTextBoxSub.Text)
+        TextBox6.Text = TblBranchTableAdapter.GetHRMLSinglePhase(SubfeederTextBox.Text)
+        TextBox5.Text = TblBranchTableAdapter.GetHRMLThreePhase(SubfeederTextBox.Text)
 
         If TxtPhaseALoad.Text = "" Then
             TxtPhaseALoad.Text = 0
@@ -1125,6 +1185,7 @@ ErrorLine: End Sub
         ProjectTextBox.Text = ProjectCodeTextBox.Text
         SubfeederTextBox.Text = CodeTextBoxSub.Text
         SetTextBox.Text = "1"
+        GroundWireCheckBox1.CheckState = False
     End Sub
 
     Private Sub BtnSaveBranch_Click(sender As Object, e As EventArgs) Handles BtnSaveBranch.Click
@@ -1428,5 +1489,7 @@ ErrorLine: End Sub
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Application.Exit()
     End Sub
+
+
 #End Region
 End Class
