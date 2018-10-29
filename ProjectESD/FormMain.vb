@@ -294,12 +294,13 @@ Public Class FormMain
             ElseIf lighting + power > 3000 And lighting + power <= 120000 Then
                 demandload = 3000 + ((lighting + power - 3000) * 0.35)
             Else
-                demandload = 3000 + ((lighting + power - 3000) * 0.35) + ((lighting + power - 120000) * 0.25)
+                demandload = 3000 + (117000 * 0.35) + ((lighting + power - 120000) * 0.25)
             End If
 
             equip = TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Motor Equipment") +
                 TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Non-Motor Equipment") +
-                TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Spare")
+                TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Spare") +
+                (TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Electric Range") * 0.8)
 
             load = equip + demandload
 
@@ -1092,7 +1093,7 @@ ErrorLine: End Sub
             End If
 
             'Computation for Non-Motors
-        ElseIf TypeComboBox.SelectedIndex = 3 Then
+        ElseIf TypeComboBox.SelectedIndex = 3 Or TypeComboBox.SelectedIndex = 4 Then
 
             power = CDec(PowerRatingTextBox.Text) * CInt(TxtMotorItem.Text)
 

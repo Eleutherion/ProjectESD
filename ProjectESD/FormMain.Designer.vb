@@ -3003,7 +3003,7 @@ Partial Class FormMain
         '
         Me.TypeComboBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "Type", True))
         Me.TypeComboBox.FormattingEnabled = True
-        Me.TypeComboBox.Items.AddRange(New Object() {"Lighting", "Power", "Motor Equipment", "Non-Motor Equipment", "Spare"})
+        Me.TypeComboBox.Items.AddRange(New Object() {"Lighting", "Power", "Motor Equipment", "Non-Motor Equipment", "Electric Range", "Spare"})
         Me.TypeComboBox.Location = New System.Drawing.Point(167, 109)
         Me.TypeComboBox.Name = "TypeComboBox"
         Me.TypeComboBox.Size = New System.Drawing.Size(121, 21)
