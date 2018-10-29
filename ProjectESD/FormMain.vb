@@ -1141,7 +1141,7 @@ ErrorLine: End Sub
             Else
                 ConduitSizeTextBox1.Text = conduit
             End If
-        ElseIf TypeComboBox.SelectedIndex = 4 Then
+        ElseIf TypeComboBox.SelectedIndex = 5 Then
             PowerRatingTextBox.Text = 1500
             OCPDRatingTextBox1.Text = 20
             FullLoadCurrentTextBox.Text = ""
@@ -1153,8 +1153,6 @@ ErrorLine: End Sub
         If GroundWireCheckBox1.Checked = True Then
             GroundWireSizeTextBox.Text = GroundWire(CInt(OCPDRatingTextBox1.Text), GroundConductorComboBox.Text)
         End If
-
-
 
 ErrorLine: End Sub
 
