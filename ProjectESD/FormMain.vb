@@ -149,12 +149,12 @@ Public Class FormMain
             End If
 
             If WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text) = 1 Then
-                wirenumber = SetTextBox.Text
+                wirenumber = SetTextBox1.Text
             ElseIf WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text) <= SetTextBox.Text Then
-                wirenumber = SetTextBox.Text
+                wirenumber = SetTextBox1.Text
             Else
                 wirenumber = WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text)
-                SetTextBox.Text = wirenumber
+                SetTextBox1.Text = wirenumber
             End If
 
             setcurrent = OCPDRatingTextBox.Text / wirenumber
