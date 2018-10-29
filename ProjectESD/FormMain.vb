@@ -1221,32 +1221,44 @@ ErrorLine: End Sub
             GrpPower.Enabled = False
             TxtMotorItem.Text = "1"
             PowerRatingTextBox.ReadOnly = True
-
+            WireTypeComboBox.Enabled = True
+            ConductorComboBox.Enabled = True
+            ConduitTypeComboBox.Enabled = True
         Else
             MotorRatingTextBox.ReadOnly = True
             CboRatingUnit.SelectedIndex = -1
             CboRatingUnit.Enabled = False
             MotorTypeComboBox.SelectedIndex = -1
             MotorTypeComboBox.Enabled = False
+
             If TypeComboBox.SelectedIndex = 0 Then
                 GrpPower.Enabled = False
                 GrpLighting.Enabled = True
                 PowerRatingTextBox.ReadOnly = True
                 TxtMotorItem.ReadOnly = True
                 TxtMotorItem.Text = ""
+                WireTypeComboBox.Enabled = True
+                ConductorComboBox.Enabled = True
+                ConduitTypeComboBox.Enabled = True
             ElseIf TypeComboBox.SelectedIndex = 1 Then
                 GrpPower.Enabled = True
                 GrpLighting.Enabled = False
                 PowerRatingTextBox.ReadOnly = True
                 TxtMotorItem.ReadOnly = True
                 TxtMotorItem.Text = ""
-            ElseIf TypeComboBox.SelectedIndex = 3 Then
+                WireTypeComboBox.Enabled = True
+                ConductorComboBox.Enabled = True
+                ConduitTypeComboBox.Enabled = True
+            ElseIf TypeComboBox.SelectedIndex = 3 Or TypeComboBox.SelectedIndex = 4 Then
                 GrpPower.Enabled = False
                 GrpLighting.Enabled = False
                 PowerRatingTextBox.ReadOnly = False
                 TxtMotorItem.ReadOnly = False
                 TxtMotorItem.Text = "1"
-            ElseIf TypeComboBox.SelectedIndex = 4 Then
+                WireTypeComboBox.Enabled = True
+                ConductorComboBox.Enabled = True
+                ConduitTypeComboBox.Enabled = True
+            ElseIf TypeComboBox.SelectedIndex = 5 Then
                 GrpPower.Enabled = False
                 GrpLighting.Enabled = False
                 WireTypeComboBox.Enabled = False
