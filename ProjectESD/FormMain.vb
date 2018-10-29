@@ -840,7 +840,7 @@ ErrorLine: End Sub
         Dim conduit As Integer
 
         'Do the data checking part
-        If TypeComboBox.Text = "" Or VoltageComboBox.Text = "" Or PhaseComboBox.Text = "" Or ((WireTypeComboBox.Text = "" Or ConductorComboBox.Text = "" Or ConduitTypeComboBox.Text = "") And TypeComboBox.SelectedIndex <> 4) Then
+        If TypeComboBox.Text = "" Or VoltageComboBox.Text = "" Or PhaseComboBox.Text = "" Or ((WireTypeComboBox.Text = "" Or ConductorComboBox.Text = "" Or ConduitTypeComboBox.Text = "") And TypeComboBox.SelectedIndex <> 5) Then
             MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             GoTo ErrorLine
 
@@ -889,7 +889,7 @@ ErrorLine: End Sub
                 GoTo ErrorLine
             End If
 
-        ElseIf TypeComboBox.SelectedIndex = 3 And PowerRatingTextBox.Text = "" Then
+        ElseIf (TypeComboBox.SelectedIndex = 3 Or TypeComboBox.SelectedIndex = 4) And PowerRatingTextBox.Text = "" Then
             MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             GoTo ErrorLine
         End If
