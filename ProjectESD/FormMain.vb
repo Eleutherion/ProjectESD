@@ -1,11 +1,12 @@
 ﻿Option Infer On
 Imports System.Text.RegularExpressions
 Imports System.Numerics
-Imports System.Linq
-Imports System.Configuration
+Imports System.Data.SqlClient
 
 Public Class FormMain
     Private Balanced As Boolean = False
+
+    Private constring As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\ESD_Database.mdf;Integrated Security=True"
 
     Private TCL As Decimal
 
@@ -18,13 +19,6 @@ Public Class FormMain
 #Region "Project"
     Private Sub BtnAddProject_Click(sender As Object, e As EventArgs) Handles BtnAddProject.Click
         TblProjectBindingSource.AddNew()
-    End Sub
-
-    Private Sub PhaseTextBox_Leave(sender As Object, e As EventArgs) Handles PhaseTextBox.Leave
-        If PhaseTextBox.Text = "1" Then
-            PhaseComboBox.SelectedIndex = 0
-            PhaseComboBox.Enabled = False
-        End If
     End Sub
 
     Private Sub BtnSaveProject_Click(sender As Object, e As EventArgs) Handles BtnSaveProject.Click
@@ -694,9 +688,69 @@ ErrorLine: End Sub
 
     Private Sub BtnSaveSub_Click(sender As Object, e As EventArgs) Handles BtnSaveSub.Click
         CodeTextBoxSub.Text = ProjectCodeTextBoxSub.Text + "-SF" + NumberTextBox.Text
+        'Dim con As New SqlConnection(constring)
+
+        'Dim query As String
+
+        'If TblSubfeederTableAdapter.CountRow(CodeTextBoxSub.Text) = 0 Then
+        '    query = "INSERT INTO tblSubfeeder (Code, ProjectCode, Number, DPCode, Voltage, CurrentRating, MinimumAmpacity, WireType, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize, NeutralConductor, NeutralSet, ConduitType, ConduitSize, OCPDRating, 
+        '                BreakerType, DistancetoMain, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, ImpedanceImag) VALUES 
+        '                (@Code,@ProjectCode,@Number,@DPCode,@Voltage,@CurrentRating,@MinimumAmpacity,@WireType,@WireSize,@Set,@Conductor,@Neutral,@NeutralWire,
+        '                @NeutralSize,@NeutralConductor,@NeutralSet,@ConduitType,@ConduitSize,@OCPDRating,@BreakerType,@DistancetoMain,@VoltageDrop,@GroundWire,@GroundWireSize,@GroundConductor,@ImpedanceReal,@ImpedanceImag)"
+        'Else
+        '    query = "UPDATE tblSubfeeder SET Code = @Code, ProjectCode = @ProjectCode, Number = @Number, DPCode = @DPCode, Voltage = @Voltage, CurrentRating = @CurrentRating, MinimumAmpacity = @MinimumAmpacity, WireType = @WireType, 
+        '                 WireSize = @WireSize, [Set] = @Set, Conductor = @Conductor, Neutral = @Neutral, NeutralWire = @NeutralWire, NeutralSize = @NeutralSize, NeutralConductor = @NeutralConductor, NeutralSet = @NeutralSet, 
+        '                 ConduitType = @ConduitType, ConduitSize = @ConduitSize, OCPDRating = @OCPDRating, BreakerType = @BreakerType, DistancetoMain = @DistancetoMain, VoltageDrop = @VoltageDrop, GroundWire = @GroundWire, 
+        '                 GroundWireSize = @GroundWireSize, GroundConductor = @GroundConductor, ImpedanceReal = @ImpedanceReal, ImpedanceImag = @ImpedanceImag WHERE (Code = @Code)"
+        'End If
+
+        'Dim cmd As New SqlCommand(query, con)
 
         Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
         If dr = DialogResult.Yes Then
+            'Try
+            '    Validate()
+
+            '    con.Open()
+
+            '    cmd.Parameters.AddWithValue("@Code", CodeTextBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@ProjectCode", ProjectCodeTextBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@Number", NumberTextBox.Text)
+            '    cmd.Parameters.AddWithValue("@DPCode", DPCodeTextBox.Text)
+            '    cmd.Parameters.AddWithValue("@Voltage", VoltageComboBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@CurrentRating", CurrentRatingTextBox.Text)
+            '    cmd.Parameters.AddWithValue("@MinimumAmpacity", MinimumAmpacityTextBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@WireType", WireTypeComboBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@WireSize", WireSizeTextBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@Set", SetTextBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@Conductor", ConductorComboBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@Neutral", NeutralCheckBox.CheckState)
+            '    cmd.Parameters.AddWithValue("@NeutralWire", NeutralWireComboBox.Text)
+            '    cmd.Parameters.AddWithValue("@NeutralSize", NeutralSizeTextBox.Text)
+            '    cmd.Parameters.AddWithValue("@NeutralConductor", NeutralConductorComboBox.Text)
+            '    cmd.Parameters.AddWithValue("@NeutralSet", NeutralSetTextBox.Text)
+            '    cmd.Parameters.AddWithValue("@ConduitType", ConduitTypeComboBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@ConduitSize", ConduitSizeTextBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@OCPDRating", OCPDRatingTextBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@BreakerType", BreakerTypeTextBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@DistancetoMain", DistancetoMainTextBox.Text)
+            '    cmd.Parameters.AddWithValue("@VoltageDrop", VoltageDropTextBox.Text)
+            '    cmd.Parameters.AddWithValue("@GroundWire", GroundWireCheckBoxSub.CheckState)
+            '    cmd.Parameters.AddWithValue("@GroundWireSize", GroundWireSizeTextBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@GroundConductor", GroundConductorComboBoxSub.Text)
+            '    cmd.Parameters.AddWithValue("@ImpedanceReal", ImpedanceRealTextBox.Text)
+            '    cmd.Parameters.AddWithValue("@ImpedanceImag", ImpedanceImagTextBox.Text)
+            '    cmd.ExecuteNonQuery()
+
+            '    MessageBox.Show("Record saved.")
+
+            '    TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+            'Catch ex As Exception
+            '    MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            'Finally
+            '    con.Close()
+            'End Try
+
             Try
                 Validate()
                 TblSubfeederBindingSource.EndEdit()
@@ -705,24 +759,33 @@ ErrorLine: End Sub
                 MessageBox.Show("Record saved.")
 
                 TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-                'Catch ex As NoNullAllowedException
-                '    MessageBox.Show(ex.ToString(), "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                'Catch ex As ConstraintException
-                '    MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As NoNullAllowedException
+                MessageBox.Show(ex.ToString(), "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As ConstraintException
+                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As Exception
-                MessageBox.Show(ex.ToString(), "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
+
         End If
     End Sub
 
     Private Sub BtnNextSub_Click(sender As Object, e As EventArgs) Handles BtnNextSub.Click
-        TblSubfeederBindingSource.MoveNext()
-        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+        Try
+            TblSubfeederBindingSource.MoveNext()
+            TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 
     Private Sub BtnPreviousSub_Click(sender As Object, e As EventArgs) Handles BtnPreviousSub.Click
-        TblSubfeederBindingSource.MovePrevious()
-        TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+        Try
+            TblSubfeederBindingSource.MovePrevious()
+            TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 
     Private Sub NeutralCheckBox_CheckStateChanged(sender As Object, e As EventArgs) Handles NeutralCheckBox.CheckStateChanged
@@ -753,6 +816,16 @@ ErrorLine: End Sub
             Catch
                 MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
+        End If
+    End Sub
+
+    Private Sub GroundWireCheckBoxSub_CheckStateChanged(sender As Object, e As EventArgs) Handles GroundWireCheckBoxSub.CheckStateChanged
+        If GroundWireCheckBoxSub.Checked Then
+            GroundWireSizeTextBoxSub.Enabled = True
+            GroundConductorComboBoxSub.Enabled = True
+        Else
+            GroundWireSizeTextBoxSub.Enabled = False
+            GroundConductorComboBoxSub.Enabled = False
         End If
     End Sub
 
@@ -1080,6 +1153,8 @@ ErrorLine: End Sub
             GroundWireSizeTextBox.Text = GroundWire(CInt(OCPDRatingTextBox1.Text), GroundConductorComboBox.Text)
         End If
 
+
+
 ErrorLine: End Sub
 
     Private Sub CboLighting1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CboLighting1.SelectedIndexChanged
@@ -1190,23 +1265,73 @@ ErrorLine: End Sub
 
     Private Sub BtnSaveBranch_Click(sender As Object, e As EventArgs) Handles BtnSaveBranch.Click
         CodeTextBox.Text = SubfeederTextBox.Text + "-BC" + CircuitNoTextBox.Text
+        'Dim con As New SqlConnection(constring)
+
+        'Dim query As String
+
+        'If TblSubfeederTableAdapter.CountRow(CodeTextBoxSub.Text) = 0 Then
+        '    query = "INSERT INTO tblBranch (Code, Project, CircuitNo, Type, Subfeeder, Voltage, PowerRating, Phase, MotorType, MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize,
+        '                [Set], Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSize, GroundConductor) VALUES 
+        '                (@Code,@Project,@CircuitNo,@Type,@Subfeeder,@Voltage,@PowerRating,@Phase,@MotorType,@MotorRating,@FullLoadCurrent,@MinimumAmpacity,@WireType,
+        '                @WireSize,@Set,@Conductor,@ConduitType,@ConduitSize,@OCPDRating,@BreakerType,@GroundWire,@GroundWireSize,@GroundConductor)"
+        'Else
+        '    query = "UPDATE tblBranch SET Code = @Code, Project = @Project, CircuitNo = @CircuitNo, Type = @Type, Subfeeder = @Subfeeder, Voltage = @Voltage, PowerRating = @PowerRating, Phase = @Phase, MotorType = @MotorType, 
+        '                MotorRating = @MotorRating, FullLoadCurrent = @FullLoadCurrent, MinimumAmpacity = @MinimumAmpacity, WireType = @WireType, WireSize = @WireSize, [Set] = @Set, Conductor = @Conductor, 
+        '                ConduitType = @ConduitType, ConduitSize = @ConduitSize, OCPDRating = @OCPDRating, BreakerType = @BreakerType, GroundWire = @GroundWire, GroundWireSize = @GroundWireSize, 
+        '                GroundConductor = @GroundConductor WHERE (Code = @Code)"
+        'End If
+
+        'Dim cmd As New SqlCommand(query, con)
 
         Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
         If dr = DialogResult.Yes Then
+            'Using con
+            '    con.Open()
+            '    Try
+            '        Using cmd
+            '            cmd.Parameters.AddWithValue("@Code", CodeTextBox.Text)
+            '            cmd.Parameters.AddWithValue("@Project", ProjectTextBox.Text)
+            '            cmd.Parameters.AddWithValue("@CircuitNo", CircuitNoTextBox.Text)
+            '            cmd.Parameters.AddWithValue("@Type", TypeComboBox.Text)
+            '            cmd.Parameters.AddWithValue("@Subfeeder", SubfeederTextBox.Text)
+            '            cmd.Parameters.AddWithValue("@Voltage", VoltageComboBox.Text)
+            '            cmd.Parameters.AddWithValue("@PowerRating", PowerRatingTextBox.Text)
+            '            cmd.Parameters.AddWithValue("@Phase", PhaseComboBox.Text)
+            '            cmd.Parameters.AddWithValue("@MotorType", MotorTypeComboBox.Text)
+            '            cmd.Parameters.AddWithValue("@MotorRating", MotorRatingTextBox.Text)
+            '            cmd.Parameters.AddWithValue("@FullLoadCurrent", FullLoadCurrentTextBox.Text)
+            '            cmd.Parameters.AddWithValue("@MinimumAmpacity", MinimumAmpacityTextBox.Text)
+            '            cmd.Parameters.AddWithValue("@WireType", WireTypeComboBox.Text)
+            '            cmd.Parameters.AddWithValue("@WireSize", WireSizeTextBox1.Text)
+            '            cmd.Parameters.AddWithValue("@Set", SetTextBox.Text)
+            '            cmd.Parameters.AddWithValue("@Conductor", ConductorComboBox.Text)
+            '            cmd.Parameters.AddWithValue("@ConduitType", ConduitTypeComboBox.Text)
+            '            cmd.Parameters.AddWithValue("@ConduitSize", ConduitSizeTextBox1.Text)
+            '            cmd.Parameters.AddWithValue("@OCPDRating", OCPDRatingTextBox1.Text)
+            '            cmd.Parameters.AddWithValue("@BreakerType", BreakerTypeTextBox1.Text)
+            '            cmd.Parameters.AddWithValue("@GroundWire", GroundWireCheckBox1.CheckState)
+            '            cmd.Parameters.AddWithValue("@GroundWireSize", GroundWireSizeTextBox.Text)
+            '            cmd.Parameters.AddWithValue("@GroundConductor", GroundConductorComboBox.Text)
+
+            '            If cmd.ExecuteNonQuery() = 1 Then
+            '                MessageBox.Show("Record saved.")
+            '            End If
+            '        End Using
+            '    Catch ex As Exception
+            '        MessageBox.Show(ex.GetHashCode().ToString(), "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            '    Finally
+            '        con.Close()
+            '    End Try
+            'End Using
             Try
                 Validate()
                 TblBranchBindingSource.EndEdit()
-                TblBranchTableAdapter.Update(ESD_DatabaseDataSet)
+                TblBranchTableAdapter.Update(ESD_DatabaseDataSet.tblBranch)
 
                 MessageBox.Show("Record saved.")
-            Catch ex As NoNullAllowedException
-                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch ex As ConstraintException
-                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As Exception
-                MessageBox.Show(ex.ToString(), "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
-        Else
 
         End If
 

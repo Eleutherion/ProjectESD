@@ -2,7 +2,7 @@
     Private Sub BtnCompute_Click(sender As Object, e As EventArgs) Handles BtnCompute.Click
         Dim area, perimeter, length, width, radius, height, replacement, hrc, hcc, hfc, cu, cf, cuf, lat, lv, bf, lsd, lbo, ldd, rsdd, ld, llf As Decimal
         Dim lamp As Integer = TxtLamp.Text
-        Dim lum As Integer
+        Dim lum As Decimal
         Dim rating As Integer = TxtRating.Text
         Dim lux As Decimal = TxtIllu.Text
 
@@ -94,17 +94,17 @@
                 llf = lat * lv * bf * lsd * lbo * ld * ldd * rsdd
                 TxtLLF.Text = Math.Round(llf, 4)
 
-                TxtLuminaire.Text = Math.Round(lux * area / (rating * llf * lamp), 4)
+                lum = lux * area / (rating * llf * lamp * cuf)
 
-                lum = Math.Truncate((lux * area / (rating * llf * lamp)) + 1)
-                'TxtLuminaire.Text = Math.Truncate(lum + 1)
+                TxtLuminaire.Text = Math.Round(lum, 4)
 
-                If lum Mod 2 = 0 Then
-                    TxtLuminaireItem.Text = lum
+                If Math.Round(lum) Mod 2 = 0 Then
+                    TxtLuminaireItem.Text = Math.Round(lum)
                 Else
-                    TxtLuminaireItem.Text = lum + 1
+                    TxtLuminaireItem.Text = Math.Round(lum) + 1
                 End If
             End If
+
         ElseIf RdoOutdoor.Checked Then
             If RadioP.Checked Then
                 area = TxtArea.Text
@@ -162,15 +162,19 @@
             llf = lat * lv * bf * lsd * lbo * ld * ldd * rsdd
             TxtLLF.Text = Math.Round(llf, 4)
 
-            TxtLuminaire.Text = Math.Round(lux * area / (rating * llf * lamp), 4)
+            lum = lux * area / (rating * llf * lamp * cuf)
 
-            lum = Math.Truncate((lux * area / (rating * llf * lamp)) + 1)
+            TxtLuminaire.Text = Math.Round(lum, 4)
+
+            'TxtLuminaire.Text = Math.Round(lux * area / (rating * llf * lamp), 4)
+
+            'lum = Math.Truncate(lux * area / (rating * llf * lamp) + 1)
             'TxtLuminaire.Text = Math.Truncate(lum + 1)
 
-            If lum Mod 2 = 0 Then
-                TxtLuminaireItem.Text = lum
+            If Math.Round(lum) Mod 2 = 0 Then
+                TxtLuminaireItem.Text = Math.Round(lum)
             Else
-                TxtLuminaireItem.Text = lum + 1
+                TxtLuminaireItem.Text = Math.Round(lum) + 1
             End If
         End If
 ErrorLine: End Sub

@@ -3144,6 +3144,7 @@ Partial Class FormMain
         '
         'ConduitTypeComboBox
         '
+        Me.ConduitTypeComboBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "ConduitType", True))
         Me.ConduitTypeComboBox.FormattingEnabled = True
         Me.ConduitTypeComboBox.Items.AddRange(New Object() {"Air", "EMT", "RMC", "Rigid PVC 80", "Rigid PVC 40"})
         Me.ConduitTypeComboBox.Location = New System.Drawing.Point(167, 479)
