@@ -120,7 +120,7 @@ Public Class FormMain
 
             LineCurrentTextBox.Text = Math.Round(imf, 4)
 
-            OCPDRatingTextBox.Text = OCPDRating(imf * 1.25)
+            OCPDRatingTextBox.Text = OCPDRating(imf * 1.5)
 
             If WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text) = 1 Then
                 wirenumber = SetTextBox1.Text
@@ -142,10 +142,10 @@ Public Class FormMain
 
             LineCurrentTextBox.Text = Math.Round(imf, 4)
 
-            If TypeComboBox1.SelectedIndex > 1 And OCPDRating(imf * 1.25) = 15 Then
+            If TypeComboBox1.SelectedIndex > 1 And OCPDRating(imf * 1.5) = 15 Then
                 OCPDRatingTextBox.Text = 20
             Else
-                OCPDRatingTextBox.Text = OCPDRating(imf * 1.25)
+                OCPDRatingTextBox.Text = OCPDRating(imf * 1.5)
             End If
 
             If WireSet(ConductorComboBoxMain.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxMain.Text), OCPDRatingTextBox.Text, ConduitTypeComboBoxMain.Text, WireTypeComboBoxMain.Text) = 1 Then
@@ -349,7 +349,7 @@ Public Class FormMain
                     CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
                 End If
 
-                OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
+                OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.5)
 
                 If WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = 1 Then
                     wirenumber = SetTextBoxDP.Text
@@ -379,11 +379,11 @@ Public Class FormMain
 
                 CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
 
-                OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
-                If TypeComboBox1.SelectedIndex > 1 And OCPDRating(idp * 1.25) = 15 Then
+                OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.5)
+                If TypeComboBox1.SelectedIndex > 1 And OCPDRating(idp * 1.5) = 15 Then
                     OCPDRatingTextBoxDP.Text = 20
                 Else
-                    OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.25)
+                    OCPDRatingTextBoxDP.Text = OCPDRating(idp * 1.5)
                 End If
 
                 If WireSet(ConductorComboBoxDP.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxDP.Text), OCPDRatingTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireTypeComboBoxDP.Text) = 1 Then
@@ -528,7 +528,7 @@ ErrorLine: End Sub
             CurrentRatingTextBox.Text = Math.Round(isf, 4)
             MinimumAmpacityTextBoxSub.Text = Math.Round(isf * 1.25, 4)
 
-            OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.25)
+            OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.55)
 
             If WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = 1 Then
                 wirenumber = SetTextBoxSub.Text
@@ -559,14 +559,14 @@ ErrorLine: End Sub
             CurrentRatingTextBox.Text = Math.Round(isf, 4)
             MinimumAmpacityTextBoxSub.Text = Math.Round(isf * 1.25, 4)
 
-            OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.25)
+            OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.5)
 
-            If WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRating(isf * 1.25), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = 1 Then
+            If WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRating(isf * 1.5), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = 1 Then
                 wirenumber = SetTextBoxSub.Text
-            ElseIf WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRating(isf * 1.25), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) <= SetTextBoxSub.Text Then
+            ElseIf WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRating(isf * 1.5), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) <= SetTextBoxSub.Text Then
                 wirenumber = SetTextBoxSub.Text
             Else
-                wirenumber = WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), OCPDRating(isf * 1.25), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+                wirenumber = WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), OCPDRating(isf * 1.5), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
                 SetTextBoxSub.Text = wirenumber
             End If
 
