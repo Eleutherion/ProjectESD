@@ -98,3 +98,5 @@ C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\x64\Debug\ProjectESD.e
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\x64\Debug\ProjectESD.application
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.exe.manifest
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.application
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.vbprojAssemblyReference.cache
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.FormSplash.resources

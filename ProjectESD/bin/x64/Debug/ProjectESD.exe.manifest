@@ -288,14 +288,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ProjectESD.exe" size="864736">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ProjectESD.exe" size="877024">
       <assemblyIdentity name="ProjectESD" version="0.0.0.1" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6VqDEEcECsfXz41OpQZJkwXI51Y36DYq3pd59Nt+0NI=</dsig:DigestValue>
+        <dsig:DigestValue>JZKLe1rh+gMBYvvjN/QHj8f94ALTJ7J+Nv4jrTILz4U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

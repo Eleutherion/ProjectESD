@@ -145,6 +145,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="ESD_DatabaseDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -178,6 +179,12 @@
       <DependentUpon>FormReport.vb</DependentUpon>
     </Compile>
     <Compile Include="FormReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSplash.Designer.vb">
+      <DependentUpon>FormSplash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSplash.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ModIllu.vb" />
@@ -240,6 +247,9 @@
     <EmbeddedResource Include="FormReport.resx">
       <DependentUpon>FormReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormSplash.resx">
+      <DependentUpon>FormSplash.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -266,6 +276,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="facebook_profile_image.png" />
     <Content Include="facebook_profile_image_kHI_icon.ico" />
     <None Include="ESD_DatabaseDataSet.xsc">
       <DependentUpon>ESD_DatabaseDataSet.xsd</DependentUpon>
