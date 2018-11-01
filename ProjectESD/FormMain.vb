@@ -36,10 +36,8 @@ Public Class FormMain
                 TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
                 TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
                 TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-            Catch ex As NoNullAllowedException
-                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Catch ex As ConstraintException
-                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
@@ -58,8 +56,8 @@ Public Class FormMain
                 TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
                 TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
                 TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-            Catch
-                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
@@ -86,7 +84,7 @@ Public Class FormMain
 #Region "Main Feeder"
     Private Sub BtnCompute_Click(sender As Object, e As EventArgs) Handles BtnCompute.Click
         Dim imf, hrml, phaseload(2), singlephaseload, threephaseload, setcurrent As Decimal
-        Dim voltage As Integer = VoltageComboBoxMain.Text
+        Dim voltage As Integer = VoltageLevelComboBox.Text
         Dim wirenumber As Integer
 
         If PhaseTextBox.Text = "3" Then
@@ -182,7 +180,7 @@ Public Class FormMain
 
             zreal = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceReal")).ToArray()
             zimag = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceImag")).ToArray()
-            zline = LineImpedance(DistancetoSETextBox.Text, ConduitTypeComboBoxMain.Text, WireSizeTextBox.Text, ConductorComboBoxMain.Text, VoltageComboBoxMain.Text, SetTextBox1.Text)
+            zline = LineImpedance(DistancetoSETextBox.Text, ConduitTypeComboBoxMain.Text, WireSizeTextBox.Text, ConductorComboBoxMain.Text, VoltageLevelComboBox.Text, SetTextBox1.Text)
 
             zutility = New Complex(1 / ShortCircuitCapTextBox.Text * Math.Cos(Math.Atan(XRRatioTextBox.Text)), 1 / ShortCircuitCapTextBox.Text * Math.Sin(Math.Atan(XRRatioTextBox.Text)))
 
@@ -211,9 +209,9 @@ Public Class FormMain
             Dim ibase, iactual As Decimal
 
             If PhaseTextBox.Text = "3" Then
-                ibase = 1000000 / (Math.Sqrt(3) * VoltageComboBoxMain.Text)
+                ibase = 1000000 / (Math.Sqrt(3) * VoltageLevelComboBox.Text)
             Else
-                ibase = 1000000 / VoltageComboBoxMain.Text
+                ibase = 1000000 / VoltageLevelComboBox.Text
             End If
 
             iactual = ifpu.Magnitude * ibase
@@ -237,12 +235,8 @@ Public Class FormMain
                 TblMainFeederTableAdapter.Update(ESD_DatabaseDataSet.tblMainFeeder)
 
                 MessageBox.Show("Record saved.")
-            Catch ex As NoNullAllowedException
-                MessageBox.Show(ex.ToString(), "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch ex As ConstraintException
-                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch
-                MessageBox.Show("An error has occurred", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
@@ -254,8 +248,8 @@ Public Class FormMain
                 TblMainFeederTableAdapter.DeletebyPrimary(ProjectCodeTextBox1.Text)
 
                 MessageBox.Show("Record deleted.")
-            Catch
-                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
@@ -276,11 +270,11 @@ Public Class FormMain
 #Region "Distribution Panel"
     Private Sub BtnComputeDP_Click(sender As Object, e As EventArgs) Handles BtnComputeDP.Click
         Dim ThreePhase As Boolean = False
-        Dim voltage As Integer = VoltageComboBoxDP.Text
+        Dim voltage As Integer = VoltageLevelComboBox.Text
         Dim idp, load, hrml, phaseload(2), setcurrent, lighting, power, demandload, equip As Decimal
         Dim wirenumber As Integer
 
-        If VoltageComboBoxDP.Text = "" Or WireTypeComboBoxDP.Text = "" Or ConductorComboBoxDP.Text = "" Or SetTextBoxDP.Text = "" Or ConduitTypeComboBoxDP.Text = "" Or DistancetoMainTextBoxDP.Text = "" Then
+        If VoltageLevelComboBox.Text = "" Or WireTypeComboBoxDP.Text = "" Or ConductorComboBoxDP.Text = "" Or SetTextBoxDP.Text = "" Or ConduitTypeComboBoxDP.Text = "" Or DistancetoMainTextBoxDP.Text = "" Then
             MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             GoTo ErrorLine
         End If
@@ -304,7 +298,7 @@ Public Class FormMain
 
             load = equip + demandload
 
-            idp = load / VoltageComboBoxDP.Text
+            idp = load / VoltageLevelComboBox.Text
 
             CurrentRatingTextBoxDP.Text = Math.Round(idp * 1.25, 4)
 
@@ -415,7 +409,7 @@ Public Class FormMain
 
         zreal = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceReal")).ToArray()
         zimag = (From row In dt.AsEnumerable() Select row.Field(Of Double)("ImpedanceImag")).ToArray()
-        zline = LineImpedance(DistancetoMainTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireSizeTextBoxDP.Text, ConductorComboBoxDP.Text, VoltageComboBoxDP.Text, SetTextBoxDP.Text)
+        zline = LineImpedance(DistancetoMainTextBoxDP.Text, ConduitTypeComboBoxDP.Text, WireSizeTextBoxDP.Text, ConductorComboBoxDP.Text, VoltageLevelComboBox.Text, SetTextBoxDP.Text)
 
         For i As Integer = 0 To count - 1 Step 1
             z(i) = New Complex(zreal(i), zimag(i))
@@ -454,12 +448,8 @@ ErrorLine: End Sub
                 TblDistributionTableAdapter.Update(ESD_DatabaseDataSet.tblDistribution)
 
                 MessageBox.Show("Record saved.")
-            Catch ex As NoNullAllowedException
-                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch ex As ConstraintException
-                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch
-                MessageBox.Show("An error has occurred", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
@@ -473,8 +463,8 @@ ErrorLine: End Sub
                 MessageBox.Show("Record deleted.")
 
                 TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
-            Catch
-                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
@@ -495,12 +485,12 @@ ErrorLine: End Sub
 #Region "Subfeeder"
     Private Sub BtnComputeSub_Click(sender As Object, e As EventArgs) Handles BtnComputeSub.Click
         Dim ThreePhase As Boolean
-        Dim voltage As Integer = VoltageComboBoxSub.Text
+        Dim voltage As Integer = VoltageLevelComboBox.Text
         Dim isf, load, hrml, phaseload(2), setcurrent, vd As Decimal
         Dim wirenumber As Integer
         Dim Z As Complex
 
-        If VoltageComboBoxSub.Text = "" Or WireTypeComboBoxSub.Text = "" Or ConductorComboBoxSub.Text = "" Or ConduitTypeComboBoxSub.Text = "" Or SetTextBoxSub.Text = "" Or DistancetoMainTextBox.Text = "" Then
+        If VoltageLevelComboBox.Text = "" Or WireTypeComboBoxSub.Text = "" Or ConductorComboBoxSub.Text = "" Or ConduitTypeComboBoxSub.Text = "" Or SetTextBoxSub.Text = "" Or DistancetoMainTextBox.Text = "" Then
             MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             GoTo ErrorLine
         ElseIf NeutralCheckBox.Checked And (NeutralConductorComboBox.Text = "" Or NeutralWireComboBox.Text = "") Then
@@ -581,7 +571,7 @@ ErrorLine: End Sub
             ConduitSizeTextBoxSub.Text = ConduitSize(WireTypeComboBoxSub.Text, ConductorComboBoxSub.Text, GroundWireCheckBoxSub.Checked, "3", ConduitTypeComboBoxSub.Text, False)
         End If
 
-        vd = VoltageDrop(isf / SetTextBoxSub.Text, DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, ThreePhase, VoltageComboBoxSub.Text)
+        vd = VoltageDrop(isf / SetTextBoxSub.Text, DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, ThreePhase, VoltageLevelComboBox.Text)
 
         Do While vd > 2
             Dim size = {"2.0", "3.5", "5.5", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "150", "175", "200", "250", "325", "375", "400", "500"}
@@ -594,7 +584,7 @@ ErrorLine: End Sub
                     GoTo ErrorLine
                 End If
             Next
-vdline:     vd = VoltageDrop(isf / SetTextBoxSub.Text, DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, ThreePhase, VoltageComboBoxSub.Text)
+vdline:     vd = VoltageDrop(isf / SetTextBoxSub.Text, DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, ThreePhase, VoltageLevelComboBox.Text)
         Loop
 
         If NeutralCheckBox.Checked Then
@@ -624,11 +614,11 @@ vdline:     vd = VoltageDrop(isf / SetTextBoxSub.Text, DistancetoMainTextBox.Tex
         Balanced = False
 
         If PhaseTextBox.Text = "3" Then
-            Z = LineImpedance(DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, VoltageComboBoxSub.Text, SetTextBoxSub.Text) +
-                LoadImpedance(Math.Sqrt(3) * VoltageComboBoxSub.Text * CurrentRatingTextBox.Text)
+            Z = LineImpedance(DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, VoltageLevelComboBox.Text, SetTextBoxSub.Text) +
+                LoadImpedance(Math.Sqrt(3) * VoltageLevelComboBox.Text * CurrentRatingTextBox.Text)
         Else
-            Z = LineImpedance(DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, VoltageComboBoxSub.Text, SetTextBoxSub.Text) +
-                LoadImpedance(VoltageComboBoxSub.Text * CurrentRatingTextBox.Text)
+            Z = LineImpedance(DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, VoltageLevelComboBox.Text, SetTextBoxSub.Text) +
+                LoadImpedance(VoltageLevelComboBox.Text * CurrentRatingTextBox.Text)
         End If
         ImpedanceRealTextBox.Text = Math.Round(Z.Real, 4)
         ImpedanceImagTextBox.Text = Math.Round(Z.Imaginary, 4)
@@ -760,10 +750,6 @@ ErrorLine: End Sub
                 MessageBox.Show("Record saved.")
 
                 TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-            Catch ex As NoNullAllowedException
-                MessageBox.Show(ex.ToString(), "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch ex As ConstraintException
-                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As Exception
                 MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
@@ -814,8 +800,8 @@ ErrorLine: End Sub
                 MessageBox.Show("Record deleted.")
 
                 TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
-            Catch
-                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
@@ -840,7 +826,7 @@ ErrorLine: End Sub
         Dim conduit As Integer
 
         'Do the data checking part
-        If TypeComboBox.Text = "" Or VoltageComboBox.Text = "" Or PhaseComboBox.Text = "" Or ((WireTypeComboBox.Text = "" Or ConductorComboBox.Text = "" Or ConduitTypeComboBox.Text = "") And TypeComboBox.SelectedIndex <> 5) Then
+        If TypeComboBox.Text = "" Or VoltageLevelComboBox.Text = "" Or PhaseComboBox.Text = "" Or ((WireTypeComboBox.Text = "" Or ConductorComboBox.Text = "" Or ConduitTypeComboBox.Text = "") And TypeComboBox.SelectedIndex <> 5) Then
             MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             GoTo ErrorLine
 
@@ -866,19 +852,19 @@ ErrorLine: End Sub
                 GoTo ErrorLine
 
             ElseIf PhaseComboBox.Text = "3" Then
-                If MotorTypeComboBox.SelectedIndex = 2 And (VoltageComboBox.SelectedIndex < 3 Or VoltageComboBox.SelectedIndex = 4) Then
+                If MotorTypeComboBox.SelectedIndex = 2 And (VoltageLevelComboBox.SelectedIndex < 3 Or VoltageLevelComboBox.SelectedIndex = 4) Then
                     MessageBox.Show("Invalid voltage rating for given motor type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     GoTo ErrorLine
 
                 ElseIf MotorTypeComboBox.SelectedIndex = 2 And CboRatingUnit.SelectedIndex = 0 And ((CDec(MotorRatingTextBox.Text) < 25) Or
                         (CDec(MotorRatingTextBox.Text) > 200) Or
-                        (CDec(MotorRatingTextBox.Text) < 60 And VoltageComboBox.SelectedIndex = 7)) Then
+                        (CDec(MotorRatingTextBox.Text) < 60 And VoltageLevelComboBox.SelectedIndex = 7)) Then
                     MessageBox.Show("Invalid motor rating for given voltage.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     GoTo ErrorLine
 
-                ElseIf (VoltageComboBox.SelectedIndex = 7 And truerating < 60) Or
-                        (VoltageComboBox.SelectedIndex = 0 And truerating > 50) Or
-                        (VoltageComboBox.SelectedIndex <= 2 And truerating > 200) Then
+                ElseIf (VoltageLevelComboBox.SelectedIndex = 7 And truerating < 60) Or
+                        (VoltageLevelComboBox.SelectedIndex = 0 And truerating > 50) Or
+                        (VoltageLevelComboBox.SelectedIndex <= 2 And truerating > 200) Then
                     MessageBox.Show("Invalid motor rating for given voltage.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     GoTo ErrorLine
 
@@ -908,7 +894,7 @@ ErrorLine: End Sub
             End If
 
             PowerRatingTextBox.Text = power
-            current = CInt(PowerRatingTextBox.Text) / CInt(VoltageComboBox.Text)
+            current = CInt(PowerRatingTextBox.Text) / CInt(VoltageLevelComboBox.Text)
             FullLoadCurrentTextBox.Text = Math.Round(current, 4)
 
             MinimumAmpacityTextBox.Text = FullLoadCurrentTextBox.Text
@@ -947,7 +933,7 @@ ErrorLine: End Sub
 
             PowerRatingTextBox.Text = CInt(TxtTotalPower1.Text) + CInt(TxtTotalPower2.Text) + CInt(TxtTotalPower3.Text) + CInt(TxtTotalPower4.Text)
 
-            current = CInt(PowerRatingTextBox.Text) / CInt(VoltageComboBox.Text)
+            current = CInt(PowerRatingTextBox.Text) / CInt(VoltageLevelComboBox.Text)
             FullLoadCurrentTextBox.Text = Math.Round(current, 4)
 
             MinimumAmpacityTextBox.Text = CStr(Math.Round(current * 1.25, 4))
@@ -997,13 +983,13 @@ ErrorLine: End Sub
             If CboRatingUnit.SelectedIndex = 0 Then
                 If PhaseComboBox.Text = "3" Then
                     If MotorTypeComboBox.SelectedIndex = 2 Then
-                        current = ThreePhaseSynchronous(truerating, VoltageComboBox.SelectedIndex)
+                        current = ThreePhaseSynchronous(truerating, VoltageLevelComboBox.SelectedIndex)
                         If current = -1 Then
                             MessageBox.Show("Given motor rating not among standard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             GoTo ErrorLine
                         End If
                     Else
-                        current = ThreePhaseInduction(truerating, VoltageComboBox.SelectedIndex)
+                        current = ThreePhaseInduction(truerating, VoltageLevelComboBox.SelectedIndex)
                         If current = -1 Then
                             MessageBox.Show("Given motor rating not among standard.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             GoTo ErrorLine
@@ -1011,21 +997,21 @@ ErrorLine: End Sub
                     End If
                     FullLoadCurrentTextBox.Text = Math.Round(current, 4)
 
-                    power = current * CInt(VoltageComboBox.Text) * Math.Sqrt(3) * CInt(TxtMotorItem.Text)
+                    power = current * CInt(VoltageLevelComboBox.Text) * Math.Sqrt(3) * CInt(TxtMotorItem.Text)
                     PowerRatingTextBox.Text = Math.Round(power, 4)
                 Else
-                    current = SinglePhaseCurrent(truerating, VoltageComboBox.SelectedIndex)
-                    power = CInt(VoltageComboBox.Text) * current * CInt(TxtMotorItem.Text)
+                    current = SinglePhaseCurrent(truerating, VoltageLevelComboBox.SelectedIndex)
+                    power = CInt(VoltageLevelComboBox.Text) * current * CInt(TxtMotorItem.Text)
                     FullLoadCurrentTextBox.Text = CStr(Math.Round(current, 4))
                     PowerRatingTextBox.Text = CStr(Math.Round(power, 4))
                 End If
             ElseIf CboRatingUnit.SelectedIndex = 1 Then
                 If PhaseComboBox.Text = "3" Then
                     power = CDec(MotorRatingTextBox.Text) * 1000 * CInt(TxtMotorItem.Text)
-                    current = power / (CInt(VoltageComboBox.Text) * Math.Sqrt(3))
+                    current = power / (CInt(VoltageLevelComboBox.Text) * Math.Sqrt(3))
                 Else
                     power = CDec(MotorRatingTextBox.Text) * 1000 * CInt(TxtMotorItem.Text)
-                    current = power / CInt(VoltageComboBox.Text)
+                    current = power / CInt(VoltageLevelComboBox.Text)
                 End If
 
                 PowerRatingTextBox.Text = CStr(Math.Round(power, 4))
@@ -1033,10 +1019,10 @@ ErrorLine: End Sub
             Else
                 If PhaseComboBox.Text = "3" Then
                     power = CDec(MotorRatingTextBox.Text) * CInt(TxtMotorItem.Text)
-                    current = power / (CInt(VoltageComboBox.Text) * Math.Sqrt(3))
+                    current = power / (CInt(VoltageLevelComboBox.Text) * Math.Sqrt(3))
                 Else
                     power = CDec(MotorRatingTextBox.Text) * CInt(TxtMotorItem.Text)
-                    current = power / CInt(VoltageComboBox.Text)
+                    current = power / CInt(VoltageLevelComboBox.Text)
                 End If
 
                 PowerRatingTextBox.Text = CStr(Math.Round(power, 4))
@@ -1097,7 +1083,7 @@ ErrorLine: End Sub
 
             power = CDec(PowerRatingTextBox.Text) * CInt(TxtMotorItem.Text)
 
-            current = power / CInt(VoltageComboBox.Text)
+            current = power / CInt(VoltageLevelComboBox.Text)
             FullLoadCurrentTextBox.Text = Math.Round(current, 4)
 
             MinimumAmpacityTextBox.Text = CStr(Math.Round(current * 1.25, 4))
@@ -1168,6 +1154,8 @@ ErrorLine: End Sub
                 TxtRatingLighting1.Text = 25
             Case 4
                 TxtRatingLighting1.Text = 1200
+            Case 5 To 8
+                TxtRatingLighting1.Text = 550
             Case Else
                 TxtRatingLighting1.Text = 0
         End Select
@@ -1185,6 +1173,8 @@ ErrorLine: End Sub
                 TxtRatingLighting2.Text = 25
             Case 4
                 TxtRatingLighting2.Text = 1200
+            Case 5 To 8
+                TxtRatingLighting2.Text = 550
             Case Else
                 TxtRatingLighting2.Text = 0
         End Select
@@ -1202,6 +1192,8 @@ ErrorLine: End Sub
                 TxtRatingLighting3.Text = 25
             Case 4
                 TxtRatingLighting3.Text = 1200
+            Case 5 To 8
+                TxtRatingLighting3.Text = 550
             Case Else
                 TxtRatingLighting3.Text = 0
         End Select
@@ -1357,8 +1349,8 @@ ErrorLine: End Sub
                 MessageBox.Show("Record deleted.")
 
                 TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-            Catch
-                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
@@ -1407,7 +1399,7 @@ ErrorLine: End Sub
         End If
 
         Dim singlephaseload, threephaseload, phaseload(2) As Decimal
-        Dim voltage As Integer = VoltageComboBoxMain.Text
+        Dim voltage As Integer = VoltageLevelComboBox.Text
 
         If PhaseTextBox.Text = "3" Then
             phaseload = {TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "A"),
@@ -1449,12 +1441,8 @@ ErrorLine: End Sub
                 TblTransGenTableAdapter.Update(ESD_DatabaseDataSet.tblTransGen)
 
                 MessageBox.Show("Record saved.")
-            Catch ex As NoNullAllowedException
-                MessageBox.Show("Fill in the required fields.", "No Null Allowed Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch ex As ConstraintException
-                MessageBox.Show("Duplicate records.", "Constraint Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As Exception
-                MessageBox.Show(ex.ToString(), "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         Else
 
@@ -1468,8 +1456,8 @@ ErrorLine: End Sub
                 TblTransGenTableAdapter.DeletebyPrimary(ProjectCodeTextBox3.Text)
 
                 MessageBox.Show("Record deleted.")
-            Catch
-                MessageBox.Show("An error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
         End If
     End Sub
@@ -1591,7 +1579,8 @@ ErrorLine: End Sub
     End Sub
 
     Private Sub AboutUsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutUsToolStripMenuItem.Click
-        MessageBox.Show("Under construction.")
+        Dim f As New FormAbout
+        f.ShowDialog()
     End Sub
 
     Private Report As FormReport

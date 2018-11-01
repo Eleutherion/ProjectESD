@@ -45,7 +45,6 @@ C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\x64\Debug\ESD_Database
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\x64\Debug\ESD_DatabaseDataSet.vb
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\x64\Debug\ESD_DatabaseDataSet.xsc
 C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\x64\Debug\ESD_DatabaseDataSet.xss
-C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.vbprojAssemblyReference.cache
 G:\ProjectESD\ProjectESD\bin\x64\Debug\ESD_DatabaseDataSet.xsd
 G:\ProjectESD\ProjectESD\bin\x64\Debug\ESD_DatabaseDataSet.Designer.vb
 G:\ProjectESD\ProjectESD\bin\x64\Debug\ESD_DatabaseDataSet.vb
@@ -94,3 +93,8 @@ G:\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.exe
 G:\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.xml
 G:\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.pdb
 G:\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.vbprojAssemblyReference.cache
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.FormAbout.resources
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\x64\Debug\ProjectESD.exe.manifest
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\bin\x64\Debug\ProjectESD.application
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.exe.manifest
+C:\Users\ambal\Documents\GitHub\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.application

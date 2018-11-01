@@ -866,8 +866,6 @@ Partial Public Class ESD_DatabaseDataSet
         
         Private columnDistancetoSE As Global.System.Data.DataColumn
         
-        Private columnVoltage As Global.System.Data.DataColumn
-        
         Private columnGroundWireSize As Global.System.Data.DataColumn
         
         Private columnGroundConductor As Global.System.Data.DataColumn
@@ -1023,14 +1021,6 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public ReadOnly Property VoltageColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnVoltage
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public ReadOnly Property GroundWireSizeColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnGroundWireSize
@@ -1136,7 +1126,6 @@ Partial Public Class ESD_DatabaseDataSet
                     ByVal ConduitType As String,  _
                     ByVal ConduitSize As String,  _
                     ByVal DistancetoSE As Double,  _
-                    ByVal Voltage As Integer,  _
                     ByVal GroundWireSize As String,  _
                     ByVal GroundConductor As String,  _
                     ByVal ImpedanceReal As Double,  _
@@ -1145,7 +1134,7 @@ Partial Public Class ESD_DatabaseDataSet
                     ByVal ShortCircuitCap As Double,  _
                     ByVal XRRatio As Double) As tblMainFeederRow
             Dim rowtblMainFeederRow As tblMainFeederRow = CType(Me.NewRow,tblMainFeederRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, TotalLoad, LineCurrent, Nothing, Conductor, OCPDRating, BreakerType, GroundWire, _Set, WireSize, ConduitType, ConduitSize, DistancetoSE, Voltage, GroundWireSize, GroundConductor, ImpedanceReal, ImpedanceImag, kAICRating, ShortCircuitCap, XRRatio}
+            Dim columnValuesArray() As Object = New Object() {Nothing, TotalLoad, LineCurrent, Nothing, Conductor, OCPDRating, BreakerType, GroundWire, _Set, WireSize, ConduitType, ConduitSize, DistancetoSE, GroundWireSize, GroundConductor, ImpedanceReal, ImpedanceImag, kAICRating, ShortCircuitCap, XRRatio}
             If (Not (parenttblProjectRowByFK_tblMainFeeder_tblProject) Is Nothing) Then
                 columnValuesArray(0) = parenttblProjectRowByFK_tblMainFeeder_tblProject(0)
             End If
@@ -1193,7 +1182,6 @@ Partial Public Class ESD_DatabaseDataSet
             Me.columnConduitType = MyBase.Columns("ConduitType")
             Me.columnConduitSize = MyBase.Columns("ConduitSize")
             Me.columnDistancetoSE = MyBase.Columns("DistancetoSE")
-            Me.columnVoltage = MyBase.Columns("Voltage")
             Me.columnGroundWireSize = MyBase.Columns("GroundWireSize")
             Me.columnGroundConductor = MyBase.Columns("GroundConductor")
             Me.columnImpedanceReal = MyBase.Columns("ImpedanceReal")
@@ -1235,8 +1223,6 @@ Partial Public Class ESD_DatabaseDataSet
             MyBase.Columns.Add(Me.columnConduitSize)
             Me.columnDistancetoSE = New Global.System.Data.DataColumn("DistancetoSE", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnDistancetoSE)
-            Me.columnVoltage = New Global.System.Data.DataColumn("Voltage", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnVoltage)
             Me.columnGroundWireSize = New Global.System.Data.DataColumn("GroundWireSize", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnGroundWireSize)
             Me.columnGroundConductor = New Global.System.Data.DataColumn("GroundConductor", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -1271,7 +1257,6 @@ Partial Public Class ESD_DatabaseDataSet
             Me.columnConduitType.MaxLength = 20
             Me.columnConduitSize.MaxLength = 10
             Me.columnDistancetoSE.AllowDBNull = false
-            Me.columnVoltage.AllowDBNull = false
             Me.columnGroundWireSize.MaxLength = 10
             Me.columnGroundConductor.MaxLength = 10
         End Sub
@@ -1421,6 +1406,8 @@ Partial Public Class ESD_DatabaseDataSet
         
         Private columnPhase As Global.System.Data.DataColumn
         
+        Private columnVoltageLevel As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub New()
@@ -1497,6 +1484,14 @@ Partial Public Class ESD_DatabaseDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public ReadOnly Property VoltageLevelColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnVoltageLevel
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1533,9 +1528,9 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function AddtblProjectRow(ByVal ProjectCode As String, ByVal Name As String, ByVal Owner As String, ByVal Type As String, ByVal Phase As Integer) As tblProjectRow
+        Public Overloads Function AddtblProjectRow(ByVal ProjectCode As String, ByVal Name As String, ByVal Owner As String, ByVal Type As String, ByVal Phase As Integer, ByVal VoltageLevel As Integer) As tblProjectRow
             Dim rowtblProjectRow As tblProjectRow = CType(Me.NewRow,tblProjectRow)
-            Dim columnValuesArray() As Object = New Object() {ProjectCode, Name, Owner, Type, Phase}
+            Dim columnValuesArray() As Object = New Object() {ProjectCode, Name, Owner, Type, Phase, VoltageLevel}
             rowtblProjectRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowtblProjectRow)
             Return rowtblProjectRow
@@ -1569,6 +1564,7 @@ Partial Public Class ESD_DatabaseDataSet
             Me.columnOwner = MyBase.Columns("Owner")
             Me.columnType = MyBase.Columns("Type")
             Me.columnPhase = MyBase.Columns("Phase")
+            Me.columnVoltageLevel = MyBase.Columns("VoltageLevel")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1584,6 +1580,8 @@ Partial Public Class ESD_DatabaseDataSet
             MyBase.Columns.Add(Me.columnType)
             Me.columnPhase = New Global.System.Data.DataColumn("Phase", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPhase)
+            Me.columnVoltageLevel = New Global.System.Data.DataColumn("VoltageLevel", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnVoltageLevel)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnProjectCode}, true))
             Me.columnProjectCode.AllowDBNull = false
             Me.columnProjectCode.Unique = true
@@ -2393,8 +2391,6 @@ Partial Public Class ESD_DatabaseDataSet
         
         Private columnDistancetoMain As Global.System.Data.DataColumn
         
-        Private columnVoltage As Global.System.Data.DataColumn
-        
         Private columnImpedanceReal As Global.System.Data.DataColumn
         
         Private columnImpedanceImag As Global.System.Data.DataColumn
@@ -2540,14 +2536,6 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public ReadOnly Property VoltageColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnVoltage
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public ReadOnly Property ImpedanceRealColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnImpedanceReal
@@ -2599,25 +2587,9 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function AddtblDistributionRow( _
-                    ByVal Code As String,  _
-                    ByVal parenttblProjectRowByFK_tblDistribution_tblProject As tblProjectRow,  _
-                    ByVal CurrentRating As Double,  _
-                    ByVal WireType As String,  _
-                    ByVal WireSize As String,  _
-                    ByVal _Set As Integer,  _
-                    ByVal Conductor As String,  _
-                    ByVal ConduitType As String,  _
-                    ByVal ConduitSize As String,  _
-                    ByVal OCPDRating As Integer,  _
-                    ByVal BreakerType As String,  _
-                    ByVal DPNumber As Integer,  _
-                    ByVal DistancetoMain As Double,  _
-                    ByVal Voltage As Integer,  _
-                    ByVal ImpedanceReal As Double,  _
-                    ByVal ImpedanceImag As Double) As tblDistributionRow
+        Public Overloads Function AddtblDistributionRow(ByVal Code As String, ByVal parenttblProjectRowByFK_tblDistribution_tblProject As tblProjectRow, ByVal CurrentRating As Double, ByVal WireType As String, ByVal WireSize As String, ByVal _Set As Integer, ByVal Conductor As String, ByVal ConduitType As String, ByVal ConduitSize As String, ByVal OCPDRating As Integer, ByVal BreakerType As String, ByVal DPNumber As Integer, ByVal DistancetoMain As Double, ByVal ImpedanceReal As Double, ByVal ImpedanceImag As Double) As tblDistributionRow
             Dim rowtblDistributionRow As tblDistributionRow = CType(Me.NewRow,tblDistributionRow)
-            Dim columnValuesArray() As Object = New Object() {Code, Nothing, CurrentRating, WireType, WireSize, _Set, Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, DPNumber, DistancetoMain, Voltage, ImpedanceReal, ImpedanceImag}
+            Dim columnValuesArray() As Object = New Object() {Code, Nothing, CurrentRating, WireType, WireSize, _Set, Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, DPNumber, DistancetoMain, ImpedanceReal, ImpedanceImag}
             If (Not (parenttblProjectRowByFK_tblDistribution_tblProject) Is Nothing) Then
                 columnValuesArray(1) = parenttblProjectRowByFK_tblDistribution_tblProject(0)
             End If
@@ -2662,7 +2634,6 @@ Partial Public Class ESD_DatabaseDataSet
             Me.columnBreakerType = MyBase.Columns("BreakerType")
             Me.columnDPNumber = MyBase.Columns("DPNumber")
             Me.columnDistancetoMain = MyBase.Columns("DistancetoMain")
-            Me.columnVoltage = MyBase.Columns("Voltage")
             Me.columnImpedanceReal = MyBase.Columns("ImpedanceReal")
             Me.columnImpedanceImag = MyBase.Columns("ImpedanceImag")
         End Sub
@@ -2699,8 +2670,6 @@ Partial Public Class ESD_DatabaseDataSet
             MyBase.Columns.Add(Me.columnDPNumber)
             Me.columnDistancetoMain = New Global.System.Data.DataColumn("DistancetoMain", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnDistancetoMain)
-            Me.columnVoltage = New Global.System.Data.DataColumn("Voltage", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnVoltage)
             Me.columnImpedanceReal = New Global.System.Data.DataColumn("ImpedanceReal", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnImpedanceReal)
             Me.columnImpedanceImag = New Global.System.Data.DataColumn("ImpedanceImag", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
@@ -2865,8 +2834,6 @@ Partial Public Class ESD_DatabaseDataSet
         
         Private columnSubfeeder As Global.System.Data.DataColumn
         
-        Private columnVoltage As Global.System.Data.DataColumn
-        
         Private columnPowerRating As Global.System.Data.DataColumn
         
         Private columnPhase As Global.System.Data.DataColumn
@@ -2973,14 +2940,6 @@ Partial Public Class ESD_DatabaseDataSet
         Public ReadOnly Property SubfeederColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnSubfeeder
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public ReadOnly Property VoltageColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnVoltage
             End Get
         End Property
         
@@ -3163,7 +3122,6 @@ Partial Public Class ESD_DatabaseDataSet
                     ByVal CircuitNo As Integer,  _
                     ByVal Type As String,  _
                     ByVal Subfeeder As String,  _
-                    ByVal Voltage As Integer,  _
                     ByVal PowerRating As Double,  _
                     ByVal Phase As String,  _
                     ByVal MotorType As String,  _
@@ -3182,12 +3140,12 @@ Partial Public Class ESD_DatabaseDataSet
                     ByVal GroundWireSize As String,  _
                     ByVal GroundConductor As String) As tblBranchRow
             Dim rowtblBranchRow As tblBranchRow = CType(Me.NewRow,tblBranchRow)
-            Dim columnValuesArray() As Object = New Object() {Code, Project, CircuitNo, Type, Subfeeder, Voltage, PowerRating, Phase, MotorType, MotorRating, FullLoadCurrent, MinimumAmpacity, Nothing, WireSize, _Set, Nothing, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSize, GroundConductor}
+            Dim columnValuesArray() As Object = New Object() {Code, Project, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, MotorRating, FullLoadCurrent, MinimumAmpacity, Nothing, WireSize, _Set, Nothing, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSize, GroundConductor}
             If (Not (parenttblWireRowByFK_tblBranch_tblWire) Is Nothing) Then
-                columnValuesArray(12) = parenttblWireRowByFK_tblBranch_tblWire(0)
+                columnValuesArray(11) = parenttblWireRowByFK_tblBranch_tblWire(0)
             End If
             If (Not (parenttblConductorRowByFK_tblBranch_tblConductor) Is Nothing) Then
-                columnValuesArray(15) = parenttblConductorRowByFK_tblBranch_tblConductor(0)
+                columnValuesArray(14) = parenttblConductorRowByFK_tblBranch_tblConductor(0)
             End If
             rowtblBranchRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowtblBranchRow)
@@ -3222,7 +3180,6 @@ Partial Public Class ESD_DatabaseDataSet
             Me.columnCircuitNo = MyBase.Columns("CircuitNo")
             Me.columnType = MyBase.Columns("Type")
             Me.columnSubfeeder = MyBase.Columns("Subfeeder")
-            Me.columnVoltage = MyBase.Columns("Voltage")
             Me.columnPowerRating = MyBase.Columns("PowerRating")
             Me.columnPhase = MyBase.Columns("Phase")
             Me.columnMotorType = MyBase.Columns("MotorType")
@@ -3255,8 +3212,6 @@ Partial Public Class ESD_DatabaseDataSet
             MyBase.Columns.Add(Me.columnType)
             Me.columnSubfeeder = New Global.System.Data.DataColumn("Subfeeder", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnSubfeeder)
-            Me.columnVoltage = New Global.System.Data.DataColumn("Voltage", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnVoltage)
             Me.columnPowerRating = New Global.System.Data.DataColumn("PowerRating", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnPowerRating)
             Me.columnPhase = New Global.System.Data.DataColumn("Phase", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -3305,7 +3260,6 @@ Partial Public Class ESD_DatabaseDataSet
             Me.columnType.MaxLength = 20
             Me.columnSubfeeder.AllowDBNull = false
             Me.columnSubfeeder.MaxLength = 20
-            Me.columnVoltage.AllowDBNull = false
             Me.columnPowerRating.AllowDBNull = false
             Me.columnPhase.MaxLength = 5
             Me.columnMotorType.MaxLength = 50
@@ -3464,8 +3418,6 @@ Partial Public Class ESD_DatabaseDataSet
         
         Private columnDPCode As Global.System.Data.DataColumn
         
-        Private columnVoltage As Global.System.Data.DataColumn
-        
         Private columnCurrentRating As Global.System.Data.DataColumn
         
         Private columnMinimumAmpacity As Global.System.Data.DataColumn
@@ -3574,14 +3526,6 @@ Partial Public Class ESD_DatabaseDataSet
         Public ReadOnly Property DPCodeColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnDPCode
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public ReadOnly Property VoltageColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnVoltage
             End Get
         End Property
         
@@ -3803,7 +3747,6 @@ Partial Public Class ESD_DatabaseDataSet
                     ByVal ProjectCode As String,  _
                     ByVal Number As Integer,  _
                     ByVal parenttblDistributionRowByFK_tblSubfeeder_tblDistribution As tblDistributionRow,  _
-                    ByVal Voltage As Integer,  _
                     ByVal CurrentRating As Double,  _
                     ByVal MinimumAmpacity As Double,  _
                     ByVal WireType As String,  _
@@ -3827,7 +3770,7 @@ Partial Public Class ESD_DatabaseDataSet
                     ByVal ImpedanceReal As Double,  _
                     ByVal ImpedanceImag As Double) As tblSubfeederRow
             Dim rowtblSubfeederRow As tblSubfeederRow = CType(Me.NewRow,tblSubfeederRow)
-            Dim columnValuesArray() As Object = New Object() {Code, ProjectCode, Number, Nothing, Voltage, CurrentRating, MinimumAmpacity, WireType, WireSize, _Set, Conductor, Neutral, NeutralWire, NeutralSize, NeutralConductor, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMain, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, ImpedanceImag}
+            Dim columnValuesArray() As Object = New Object() {Code, ProjectCode, Number, Nothing, CurrentRating, MinimumAmpacity, WireType, WireSize, _Set, Conductor, Neutral, NeutralWire, NeutralSize, NeutralConductor, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMain, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, ImpedanceImag}
             If (Not (parenttblDistributionRowByFK_tblSubfeeder_tblDistribution) Is Nothing) Then
                 columnValuesArray(3) = parenttblDistributionRowByFK_tblSubfeeder_tblDistribution(0)
             End If
@@ -3863,7 +3806,6 @@ Partial Public Class ESD_DatabaseDataSet
             Me.columnProjectCode = MyBase.Columns("ProjectCode")
             Me.columnNumber = MyBase.Columns("Number")
             Me.columnDPCode = MyBase.Columns("DPCode")
-            Me.columnVoltage = MyBase.Columns("Voltage")
             Me.columnCurrentRating = MyBase.Columns("CurrentRating")
             Me.columnMinimumAmpacity = MyBase.Columns("MinimumAmpacity")
             Me.columnWireType = MyBase.Columns("WireType")
@@ -3899,8 +3841,6 @@ Partial Public Class ESD_DatabaseDataSet
             MyBase.Columns.Add(Me.columnNumber)
             Me.columnDPCode = New Global.System.Data.DataColumn("DPCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnDPCode)
-            Me.columnVoltage = New Global.System.Data.DataColumn("Voltage", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnVoltage)
             Me.columnCurrentRating = New Global.System.Data.DataColumn("CurrentRating", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCurrentRating)
             Me.columnMinimumAmpacity = New Global.System.Data.DataColumn("MinimumAmpacity", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
@@ -3957,7 +3897,6 @@ Partial Public Class ESD_DatabaseDataSet
             Me.columnNumber.AllowDBNull = false
             Me.columnDPCode.AllowDBNull = false
             Me.columnDPCode.MaxLength = 20
-            Me.columnVoltage.AllowDBNull = false
             Me.columnWireType.MaxLength = 10
             Me.columnWireSize.MaxLength = 10
             Me.columnConductor.MaxLength = 10
@@ -4315,17 +4254,6 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property Voltage() As Integer
-            Get
-                Return CType(Me(Me.tabletblMainFeeder.VoltageColumn),Integer)
-            End Get
-            Set
-                Me(Me.tabletblMainFeeder.VoltageColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property GroundWireSize() As String
             Get
                 Try 
@@ -4640,6 +4568,21 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property VoltageLevel() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tabletblProject.VoltageLevelColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'VoltageLevel' in table 'tblProject' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabletblProject.VoltageLevelColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Function IsNameNull() As Boolean
             Return Me.IsNull(Me.tabletblProject.NameColumn)
         End Function
@@ -4660,6 +4603,18 @@ Partial Public Class ESD_DatabaseDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub SetOwnerNull()
             Me(Me.tabletblProject.OwnerColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsVoltageLevelNull() As Boolean
+            Return Me.IsNull(Me.tabletblProject.VoltageLevelColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetVoltageLevelNull()
+            Me(Me.tabletblProject.VoltageLevelColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -5098,21 +5053,6 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property Voltage() As Integer
-            Get
-                Try 
-                    Return CType(Me(Me.tabletblDistribution.VoltageColumn),Integer)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Voltage' in table 'tblDistribution' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tabletblDistribution.VoltageColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property ImpedanceReal() As Double
             Get
                 Try 
@@ -5274,18 +5214,6 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Function IsVoltageNull() As Boolean
-            Return Me.IsNull(Me.tabletblDistribution.VoltageColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Sub SetVoltageNull()
-            Me(Me.tabletblDistribution.VoltageColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Function IsImpedanceRealNull() As Boolean
             Return Me.IsNull(Me.tabletblDistribution.ImpedanceRealColumn)
         End Function
@@ -5386,17 +5314,6 @@ Partial Public Class ESD_DatabaseDataSet
             End Get
             Set
                 Me(Me.tabletblBranch.SubfeederColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property Voltage() As Integer
-            Get
-                Return CType(Me(Me.tabletblBranch.VoltageColumn),Integer)
-            End Get
-            Set
-                Me(Me.tabletblBranch.VoltageColumn) = value
             End Set
         End Property
         
@@ -5890,17 +5807,6 @@ Partial Public Class ESD_DatabaseDataSet
             End Get
             Set
                 Me(Me.tabletblSubfeeder.DPCodeColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property Voltage() As Integer
-            Get
-                Return CType(Me(Me.tabletblSubfeeder.VoltageColumn),Integer)
-            End Get
-            Set
-                Me(Me.tabletblSubfeeder.VoltageColumn) = value
             End Set
         End Property
         
@@ -7259,7 +7165,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             tableMapping.ColumnMappings.Add("ConduitType", "ConduitType")
             tableMapping.ColumnMappings.Add("ConduitSize", "ConduitSize")
             tableMapping.ColumnMappings.Add("DistancetoSE", "DistancetoSE")
-            tableMapping.ColumnMappings.Add("Voltage", "Voltage")
             tableMapping.ColumnMappings.Add("GroundWireSize", "GroundWireSize")
             tableMapping.ColumnMappings.Add("GroundConductor", "GroundConductor")
             tableMapping.ColumnMappings.Add("ImpedanceReal", "ImpedanceReal")
@@ -7278,17 +7183,16 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 "Original_GroundWire) AND ([Set] = @Original_Set) AND ((@IsNull_ConduitSize = 1 A"& _ 
                 "ND [ConduitSize] IS NULL) OR ([ConduitSize] = @Original_ConduitSize)) AND ([Cond"& _ 
                 "uitType] = @Original_ConduitType) AND ([WireSize] = @Original_WireSize) AND ([Di"& _ 
-                "stancetoSE] = @Original_DistancetoSE) AND ([Voltage] = @Original_Voltage) AND (("& _ 
-                "@IsNull_GroundConductor = 1 AND [GroundConductor] IS NULL) OR ([GroundConductor]"& _ 
-                " = @Original_GroundConductor)) AND ((@IsNull_GroundWireSize = 1 AND [GroundWireS"& _ 
-                "ize] IS NULL) OR ([GroundWireSize] = @Original_GroundWireSize)) AND ((@IsNull_Im"& _ 
-                "pedanceImag = 1 AND [ImpedanceImag] IS NULL) OR ([ImpedanceImag] = @Original_Imp"& _ 
-                "edanceImag)) AND ((@IsNull_ImpedanceReal = 1 AND [ImpedanceReal] IS NULL) OR ([I"& _ 
-                "mpedanceReal] = @Original_ImpedanceReal)) AND ((@IsNull_kAICRating = 1 AND [kAIC"& _ 
-                "Rating] IS NULL) OR ([kAICRating] = @Original_kAICRating)) AND ((@IsNull_ShortCi"& _ 
-                "rcuitCap = 1 AND [ShortCircuitCap] IS NULL) OR ([ShortCircuitCap] = @Original_Sh"& _ 
-                "ortCircuitCap)) AND ((@IsNull_XRRatio = 1 AND [XRRatio] IS NULL) OR ([XRRatio] ="& _ 
-                " @Original_XRRatio)))"
+                "stancetoSE] = @Original_DistancetoSE) AND ((@IsNull_GroundConductor = 1 AND [Gro"& _ 
+                "undConductor] IS NULL) OR ([GroundConductor] = @Original_GroundConductor)) AND ("& _ 
+                "(@IsNull_GroundWireSize = 1 AND [GroundWireSize] IS NULL) OR ([GroundWireSize] ="& _ 
+                " @Original_GroundWireSize)) AND ((@IsNull_ImpedanceImag = 1 AND [ImpedanceImag] "& _ 
+                "IS NULL) OR ([ImpedanceImag] = @Original_ImpedanceImag)) AND ((@IsNull_Impedance"& _ 
+                "Real = 1 AND [ImpedanceReal] IS NULL) OR ([ImpedanceReal] = @Original_ImpedanceR"& _ 
+                "eal)) AND ((@IsNull_kAICRating = 1 AND [kAICRating] IS NULL) OR ([kAICRating] = "& _ 
+                "@Original_kAICRating)) AND ((@IsNull_ShortCircuitCap = 1 AND [ShortCircuitCap] I"& _ 
+                "S NULL) OR ([ShortCircuitCap] = @Original_ShortCircuitCap)) AND ((@IsNull_XRRati"& _ 
+                "o = 1 AND [XRRatio] IS NULL) OR ([XRRatio] = @Original_XRRatio)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TotalLoad", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TotalLoad", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -7305,7 +7209,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ConduitType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ConduitType", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_WireSize", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "WireSize", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DistancetoSE", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistancetoSE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_GroundConductor", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundConductor", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_GroundConductor", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundConductor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_GroundWireSize", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundWireSize", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -7324,16 +7227,16 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [tblMainFeeder] ([ProjectCode], [TotalLoad], [LineCurrent], [WireType"& _ 
                 "], [Conductor], [OCPDRating], [BreakerType], [GroundWire], [Set], [ConduitSize],"& _ 
-                " [ConduitType], [WireSize], [DistancetoSE], [Voltage], [GroundConductor], [Groun"& _ 
-                "dWireSize], [ImpedanceImag], [ImpedanceReal], [kAICRating], [ShortCircuitCap], ["& _ 
-                "XRRatio]) VALUES (@ProjectCode, @TotalLoad, @LineCurrent, @WireType, @Conductor,"& _ 
-                " @OCPDRating, @BreakerType, @GroundWire, @Set, @ConduitSize, @ConduitType, @Wire"& _ 
-                "Size, @DistancetoSE, @Voltage, @GroundConductor, @GroundWireSize, @ImpedanceImag"& _ 
-                ", @ImpedanceReal, @kAICRating, @ShortCircuitCap, @XRRatio);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProjectCode,"& _ 
-                " TotalLoad, LineCurrent, WireType, Conductor, OCPDRating, BreakerType, GroundWir"& _ 
-                "e, [Set], ConduitSize, ConduitType, WireSize, DistancetoSE, Voltage, GroundCondu"& _ 
-                "ctor, GroundWireSize, ImpedanceImag, ImpedanceReal, kAICRating, ShortCircuitCap,"& _ 
-                " XRRatio FROM tblMainFeeder WHERE (ProjectCode = @ProjectCode)"
+                " [ConduitType], [WireSize], [DistancetoSE], [GroundConductor], [GroundWireSize],"& _ 
+                " [ImpedanceImag], [ImpedanceReal], [kAICRating], [ShortCircuitCap], [XRRatio]) V"& _ 
+                "ALUES (@ProjectCode, @TotalLoad, @LineCurrent, @WireType, @Conductor, @OCPDRatin"& _ 
+                "g, @BreakerType, @GroundWire, @Set, @ConduitSize, @ConduitType, @WireSize, @Dist"& _ 
+                "ancetoSE, @GroundConductor, @GroundWireSize, @ImpedanceImag, @ImpedanceReal, @kA"& _ 
+                "ICRating, @ShortCircuitCap, @XRRatio);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProjectCode, TotalLoad, LineCurre"& _ 
+                "nt, WireType, Conductor, OCPDRating, BreakerType, GroundWire, [Set], ConduitSize"& _ 
+                ", ConduitType, WireSize, DistancetoSE, GroundConductor, GroundWireSize, Impedanc"& _ 
+                "eImag, ImpedanceReal, kAICRating, ShortCircuitCap, XRRatio FROM tblMainFeeder WH"& _ 
+                "ERE (ProjectCode = @ProjectCode)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalLoad", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TotalLoad", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7348,7 +7251,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ConduitType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ConduitType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WireSize", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "WireSize", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DistancetoSE", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistancetoSE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroundConductor", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundConductor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroundWireSize", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundWireSize", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ImpedanceImag", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceImag", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7362,32 +7264,32 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 ", [LineCurrent] = @LineCurrent, [WireType] = @WireType, [Conductor] = @Conductor"& _ 
                 ", [OCPDRating] = @OCPDRating, [BreakerType] = @BreakerType, [GroundWire] = @Grou"& _ 
                 "ndWire, [Set] = @Set, [ConduitSize] = @ConduitSize, [ConduitType] = @ConduitType"& _ 
-                ", [WireSize] = @WireSize, [DistancetoSE] = @DistancetoSE, [Voltage] = @Voltage, "& _ 
-                "[GroundConductor] = @GroundConductor, [GroundWireSize] = @GroundWireSize, [Imped"& _ 
-                "anceImag] = @ImpedanceImag, [ImpedanceReal] = @ImpedanceReal, [kAICRating] = @kA"& _ 
-                "ICRating, [ShortCircuitCap] = @ShortCircuitCap, [XRRatio] = @XRRatio WHERE (([Pr"& _ 
-                "ojectCode] = @Original_ProjectCode) AND ([TotalLoad] = @Original_TotalLoad) AND "& _ 
-                "([LineCurrent] = @Original_LineCurrent) AND ([WireType] = @Original_WireType) AN"& _ 
-                "D ([Conductor] = @Original_Conductor) AND ([OCPDRating] = @Original_OCPDRating) "& _ 
-                "AND ((@IsNull_BreakerType = 1 AND [BreakerType] IS NULL) OR ([BreakerType] = @Or"& _ 
-                "iginal_BreakerType)) AND ([GroundWire] = @Original_GroundWire) AND ([Set] = @Ori"& _ 
-                "ginal_Set) AND ((@IsNull_ConduitSize = 1 AND [ConduitSize] IS NULL) OR ([Conduit"& _ 
-                "Size] = @Original_ConduitSize)) AND ([ConduitType] = @Original_ConduitType) AND "& _ 
-                "([WireSize] = @Original_WireSize) AND ([DistancetoSE] = @Original_DistancetoSE) "& _ 
-                "AND ([Voltage] = @Original_Voltage) AND ((@IsNull_GroundConductor = 1 AND [Groun"& _ 
-                "dConductor] IS NULL) OR ([GroundConductor] = @Original_GroundConductor)) AND ((@"& _ 
-                "IsNull_GroundWireSize = 1 AND [GroundWireSize] IS NULL) OR ([GroundWireSize] = @"& _ 
-                "Original_GroundWireSize)) AND ((@IsNull_ImpedanceImag = 1 AND [ImpedanceImag] IS"& _ 
-                " NULL) OR ([ImpedanceImag] = @Original_ImpedanceImag)) AND ((@IsNull_ImpedanceRe"& _ 
-                "al = 1 AND [ImpedanceReal] IS NULL) OR ([ImpedanceReal] = @Original_ImpedanceRea"& _ 
-                "l)) AND ((@IsNull_kAICRating = 1 AND [kAICRating] IS NULL) OR ([kAICRating] = @O"& _ 
-                "riginal_kAICRating)) AND ((@IsNull_ShortCircuitCap = 1 AND [ShortCircuitCap] IS "& _ 
-                "NULL) OR ([ShortCircuitCap] = @Original_ShortCircuitCap)) AND ((@IsNull_XRRatio "& _ 
-                "= 1 AND [XRRatio] IS NULL) OR ([XRRatio] = @Original_XRRatio)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Project"& _ 
-                "Code, TotalLoad, LineCurrent, WireType, Conductor, OCPDRating, BreakerType, Grou"& _ 
-                "ndWire, [Set], ConduitSize, ConduitType, WireSize, DistancetoSE, Voltage, Ground"& _ 
-                "Conductor, GroundWireSize, ImpedanceImag, ImpedanceReal, kAICRating, ShortCircui"& _ 
-                "tCap, XRRatio FROM tblMainFeeder WHERE (ProjectCode = @ProjectCode)"
+                ", [WireSize] = @WireSize, [DistancetoSE] = @DistancetoSE, [GroundConductor] = @G"& _ 
+                "roundConductor, [GroundWireSize] = @GroundWireSize, [ImpedanceImag] = @Impedance"& _ 
+                "Imag, [ImpedanceReal] = @ImpedanceReal, [kAICRating] = @kAICRating, [ShortCircui"& _ 
+                "tCap] = @ShortCircuitCap, [XRRatio] = @XRRatio WHERE (([ProjectCode] = @Original"& _ 
+                "_ProjectCode) AND ([TotalLoad] = @Original_TotalLoad) AND ([LineCurrent] = @Orig"& _ 
+                "inal_LineCurrent) AND ([WireType] = @Original_WireType) AND ([Conductor] = @Orig"& _ 
+                "inal_Conductor) AND ([OCPDRating] = @Original_OCPDRating) AND ((@IsNull_BreakerT"& _ 
+                "ype = 1 AND [BreakerType] IS NULL) OR ([BreakerType] = @Original_BreakerType)) A"& _ 
+                "ND ([GroundWire] = @Original_GroundWire) AND ([Set] = @Original_Set) AND ((@IsNu"& _ 
+                "ll_ConduitSize = 1 AND [ConduitSize] IS NULL) OR ([ConduitSize] = @Original_Cond"& _ 
+                "uitSize)) AND ([ConduitType] = @Original_ConduitType) AND ([WireSize] = @Origina"& _ 
+                "l_WireSize) AND ([DistancetoSE] = @Original_DistancetoSE) AND ((@IsNull_GroundCo"& _ 
+                "nductor = 1 AND [GroundConductor] IS NULL) OR ([GroundConductor] = @Original_Gro"& _ 
+                "undConductor)) AND ((@IsNull_GroundWireSize = 1 AND [GroundWireSize] IS NULL) OR"& _ 
+                " ([GroundWireSize] = @Original_GroundWireSize)) AND ((@IsNull_ImpedanceImag = 1 "& _ 
+                "AND [ImpedanceImag] IS NULL) OR ([ImpedanceImag] = @Original_ImpedanceImag)) AND"& _ 
+                " ((@IsNull_ImpedanceReal = 1 AND [ImpedanceReal] IS NULL) OR ([ImpedanceReal] = "& _ 
+                "@Original_ImpedanceReal)) AND ((@IsNull_kAICRating = 1 AND [kAICRating] IS NULL)"& _ 
+                " OR ([kAICRating] = @Original_kAICRating)) AND ((@IsNull_ShortCircuitCap = 1 AND"& _ 
+                " [ShortCircuitCap] IS NULL) OR ([ShortCircuitCap] = @Original_ShortCircuitCap)) "& _ 
+                "AND ((@IsNull_XRRatio = 1 AND [XRRatio] IS NULL) OR ([XRRatio] = @Original_XRRat"& _ 
+                "io)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProjectCode, TotalLoad, LineCurrent, WireType, Conductor, OCPDRat"& _ 
+                "ing, BreakerType, GroundWire, [Set], ConduitSize, ConduitType, WireSize, Distanc"& _ 
+                "etoSE, GroundConductor, GroundWireSize, ImpedanceImag, ImpedanceReal, kAICRating"& _ 
+                ", ShortCircuitCap, XRRatio FROM tblMainFeeder WHERE (ProjectCode = @ProjectCode)"& _ 
+                ""
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalLoad", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TotalLoad", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7402,7 +7304,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ConduitType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ConduitType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WireSize", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "WireSize", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DistancetoSE", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistancetoSE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroundConductor", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundConductor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GroundWireSize", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundWireSize", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ImpedanceImag", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceImag", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -7425,7 +7326,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ConduitType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ConduitType", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_WireSize", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "WireSize", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DistancetoSE", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistancetoSE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_GroundConductor", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundConductor", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_GroundConductor", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundConductor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_GroundWireSize", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundWireSize", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -7456,9 +7356,9 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT ProjectCode, TotalLoad, LineCurrent, WireType, Conductor, OCPDRating, Brea"& _ 
-                "kerType, GroundWire, [Set], ConduitSize, ConduitType, WireSize, DistancetoSE, Vo"& _ 
-                "ltage, GroundConductor, GroundWireSize, ImpedanceImag, ImpedanceReal, kAICRating"& _ 
-                ", ShortCircuitCap, XRRatio FROM tblMainFeeder"
+                "kerType, GroundWire, [Set], ConduitSize, ConduitType, WireSize, DistancetoSE, Gr"& _ 
+                "oundConductor, GroundWireSize, ImpedanceImag, ImpedanceReal, kAICRating, ShortCi"& _ 
+                "rcuitCap, XRRatio FROM tblMainFeeder"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
@@ -7467,11 +7367,10 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT        ProjectCode, TotalLoad, LineCurrent, WireType, Conductor, OCPDRatin"& _ 
-                "g, BreakerType, GroundWire, [Set], ConduitSize, ConduitType, WireSize, Distancet"& _ 
-                "oSE, Voltage, GroundConductor, GroundWireSize, ImpedanceImag, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                "& _ 
-                "         ImpedanceReal, kAICRating, ShortCircuitCap, XRRatio"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tb"& _ 
-                "lMainFeeder"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (ProjectCode = @project)"
+            Me._commandCollection(2).CommandText = "SELECT ProjectCode, TotalLoad, LineCurrent, WireType, Conductor, OCPDRating, Brea"& _ 
+                "kerType, GroundWire, [Set], ConduitSize, ConduitType, WireSize, DistancetoSE, Gr"& _ 
+                "oundConductor, GroundWireSize, ImpedanceImag, ImpedanceReal, kAICRating, ShortCi"& _ 
+                "rcuitCap, XRRatio FROM tblMainFeeder WHERE (ProjectCode = @project)"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
@@ -7564,7 +7463,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_ConduitType As String,  _
                     ByVal Original_WireSize As String,  _
                     ByVal Original_DistancetoSE As Double,  _
-                    ByVal Original_Voltage As Integer,  _
                     ByVal Original_GroundConductor As String,  _
                     ByVal Original_GroundWireSize As String,  _
                     ByVal Original_ImpedanceImag As Global.System.Nullable(Of Double),  _
@@ -7617,55 +7515,54 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(13).Value = CType(Original_WireSize,String)
             End If
             Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_DistancetoSE,Double)
-            Me.Adapter.DeleteCommand.Parameters(15).Value = CType(Original_Voltage,Integer)
             If (Original_GroundConductor Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(Original_GroundConductor,String)
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_GroundConductor,String)
             End If
             If (Original_GroundWireSize Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(Original_GroundWireSize,String)
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_GroundWireSize,String)
             End If
             If (Original_ImpedanceImag.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(Original_ImpedanceImag.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(Original_ImpedanceImag.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(20).Value = Global.System.DBNull.Value
             End If
             If (Original_ImpedanceReal.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(Original_ImpedanceReal.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(Original_ImpedanceReal.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(23).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(22).Value = Global.System.DBNull.Value
             End If
             If (Original_kAICRating.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(Original_kAICRating.Value,Integer)
+                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(Original_kAICRating.Value,Integer)
             Else
-                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(25).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(24).Value = Global.System.DBNull.Value
             End If
             If (Original_ShortCircuitCap.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(Original_ShortCircuitCap.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(Original_ShortCircuitCap.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(27).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(26).Value = Global.System.DBNull.Value
             End If
             If (Original_XRRatio.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(28).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(29).Value = CType(Original_XRRatio.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(28).Value = CType(Original_XRRatio.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(28).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(29).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(28).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -7700,7 +7597,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal ConduitType As String,  _
                     ByVal WireSize As String,  _
                     ByVal DistancetoSE As Double,  _
-                    ByVal Voltage As Integer,  _
                     ByVal GroundConductor As String,  _
                     ByVal GroundWireSize As String,  _
                     ByVal ImpedanceImag As Global.System.Nullable(Of Double),  _
@@ -7749,41 +7645,40 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(11).Value = CType(WireSize,String)
             End If
             Me.Adapter.InsertCommand.Parameters(12).Value = CType(DistancetoSE,Double)
-            Me.Adapter.InsertCommand.Parameters(13).Value = CType(Voltage,Integer)
             If (GroundConductor Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(GroundConductor,String)
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(GroundConductor,String)
             End If
             If (GroundWireSize Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(GroundWireSize,String)
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(GroundWireSize,String)
             End If
             If (ImpedanceImag.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(16).Value = CType(ImpedanceImag.Value,Double)
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(ImpedanceImag.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
+            End If
+            If (ImpedanceReal.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(ImpedanceReal.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
             End If
-            If (ImpedanceReal.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(17).Value = CType(ImpedanceReal.Value,Double)
+            If (kAICRating.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(kAICRating.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
             End If
-            If (kAICRating.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(18).Value = CType(kAICRating.Value,Integer)
+            If (ShortCircuitCap.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(ShortCircuitCap.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
             End If
-            If (ShortCircuitCap.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(19).Value = CType(ShortCircuitCap.Value,Double)
+            If (XRRatio.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(19).Value = CType(XRRatio.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
-            End If
-            If (XRRatio.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(20).Value = CType(XRRatio.Value,Double)
-            Else
-                Me.Adapter.InsertCommand.Parameters(20).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -7818,7 +7713,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal ConduitType As String,  _
                     ByVal WireSize As String,  _
                     ByVal DistancetoSE As Double,  _
-                    ByVal Voltage As Integer,  _
                     ByVal GroundConductor As String,  _
                     ByVal GroundWireSize As String,  _
                     ByVal ImpedanceImag As Global.System.Nullable(Of Double),  _
@@ -7839,7 +7733,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_ConduitType As String,  _
                     ByVal Original_WireSize As String,  _
                     ByVal Original_DistancetoSE As Double,  _
-                    ByVal Original_Voltage As Integer,  _
                     ByVal Original_GroundConductor As String,  _
                     ByVal Original_GroundWireSize As String,  _
                     ByVal Original_ImpedanceImag As Global.System.Nullable(Of Double),  _
@@ -7888,136 +7781,134 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(11).Value = CType(WireSize,String)
             End If
             Me.Adapter.UpdateCommand.Parameters(12).Value = CType(DistancetoSE,Double)
-            Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Voltage,Integer)
             If (GroundConductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(GroundConductor,String)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(GroundConductor,String)
             End If
             If (GroundWireSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(GroundWireSize,String)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(GroundWireSize,String)
             End If
             If (ImpedanceImag.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(ImpedanceImag.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(ImpedanceImag.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+            End If
+            If (ImpedanceReal.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(ImpedanceReal.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             End If
-            If (ImpedanceReal.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(ImpedanceReal.Value,Double)
+            If (kAICRating.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(kAICRating.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
             End If
-            If (kAICRating.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(kAICRating.Value,Integer)
+            If (ShortCircuitCap.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(ShortCircuitCap.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             End If
-            If (ShortCircuitCap.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(ShortCircuitCap.Value,Double)
+            If (XRRatio.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(XRRatio.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
-            End If
-            If (XRRatio.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(XRRatio.Value,Double)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
             End If
             If (Original_ProjectCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_ProjectCode")
             Else
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_ProjectCode,String)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_ProjectCode,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_TotalLoad,Double)
-            Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_LineCurrent,Double)
+            Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_TotalLoad,Double)
+            Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_LineCurrent,Double)
             If (Original_WireType Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_WireType")
             Else
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_WireType,String)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_WireType,String)
             End If
             If (Original_Conductor Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Conductor")
             Else
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_Conductor,String)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_Conductor,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_OCPDRating,Integer)
+            Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_OCPDRating,Integer)
             If (Original_BreakerType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(28).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_BreakerType,String)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_BreakerType,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_GroundWire,Boolean)
-            Me.Adapter.UpdateCommand.Parameters(30).Value = CType(Original_Set,Integer)
+            Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_GroundWire,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_Set,Integer)
             If (Original_ConduitSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(32).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(Original_ConduitSize,String)
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_ConduitSize,String)
             End If
             If (Original_ConduitType Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_ConduitType")
             Else
-                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_ConduitType,String)
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(Original_ConduitType,String)
             End If
             If (Original_WireSize Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_WireSize")
             Else
-                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(Original_WireSize,String)
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_WireSize,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(35).Value = CType(Original_DistancetoSE,Double)
-            Me.Adapter.UpdateCommand.Parameters(36).Value = CType(Original_Voltage,Integer)
+            Me.Adapter.UpdateCommand.Parameters(34).Value = CType(Original_DistancetoSE,Double)
             If (Original_GroundConductor Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(36).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(Original_GroundConductor,String)
+            End If
+            If (Original_GroundWireSize Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(37).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(38).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(37).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(Original_GroundConductor,String)
-            End If
-            If (Original_GroundWireSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(40).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(Original_GroundWireSize,String)
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(Original_GroundWireSize,String)
             End If
             If (Original_ImpedanceImag.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(Original_ImpedanceImag.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(40).Value = Global.System.DBNull.Value
+            End If
+            If (Original_ImpedanceReal.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(41).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(Original_ImpedanceImag.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(Original_ImpedanceReal.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(41).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(42).Value = Global.System.DBNull.Value
             End If
-            If (Original_ImpedanceReal.HasValue = true) Then
+            If (Original_kAICRating.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(43).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(Original_ImpedanceReal.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(Original_kAICRating.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(43).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(44).Value = Global.System.DBNull.Value
             End If
-            If (Original_kAICRating.HasValue = true) Then
+            If (Original_ShortCircuitCap.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(45).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(46).Value = CType(Original_kAICRating.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(46).Value = CType(Original_ShortCircuitCap.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(45).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(46).Value = Global.System.DBNull.Value
             End If
-            If (Original_ShortCircuitCap.HasValue = true) Then
+            If (Original_XRRatio.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(47).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(48).Value = CType(Original_ShortCircuitCap.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(48).Value = CType(Original_XRRatio.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(47).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(48).Value = Global.System.DBNull.Value
-            End If
-            If (Original_XRRatio.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(50).Value = CType(Original_XRRatio.Value,Double)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(50).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -8051,7 +7942,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal ConduitType As String,  _
                     ByVal WireSize As String,  _
                     ByVal DistancetoSE As Double,  _
-                    ByVal Voltage As Integer,  _
                     ByVal GroundConductor As String,  _
                     ByVal GroundWireSize As String,  _
                     ByVal ImpedanceImag As Global.System.Nullable(Of Double),  _
@@ -8072,7 +7962,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_ConduitType As String,  _
                     ByVal Original_WireSize As String,  _
                     ByVal Original_DistancetoSE As Double,  _
-                    ByVal Original_Voltage As Integer,  _
                     ByVal Original_GroundConductor As String,  _
                     ByVal Original_GroundWireSize As String,  _
                     ByVal Original_ImpedanceImag As Global.System.Nullable(Of Double),  _
@@ -8080,7 +7969,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_kAICRating As Global.System.Nullable(Of Integer),  _
                     ByVal Original_ShortCircuitCap As Global.System.Nullable(Of Double),  _
                     ByVal Original_XRRatio As Global.System.Nullable(Of Double)) As Integer
-            Return Me.Update(Original_ProjectCode, TotalLoad, LineCurrent, WireType, Conductor, OCPDRating, BreakerType, GroundWire, _Set, ConduitSize, ConduitType, WireSize, DistancetoSE, Voltage, GroundConductor, GroundWireSize, ImpedanceImag, ImpedanceReal, kAICRating, ShortCircuitCap, XRRatio, Original_ProjectCode, Original_TotalLoad, Original_LineCurrent, Original_WireType, Original_Conductor, Original_OCPDRating, Original_BreakerType, Original_GroundWire, Original_Set, Original_ConduitSize, Original_ConduitType, Original_WireSize, Original_DistancetoSE, Original_Voltage, Original_GroundConductor, Original_GroundWireSize, Original_ImpedanceImag, Original_ImpedanceReal, Original_kAICRating, Original_ShortCircuitCap, Original_XRRatio)
+            Return Me.Update(Original_ProjectCode, TotalLoad, LineCurrent, WireType, Conductor, OCPDRating, BreakerType, GroundWire, _Set, ConduitSize, ConduitType, WireSize, DistancetoSE, GroundConductor, GroundWireSize, ImpedanceImag, ImpedanceReal, kAICRating, ShortCircuitCap, XRRatio, Original_ProjectCode, Original_TotalLoad, Original_LineCurrent, Original_WireType, Original_Conductor, Original_OCPDRating, Original_BreakerType, Original_GroundWire, Original_Set, Original_ConduitSize, Original_ConduitType, Original_WireSize, Original_DistancetoSE, Original_GroundConductor, Original_GroundWireSize, Original_ImpedanceImag, Original_ImpedanceReal, Original_kAICRating, Original_ShortCircuitCap, Original_XRRatio)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8243,13 +8132,15 @@ Namespace ESD_DatabaseDataSetTableAdapters
             tableMapping.ColumnMappings.Add("Owner", "Owner")
             tableMapping.ColumnMappings.Add("Type", "Type")
             tableMapping.ColumnMappings.Add("Phase", "Phase")
+            tableMapping.ColumnMappings.Add("VoltageLevel", "VoltageLevel")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[tblProject] WHERE (([ProjectCode] = @Original_ProjectCode) AND"& _ 
-                " ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsN"& _ 
-                "ull_Owner = 1 AND [Owner] IS NULL) OR ([Owner] = @Original_Owner)) AND ([Type] ="& _ 
-                " @Original_Type) AND ([Phase] = @Original_Phase))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [tblProject] WHERE (([ProjectCode] = @Original_ProjectCode) AND ((@Is"& _ 
+                "Null_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_Name)) AND ((@IsNull_Ow"& _ 
+                "ner = 1 AND [Owner] IS NULL) OR ([Owner] = @Original_Owner)) AND ([Type] = @Orig"& _ 
+                "inal_Type) AND ([Phase] = @Original_Phase) AND ((@IsNull_VoltageLevel = 1 AND [V"& _ 
+                "oltageLevel] IS NULL) OR ([VoltageLevel] = @Original_VoltageLevel)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Name", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -8258,32 +8149,38 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Owner", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Owner", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Type", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Type", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Phase", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Phase", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_VoltageLevel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "VoltageLevel", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_VoltageLevel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "VoltageLevel", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[tblProject] ([ProjectCode], [Name], [Owner], [Type], [Phase]) "& _ 
-                "VALUES (@ProjectCode, @Name, @Owner, @Type, @Phase);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProjectCode, Name, "& _ 
-                "Owner, Type, Phase FROM tblProject WHERE (ProjectCode = @ProjectCode)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [tblProject] ([ProjectCode], [Name], [Owner], [Type], [Phase], [Volta"& _ 
+                "geLevel]) VALUES (@ProjectCode, @Name, @Owner, @Type, @Phase, @VoltageLevel);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"S"& _ 
+                "ELECT ProjectCode, Name, Owner, Type, Phase, VoltageLevel FROM tblProject WHERE "& _ 
+                "(ProjectCode = @ProjectCode)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Name", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Owner", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Owner", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Type", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Type", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Phase", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Phase", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VoltageLevel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "VoltageLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[tblProject] SET [ProjectCode] = @ProjectCode, [Name] = @Name, [Owne"& _ 
-                "r] = @Owner, [Type] = @Type, [Phase] = @Phase WHERE (([ProjectCode] = @Original_"& _ 
-                "ProjectCode) AND ((@IsNull_Name = 1 AND [Name] IS NULL) OR ([Name] = @Original_N"& _ 
-                "ame)) AND ((@IsNull_Owner = 1 AND [Owner] IS NULL) OR ([Owner] = @Original_Owner"& _ 
-                ")) AND ([Type] = @Original_Type) AND ([Phase] = @Original_Phase));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Proje"& _ 
-                "ctCode, Name, Owner, Type, Phase FROM tblProject WHERE (ProjectCode = @ProjectCo"& _ 
-                "de)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [tblProject] SET [ProjectCode] = @ProjectCode, [Name] = @Name, [Owner] = @"& _ 
+                "Owner, [Type] = @Type, [Phase] = @Phase, [VoltageLevel] = @VoltageLevel WHERE (("& _ 
+                "[ProjectCode] = @Original_ProjectCode) AND ((@IsNull_Name = 1 AND [Name] IS NULL"& _ 
+                ") OR ([Name] = @Original_Name)) AND ((@IsNull_Owner = 1 AND [Owner] IS NULL) OR "& _ 
+                "([Owner] = @Original_Owner)) AND ([Type] = @Original_Type) AND ([Phase] = @Origi"& _ 
+                "nal_Phase) AND ((@IsNull_VoltageLevel = 1 AND [VoltageLevel] IS NULL) OR ([Volta"& _ 
+                "geLevel] = @Original_VoltageLevel)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProjectCode, Name, Owner, Type, Ph"& _ 
+                "ase, VoltageLevel FROM tblProject WHERE (ProjectCode = @ProjectCode)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Name", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Owner", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Owner", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Type", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Type", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Phase", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Phase", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@VoltageLevel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "VoltageLevel", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Name", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Name", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -8291,6 +8188,8 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Owner", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Owner", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Type", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Type", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Phase", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Phase", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_VoltageLevel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "VoltageLevel", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_VoltageLevel", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "VoltageLevel", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8306,7 +8205,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(2) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT ProjectCode, Name, Owner, Type, Phase FROM dbo.tblProject"
+            Me._commandCollection(0).CommandText = "SELECT ProjectCode, Name, Owner, Type, Phase, VoltageLevel FROM tblProject"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
@@ -8315,8 +8214,8 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@projectcode", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT        ProjectCode, Name, Owner, Type, Phase"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tblProject"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)& _ 
-                "WHERE        (ProjectCode = @project)"
+            Me._commandCollection(2).CommandText = "SELECT ProjectCode, Name, Owner, Type, Phase, VoltageLevel FROM tblProject WHERE "& _ 
+                "(ProjectCode = @project)"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
@@ -8395,7 +8294,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_ProjectCode As String, ByVal Original_Name As String, ByVal Original_Owner As String, ByVal Original_Type As String, ByVal Original_Phase As Integer) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_ProjectCode As String, ByVal Original_Name As String, ByVal Original_Owner As String, ByVal Original_Type As String, ByVal Original_Phase As Integer, ByVal Original_VoltageLevel As Global.System.Nullable(Of Integer)) As Integer
             If (Original_ProjectCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_ProjectCode")
             Else
@@ -8421,6 +8320,13 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_Type,String)
             End If
             Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_Phase,Integer)
+            If (Original_VoltageLevel.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_VoltageLevel.Value,Integer)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -8440,7 +8346,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal ProjectCode As String, ByVal Name As String, ByVal Owner As String, ByVal Type As String, ByVal Phase As Integer) As Integer
+        Public Overloads Overridable Function Insert(ByVal ProjectCode As String, ByVal Name As String, ByVal Owner As String, ByVal Type As String, ByVal Phase As Integer, ByVal VoltageLevel As Global.System.Nullable(Of Integer)) As Integer
             If (ProjectCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("ProjectCode")
             Else
@@ -8462,6 +8368,11 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 Me.Adapter.InsertCommand.Parameters(3).Value = CType(Type,String)
             End If
             Me.Adapter.InsertCommand.Parameters(4).Value = CType(Phase,Integer)
+            If (VoltageLevel.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(VoltageLevel.Value,Integer)
+            Else
+                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -8481,7 +8392,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal ProjectCode As String, ByVal Name As String, ByVal Owner As String, ByVal Type As String, ByVal Phase As Integer, ByVal Original_ProjectCode As String, ByVal Original_Name As String, ByVal Original_Owner As String, ByVal Original_Type As String, ByVal Original_Phase As Integer) As Integer
+        Public Overloads Overridable Function Update(ByVal ProjectCode As String, ByVal Name As String, ByVal Owner As String, ByVal Type As String, ByVal Phase As Integer, ByVal VoltageLevel As Global.System.Nullable(Of Integer), ByVal Original_ProjectCode As String, ByVal Original_Name As String, ByVal Original_Owner As String, ByVal Original_Type As String, ByVal Original_Phase As Integer, ByVal Original_VoltageLevel As Global.System.Nullable(Of Integer)) As Integer
             If (ProjectCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("ProjectCode")
             Else
@@ -8503,31 +8414,43 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Type,String)
             End If
             Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Phase,Integer)
+            If (VoltageLevel.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(VoltageLevel.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
             If (Original_ProjectCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_ProjectCode")
             Else
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Original_ProjectCode,String)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Original_ProjectCode,String)
             End If
             If (Original_Name Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_Name,String)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_Name,String)
             End If
             If (Original_Owner Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_Owner,String)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_Owner,String)
             End If
             If (Original_Type Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Type")
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_Type,String)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_Type,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_Phase,Integer)
+            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_Phase,Integer)
+            If (Original_VoltageLevel.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_VoltageLevel.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -8547,8 +8470,8 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal Name As String, ByVal Owner As String, ByVal Type As String, ByVal Phase As Integer, ByVal Original_ProjectCode As String, ByVal Original_Name As String, ByVal Original_Owner As String, ByVal Original_Type As String, ByVal Original_Phase As Integer) As Integer
-            Return Me.Update(Original_ProjectCode, Name, Owner, Type, Phase, Original_ProjectCode, Original_Name, Original_Owner, Original_Type, Original_Phase)
+        Public Overloads Overridable Function Update(ByVal Name As String, ByVal Owner As String, ByVal Type As String, ByVal Phase As Integer, ByVal VoltageLevel As Global.System.Nullable(Of Integer), ByVal Original_ProjectCode As String, ByVal Original_Name As String, ByVal Original_Owner As String, ByVal Original_Type As String, ByVal Original_Phase As Integer, ByVal Original_VoltageLevel As Global.System.Nullable(Of Integer)) As Integer
+            Return Me.Update(Original_ProjectCode, Name, Owner, Type, Phase, VoltageLevel, Original_ProjectCode, Original_Name, Original_Owner, Original_Type, Original_Phase, Original_VoltageLevel)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9587,7 +9510,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             tableMapping.ColumnMappings.Add("BreakerType", "BreakerType")
             tableMapping.ColumnMappings.Add("DPNumber", "DPNumber")
             tableMapping.ColumnMappings.Add("DistancetoMain", "DistancetoMain")
-            tableMapping.ColumnMappings.Add("Voltage", "Voltage")
             tableMapping.ColumnMappings.Add("ImpedanceReal", "ImpedanceReal")
             tableMapping.ColumnMappings.Add("ImpedanceImag", "ImpedanceImag")
             Me._adapter.TableMappings.Add(tableMapping)
@@ -9607,10 +9529,9 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 "= 1 AND [BreakerType] IS NULL) OR ([BreakerType] = @Original_BreakerType)) AND ("& _ 
                 "[DPNumber] = @Original_DPNumber) AND ((@IsNull_DistancetoMain = 1 AND [Distancet"& _ 
                 "oMain] IS NULL) OR ([DistancetoMain] = @Original_DistancetoMain)) AND ((@IsNull_"& _ 
-                "Voltage = 1 AND [Voltage] IS NULL) OR ([Voltage] = @Original_Voltage)) AND ((@Is"& _ 
-                "Null_ImpedanceImag = 1 AND [ImpedanceImag] IS NULL) OR ([ImpedanceImag] = @Origi"& _ 
-                "nal_ImpedanceImag)) AND ((@IsNull_ImpedanceReal = 1 AND [ImpedanceReal] IS NULL)"& _ 
-                " OR ([ImpedanceReal] = @Original_ImpedanceReal)))"
+                "ImpedanceImag = 1 AND [ImpedanceImag] IS NULL) OR ([ImpedanceImag] = @Original_I"& _ 
+                "mpedanceImag)) AND ((@IsNull_ImpedanceReal = 1 AND [ImpedanceReal] IS NULL) OR ("& _ 
+                "[ImpedanceReal] = @Original_ImpedanceReal)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -9635,8 +9556,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DPNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DPNumber", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_DistancetoMain", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistancetoMain", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DistancetoMain", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistancetoMain", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_ImpedanceImag", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceImag", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ImpedanceImag", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceImag", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_ImpedanceReal", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceReal", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -9645,13 +9564,13 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [tblDistribution] ([Code], [ProjectCode], [CurrentRating], [WireType]"& _ 
                 ", [WireSize], [Set], [Conductor], [ConduitType], [ConduitSize], [OCPDRating], [B"& _ 
-                "reakerType], [DPNumber], [DistancetoMain], [Voltage], [ImpedanceImag], [Impedanc"& _ 
-                "eReal]) VALUES (@Code, @ProjectCode, @CurrentRating, @WireType, @WireSize, @Set,"& _ 
-                " @Conductor, @ConduitType, @ConduitSize, @OCPDRating, @BreakerType, @DPNumber, @"& _ 
-                "DistancetoMain, @Voltage, @ImpedanceImag, @ImpedanceReal);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, Project"& _ 
-                "Code, CurrentRating, WireType, WireSize, [Set], Conductor, ConduitType, ConduitS"& _ 
-                "ize, OCPDRating, BreakerType, DPNumber, DistancetoMain, Voltage, ImpedanceImag, "& _ 
-                "ImpedanceReal FROM tblDistribution WHERE (Code = @Code)"
+                "reakerType], [DPNumber], [DistancetoMain], [ImpedanceImag], [ImpedanceReal]) VAL"& _ 
+                "UES (@Code, @ProjectCode, @CurrentRating, @WireType, @WireSize, @Set, @Conductor"& _ 
+                ", @ConduitType, @ConduitSize, @OCPDRating, @BreakerType, @DPNumber, @DistancetoM"& _ 
+                "ain, @ImpedanceImag, @ImpedanceReal);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, ProjectCode, CurrentRating, "& _ 
+                "WireType, WireSize, [Set], Conductor, ConduitType, ConduitSize, OCPDRating, Brea"& _ 
+                "kerType, DPNumber, DistancetoMain, ImpedanceImag, ImpedanceReal FROM tblDistribu"& _ 
+                "tion WHERE (Code = @Code)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Code", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -9666,7 +9585,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BreakerType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "BreakerType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DPNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DistancetoMain", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistancetoMain", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ImpedanceImag", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceImag", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ImpedanceReal", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceReal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
@@ -9675,29 +9593,27 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 "ntRating] = @CurrentRating, [WireType] = @WireType, [WireSize] = @WireSize, [Set"& _ 
                 "] = @Set, [Conductor] = @Conductor, [ConduitType] = @ConduitType, [ConduitSize] "& _ 
                 "= @ConduitSize, [OCPDRating] = @OCPDRating, [BreakerType] = @BreakerType, [DPNum"& _ 
-                "ber] = @DPNumber, [DistancetoMain] = @DistancetoMain, [Voltage] = @Voltage, [Imp"& _ 
-                "edanceImag] = @ImpedanceImag, [ImpedanceReal] = @ImpedanceReal WHERE (([Code] = "& _ 
-                "@Original_Code) AND ([ProjectCode] = @Original_ProjectCode) AND ((@IsNull_Curren"& _ 
-                "tRating = 1 AND [CurrentRating] IS NULL) OR ([CurrentRating] = @Original_Current"& _ 
-                "Rating)) AND ((@IsNull_WireType = 1 AND [WireType] IS NULL) OR ([WireType] = @Or"& _ 
-                "iginal_WireType)) AND ((@IsNull_WireSize = 1 AND [WireSize] IS NULL) OR ([WireSi"& _ 
-                "ze] = @Original_WireSize)) AND ((@IsNull_Set = 1 AND [Set] IS NULL) OR ([Set] = "& _ 
-                "@Original_Set)) AND ((@IsNull_Conductor = 1 AND [Conductor] IS NULL) OR ([Conduc"& _ 
-                "tor] = @Original_Conductor)) AND ((@IsNull_ConduitType = 1 AND [ConduitType] IS "& _ 
-                "NULL) OR ([ConduitType] = @Original_ConduitType)) AND ((@IsNull_ConduitSize = 1 "& _ 
-                "AND [ConduitSize] IS NULL) OR ([ConduitSize] = @Original_ConduitSize)) AND ((@Is"& _ 
-                "Null_OCPDRating = 1 AND [OCPDRating] IS NULL) OR ([OCPDRating] = @Original_OCPDR"& _ 
-                "ating)) AND ((@IsNull_BreakerType = 1 AND [BreakerType] IS NULL) OR ([BreakerTyp"& _ 
-                "e] = @Original_BreakerType)) AND ([DPNumber] = @Original_DPNumber) AND ((@IsNull"& _ 
-                "_DistancetoMain = 1 AND [DistancetoMain] IS NULL) OR ([DistancetoMain] = @Origin"& _ 
-                "al_DistancetoMain)) AND ((@IsNull_Voltage = 1 AND [Voltage] IS NULL) OR ([Voltag"& _ 
-                "e] = @Original_Voltage)) AND ((@IsNull_ImpedanceImag = 1 AND [ImpedanceImag] IS "& _ 
-                "NULL) OR ([ImpedanceImag] = @Original_ImpedanceImag)) AND ((@IsNull_ImpedanceRea"& _ 
-                "l = 1 AND [ImpedanceReal] IS NULL) OR ([ImpedanceReal] = @Original_ImpedanceReal"& _ 
-                ")));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, ProjectCode, CurrentRating, WireType, WireSize, [Set], Conduc"& _ 
-                "tor, ConduitType, ConduitSize, OCPDRating, BreakerType, DPNumber, DistancetoMain"& _ 
-                ", Voltage, ImpedanceImag, ImpedanceReal FROM tblDistribution WHERE (Code = @Code"& _ 
-                ")"
+                "ber] = @DPNumber, [DistancetoMain] = @DistancetoMain, [ImpedanceImag] = @Impedan"& _ 
+                "ceImag, [ImpedanceReal] = @ImpedanceReal WHERE (([Code] = @Original_Code) AND (["& _ 
+                "ProjectCode] = @Original_ProjectCode) AND ((@IsNull_CurrentRating = 1 AND [Curre"& _ 
+                "ntRating] IS NULL) OR ([CurrentRating] = @Original_CurrentRating)) AND ((@IsNull"& _ 
+                "_WireType = 1 AND [WireType] IS NULL) OR ([WireType] = @Original_WireType)) AND "& _ 
+                "((@IsNull_WireSize = 1 AND [WireSize] IS NULL) OR ([WireSize] = @Original_WireSi"& _ 
+                "ze)) AND ((@IsNull_Set = 1 AND [Set] IS NULL) OR ([Set] = @Original_Set)) AND (("& _ 
+                "@IsNull_Conductor = 1 AND [Conductor] IS NULL) OR ([Conductor] = @Original_Condu"& _ 
+                "ctor)) AND ((@IsNull_ConduitType = 1 AND [ConduitType] IS NULL) OR ([ConduitType"& _ 
+                "] = @Original_ConduitType)) AND ((@IsNull_ConduitSize = 1 AND [ConduitSize] IS N"& _ 
+                "ULL) OR ([ConduitSize] = @Original_ConduitSize)) AND ((@IsNull_OCPDRating = 1 AN"& _ 
+                "D [OCPDRating] IS NULL) OR ([OCPDRating] = @Original_OCPDRating)) AND ((@IsNull_"& _ 
+                "BreakerType = 1 AND [BreakerType] IS NULL) OR ([BreakerType] = @Original_Breaker"& _ 
+                "Type)) AND ([DPNumber] = @Original_DPNumber) AND ((@IsNull_DistancetoMain = 1 AN"& _ 
+                "D [DistancetoMain] IS NULL) OR ([DistancetoMain] = @Original_DistancetoMain)) AN"& _ 
+                "D ((@IsNull_ImpedanceImag = 1 AND [ImpedanceImag] IS NULL) OR ([ImpedanceImag] ="& _ 
+                " @Original_ImpedanceImag)) AND ((@IsNull_ImpedanceReal = 1 AND [ImpedanceReal] I"& _ 
+                "S NULL) OR ([ImpedanceReal] = @Original_ImpedanceReal)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, ProjectC"& _ 
+                "ode, CurrentRating, WireType, WireSize, [Set], Conductor, ConduitType, ConduitSi"& _ 
+                "ze, OCPDRating, BreakerType, DPNumber, DistancetoMain, ImpedanceImag, ImpedanceR"& _ 
+                "eal FROM tblDistribution WHERE (Code = @Code)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Code", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -9712,7 +9628,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BreakerType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "BreakerType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DPNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DPNumber", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DistancetoMain", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistancetoMain", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ImpedanceImag", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceImag", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ImpedanceReal", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceReal", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -9738,8 +9653,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DPNumber", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DPNumber", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_DistancetoMain", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistancetoMain", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DistancetoMain", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DistancetoMain", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_ImpedanceImag", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceImag", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ImpedanceImag", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceImag", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_ImpedanceReal", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceReal", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -9760,8 +9673,8 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT Code, ProjectCode, CurrentRating, WireType, WireSize, [Set], Conductor, Co"& _ 
-                "nduitType, ConduitSize, OCPDRating, BreakerType, DPNumber, DistancetoMain, Volta"& _ 
-                "ge, ImpedanceImag, ImpedanceReal FROM tblDistribution"
+                "nduitType, ConduitSize, OCPDRating, BreakerType, DPNumber, DistancetoMain, Imped"& _ 
+                "anceImag, ImpedanceReal FROM tblDistribution"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
@@ -9784,18 +9697,17 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT        Code, ProjectCode, CurrentRating, WireType, WireSize, [Set], Conduc"& _ 
-                "tor, ConduitType, ConduitSize, OCPDRating, BreakerType, DPNumber, DistancetoMain"& _ 
-                ", Voltage, ImpedanceImag, ImpedanceReal"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tblDistribution"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE "& _ 
-                "       (ProjectCode = @project)"
+            Me._commandCollection(4).CommandText = "SELECT Code, ProjectCode, CurrentRating, WireType, WireSize, [Set], Conductor, Co"& _ 
+                "nduitType, ConduitSize, OCPDRating, BreakerType, DPNumber, DistancetoMain, Imped"& _ 
+                "anceImag, ImpedanceReal FROM tblDistribution WHERE (ProjectCode = @project)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT Code, ProjectCode, DPNumber, Voltage, CurrentRating, WireType, WireSize, ["& _ 
-                "Set], Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMa"& _ 
-                "in, ImpedanceImag, ImpedanceReal FROM tblDistribution WHERE (ProjectCode = @proj"& _ 
-                "ect) AND (ImpedanceImag IS NOT NULL) AND (ImpedanceReal IS NOT NULL)"
+            Me._commandCollection(5).CommandText = "SELECT Code, ProjectCode, DPNumber, CurrentRating, WireType, WireSize, [Set], Con"& _ 
+                "ductor, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMain, Imped"& _ 
+                "anceImag, ImpedanceReal FROM tblDistribution WHERE (ProjectCode = @project) AND "& _ 
+                "(ImpedanceImag IS NOT NULL) AND (ImpedanceReal IS NOT NULL)"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
@@ -9965,23 +9877,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete( _
-                    ByVal Original_Code As String,  _
-                    ByVal Original_ProjectCode As String,  _
-                    ByVal Original_CurrentRating As Global.System.Nullable(Of Double),  _
-                    ByVal Original_WireType As String,  _
-                    ByVal Original_WireSize As String,  _
-                    ByVal Original_Set As Global.System.Nullable(Of Integer),  _
-                    ByVal Original_Conductor As String,  _
-                    ByVal Original_ConduitType As String,  _
-                    ByVal Original_ConduitSize As String,  _
-                    ByVal Original_OCPDRating As Global.System.Nullable(Of Integer),  _
-                    ByVal Original_BreakerType As String,  _
-                    ByVal Original_DPNumber As Integer,  _
-                    ByVal Original_DistancetoMain As Global.System.Nullable(Of Double),  _
-                    ByVal Original_Voltage As Global.System.Nullable(Of Integer),  _
-                    ByVal Original_ImpedanceImag As Global.System.Nullable(Of Double),  _
-                    ByVal Original_ImpedanceReal As Global.System.Nullable(Of Double)) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_Code As String, ByVal Original_ProjectCode As String, ByVal Original_CurrentRating As Global.System.Nullable(Of Double), ByVal Original_WireType As String, ByVal Original_WireSize As String, ByVal Original_Set As Global.System.Nullable(Of Integer), ByVal Original_Conductor As String, ByVal Original_ConduitType As String, ByVal Original_ConduitSize As String, ByVal Original_OCPDRating As Global.System.Nullable(Of Integer), ByVal Original_BreakerType As String, ByVal Original_DPNumber As Integer, ByVal Original_DistancetoMain As Global.System.Nullable(Of Double), ByVal Original_ImpedanceImag As Global.System.Nullable(Of Double), ByVal Original_ImpedanceReal As Global.System.Nullable(Of Double)) As Integer
             If (Original_Code Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Code")
             Else
@@ -10063,26 +9959,19 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 Me.Adapter.DeleteCommand.Parameters(21).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(22).Value = Global.System.DBNull.Value
             End If
-            If (Original_Voltage.HasValue = true) Then
+            If (Original_ImpedanceImag.HasValue = true) Then
                 Me.Adapter.DeleteCommand.Parameters(23).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(Original_Voltage.Value,Integer)
+                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(Original_ImpedanceImag.Value,Double)
             Else
                 Me.Adapter.DeleteCommand.Parameters(23).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(24).Value = Global.System.DBNull.Value
             End If
-            If (Original_ImpedanceImag.HasValue = true) Then
+            If (Original_ImpedanceReal.HasValue = true) Then
                 Me.Adapter.DeleteCommand.Parameters(25).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(Original_ImpedanceImag.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(Original_ImpedanceReal.Value,Double)
             Else
                 Me.Adapter.DeleteCommand.Parameters(25).Value = CType(1,Object)
                 Me.Adapter.DeleteCommand.Parameters(26).Value = Global.System.DBNull.Value
-            End If
-            If (Original_ImpedanceReal.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(28).Value = CType(Original_ImpedanceReal.Value,Double)
-            Else
-                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(28).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -10103,23 +9992,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert( _
-                    ByVal Code As String,  _
-                    ByVal ProjectCode As String,  _
-                    ByVal CurrentRating As Global.System.Nullable(Of Double),  _
-                    ByVal WireType As String,  _
-                    ByVal WireSize As String,  _
-                    ByVal _Set As Global.System.Nullable(Of Integer),  _
-                    ByVal Conductor As String,  _
-                    ByVal ConduitType As String,  _
-                    ByVal ConduitSize As String,  _
-                    ByVal OCPDRating As Global.System.Nullable(Of Integer),  _
-                    ByVal BreakerType As String,  _
-                    ByVal DPNumber As Integer,  _
-                    ByVal DistancetoMain As Global.System.Nullable(Of Double),  _
-                    ByVal Voltage As Global.System.Nullable(Of Integer),  _
-                    ByVal ImpedanceImag As Global.System.Nullable(Of Double),  _
-                    ByVal ImpedanceReal As Global.System.Nullable(Of Double)) As Integer
+        Public Overloads Overridable Function Insert(ByVal Code As String, ByVal ProjectCode As String, ByVal CurrentRating As Global.System.Nullable(Of Double), ByVal WireType As String, ByVal WireSize As String, ByVal _Set As Global.System.Nullable(Of Integer), ByVal Conductor As String, ByVal ConduitType As String, ByVal ConduitSize As String, ByVal OCPDRating As Global.System.Nullable(Of Integer), ByVal BreakerType As String, ByVal DPNumber As Integer, ByVal DistancetoMain As Global.System.Nullable(Of Double), ByVal ImpedanceImag As Global.System.Nullable(Of Double), ByVal ImpedanceReal As Global.System.Nullable(Of Double)) As Integer
             If (Code Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Code")
             Else
@@ -10181,20 +10054,15 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
             End If
-            If (Voltage.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(Voltage.Value,Integer)
+            If (ImpedanceImag.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(ImpedanceImag.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            If (ImpedanceImag.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(ImpedanceImag.Value,Double)
+            If (ImpedanceReal.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(ImpedanceReal.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
-            End If
-            If (ImpedanceReal.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(ImpedanceReal.Value,Double)
-            Else
-                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -10229,7 +10097,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal BreakerType As String,  _
                     ByVal DPNumber As Integer,  _
                     ByVal DistancetoMain As Global.System.Nullable(Of Double),  _
-                    ByVal Voltage As Global.System.Nullable(Of Integer),  _
                     ByVal ImpedanceImag As Global.System.Nullable(Of Double),  _
                     ByVal ImpedanceReal As Global.System.Nullable(Of Double),  _
                     ByVal Original_Code As String,  _
@@ -10245,7 +10112,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_BreakerType As String,  _
                     ByVal Original_DPNumber As Integer,  _
                     ByVal Original_DistancetoMain As Global.System.Nullable(Of Double),  _
-                    ByVal Original_Voltage As Global.System.Nullable(Of Integer),  _
                     ByVal Original_ImpedanceImag As Global.System.Nullable(Of Double),  _
                     ByVal Original_ImpedanceReal As Global.System.Nullable(Of Double)) As Integer
             If (Code Is Nothing) Then
@@ -10309,122 +10175,110 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
             End If
-            If (Voltage.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Voltage.Value,Integer)
+            If (ImpedanceImag.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(ImpedanceImag.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            If (ImpedanceImag.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(ImpedanceImag.Value,Double)
+            If (ImpedanceReal.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(ImpedanceReal.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
-            End If
-            If (ImpedanceReal.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(ImpedanceReal.Value,Double)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
             End If
             If (Original_Code Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Code")
             Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_Code,String)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_Code,String)
             End If
             If (Original_ProjectCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_ProjectCode")
             Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_ProjectCode,String)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_ProjectCode,String)
             End If
             If (Original_CurrentRating.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_CurrentRating.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_CurrentRating.Value,Double)
             Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             End If
             If (Original_WireType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_WireType,String)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_WireType,String)
             End If
             If (Original_WireSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_WireSize,String)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_WireSize,String)
             End If
             If (Original_Set.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_Set.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_Set.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
             End If
             If (Original_Conductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_Conductor,String)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_Conductor,String)
             End If
             If (Original_ConduitType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(29).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(28).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_ConduitType,String)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_ConduitType,String)
             End If
             If (Original_ConduitSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(31).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(30).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_ConduitSize,String)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(Original_ConduitSize,String)
             End If
             If (Original_OCPDRating.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_OCPDRating.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(Original_OCPDRating.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(33).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(32).Value = Global.System.DBNull.Value
             End If
             If (Original_BreakerType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(35).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(34).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(Original_BreakerType,String)
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(Original_BreakerType,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(36).Value = CType(Original_DPNumber,Integer)
+            Me.Adapter.UpdateCommand.Parameters(35).Value = CType(Original_DPNumber,Integer)
             If (Original_DistancetoMain.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(Original_DistancetoMain.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(Original_DistancetoMain.Value,Double)
             Else
-                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(38).Value = Global.System.DBNull.Value
-            End If
-            If (Original_Voltage.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(Original_Voltage.Value,Integer)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(40).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(37).Value = Global.System.DBNull.Value
             End If
             If (Original_ImpedanceImag.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(Original_ImpedanceImag.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(Original_ImpedanceImag.Value,Double)
             Else
-                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(42).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(39).Value = Global.System.DBNull.Value
             End If
             If (Original_ImpedanceReal.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(43).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(Original_ImpedanceReal.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(Original_ImpedanceReal.Value,Double)
             Else
-                Me.Adapter.UpdateCommand.Parameters(43).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(44).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(41).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -10458,7 +10312,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal BreakerType As String,  _
                     ByVal DPNumber As Integer,  _
                     ByVal DistancetoMain As Global.System.Nullable(Of Double),  _
-                    ByVal Voltage As Global.System.Nullable(Of Integer),  _
                     ByVal ImpedanceImag As Global.System.Nullable(Of Double),  _
                     ByVal ImpedanceReal As Global.System.Nullable(Of Double),  _
                     ByVal Original_Code As String,  _
@@ -10474,10 +10327,9 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_BreakerType As String,  _
                     ByVal Original_DPNumber As Integer,  _
                     ByVal Original_DistancetoMain As Global.System.Nullable(Of Double),  _
-                    ByVal Original_Voltage As Global.System.Nullable(Of Integer),  _
                     ByVal Original_ImpedanceImag As Global.System.Nullable(Of Double),  _
                     ByVal Original_ImpedanceReal As Global.System.Nullable(Of Double)) As Integer
-            Return Me.Update(Original_Code, ProjectCode, CurrentRating, WireType, WireSize, _Set, Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, DPNumber, DistancetoMain, Voltage, ImpedanceImag, ImpedanceReal, Original_Code, Original_ProjectCode, Original_CurrentRating, Original_WireType, Original_WireSize, Original_Set, Original_Conductor, Original_ConduitType, Original_ConduitSize, Original_OCPDRating, Original_BreakerType, Original_DPNumber, Original_DistancetoMain, Original_Voltage, Original_ImpedanceImag, Original_ImpedanceReal)
+            Return Me.Update(Original_Code, ProjectCode, CurrentRating, WireType, WireSize, _Set, Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, DPNumber, DistancetoMain, ImpedanceImag, ImpedanceReal, Original_Code, Original_ProjectCode, Original_CurrentRating, Original_WireType, Original_WireSize, Original_Set, Original_Conductor, Original_ConduitType, Original_ConduitSize, Original_OCPDRating, Original_BreakerType, Original_DPNumber, Original_DistancetoMain, Original_ImpedanceImag, Original_ImpedanceReal)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -10836,7 +10688,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             tableMapping.ColumnMappings.Add("CircuitNo", "CircuitNo")
             tableMapping.ColumnMappings.Add("Type", "Type")
             tableMapping.ColumnMappings.Add("Subfeeder", "Subfeeder")
-            tableMapping.ColumnMappings.Add("Voltage", "Voltage")
             tableMapping.ColumnMappings.Add("PowerRating", "PowerRating")
             tableMapping.ColumnMappings.Add("Phase", "Phase")
             tableMapping.ColumnMappings.Add("MotorType", "MotorType")
@@ -10859,33 +10710,32 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.DeleteCommand.Connection = Me.Connection
             Me._adapter.DeleteCommand.CommandText = "DELETE FROM [tblBranch] WHERE (([Code] = @Original_Code) AND ([Project] = @Origin"& _ 
                 "al_Project) AND ([CircuitNo] = @Original_CircuitNo) AND ([Type] = @Original_Type"& _ 
-                ") AND ([Subfeeder] = @Original_Subfeeder) AND ([Voltage] = @Original_Voltage) AN"& _ 
-                "D ([PowerRating] = @Original_PowerRating) AND ((@IsNull_Phase = 1 AND [Phase] IS"& _ 
-                " NULL) OR ([Phase] = @Original_Phase)) AND ((@IsNull_MotorType = 1 AND [MotorTyp"& _ 
-                "e] IS NULL) OR ([MotorType] = @Original_MotorType)) AND ((@IsNull_MotorRating = "& _ 
-                "1 AND [MotorRating] IS NULL) OR ([MotorRating] = @Original_MotorRating)) AND ((@"& _ 
-                "IsNull_FullLoadCurrent = 1 AND [FullLoadCurrent] IS NULL) OR ([FullLoadCurrent] "& _ 
-                "= @Original_FullLoadCurrent)) AND ((@IsNull_MinimumAmpacity = 1 AND [MinimumAmpa"& _ 
-                "city] IS NULL) OR ([MinimumAmpacity] = @Original_MinimumAmpacity)) AND ((@IsNull"& _ 
-                "_WireType = 1 AND [WireType] IS NULL) OR ([WireType] = @Original_WireType)) AND "& _ 
-                "((@IsNull_WireSize = 1 AND [WireSize] IS NULL) OR ([WireSize] = @Original_WireSi"& _ 
-                "ze)) AND ((@IsNull_Set = 1 AND [Set] IS NULL) OR ([Set] = @Original_Set)) AND (("& _ 
-                "@IsNull_Conductor = 1 AND [Conductor] IS NULL) OR ([Conductor] = @Original_Condu"& _ 
-                "ctor)) AND ((@IsNull_ConduitType = 1 AND [ConduitType] IS NULL) OR ([ConduitType"& _ 
-                "] = @Original_ConduitType)) AND ((@IsNull_ConduitSize = 1 AND [ConduitSize] IS N"& _ 
-                "ULL) OR ([ConduitSize] = @Original_ConduitSize)) AND ([OCPDRating] = @Original_O"& _ 
-                "CPDRating) AND ((@IsNull_BreakerType = 1 AND [BreakerType] IS NULL) OR ([Breaker"& _ 
-                "Type] = @Original_BreakerType)) AND ([GroundWire] = @Original_GroundWire) AND (("& _ 
-                "@IsNull_GroundWireSize = 1 AND [GroundWireSize] IS NULL) OR ([GroundWireSize] = "& _ 
-                "@Original_GroundWireSize)) AND ((@IsNull_GroundConductor = 1 AND [GroundConducto"& _ 
-                "r] IS NULL) OR ([GroundConductor] = @Original_GroundConductor)))"
+                ") AND ([Subfeeder] = @Original_Subfeeder) AND ([PowerRating] = @Original_PowerRa"& _ 
+                "ting) AND ((@IsNull_Phase = 1 AND [Phase] IS NULL) OR ([Phase] = @Original_Phase"& _ 
+                ")) AND ((@IsNull_MotorType = 1 AND [MotorType] IS NULL) OR ([MotorType] = @Origi"& _ 
+                "nal_MotorType)) AND ((@IsNull_MotorRating = 1 AND [MotorRating] IS NULL) OR ([Mo"& _ 
+                "torRating] = @Original_MotorRating)) AND ((@IsNull_FullLoadCurrent = 1 AND [Full"& _ 
+                "LoadCurrent] IS NULL) OR ([FullLoadCurrent] = @Original_FullLoadCurrent)) AND (("& _ 
+                "@IsNull_MinimumAmpacity = 1 AND [MinimumAmpacity] IS NULL) OR ([MinimumAmpacity]"& _ 
+                " = @Original_MinimumAmpacity)) AND ((@IsNull_WireType = 1 AND [WireType] IS NULL"& _ 
+                ") OR ([WireType] = @Original_WireType)) AND ((@IsNull_WireSize = 1 AND [WireSize"& _ 
+                "] IS NULL) OR ([WireSize] = @Original_WireSize)) AND ((@IsNull_Set = 1 AND [Set]"& _ 
+                " IS NULL) OR ([Set] = @Original_Set)) AND ((@IsNull_Conductor = 1 AND [Conductor"& _ 
+                "] IS NULL) OR ([Conductor] = @Original_Conductor)) AND ((@IsNull_ConduitType = 1"& _ 
+                " AND [ConduitType] IS NULL) OR ([ConduitType] = @Original_ConduitType)) AND ((@I"& _ 
+                "sNull_ConduitSize = 1 AND [ConduitSize] IS NULL) OR ([ConduitSize] = @Original_C"& _ 
+                "onduitSize)) AND ([OCPDRating] = @Original_OCPDRating) AND ((@IsNull_BreakerType"& _ 
+                " = 1 AND [BreakerType] IS NULL) OR ([BreakerType] = @Original_BreakerType)) AND "& _ 
+                "([GroundWire] = @Original_GroundWire) AND ((@IsNull_GroundWireSize = 1 AND [Grou"& _ 
+                "ndWireSize] IS NULL) OR ([GroundWireSize] = @Original_GroundWireSize)) AND ((@Is"& _ 
+                "Null_GroundConductor = 1 AND [GroundConductor] IS NULL) OR ([GroundConductor] = "& _ 
+                "@Original_GroundConductor)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Project", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Project", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CircuitNo", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CircuitNo", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Type", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Type", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Subfeeder", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_PowerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PowerRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Phase", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Phase", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Phase", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Phase", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -10919,25 +10769,24 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_GroundConductor", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GroundConductor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [tblBranch] ([Code], [Project], [CircuitNo], [Type], [Subfeeder], [Vo"& _ 
-                "ltage], [PowerRating], [Phase], [MotorType], [MotorRating], [FullLoadCurrent], ["& _ 
-                "MinimumAmpacity], [WireType], [WireSize], [Set], [Conductor], [ConduitType], [Co"& _ 
-                "nduitSize], [OCPDRating], [BreakerType], [GroundWire], [GroundWireSize], [Ground"& _ 
-                "Conductor]) VALUES (@Code, @Project, @CircuitNo, @Type, @Subfeeder, @Voltage, @P"& _ 
-                "owerRating, @Phase, @MotorType, @MotorRating, @FullLoadCurrent, @MinimumAmpacity"& _ 
-                ", @WireType, @WireSize, @Set, @Conductor, @ConduitType, @ConduitSize, @OCPDRatin"& _ 
-                "g, @BreakerType, @GroundWire, @GroundWireSize, @GroundConductor);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, "& _ 
-                "Project, CircuitNo, Type, Subfeeder, Voltage, PowerRating, Phase, MotorType, Mot"& _ 
-                "orRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], Conductor"& _ 
-                ", ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSize,"& _ 
-                " GroundConductor FROM tblBranch WHERE (Code = @Code)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [tblBranch] ([Code], [Project], [CircuitNo], [Type], [Subfeeder], [Po"& _ 
+                "werRating], [Phase], [MotorType], [MotorRating], [FullLoadCurrent], [MinimumAmpa"& _ 
+                "city], [WireType], [WireSize], [Set], [Conductor], [ConduitType], [ConduitSize],"& _ 
+                " [OCPDRating], [BreakerType], [GroundWire], [GroundWireSize], [GroundConductor])"& _ 
+                " VALUES (@Code, @Project, @CircuitNo, @Type, @Subfeeder, @PowerRating, @Phase, @"& _ 
+                "MotorType, @MotorRating, @FullLoadCurrent, @MinimumAmpacity, @WireType, @WireSiz"& _ 
+                "e, @Set, @Conductor, @ConduitType, @ConduitSize, @OCPDRating, @BreakerType, @Gro"& _ 
+                "undWire, @GroundWireSize, @GroundConductor);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, Project, CircuitNo, T"& _ 
+                "ype, Subfeeder, PowerRating, Phase, MotorType, MotorRating, FullLoadCurrent, Min"& _ 
+                "imumAmpacity, WireType, WireSize, [Set], Conductor, ConduitType, ConduitSize, OC"& _ 
+                "PDRating, BreakerType, GroundWire, GroundWireSize, GroundConductor FROM tblBranc"& _ 
+                "h WHERE (Code = @Code)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Code", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Project", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Project", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CircuitNo", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CircuitNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Type", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Type", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Subfeeder", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PowerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PowerRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Phase", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Phase", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MotorType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "MotorType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -10958,46 +10807,44 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [tblBranch] SET [Code] = @Code, [Project] = @Project, [CircuitNo] = @Circu"& _ 
-                "itNo, [Type] = @Type, [Subfeeder] = @Subfeeder, [Voltage] = @Voltage, [PowerRati"& _ 
-                "ng] = @PowerRating, [Phase] = @Phase, [MotorType] = @MotorType, [MotorRating] = "& _ 
-                "@MotorRating, [FullLoadCurrent] = @FullLoadCurrent, [MinimumAmpacity] = @Minimum"& _ 
-                "Ampacity, [WireType] = @WireType, [WireSize] = @WireSize, [Set] = @Set, [Conduct"& _ 
-                "or] = @Conductor, [ConduitType] = @ConduitType, [ConduitSize] = @ConduitSize, [O"& _ 
-                "CPDRating] = @OCPDRating, [BreakerType] = @BreakerType, [GroundWire] = @GroundWi"& _ 
-                "re, [GroundWireSize] = @GroundWireSize, [GroundConductor] = @GroundConductor WHE"& _ 
-                "RE (([Code] = @Original_Code) AND ([Project] = @Original_Project) AND ([CircuitN"& _ 
-                "o] = @Original_CircuitNo) AND ([Type] = @Original_Type) AND ([Subfeeder] = @Orig"& _ 
-                "inal_Subfeeder) AND ([Voltage] = @Original_Voltage) AND ([PowerRating] = @Origin"& _ 
-                "al_PowerRating) AND ((@IsNull_Phase = 1 AND [Phase] IS NULL) OR ([Phase] = @Orig"& _ 
-                "inal_Phase)) AND ((@IsNull_MotorType = 1 AND [MotorType] IS NULL) OR ([MotorType"& _ 
-                "] = @Original_MotorType)) AND ((@IsNull_MotorRating = 1 AND [MotorRating] IS NUL"& _ 
-                "L) OR ([MotorRating] = @Original_MotorRating)) AND ((@IsNull_FullLoadCurrent = 1"& _ 
-                " AND [FullLoadCurrent] IS NULL) OR ([FullLoadCurrent] = @Original_FullLoadCurren"& _ 
-                "t)) AND ((@IsNull_MinimumAmpacity = 1 AND [MinimumAmpacity] IS NULL) OR ([Minimu"& _ 
-                "mAmpacity] = @Original_MinimumAmpacity)) AND ((@IsNull_WireType = 1 AND [WireTyp"& _ 
-                "e] IS NULL) OR ([WireType] = @Original_WireType)) AND ((@IsNull_WireSize = 1 AND"& _ 
-                " [WireSize] IS NULL) OR ([WireSize] = @Original_WireSize)) AND ((@IsNull_Set = 1"& _ 
-                " AND [Set] IS NULL) OR ([Set] = @Original_Set)) AND ((@IsNull_Conductor = 1 AND "& _ 
-                "[Conductor] IS NULL) OR ([Conductor] = @Original_Conductor)) AND ((@IsNull_Condu"& _ 
-                "itType = 1 AND [ConduitType] IS NULL) OR ([ConduitType] = @Original_ConduitType)"& _ 
-                ") AND ((@IsNull_ConduitSize = 1 AND [ConduitSize] IS NULL) OR ([ConduitSize] = @"& _ 
-                "Original_ConduitSize)) AND ([OCPDRating] = @Original_OCPDRating) AND ((@IsNull_B"& _ 
-                "reakerType = 1 AND [BreakerType] IS NULL) OR ([BreakerType] = @Original_BreakerT"& _ 
-                "ype)) AND ([GroundWire] = @Original_GroundWire) AND ((@IsNull_GroundWireSize = 1"& _ 
-                " AND [GroundWireSize] IS NULL) OR ([GroundWireSize] = @Original_GroundWireSize))"& _ 
-                " AND ((@IsNull_GroundConductor = 1 AND [GroundConductor] IS NULL) OR ([GroundCon"& _ 
-                "ductor] = @Original_GroundConductor)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, Project, CircuitNo, Type, "& _ 
-                "Subfeeder, Voltage, PowerRating, Phase, MotorType, MotorRating, FullLoadCurrent,"& _ 
-                " MinimumAmpacity, WireType, WireSize, [Set], Conductor, ConduitType, ConduitSize"& _ 
-                ", OCPDRating, BreakerType, GroundWire, GroundWireSize, GroundConductor FROM tblB"& _ 
-                "ranch WHERE (Code = @Code)"
+                "itNo, [Type] = @Type, [Subfeeder] = @Subfeeder, [PowerRating] = @PowerRating, [P"& _ 
+                "hase] = @Phase, [MotorType] = @MotorType, [MotorRating] = @MotorRating, [FullLoa"& _ 
+                "dCurrent] = @FullLoadCurrent, [MinimumAmpacity] = @MinimumAmpacity, [WireType] ="& _ 
+                " @WireType, [WireSize] = @WireSize, [Set] = @Set, [Conductor] = @Conductor, [Con"& _ 
+                "duitType] = @ConduitType, [ConduitSize] = @ConduitSize, [OCPDRating] = @OCPDRati"& _ 
+                "ng, [BreakerType] = @BreakerType, [GroundWire] = @GroundWire, [GroundWireSize] ="& _ 
+                " @GroundWireSize, [GroundConductor] = @GroundConductor WHERE (([Code] = @Origina"& _ 
+                "l_Code) AND ([Project] = @Original_Project) AND ([CircuitNo] = @Original_Circuit"& _ 
+                "No) AND ([Type] = @Original_Type) AND ([Subfeeder] = @Original_Subfeeder) AND (["& _ 
+                "PowerRating] = @Original_PowerRating) AND ((@IsNull_Phase = 1 AND [Phase] IS NUL"& _ 
+                "L) OR ([Phase] = @Original_Phase)) AND ((@IsNull_MotorType = 1 AND [MotorType] I"& _ 
+                "S NULL) OR ([MotorType] = @Original_MotorType)) AND ((@IsNull_MotorRating = 1 AN"& _ 
+                "D [MotorRating] IS NULL) OR ([MotorRating] = @Original_MotorRating)) AND ((@IsNu"& _ 
+                "ll_FullLoadCurrent = 1 AND [FullLoadCurrent] IS NULL) OR ([FullLoadCurrent] = @O"& _ 
+                "riginal_FullLoadCurrent)) AND ((@IsNull_MinimumAmpacity = 1 AND [MinimumAmpacity"& _ 
+                "] IS NULL) OR ([MinimumAmpacity] = @Original_MinimumAmpacity)) AND ((@IsNull_Wir"& _ 
+                "eType = 1 AND [WireType] IS NULL) OR ([WireType] = @Original_WireType)) AND ((@I"& _ 
+                "sNull_WireSize = 1 AND [WireSize] IS NULL) OR ([WireSize] = @Original_WireSize))"& _ 
+                " AND ((@IsNull_Set = 1 AND [Set] IS NULL) OR ([Set] = @Original_Set)) AND ((@IsN"& _ 
+                "ull_Conductor = 1 AND [Conductor] IS NULL) OR ([Conductor] = @Original_Conductor"& _ 
+                ")) AND ((@IsNull_ConduitType = 1 AND [ConduitType] IS NULL) OR ([ConduitType] = "& _ 
+                "@Original_ConduitType)) AND ((@IsNull_ConduitSize = 1 AND [ConduitSize] IS NULL)"& _ 
+                " OR ([ConduitSize] = @Original_ConduitSize)) AND ([OCPDRating] = @Original_OCPDR"& _ 
+                "ating) AND ((@IsNull_BreakerType = 1 AND [BreakerType] IS NULL) OR ([BreakerType"& _ 
+                "] = @Original_BreakerType)) AND ([GroundWire] = @Original_GroundWire) AND ((@IsN"& _ 
+                "ull_GroundWireSize = 1 AND [GroundWireSize] IS NULL) OR ([GroundWireSize] = @Ori"& _ 
+                "ginal_GroundWireSize)) AND ((@IsNull_GroundConductor = 1 AND [GroundConductor] I"& _ 
+                "S NULL) OR ([GroundConductor] = @Original_GroundConductor)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, Proj"& _ 
+                "ect, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, MotorRating, Ful"& _ 
+                "lLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], Conductor, ConduitType"& _ 
+                ", ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSize, GroundConduc"& _ 
+                "tor FROM tblBranch WHERE (Code = @Code)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Code", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Project", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Project", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CircuitNo", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CircuitNo", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Type", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Type", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Subfeeder", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PowerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PowerRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Phase", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Phase", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MotorType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "MotorType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -11020,7 +10867,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CircuitNo", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CircuitNo", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Type", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Type", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Subfeeder", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_PowerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PowerRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_Phase", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Phase", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Phase", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Phase", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -11067,10 +10913,10 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(13) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Code, Project, CircuitNo, Type, Subfeeder, Voltage, PowerRating, Phase, Mo"& _ 
-                "torType, MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set"& _ 
-                "], Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, Gro"& _ 
-                "undWireSize, GroundConductor FROM tblBranch"
+            Me._commandCollection(0).CommandText = "SELECT Code, Project, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, "& _ 
+                "MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], Conduc"& _ 
+                "tor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSi"& _ 
+                "ze, GroundConductor FROM tblBranch"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
@@ -11085,19 +10931,18 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT        Code, Project, CircuitNo, Type, Subfeeder, Voltage, PowerRating, Ph"& _ 
-                "ase, MotorType, MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSiz"& _ 
-                "e, [Set], Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"       "& _ 
-                "                   GroundWire, GroundWireSize, GroundConductor"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            "& _ 
-                "tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Project = @project)"
+            Me._commandCollection(3).CommandText = "SELECT Code, Project, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, "& _ 
+                "MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], Conduc"& _ 
+                "tor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSi"& _ 
+                "ze, GroundConductor FROM tblBranch WHERE (Project = @project)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Project", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT Code, Project, CircuitNo, Type, Subfeeder, Voltage, PowerRating, Phase, Mo"& _ 
-                "torType, MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set"& _ 
-                "], Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, Gro"& _ 
-                "undWireSize, GroundConductor FROM tblBranch WHERE (Subfeeder = @subfeeder)"
+            Me._commandCollection(4).CommandText = "SELECT Code, Project, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, "& _ 
+                "MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], Conduc"& _ 
+                "tor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSi"& _ 
+                "ze, GroundConductor FROM tblBranch WHERE (Subfeeder = @subfeeder)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
@@ -11304,7 +11149,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_CircuitNo As Integer,  _
                     ByVal Original_Type As String,  _
                     ByVal Original_Subfeeder As String,  _
-                    ByVal Original_Voltage As Integer,  _
                     ByVal Original_PowerRating As Double,  _
                     ByVal Original_Phase As String,  _
                     ByVal Original_MotorType As String,  _
@@ -11343,107 +11187,106 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Else
                 Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_Subfeeder,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_Voltage,Integer)
-            Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_PowerRating,Double)
+            Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_PowerRating,Double)
             If (Original_Phase Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_Phase,String)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_Phase,String)
             End If
             If (Original_MotorType Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_MotorType,String)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(Original_MotorType,String)
             End If
             If (Original_MotorRating.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_MotorRating.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(Original_MotorRating.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(12).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(11).Value = Global.System.DBNull.Value
             End If
             If (Original_FullLoadCurrent.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_FullLoadCurrent.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(Original_FullLoadCurrent.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
             If (Original_MinimumAmpacity.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_MinimumAmpacity.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(Original_MinimumAmpacity.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(15).Value = Global.System.DBNull.Value
             End If
             If (Original_WireType Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(17).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_WireType,String)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(Original_WireType,String)
             End If
             If (Original_WireSize Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(20).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(Original_WireSize,String)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(Original_WireSize,String)
             End If
             If (Original_Set.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(Original_Set.Value,Integer)
+                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(Original_Set.Value,Integer)
             Else
-                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(22).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(21).Value = Global.System.DBNull.Value
             End If
             If (Original_Conductor Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(24).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(Original_Conductor,String)
+                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(Original_Conductor,String)
             End If
             If (Original_ConduitType Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(26).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(25).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(Original_ConduitType,String)
+                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(Original_ConduitType,String)
             End If
             If (Original_ConduitSize Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(28).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(27).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(28).Value = CType(Original_ConduitSize,String)
+                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(Original_ConduitSize,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(29).Value = CType(Original_OCPDRating,Integer)
+            Me.Adapter.DeleteCommand.Parameters(28).Value = CType(Original_OCPDRating,Integer)
             If (Original_BreakerType Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(30).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(31).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(29).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(30).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(30).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(31).Value = CType(Original_BreakerType,String)
+                Me.Adapter.DeleteCommand.Parameters(29).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(30).Value = CType(Original_BreakerType,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(32).Value = CType(Original_GroundWire,Boolean)
+            Me.Adapter.DeleteCommand.Parameters(31).Value = CType(Original_GroundWire,Boolean)
             If (Original_GroundWireSize Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(33).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(34).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(32).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(33).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(33).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(34).Value = CType(Original_GroundWireSize,String)
+                Me.Adapter.DeleteCommand.Parameters(32).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(33).Value = CType(Original_GroundWireSize,String)
             End If
             If (Original_GroundConductor Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(35).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(36).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(34).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(35).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(35).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(36).Value = CType(Original_GroundConductor,String)
+                Me.Adapter.DeleteCommand.Parameters(34).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(35).Value = CType(Original_GroundConductor,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -11470,7 +11313,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal CircuitNo As Integer,  _
                     ByVal Type As String,  _
                     ByVal Subfeeder As String,  _
-                    ByVal Voltage As Integer,  _
                     ByVal PowerRating As Double,  _
                     ByVal Phase As String,  _
                     ByVal MotorType As String,  _
@@ -11509,79 +11351,78 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(4).Value = CType(Subfeeder,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(5).Value = CType(Voltage,Integer)
-            Me.Adapter.InsertCommand.Parameters(6).Value = CType(PowerRating,Double)
+            Me.Adapter.InsertCommand.Parameters(5).Value = CType(PowerRating,Double)
             If (Phase Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(Phase,String)
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(Phase,String)
             End If
             If (MotorType Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(MotorType,String)
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(MotorType,String)
             End If
             If (MotorRating.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(9).Value = CType(MotorRating.Value,Double)
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(MotorRating.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            If (FullLoadCurrent.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(FullLoadCurrent.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
             End If
-            If (FullLoadCurrent.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(10).Value = CType(FullLoadCurrent.Value,Double)
+            If (MinimumAmpacity.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(MinimumAmpacity.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
-            If (MinimumAmpacity.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(11).Value = CType(MinimumAmpacity.Value,Double)
-            Else
-                Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
-            End If
             If (WireType Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(12).Value = CType(WireType,String)
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(WireType,String)
             End If
             If (WireSize Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(WireSize,String)
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(WireSize,String)
             End If
             If (_Set.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(_Set.Value,Integer)
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(_Set.Value,Integer)
             Else
-                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
             If (Conductor Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(Conductor,String)
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(Conductor,String)
             End If
             If (ConduitType Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(16).Value = CType(ConduitType,String)
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(ConduitType,String)
             End If
             If (ConduitSize Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(17).Value = CType(ConduitSize,String)
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(ConduitSize,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(18).Value = CType(OCPDRating,Integer)
+            Me.Adapter.InsertCommand.Parameters(17).Value = CType(OCPDRating,Integer)
             If (BreakerType Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(19).Value = CType(BreakerType,String)
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(BreakerType,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(20).Value = CType(GroundWire,Boolean)
+            Me.Adapter.InsertCommand.Parameters(19).Value = CType(GroundWire,Boolean)
             If (GroundWireSize Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(21).Value = CType(GroundWireSize,String)
+                Me.Adapter.InsertCommand.Parameters(20).Value = CType(GroundWireSize,String)
             End If
             If (GroundConductor Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(22).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(21).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(22).Value = CType(GroundConductor,String)
+                Me.Adapter.InsertCommand.Parameters(21).Value = CType(GroundConductor,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -11608,7 +11449,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal CircuitNo As Integer,  _
                     ByVal Type As String,  _
                     ByVal Subfeeder As String,  _
-                    ByVal Voltage As Integer,  _
                     ByVal PowerRating As Double,  _
                     ByVal Phase As String,  _
                     ByVal MotorType As String,  _
@@ -11631,7 +11471,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_CircuitNo As Integer,  _
                     ByVal Original_Type As String,  _
                     ByVal Original_Subfeeder As String,  _
-                    ByVal Original_Voltage As Integer,  _
                     ByVal Original_PowerRating As Double,  _
                     ByVal Original_Phase As String,  _
                     ByVal Original_MotorType As String,  _
@@ -11670,202 +11509,200 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Subfeeder,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Voltage,Integer)
-            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(PowerRating,Double)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(PowerRating,Double)
             If (Phase Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Phase,String)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Phase,String)
             End If
             If (MotorType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(MotorType,String)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(MotorType,String)
             End If
             If (MotorRating.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(MotorRating.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(MotorRating.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            If (FullLoadCurrent.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(FullLoadCurrent.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
             End If
-            If (FullLoadCurrent.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(FullLoadCurrent.Value,Double)
+            If (MinimumAmpacity.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(MinimumAmpacity.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
-            If (MinimumAmpacity.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(MinimumAmpacity.Value,Double)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
-            End If
             If (WireType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(WireType,String)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(WireType,String)
             End If
             If (WireSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(WireSize,String)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(WireSize,String)
             End If
             If (_Set.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(_Set.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(_Set.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
             If (Conductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Conductor,String)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Conductor,String)
             End If
             If (ConduitType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(ConduitType,String)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(ConduitType,String)
             End If
             If (ConduitSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(ConduitSize,String)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(ConduitSize,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(18).Value = CType(OCPDRating,Integer)
+            Me.Adapter.UpdateCommand.Parameters(17).Value = CType(OCPDRating,Integer)
             If (BreakerType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(BreakerType,String)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(BreakerType,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(GroundWire,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(GroundWire,Boolean)
             If (GroundWireSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(GroundWireSize,String)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(GroundWireSize,String)
             End If
             If (GroundConductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(GroundConductor,String)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(GroundConductor,String)
             End If
             If (Original_Code Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Code")
             Else
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_Code,String)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_Code,String)
             End If
             If (Original_Project Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Project")
             Else
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_Project,String)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_Project,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_CircuitNo,Integer)
+            Me.Adapter.UpdateCommand.Parameters(24).Value = CType(Original_CircuitNo,Integer)
             If (Original_Type Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Type")
             Else
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_Type,String)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_Type,String)
             End If
             If (Original_Subfeeder Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Subfeeder")
             Else
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_Subfeeder,String)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_Subfeeder,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_Voltage,Integer)
-            Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_PowerRating,Double)
+            Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_PowerRating,Double)
             If (Original_Phase Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_Phase,String)
+            End If
+            If (Original_MotorType Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(30).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(31).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(30).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_Phase,String)
-            End If
-            If (Original_MotorType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(33).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_MotorType,String)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_MotorType,String)
             End If
             If (Original_MotorRating.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_MotorRating.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(33).Value = Global.System.DBNull.Value
+            End If
+            If (Original_FullLoadCurrent.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(34).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(Original_MotorRating.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(Original_FullLoadCurrent.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(34).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(35).Value = Global.System.DBNull.Value
             End If
-            If (Original_FullLoadCurrent.HasValue = true) Then
+            If (Original_MinimumAmpacity.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(36).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(Original_FullLoadCurrent.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(Original_MinimumAmpacity.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(36).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(37).Value = Global.System.DBNull.Value
             End If
-            If (Original_MinimumAmpacity.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(Original_MinimumAmpacity.Value,Double)
-            Else
+            If (Original_WireType Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(38).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(39).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(Original_WireType,String)
             End If
-            If (Original_WireType Is Nothing) Then
+            If (Original_WireSize Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(40).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(41).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(40).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(Original_WireType,String)
-            End If
-            If (Original_WireSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(43).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(43).Value = CType(Original_WireSize,String)
+                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(Original_WireSize,String)
             End If
             If (Original_Set.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(45).Value = CType(Original_Set.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(43).Value = CType(Original_Set.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(45).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(43).Value = Global.System.DBNull.Value
             End If
             If (Original_Conductor Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(45).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(45).Value = CType(Original_Conductor,String)
+            End If
+            If (Original_ConduitType Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(46).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(47).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(46).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(47).Value = CType(Original_Conductor,String)
+                Me.Adapter.UpdateCommand.Parameters(47).Value = CType(Original_ConduitType,String)
             End If
-            If (Original_ConduitType Is Nothing) Then
+            If (Original_ConduitSize Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(48).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(49).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(48).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(Original_ConduitType,String)
+                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(Original_ConduitSize,String)
             End If
-            If (Original_ConduitSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(50).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(51).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(50).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(51).Value = CType(Original_ConduitSize,String)
-            End If
-            Me.Adapter.UpdateCommand.Parameters(52).Value = CType(Original_OCPDRating,Integer)
+            Me.Adapter.UpdateCommand.Parameters(50).Value = CType(Original_OCPDRating,Integer)
             If (Original_BreakerType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(53).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(54).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(51).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(52).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(53).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(54).Value = CType(Original_BreakerType,String)
+                Me.Adapter.UpdateCommand.Parameters(51).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(52).Value = CType(Original_BreakerType,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(55).Value = CType(Original_GroundWire,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(53).Value = CType(Original_GroundWire,Boolean)
             If (Original_GroundWireSize Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(54).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(55).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(54).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(55).Value = CType(Original_GroundWireSize,String)
+            End If
+            If (Original_GroundConductor Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(56).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(57).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(56).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(57).Value = CType(Original_GroundWireSize,String)
-            End If
-            If (Original_GroundConductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(58).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(59).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(58).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(59).Value = CType(Original_GroundConductor,String)
+                Me.Adapter.UpdateCommand.Parameters(57).Value = CType(Original_GroundConductor,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -11891,7 +11728,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal CircuitNo As Integer,  _
                     ByVal Type As String,  _
                     ByVal Subfeeder As String,  _
-                    ByVal Voltage As Integer,  _
                     ByVal PowerRating As Double,  _
                     ByVal Phase As String,  _
                     ByVal MotorType As String,  _
@@ -11914,7 +11750,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_CircuitNo As Integer,  _
                     ByVal Original_Type As String,  _
                     ByVal Original_Subfeeder As String,  _
-                    ByVal Original_Voltage As Integer,  _
                     ByVal Original_PowerRating As Double,  _
                     ByVal Original_Phase As String,  _
                     ByVal Original_MotorType As String,  _
@@ -11932,7 +11767,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_GroundWire As Boolean,  _
                     ByVal Original_GroundWireSize As String,  _
                     ByVal Original_GroundConductor As String) As Integer
-            Return Me.Update(Original_Code, Project, CircuitNo, Type, Subfeeder, Voltage, PowerRating, Phase, MotorType, MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, _Set, Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSize, GroundConductor, Original_Code, Original_Project, Original_CircuitNo, Original_Type, Original_Subfeeder, Original_Voltage, Original_PowerRating, Original_Phase, Original_MotorType, Original_MotorRating, Original_FullLoadCurrent, Original_MinimumAmpacity, Original_WireType, Original_WireSize, Original_Set, Original_Conductor, Original_ConduitType, Original_ConduitSize, Original_OCPDRating, Original_BreakerType, Original_GroundWire, Original_GroundWireSize, Original_GroundConductor)
+            Return Me.Update(Original_Code, Project, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, _Set, Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSize, GroundConductor, Original_Code, Original_Project, Original_CircuitNo, Original_Type, Original_Subfeeder, Original_PowerRating, Original_Phase, Original_MotorType, Original_MotorRating, Original_FullLoadCurrent, Original_MinimumAmpacity, Original_WireType, Original_WireSize, Original_Set, Original_Conductor, Original_ConduitType, Original_ConduitSize, Original_OCPDRating, Original_BreakerType, Original_GroundWire, Original_GroundWireSize, Original_GroundConductor)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -12409,7 +12244,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             tableMapping.ColumnMappings.Add("ProjectCode", "ProjectCode")
             tableMapping.ColumnMappings.Add("Number", "Number")
             tableMapping.ColumnMappings.Add("DPCode", "DPCode")
-            tableMapping.ColumnMappings.Add("Voltage", "Voltage")
             tableMapping.ColumnMappings.Add("CurrentRating", "CurrentRating")
             tableMapping.ColumnMappings.Add("MinimumAmpacity", "MinimumAmpacity")
             tableMapping.ColumnMappings.Add("WireType", "WireType")
@@ -12435,42 +12269,41 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[tblSubfeeder] WHERE (([Code] = @Original_Code) AND ([ProjectCo"& _ 
-                "de] = @Original_ProjectCode) AND ([Number] = @Original_Number) AND ([DPCode] = @"& _ 
-                "Original_DPCode) AND ([Voltage] = @Original_Voltage) AND ((@IsNull_CurrentRating"& _ 
-                " = 1 AND [CurrentRating] IS NULL) OR ([CurrentRating] = @Original_CurrentRating)"& _ 
-                ") AND ((@IsNull_MinimumAmpacity = 1 AND [MinimumAmpacity] IS NULL) OR ([MinimumA"& _ 
-                "mpacity] = @Original_MinimumAmpacity)) AND ((@IsNull_WireType = 1 AND [WireType]"& _ 
-                " IS NULL) OR ([WireType] = @Original_WireType)) AND ((@IsNull_WireSize = 1 AND ["& _ 
-                "WireSize] IS NULL) OR ([WireSize] = @Original_WireSize)) AND ((@IsNull_Set = 1 A"& _ 
-                "ND [Set] IS NULL) OR ([Set] = @Original_Set)) AND ((@IsNull_Conductor = 1 AND [C"& _ 
-                "onductor] IS NULL) OR ([Conductor] = @Original_Conductor)) AND ([Neutral] = @Ori"& _ 
-                "ginal_Neutral) AND ((@IsNull_NeutralWire = 1 AND [NeutralWire] IS NULL) OR ([Neu"& _ 
-                "tralWire] = @Original_NeutralWire)) AND ((@IsNull_NeutralSize = 1 AND [NeutralSi"& _ 
-                "ze] IS NULL) OR ([NeutralSize] = @Original_NeutralSize)) AND ((@IsNull_NeutralCo"& _ 
-                "nductor = 1 AND [NeutralConductor] IS NULL) OR ([NeutralConductor] = @Original_N"& _ 
-                "eutralConductor)) AND ((@IsNull_NeutralSet = 1 AND [NeutralSet] IS NULL) OR ([Ne"& _ 
-                "utralSet] = @Original_NeutralSet)) AND ((@IsNull_ConduitType = 1 AND [ConduitTyp"& _ 
-                "e] IS NULL) OR ([ConduitType] = @Original_ConduitType)) AND ((@IsNull_ConduitSiz"& _ 
-                "e = 1 AND [ConduitSize] IS NULL) OR ([ConduitSize] = @Original_ConduitSize)) AND"& _ 
-                " ((@IsNull_OCPDRating = 1 AND [OCPDRating] IS NULL) OR ([OCPDRating] = @Original"& _ 
-                "_OCPDRating)) AND ((@IsNull_BreakerType = 1 AND [BreakerType] IS NULL) OR ([Brea"& _ 
-                "kerType] = @Original_BreakerType)) AND ((@IsNull_DistancetoMain = 1 AND [Distanc"& _ 
-                "etoMain] IS NULL) OR ([DistancetoMain] = @Original_DistancetoMain)) AND ((@IsNul"& _ 
-                "l_VoltageDrop = 1 AND [VoltageDrop] IS NULL) OR ([VoltageDrop] = @Original_Volta"& _ 
-                "geDrop)) AND ((@IsNull_GroundWire = 1 AND [GroundWire] IS NULL) OR ([GroundWire]"& _ 
-                " = @Original_GroundWire)) AND ((@IsNull_GroundWireSize = 1 AND [GroundWireSize] "& _ 
-                "IS NULL) OR ([GroundWireSize] = @Original_GroundWireSize)) AND ((@IsNull_GroundC"& _ 
-                "onductor = 1 AND [GroundConductor] IS NULL) OR ([GroundConductor] = @Original_Gr"& _ 
-                "oundConductor)) AND ((@IsNull_ImpedanceReal = 1 AND [ImpedanceReal] IS NULL) OR "& _ 
-                "([ImpedanceReal] = @Original_ImpedanceReal)) AND ((@IsNull_ImpedanceImag = 1 AND"& _ 
-                " [ImpedanceImag] IS NULL) OR ([ImpedanceImag] = @Original_ImpedanceImag)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [tblSubfeeder] WHERE (([Code] = @Original_Code) AND ([ProjectCode] = "& _ 
+                "@Original_ProjectCode) AND ([Number] = @Original_Number) AND ([DPCode] = @Origin"& _ 
+                "al_DPCode) AND ((@IsNull_CurrentRating = 1 AND [CurrentRating] IS NULL) OR ([Cur"& _ 
+                "rentRating] = @Original_CurrentRating)) AND ((@IsNull_MinimumAmpacity = 1 AND [M"& _ 
+                "inimumAmpacity] IS NULL) OR ([MinimumAmpacity] = @Original_MinimumAmpacity)) AND"& _ 
+                " ((@IsNull_WireType = 1 AND [WireType] IS NULL) OR ([WireType] = @Original_WireT"& _ 
+                "ype)) AND ((@IsNull_WireSize = 1 AND [WireSize] IS NULL) OR ([WireSize] = @Origi"& _ 
+                "nal_WireSize)) AND ((@IsNull_Set = 1 AND [Set] IS NULL) OR ([Set] = @Original_Se"& _ 
+                "t)) AND ((@IsNull_Conductor = 1 AND [Conductor] IS NULL) OR ([Conductor] = @Orig"& _ 
+                "inal_Conductor)) AND ([Neutral] = @Original_Neutral) AND ((@IsNull_NeutralWire ="& _ 
+                " 1 AND [NeutralWire] IS NULL) OR ([NeutralWire] = @Original_NeutralWire)) AND (("& _ 
+                "@IsNull_NeutralSize = 1 AND [NeutralSize] IS NULL) OR ([NeutralSize] = @Original"& _ 
+                "_NeutralSize)) AND ((@IsNull_NeutralConductor = 1 AND [NeutralConductor] IS NULL"& _ 
+                ") OR ([NeutralConductor] = @Original_NeutralConductor)) AND ((@IsNull_NeutralSet"& _ 
+                " = 1 AND [NeutralSet] IS NULL) OR ([NeutralSet] = @Original_NeutralSet)) AND ((@"& _ 
+                "IsNull_ConduitType = 1 AND [ConduitType] IS NULL) OR ([ConduitType] = @Original_"& _ 
+                "ConduitType)) AND ((@IsNull_ConduitSize = 1 AND [ConduitSize] IS NULL) OR ([Cond"& _ 
+                "uitSize] = @Original_ConduitSize)) AND ((@IsNull_OCPDRating = 1 AND [OCPDRating]"& _ 
+                " IS NULL) OR ([OCPDRating] = @Original_OCPDRating)) AND ((@IsNull_BreakerType = "& _ 
+                "1 AND [BreakerType] IS NULL) OR ([BreakerType] = @Original_BreakerType)) AND ((@"& _ 
+                "IsNull_DistancetoMain = 1 AND [DistancetoMain] IS NULL) OR ([DistancetoMain] = @"& _ 
+                "Original_DistancetoMain)) AND ((@IsNull_VoltageDrop = 1 AND [VoltageDrop] IS NUL"& _ 
+                "L) OR ([VoltageDrop] = @Original_VoltageDrop)) AND ((@IsNull_GroundWire = 1 AND "& _ 
+                "[GroundWire] IS NULL) OR ([GroundWire] = @Original_GroundWire)) AND ((@IsNull_Gr"& _ 
+                "oundWireSize = 1 AND [GroundWireSize] IS NULL) OR ([GroundWireSize] = @Original_"& _ 
+                "GroundWireSize)) AND ((@IsNull_GroundConductor = 1 AND [GroundConductor] IS NULL"& _ 
+                ") OR ([GroundConductor] = @Original_GroundConductor)) AND ((@IsNull_ImpedanceRea"& _ 
+                "l = 1 AND [ImpedanceReal] IS NULL) OR ([ImpedanceReal] = @Original_ImpedanceReal"& _ 
+                ")) AND ((@IsNull_ImpedanceImag = 1 AND [ImpedanceImag] IS NULL) OR ([ImpedanceIm"& _ 
+                "ag] = @Original_ImpedanceImag)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Number", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Number", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DPCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_CurrentRating", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CurrentRating", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CurrentRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CurrentRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_MinimumAmpacity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "MinimumAmpacity", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -12516,27 +12349,26 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ImpedanceImag", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceImag", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[tblSubfeeder] ([Code], [ProjectCode], [Number], [DPCode], [Vol"& _ 
-                "tage], [CurrentRating], [MinimumAmpacity], [WireType], [WireSize], [Set], [Condu"& _ 
-                "ctor], [Neutral], [NeutralWire], [NeutralSize], [NeutralConductor], [NeutralSet]"& _ 
-                ", [ConduitType], [ConduitSize], [OCPDRating], [BreakerType], [DistancetoMain], ["& _ 
-                "VoltageDrop], [GroundWire], [GroundWireSize], [GroundConductor], [ImpedanceReal]"& _ 
-                ", [ImpedanceImag]) VALUES (@Code, @ProjectCode, @Number, @DPCode, @Voltage, @Cur"& _ 
-                "rentRating, @MinimumAmpacity, @WireType, @WireSize, @Set, @Conductor, @Neutral, "& _ 
-                "@NeutralWire, @NeutralSize, @NeutralConductor, @NeutralSet, @ConduitType, @Condu"& _ 
-                "itSize, @OCPDRating, @BreakerType, @DistancetoMain, @VoltageDrop, @GroundWire, @"& _ 
-                "GroundWireSize, @GroundConductor, @ImpedanceReal, @ImpedanceImag);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code,"& _ 
-                " ProjectCode, Number, DPCode, Voltage, CurrentRating, MinimumAmpacity, WireType,"& _ 
-                " WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize, NeutralConductor"& _ 
-                ", NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMain,"& _ 
-                " VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, Impeda"& _ 
-                "nceImag FROM tblSubfeeder WHERE (Code = @Code)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [tblSubfeeder] ([Code], [ProjectCode], [Number], [DPCode], [CurrentRa"& _ 
+                "ting], [MinimumAmpacity], [WireType], [WireSize], [Set], [Conductor], [Neutral],"& _ 
+                " [NeutralWire], [NeutralSize], [NeutralConductor], [NeutralSet], [ConduitType], "& _ 
+                "[ConduitSize], [OCPDRating], [BreakerType], [DistancetoMain], [VoltageDrop], [Gr"& _ 
+                "oundWire], [GroundWireSize], [GroundConductor], [ImpedanceReal], [ImpedanceImag]"& _ 
+                ") VALUES (@Code, @ProjectCode, @Number, @DPCode, @CurrentRating, @MinimumAmpacit"& _ 
+                "y, @WireType, @WireSize, @Set, @Conductor, @Neutral, @NeutralWire, @NeutralSize,"& _ 
+                " @NeutralConductor, @NeutralSet, @ConduitType, @ConduitSize, @OCPDRating, @Break"& _ 
+                "erType, @DistancetoMain, @VoltageDrop, @GroundWire, @GroundWireSize, @GroundCond"& _ 
+                "uctor, @ImpedanceReal, @ImpedanceImag);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, ProjectCode, Number, DPCod"& _ 
+                "e, CurrentRating, MinimumAmpacity, WireType, WireSize, [Set], Conductor, Neutral"& _ 
+                ", NeutralWire, NeutralSize, NeutralConductor, NeutralSet, ConduitType, ConduitSi"& _ 
+                "ze, OCPDRating, BreakerType, DistancetoMain, VoltageDrop, GroundWire, GroundWire"& _ 
+                "Size, GroundConductor, ImpedanceReal, ImpedanceImag FROM tblSubfeeder WHERE (Cod"& _ 
+                "e = @Code)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Code", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Number", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Number", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DPCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CurrentRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CurrentRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MinimumAmpacity", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "MinimumAmpacity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WireType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "WireType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -12561,57 +12393,55 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ImpedanceImag", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ImpedanceImag", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[tblSubfeeder] SET [Code] = @Code, [ProjectCode] = @ProjectCode, [Nu"& _ 
-                "mber] = @Number, [DPCode] = @DPCode, [Voltage] = @Voltage, [CurrentRating] = @Cu"& _ 
-                "rrentRating, [MinimumAmpacity] = @MinimumAmpacity, [WireType] = @WireType, [Wire"& _ 
-                "Size] = @WireSize, [Set] = @Set, [Conductor] = @Conductor, [Neutral] = @Neutral,"& _ 
-                " [NeutralWire] = @NeutralWire, [NeutralSize] = @NeutralSize, [NeutralConductor] "& _ 
-                "= @NeutralConductor, [NeutralSet] = @NeutralSet, [ConduitType] = @ConduitType, ["& _ 
-                "ConduitSize] = @ConduitSize, [OCPDRating] = @OCPDRating, [BreakerType] = @Breake"& _ 
-                "rType, [DistancetoMain] = @DistancetoMain, [VoltageDrop] = @VoltageDrop, [Ground"& _ 
-                "Wire] = @GroundWire, [GroundWireSize] = @GroundWireSize, [GroundConductor] = @Gr"& _ 
-                "oundConductor, [ImpedanceReal] = @ImpedanceReal, [ImpedanceImag] = @ImpedanceIma"& _ 
-                "g WHERE (([Code] = @Original_Code) AND ([ProjectCode] = @Original_ProjectCode) A"& _ 
-                "ND ([Number] = @Original_Number) AND ([DPCode] = @Original_DPCode) AND ([Voltage"& _ 
-                "] = @Original_Voltage) AND ((@IsNull_CurrentRating = 1 AND [CurrentRating] IS NU"& _ 
-                "LL) OR ([CurrentRating] = @Original_CurrentRating)) AND ((@IsNull_MinimumAmpacit"& _ 
-                "y = 1 AND [MinimumAmpacity] IS NULL) OR ([MinimumAmpacity] = @Original_MinimumAm"& _ 
-                "pacity)) AND ((@IsNull_WireType = 1 AND [WireType] IS NULL) OR ([WireType] = @Or"& _ 
-                "iginal_WireType)) AND ((@IsNull_WireSize = 1 AND [WireSize] IS NULL) OR ([WireSi"& _ 
-                "ze] = @Original_WireSize)) AND ((@IsNull_Set = 1 AND [Set] IS NULL) OR ([Set] = "& _ 
-                "@Original_Set)) AND ((@IsNull_Conductor = 1 AND [Conductor] IS NULL) OR ([Conduc"& _ 
-                "tor] = @Original_Conductor)) AND ([Neutral] = @Original_Neutral) AND ((@IsNull_N"& _ 
-                "eutralWire = 1 AND [NeutralWire] IS NULL) OR ([NeutralWire] = @Original_NeutralW"& _ 
-                "ire)) AND ((@IsNull_NeutralSize = 1 AND [NeutralSize] IS NULL) OR ([NeutralSize]"& _ 
-                " = @Original_NeutralSize)) AND ((@IsNull_NeutralConductor = 1 AND [NeutralConduc"& _ 
-                "tor] IS NULL) OR ([NeutralConductor] = @Original_NeutralConductor)) AND ((@IsNul"& _ 
-                "l_NeutralSet = 1 AND [NeutralSet] IS NULL) OR ([NeutralSet] = @Original_NeutralS"& _ 
-                "et)) AND ((@IsNull_ConduitType = 1 AND [ConduitType] IS NULL) OR ([ConduitType] "& _ 
-                "= @Original_ConduitType)) AND ((@IsNull_ConduitSize = 1 AND [ConduitSize] IS NUL"& _ 
-                "L) OR ([ConduitSize] = @Original_ConduitSize)) AND ((@IsNull_OCPDRating = 1 AND "& _ 
-                "[OCPDRating] IS NULL) OR ([OCPDRating] = @Original_OCPDRating)) AND ((@IsNull_Br"& _ 
-                "eakerType = 1 AND [BreakerType] IS NULL) OR ([BreakerType] = @Original_BreakerTy"& _ 
-                "pe)) AND ((@IsNull_DistancetoMain = 1 AND [DistancetoMain] IS NULL) OR ([Distanc"& _ 
-                "etoMain] = @Original_DistancetoMain)) AND ((@IsNull_VoltageDrop = 1 AND [Voltage"& _ 
-                "Drop] IS NULL) OR ([VoltageDrop] = @Original_VoltageDrop)) AND ((@IsNull_GroundW"& _ 
-                "ire = 1 AND [GroundWire] IS NULL) OR ([GroundWire] = @Original_GroundWire)) AND "& _ 
-                "((@IsNull_GroundWireSize = 1 AND [GroundWireSize] IS NULL) OR ([GroundWireSize] "& _ 
-                "= @Original_GroundWireSize)) AND ((@IsNull_GroundConductor = 1 AND [GroundConduc"& _ 
-                "tor] IS NULL) OR ([GroundConductor] = @Original_GroundConductor)) AND ((@IsNull_"& _ 
-                "ImpedanceReal = 1 AND [ImpedanceReal] IS NULL) OR ([ImpedanceReal] = @Original_I"& _ 
-                "mpedanceReal)) AND ((@IsNull_ImpedanceImag = 1 AND [ImpedanceImag] IS NULL) OR ("& _ 
-                "[ImpedanceImag] = @Original_ImpedanceImag)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, ProjectCode, Number,"& _ 
-                " DPCode, Voltage, CurrentRating, MinimumAmpacity, WireType, WireSize, [Set], Con"& _ 
-                "ductor, Neutral, NeutralWire, NeutralSize, NeutralConductor, NeutralSet, Conduit"& _ 
-                "Type, ConduitSize, OCPDRating, BreakerType, DistancetoMain, VoltageDrop, GroundW"& _ 
-                "ire, GroundWireSize, GroundConductor, ImpedanceReal, ImpedanceImag FROM tblSubfe"& _ 
-                "eder WHERE (Code = @Code)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [tblSubfeeder] SET [Code] = @Code, [ProjectCode] = @ProjectCode, [Number] "& _ 
+                "= @Number, [DPCode] = @DPCode, [CurrentRating] = @CurrentRating, [MinimumAmpacit"& _ 
+                "y] = @MinimumAmpacity, [WireType] = @WireType, [WireSize] = @WireSize, [Set] = @"& _ 
+                "Set, [Conductor] = @Conductor, [Neutral] = @Neutral, [NeutralWire] = @NeutralWir"& _ 
+                "e, [NeutralSize] = @NeutralSize, [NeutralConductor] = @NeutralConductor, [Neutra"& _ 
+                "lSet] = @NeutralSet, [ConduitType] = @ConduitType, [ConduitSize] = @ConduitSize,"& _ 
+                " [OCPDRating] = @OCPDRating, [BreakerType] = @BreakerType, [DistancetoMain] = @D"& _ 
+                "istancetoMain, [VoltageDrop] = @VoltageDrop, [GroundWire] = @GroundWire, [Ground"& _ 
+                "WireSize] = @GroundWireSize, [GroundConductor] = @GroundConductor, [ImpedanceRea"& _ 
+                "l] = @ImpedanceReal, [ImpedanceImag] = @ImpedanceImag WHERE (([Code] = @Original"& _ 
+                "_Code) AND ([ProjectCode] = @Original_ProjectCode) AND ([Number] = @Original_Num"& _ 
+                "ber) AND ([DPCode] = @Original_DPCode) AND ((@IsNull_CurrentRating = 1 AND [Curr"& _ 
+                "entRating] IS NULL) OR ([CurrentRating] = @Original_CurrentRating)) AND ((@IsNul"& _ 
+                "l_MinimumAmpacity = 1 AND [MinimumAmpacity] IS NULL) OR ([MinimumAmpacity] = @Or"& _ 
+                "iginal_MinimumAmpacity)) AND ((@IsNull_WireType = 1 AND [WireType] IS NULL) OR ("& _ 
+                "[WireType] = @Original_WireType)) AND ((@IsNull_WireSize = 1 AND [WireSize] IS N"& _ 
+                "ULL) OR ([WireSize] = @Original_WireSize)) AND ((@IsNull_Set = 1 AND [Set] IS NU"& _ 
+                "LL) OR ([Set] = @Original_Set)) AND ((@IsNull_Conductor = 1 AND [Conductor] IS N"& _ 
+                "ULL) OR ([Conductor] = @Original_Conductor)) AND ([Neutral] = @Original_Neutral)"& _ 
+                " AND ((@IsNull_NeutralWire = 1 AND [NeutralWire] IS NULL) OR ([NeutralWire] = @O"& _ 
+                "riginal_NeutralWire)) AND ((@IsNull_NeutralSize = 1 AND [NeutralSize] IS NULL) O"& _ 
+                "R ([NeutralSize] = @Original_NeutralSize)) AND ((@IsNull_NeutralConductor = 1 AN"& _ 
+                "D [NeutralConductor] IS NULL) OR ([NeutralConductor] = @Original_NeutralConducto"& _ 
+                "r)) AND ((@IsNull_NeutralSet = 1 AND [NeutralSet] IS NULL) OR ([NeutralSet] = @O"& _ 
+                "riginal_NeutralSet)) AND ((@IsNull_ConduitType = 1 AND [ConduitType] IS NULL) OR"& _ 
+                " ([ConduitType] = @Original_ConduitType)) AND ((@IsNull_ConduitSize = 1 AND [Con"& _ 
+                "duitSize] IS NULL) OR ([ConduitSize] = @Original_ConduitSize)) AND ((@IsNull_OCP"& _ 
+                "DRating = 1 AND [OCPDRating] IS NULL) OR ([OCPDRating] = @Original_OCPDRating)) "& _ 
+                "AND ((@IsNull_BreakerType = 1 AND [BreakerType] IS NULL) OR ([BreakerType] = @Or"& _ 
+                "iginal_BreakerType)) AND ((@IsNull_DistancetoMain = 1 AND [DistancetoMain] IS NU"& _ 
+                "LL) OR ([DistancetoMain] = @Original_DistancetoMain)) AND ((@IsNull_VoltageDrop "& _ 
+                "= 1 AND [VoltageDrop] IS NULL) OR ([VoltageDrop] = @Original_VoltageDrop)) AND ("& _ 
+                "(@IsNull_GroundWire = 1 AND [GroundWire] IS NULL) OR ([GroundWire] = @Original_G"& _ 
+                "roundWire)) AND ((@IsNull_GroundWireSize = 1 AND [GroundWireSize] IS NULL) OR (["& _ 
+                "GroundWireSize] = @Original_GroundWireSize)) AND ((@IsNull_GroundConductor = 1 A"& _ 
+                "ND [GroundConductor] IS NULL) OR ([GroundConductor] = @Original_GroundConductor)"& _ 
+                ") AND ((@IsNull_ImpedanceReal = 1 AND [ImpedanceReal] IS NULL) OR ([ImpedanceRea"& _ 
+                "l] = @Original_ImpedanceReal)) AND ((@IsNull_ImpedanceImag = 1 AND [ImpedanceIma"& _ 
+                "g] IS NULL) OR ([ImpedanceImag] = @Original_ImpedanceImag)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Code, Proj"& _ 
+                "ectCode, Number, DPCode, CurrentRating, MinimumAmpacity, WireType, WireSize, [Se"& _ 
+                "t], Conductor, Neutral, NeutralWire, NeutralSize, NeutralConductor, NeutralSet, "& _ 
+                "ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMain, VoltageDrop, "& _ 
+                "GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, ImpedanceImag FROM t"& _ 
+                "blSubfeeder WHERE (Code = @Code)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Code", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Number", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Number", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DPCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CurrentRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CurrentRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@MinimumAmpacity", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "MinimumAmpacity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@WireType", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "WireType", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -12638,7 +12468,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Number", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Number", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DPCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Voltage", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Voltage", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_CurrentRating", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CurrentRating", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CurrentRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CurrentRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_MinimumAmpacity", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "MinimumAmpacity", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
@@ -12697,11 +12526,11 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(6) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Code, ProjectCode, Number, DPCode, Voltage, CurrentRating, MinimumAmpacity"& _ 
-                ", WireType, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize, Neutr"& _ 
-                "alConductor, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, Dist"& _ 
-                "ancetoMain, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceR"& _ 
-                "eal, ImpedanceImag FROM dbo.tblSubfeeder"
+            Me._commandCollection(0).CommandText = "SELECT Code, ProjectCode, Number, DPCode, CurrentRating, MinimumAmpacity, WireTyp"& _ 
+                "e, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize, NeutralConduct"& _ 
+                "or, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMai"& _ 
+                "n, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, Impe"& _ 
+                "danceImag FROM tblSubfeeder"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
@@ -12722,33 +12551,30 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT        Code, ProjectCode, Number, DPCode, Voltage, CurrentRating, MinimumA"& _ 
-                "mpacity, WireType, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize"& _ 
-                ", NeutralConductor, NeutralSet, ConduitType, ConduitSize, OCPDRating, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
-                "                 BreakerType, DistancetoMain, VoltageDrop, GroundWire, GroundWir"& _ 
-                "eSize, GroundConductor, ImpedanceReal, ImpedanceImag"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tblSubfeed"& _ 
-                "er"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (DPCode = @dp)"
+            Me._commandCollection(4).CommandText = "SELECT Code, ProjectCode, Number, DPCode, CurrentRating, MinimumAmpacity, WireTyp"& _ 
+                "e, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize, NeutralConduct"& _ 
+                "or, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMai"& _ 
+                "n, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, Impe"& _ 
+                "danceImag FROM tblSubfeeder WHERE (DPCode = @dp)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT        Code, ProjectCode, Number, DPCode, Voltage, CurrentRating, MinimumA"& _ 
-                "mpacity, WireType, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize"& _ 
-                ", NeutralConductor, NeutralSet, ConduitType, ConduitSize, OCPDRating, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
-                "                 BreakerType, DistancetoMain, VoltageDrop, GroundWire, GroundWir"& _ 
-                "eSize, GroundConductor, ImpedanceReal, ImpedanceImag"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tblSubfeed"& _ 
-                "er"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (ProjectCode = @project)"
+            Me._commandCollection(5).CommandText = "SELECT Code, ProjectCode, Number, DPCode, CurrentRating, MinimumAmpacity, WireTyp"& _ 
+                "e, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize, NeutralConduct"& _ 
+                "or, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMai"& _ 
+                "n, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, Impe"& _ 
+                "danceImag FROM tblSubfeeder WHERE (ProjectCode = @project)"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(6).Connection = Me.Connection
-            Me._commandCollection(6).CommandText = "SELECT        Code, ProjectCode, Number, DPCode, Voltage, CurrentRating, MinimumA"& _ 
-                "mpacity, WireType, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize"& _ 
-                ", NeutralConductor, NeutralSet, ConduitType, ConduitSize, OCPDRating, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
-                "                 BreakerType, DistancetoMain, VoltageDrop, GroundWire, GroundWir"& _ 
-                "eSize, GroundConductor, ImpedanceReal, ImpedanceImag"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tblSubfeed"& _ 
-                "er"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (DPCode = @dp) AND (ImpedanceReal IS NOT NULL) AND (ImpedanceIm"& _ 
-                "ag IS NOT NULL)"
+            Me._commandCollection(6).CommandText = "SELECT Code, ProjectCode, Number, DPCode, CurrentRating, MinimumAmpacity, WireTyp"& _ 
+                "e, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize, NeutralConduct"& _ 
+                "or, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMai"& _ 
+                "n, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, Impe"& _ 
+                "danceImag FROM tblSubfeeder WHERE (DPCode = @dp) AND (ImpedanceReal IS NOT NULL)"& _ 
+                " AND (ImpedanceImag IS NOT NULL)"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
@@ -12868,7 +12694,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_ProjectCode As String,  _
                     ByVal Original_Number As Integer,  _
                     ByVal Original_DPCode As String,  _
-                    ByVal Original_Voltage As Integer,  _
                     ByVal Original_CurrentRating As Global.System.Nullable(Of Double),  _
                     ByVal Original_MinimumAmpacity As Global.System.Nullable(Of Double),  _
                     ByVal Original_WireType As String,  _
@@ -12907,154 +12732,153 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Else
                 Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_DPCode,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_Voltage,Integer)
             If (Original_CurrentRating.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_CurrentRating.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_CurrentRating.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             If (Original_MinimumAmpacity.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_MinimumAmpacity.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_MinimumAmpacity.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(7).Value = Global.System.DBNull.Value
             End If
             If (Original_WireType Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_WireType,String)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(Original_WireType,String)
             End If
             If (Original_WireSize Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(12).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_WireSize,String)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(Original_WireSize,String)
             End If
             If (Original_Set.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_Set.Value,Integer)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(Original_Set.Value,Integer)
             Else
-                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
             If (Original_Conductor Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_Conductor,String)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(Original_Conductor,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(17).Value = CType(Original_Neutral,Boolean)
+            Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_Neutral,Boolean)
             If (Original_NeutralWire Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(Original_NeutralWire,String)
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_NeutralWire,String)
             End If
             If (Original_NeutralSize Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(21).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(20).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(Original_NeutralSize,String)
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(Original_NeutralSize,String)
             End If
             If (Original_NeutralConductor Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(23).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(Original_NeutralConductor,String)
+                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(Original_NeutralConductor,String)
             End If
             If (Original_NeutralSet.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(Original_NeutralSet.Value,Integer)
+                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(Original_NeutralSet.Value,Integer)
             Else
-                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(25).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(24).Value = Global.System.DBNull.Value
             End If
             If (Original_ConduitType Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(27).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(26).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(Original_ConduitType,String)
+                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(Original_ConduitType,String)
             End If
             If (Original_ConduitSize Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(28).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(29).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(28).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(28).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(29).Value = CType(Original_ConduitSize,String)
+                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(28).Value = CType(Original_ConduitSize,String)
             End If
             If (Original_OCPDRating.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(30).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(31).Value = CType(Original_OCPDRating.Value,Integer)
+                Me.Adapter.DeleteCommand.Parameters(29).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(30).Value = CType(Original_OCPDRating.Value,Integer)
             Else
-                Me.Adapter.DeleteCommand.Parameters(30).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(31).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(29).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(30).Value = Global.System.DBNull.Value
             End If
             If (Original_BreakerType Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(32).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(33).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(31).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(32).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(32).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(33).Value = CType(Original_BreakerType,String)
+                Me.Adapter.DeleteCommand.Parameters(31).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(32).Value = CType(Original_BreakerType,String)
             End If
             If (Original_DistancetoMain.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(34).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(35).Value = CType(Original_DistancetoMain.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(33).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(34).Value = CType(Original_DistancetoMain.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(34).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(35).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(33).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(34).Value = Global.System.DBNull.Value
             End If
             If (Original_VoltageDrop.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(36).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(37).Value = CType(Original_VoltageDrop.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(35).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(36).Value = CType(Original_VoltageDrop.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(36).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(37).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(35).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(36).Value = Global.System.DBNull.Value
             End If
             If (Original_GroundWire.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(38).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(39).Value = CType(Original_GroundWire.Value,Boolean)
+                Me.Adapter.DeleteCommand.Parameters(37).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(38).Value = CType(Original_GroundWire.Value,Boolean)
             Else
-                Me.Adapter.DeleteCommand.Parameters(38).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(39).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(37).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(38).Value = Global.System.DBNull.Value
             End If
             If (Original_GroundWireSize Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(40).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(41).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(39).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(40).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(40).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(41).Value = CType(Original_GroundWireSize,String)
+                Me.Adapter.DeleteCommand.Parameters(39).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(40).Value = CType(Original_GroundWireSize,String)
             End If
             If (Original_GroundConductor Is Nothing) Then
-                Me.Adapter.DeleteCommand.Parameters(42).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(43).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(41).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(42).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.DeleteCommand.Parameters(42).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(43).Value = CType(Original_GroundConductor,String)
+                Me.Adapter.DeleteCommand.Parameters(41).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(42).Value = CType(Original_GroundConductor,String)
             End If
             If (Original_ImpedanceReal.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(44).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(45).Value = CType(Original_ImpedanceReal.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(43).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(44).Value = CType(Original_ImpedanceReal.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(44).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(45).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(43).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(44).Value = Global.System.DBNull.Value
             End If
             If (Original_ImpedanceImag.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(46).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(47).Value = CType(Original_ImpedanceImag.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(45).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(46).Value = CType(Original_ImpedanceImag.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(46).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(47).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(45).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(46).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -13080,7 +12904,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal ProjectCode As String,  _
                     ByVal Number As Integer,  _
                     ByVal DPCode As String,  _
-                    ByVal Voltage As Integer,  _
                     ByVal CurrentRating As Global.System.Nullable(Of Double),  _
                     ByVal MinimumAmpacity As Global.System.Nullable(Of Double),  _
                     ByVal WireType As String,  _
@@ -13119,112 +12942,111 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Else
                 Me.Adapter.InsertCommand.Parameters(3).Value = CType(DPCode,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(4).Value = CType(Voltage,Integer)
             If (CurrentRating.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(CurrentRating.Value,Double)
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(CurrentRating.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (MinimumAmpacity.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(MinimumAmpacity.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (MinimumAmpacity.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(MinimumAmpacity.Value,Double)
-            Else
-                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
-            End If
             If (WireType Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(WireType,String)
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(WireType,String)
             End If
             If (WireSize Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(8).Value = CType(WireSize,String)
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(WireSize,String)
             End If
             If (_Set.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(9).Value = CType(_Set.Value,Integer)
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(_Set.Value,Integer)
             Else
-                Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
             End If
             If (Conductor Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(10).Value = CType(Conductor,String)
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(Conductor,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(11).Value = CType(Neutral,Boolean)
+            Me.Adapter.InsertCommand.Parameters(10).Value = CType(Neutral,Boolean)
             If (NeutralWire Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(12).Value = CType(NeutralWire,String)
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(NeutralWire,String)
             End If
             If (NeutralSize Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(NeutralSize,String)
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(NeutralSize,String)
             End If
             If (NeutralConductor Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(NeutralConductor,String)
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(NeutralConductor,String)
             End If
             If (NeutralSet.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(NeutralSet.Value,Integer)
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(NeutralSet.Value,Integer)
             Else
-                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
             End If
             If (ConduitType Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(16).Value = CType(ConduitType,String)
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(ConduitType,String)
             End If
             If (ConduitSize Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(17).Value = CType(ConduitSize,String)
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(ConduitSize,String)
             End If
             If (OCPDRating.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(18).Value = CType(OCPDRating.Value,Integer)
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(OCPDRating.Value,Integer)
             Else
-                Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
             End If
             If (BreakerType Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(19).Value = CType(BreakerType,String)
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(BreakerType,String)
             End If
             If (DistancetoMain.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(20).Value = CType(DistancetoMain.Value,Double)
+                Me.Adapter.InsertCommand.Parameters(19).Value = CType(DistancetoMain.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
+            End If
+            If (VoltageDrop.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(20).Value = CType(VoltageDrop.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(20).Value = Global.System.DBNull.Value
             End If
-            If (VoltageDrop.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(21).Value = CType(VoltageDrop.Value,Double)
+            If (GroundWire.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(21).Value = CType(GroundWire.Value,Boolean)
             Else
                 Me.Adapter.InsertCommand.Parameters(21).Value = Global.System.DBNull.Value
             End If
-            If (GroundWire.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(22).Value = CType(GroundWire.Value,Boolean)
-            Else
-                Me.Adapter.InsertCommand.Parameters(22).Value = Global.System.DBNull.Value
-            End If
             If (GroundWireSize Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(23).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(23).Value = CType(GroundWireSize,String)
+                Me.Adapter.InsertCommand.Parameters(22).Value = CType(GroundWireSize,String)
             End If
             If (GroundConductor Is Nothing) Then
-                Me.Adapter.InsertCommand.Parameters(24).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(24).Value = CType(GroundConductor,String)
+                Me.Adapter.InsertCommand.Parameters(23).Value = CType(GroundConductor,String)
             End If
             If (ImpedanceReal.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(25).Value = CType(ImpedanceReal.Value,Double)
+                Me.Adapter.InsertCommand.Parameters(24).Value = CType(ImpedanceReal.Value,Double)
             Else
-                Me.Adapter.InsertCommand.Parameters(25).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(24).Value = Global.System.DBNull.Value
             End If
             If (ImpedanceImag.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(26).Value = CType(ImpedanceImag.Value,Double)
+                Me.Adapter.InsertCommand.Parameters(25).Value = CType(ImpedanceImag.Value,Double)
             Else
-                Me.Adapter.InsertCommand.Parameters(26).Value = Global.System.DBNull.Value
+                Me.Adapter.InsertCommand.Parameters(25).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -13250,7 +13072,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal ProjectCode As String,  _
                     ByVal Number As Integer,  _
                     ByVal DPCode As String,  _
-                    ByVal Voltage As Integer,  _
                     ByVal CurrentRating As Global.System.Nullable(Of Double),  _
                     ByVal MinimumAmpacity As Global.System.Nullable(Of Double),  _
                     ByVal WireType As String,  _
@@ -13277,7 +13098,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_ProjectCode As String,  _
                     ByVal Original_Number As Integer,  _
                     ByVal Original_DPCode As String,  _
-                    ByVal Original_Voltage As Integer,  _
                     ByVal Original_CurrentRating As Global.System.Nullable(Of Double),  _
                     ByVal Original_MinimumAmpacity As Global.System.Nullable(Of Double),  _
                     ByVal Original_WireType As String,  _
@@ -13316,277 +13136,275 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(3).Value = CType(DPCode,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Voltage,Integer)
             If (CurrentRating.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(CurrentRating.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(CurrentRating.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (MinimumAmpacity.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(MinimumAmpacity.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (MinimumAmpacity.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(MinimumAmpacity.Value,Double)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
-            End If
             If (WireType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(WireType,String)
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(WireType,String)
             End If
             If (WireSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(WireSize,String)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(WireSize,String)
             End If
             If (_Set.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(_Set.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(_Set.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
             End If
             If (Conductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Conductor,String)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Conductor,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Neutral,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Neutral,Boolean)
             If (NeutralWire Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(NeutralWire,String)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(NeutralWire,String)
             End If
             If (NeutralSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(NeutralSize,String)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(NeutralSize,String)
             End If
             If (NeutralConductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(NeutralConductor,String)
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(NeutralConductor,String)
             End If
             If (NeutralSet.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(NeutralSet.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(NeutralSet.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
             End If
             If (ConduitType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(ConduitType,String)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(ConduitType,String)
             End If
             If (ConduitSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(ConduitSize,String)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(ConduitSize,String)
             End If
             If (OCPDRating.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(OCPDRating.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(OCPDRating.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
             End If
             If (BreakerType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(BreakerType,String)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(BreakerType,String)
             End If
             If (DistancetoMain.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(DistancetoMain.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(DistancetoMain.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
+            End If
+            If (VoltageDrop.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(VoltageDrop.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
             End If
-            If (VoltageDrop.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(VoltageDrop.Value,Double)
+            If (GroundWire.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(GroundWire.Value,Boolean)
             Else
                 Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
             End If
-            If (GroundWire.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(GroundWire.Value,Boolean)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
-            End If
             If (GroundWireSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(GroundWireSize,String)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(GroundWireSize,String)
             End If
             If (GroundConductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(GroundConductor,String)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(GroundConductor,String)
             End If
             If (ImpedanceReal.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(ImpedanceReal.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(ImpedanceReal.Value,Double)
             Else
-                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(24).Value = Global.System.DBNull.Value
             End If
             If (ImpedanceImag.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(ImpedanceImag.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(ImpedanceImag.Value,Double)
             Else
-                Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
             End If
             If (Original_Code Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Code")
             Else
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_Code,String)
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(Original_Code,String)
             End If
             If (Original_ProjectCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_ProjectCode")
             Else
-                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_ProjectCode,String)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_ProjectCode,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_Number,Integer)
+            Me.Adapter.UpdateCommand.Parameters(28).Value = CType(Original_Number,Integer)
             If (Original_DPCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_DPCode")
             Else
-                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(Original_DPCode,String)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_DPCode,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_Voltage,Integer)
             If (Original_CurrentRating.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_CurrentRating.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = Global.System.DBNull.Value
+            End If
+            If (Original_MinimumAmpacity.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(32).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_CurrentRating.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_MinimumAmpacity.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(32).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(33).Value = Global.System.DBNull.Value
             End If
-            If (Original_MinimumAmpacity.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(Original_MinimumAmpacity.Value,Double)
-            Else
+            If (Original_WireType Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(34).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(35).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(Original_WireType,String)
             End If
-            If (Original_WireType Is Nothing) Then
+            If (Original_WireSize Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(36).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(37).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(36).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(Original_WireType,String)
-            End If
-            If (Original_WireSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(39).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(Original_WireSize,String)
+                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(Original_WireSize,String)
             End If
             If (Original_Set.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(Original_Set.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(Original_Set.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(41).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(39).Value = Global.System.DBNull.Value
             End If
             If (Original_Conductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(43).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(41).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(43).Value = CType(Original_Conductor,String)
+                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(Original_Conductor,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(44).Value = CType(Original_Neutral,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(42).Value = CType(Original_Neutral,Boolean)
             If (Original_NeutralWire Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(43).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(44).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(43).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(Original_NeutralWire,String)
+            End If
+            If (Original_NeutralSize Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(45).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(46).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(45).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(46).Value = CType(Original_NeutralWire,String)
+                Me.Adapter.UpdateCommand.Parameters(46).Value = CType(Original_NeutralSize,String)
             End If
-            If (Original_NeutralSize Is Nothing) Then
+            If (Original_NeutralConductor Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(47).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(48).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(47).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(48).Value = CType(Original_NeutralSize,String)
-            End If
-            If (Original_NeutralConductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(50).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(50).Value = CType(Original_NeutralConductor,String)
+                Me.Adapter.UpdateCommand.Parameters(48).Value = CType(Original_NeutralConductor,String)
             End If
             If (Original_NeutralSet.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(51).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(52).Value = CType(Original_NeutralSet.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(50).Value = CType(Original_NeutralSet.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(51).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(52).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(50).Value = Global.System.DBNull.Value
             End If
             If (Original_ConduitType Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(51).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(52).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(51).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(52).Value = CType(Original_ConduitType,String)
+            End If
+            If (Original_ConduitSize Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(53).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(54).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(53).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(54).Value = CType(Original_ConduitType,String)
-            End If
-            If (Original_ConduitSize Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(55).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(56).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(55).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(56).Value = CType(Original_ConduitSize,String)
+                Me.Adapter.UpdateCommand.Parameters(54).Value = CType(Original_ConduitSize,String)
             End If
             If (Original_OCPDRating.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(57).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(58).Value = CType(Original_OCPDRating.Value,Integer)
+                Me.Adapter.UpdateCommand.Parameters(55).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(56).Value = CType(Original_OCPDRating.Value,Integer)
             Else
-                Me.Adapter.UpdateCommand.Parameters(57).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(58).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(55).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(56).Value = Global.System.DBNull.Value
             End If
             If (Original_BreakerType Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(59).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(60).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(57).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(58).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(59).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(60).Value = CType(Original_BreakerType,String)
+                Me.Adapter.UpdateCommand.Parameters(57).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(58).Value = CType(Original_BreakerType,String)
             End If
             If (Original_DistancetoMain.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(59).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(60).Value = CType(Original_DistancetoMain.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(59).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(60).Value = Global.System.DBNull.Value
+            End If
+            If (Original_VoltageDrop.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(61).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(62).Value = CType(Original_DistancetoMain.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(62).Value = CType(Original_VoltageDrop.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(61).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(62).Value = Global.System.DBNull.Value
             End If
-            If (Original_VoltageDrop.HasValue = true) Then
+            If (Original_GroundWire.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(63).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(64).Value = CType(Original_VoltageDrop.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(64).Value = CType(Original_GroundWire.Value,Boolean)
             Else
                 Me.Adapter.UpdateCommand.Parameters(63).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(64).Value = Global.System.DBNull.Value
             End If
-            If (Original_GroundWire.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(65).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(66).Value = CType(Original_GroundWire.Value,Boolean)
-            Else
+            If (Original_GroundWireSize Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(65).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(66).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(65).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(66).Value = CType(Original_GroundWireSize,String)
             End If
-            If (Original_GroundWireSize Is Nothing) Then
+            If (Original_GroundConductor Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(67).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(68).Value = Global.System.DBNull.Value
             Else
                 Me.Adapter.UpdateCommand.Parameters(67).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(68).Value = CType(Original_GroundWireSize,String)
-            End If
-            If (Original_GroundConductor Is Nothing) Then
-                Me.Adapter.UpdateCommand.Parameters(69).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(70).Value = Global.System.DBNull.Value
-            Else
-                Me.Adapter.UpdateCommand.Parameters(69).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(70).Value = CType(Original_GroundConductor,String)
+                Me.Adapter.UpdateCommand.Parameters(68).Value = CType(Original_GroundConductor,String)
             End If
             If (Original_ImpedanceReal.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(69).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(70).Value = CType(Original_ImpedanceReal.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(69).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(70).Value = Global.System.DBNull.Value
+            End If
+            If (Original_ImpedanceImag.HasValue = true) Then
                 Me.Adapter.UpdateCommand.Parameters(71).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(72).Value = CType(Original_ImpedanceReal.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(72).Value = CType(Original_ImpedanceImag.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(71).Value = CType(1,Object)
                 Me.Adapter.UpdateCommand.Parameters(72).Value = Global.System.DBNull.Value
-            End If
-            If (Original_ImpedanceImag.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(73).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(74).Value = CType(Original_ImpedanceImag.Value,Double)
-            Else
-                Me.Adapter.UpdateCommand.Parameters(73).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(74).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -13611,7 +13429,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal ProjectCode As String,  _
                     ByVal Number As Integer,  _
                     ByVal DPCode As String,  _
-                    ByVal Voltage As Integer,  _
                     ByVal CurrentRating As Global.System.Nullable(Of Double),  _
                     ByVal MinimumAmpacity As Global.System.Nullable(Of Double),  _
                     ByVal WireType As String,  _
@@ -13638,7 +13455,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_ProjectCode As String,  _
                     ByVal Original_Number As Integer,  _
                     ByVal Original_DPCode As String,  _
-                    ByVal Original_Voltage As Integer,  _
                     ByVal Original_CurrentRating As Global.System.Nullable(Of Double),  _
                     ByVal Original_MinimumAmpacity As Global.System.Nullable(Of Double),  _
                     ByVal Original_WireType As String,  _
@@ -13661,7 +13477,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
                     ByVal Original_GroundConductor As String,  _
                     ByVal Original_ImpedanceReal As Global.System.Nullable(Of Double),  _
                     ByVal Original_ImpedanceImag As Global.System.Nullable(Of Double)) As Integer
-            Return Me.Update(Original_Code, ProjectCode, Number, DPCode, Voltage, CurrentRating, MinimumAmpacity, WireType, WireSize, _Set, Conductor, Neutral, NeutralWire, NeutralSize, NeutralConductor, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMain, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, ImpedanceImag, Original_Code, Original_ProjectCode, Original_Number, Original_DPCode, Original_Voltage, Original_CurrentRating, Original_MinimumAmpacity, Original_WireType, Original_WireSize, Original_Set, Original_Conductor, Original_Neutral, Original_NeutralWire, Original_NeutralSize, Original_NeutralConductor, Original_NeutralSet, Original_ConduitType, Original_ConduitSize, Original_OCPDRating, Original_BreakerType, Original_DistancetoMain, Original_VoltageDrop, Original_GroundWire, Original_GroundWireSize, Original_GroundConductor, Original_ImpedanceReal, Original_ImpedanceImag)
+            Return Me.Update(Original_Code, ProjectCode, Number, DPCode, CurrentRating, MinimumAmpacity, WireType, WireSize, _Set, Conductor, Neutral, NeutralWire, NeutralSize, NeutralConductor, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMain, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, ImpedanceImag, Original_Code, Original_ProjectCode, Original_Number, Original_DPCode, Original_CurrentRating, Original_MinimumAmpacity, Original_WireType, Original_WireSize, Original_Set, Original_Conductor, Original_Neutral, Original_NeutralWire, Original_NeutralSize, Original_NeutralConductor, Original_NeutralSet, Original_ConduitType, Original_ConduitSize, Original_OCPDRating, Original_BreakerType, Original_DistancetoMain, Original_VoltageDrop, Original_GroundWire, Original_GroundWireSize, Original_GroundConductor, Original_ImpedanceReal, Original_ImpedanceImag)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
