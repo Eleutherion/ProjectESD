@@ -2,4 +2,5 @@
 End Class
 
 Namespace ESD_DatabaseDataSetTableAdapters
+
 End Namespace
