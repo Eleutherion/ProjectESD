@@ -8,8 +8,8 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("EDASS")>
-<Assembly: AssemblyDescription("Electrical Design Analysis and Simulator Software")>
+<Assembly: AssemblyTitle("Electrical Design Analysis Simulator Software")>
+<Assembly: AssemblyDescription("Designed and Developed by: Cayanan, Maria Carmela Lourdes D.; Justiniani, John Benedict P.; Santoyo, Ren Christian E.")>
 <Assembly: AssemblyCompany("ProjectESD")>
 <Assembly: AssemblyProduct("ProjectESD")>
 <Assembly: AssemblyCopyright("Copyright ©  2018")>
