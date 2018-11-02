@@ -288,14 +288,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ProjectESD.exe" size="877024">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ProjectESD.exe" size="870368">
       <assemblyIdentity name="ProjectESD" version="0.0.0.1" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>JZKLe1rh+gMBYvvjN/QHj8f94ALTJ7J+Nv4jrTILz4U=</dsig:DigestValue>
+        <dsig:DigestValue>dnXeqI1jx4vkdxKZ4L3qbIVoOKvSW87+y6E91kC79jc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -329,7 +329,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>g10PtlbH7fPruwBQc4B7d+EpoHN1nO2Ret5fPAawu7M=</dsig:DigestValue>
+      <dsig:DigestValue>XbEGQsc5RBvyVA0s0oFimhHi43zywBqEJ1j8dpESOH8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ESD_Database_log.ldf" size="8388608" writeableType="applicationData">
@@ -338,16 +338,16 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>oMhYDbhJxOmZZyCxXHW1CqW8RpyZ6UypvEQU/Y4CpjU=</dsig:DigestValue>
+      <dsig:DigestValue>KNHSnVM9iGrta6dKI44LbFp64gdt0lB4UOuLQhTDFTE=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ESD_DatabaseDataSet.xsd" size="316855">
+  <file name="ESD_DatabaseDataSet.xsd" size="313811">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>XKQXLgfnKfc+UvGP/kVCmF2Ir4ve3TxDFXduNtQd5is=</dsig:DigestValue>
+      <dsig:DigestValue>GHfTLOa7y0EpSEC/dAZ+Mjdli18r6EMJrg4W75qzcRA=</dsig:DigestValue>
     </hash>
   </file>
   <file name="facebook_profile_image_kHI_icon.ico" size="24915">
@@ -366,6 +366,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>l4qL9Wp4j4EkUyYMmu/zDuGxVW+9bpR5j4XrJzyyxsg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="User-Manual.pdf" size="134273">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>IBTjWQh1rkg8CHChgt9w0BR4AA+Ft1xHFhPlLvStT1Q=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

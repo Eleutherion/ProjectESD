@@ -1575,7 +1575,7 @@ ErrorLine: End Sub
     End Sub
 
     Private Sub ManualToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ManualToolStripMenuItem.Click
-        MessageBox.Show("Under construction.")
+        Process.Start(Application.StartupPath & "\User-Manual.pdf")
     End Sub
 
     Private Sub AboutUsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutUsToolStripMenuItem.Click

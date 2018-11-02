@@ -7367,10 +7367,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT ProjectCode, TotalLoad, LineCurrent, WireType, Conductor, OCPDRating, Brea"& _ 
-                "kerType, GroundWire, [Set], ConduitSize, ConduitType, WireSize, DistancetoSE, Gr"& _ 
-                "oundConductor, GroundWireSize, ImpedanceImag, ImpedanceReal, kAICRating, ShortCi"& _ 
-                "rcuitCap, XRRatio FROM tblMainFeeder WHERE (ProjectCode = @project)"
+            Me._commandCollection(2).CommandText = "SELECT * FROM tblMainFeeder WHERE (ProjectCode = @project)"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
@@ -9697,17 +9694,13 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT Code, ProjectCode, CurrentRating, WireType, WireSize, [Set], Conductor, Co"& _ 
-                "nduitType, ConduitSize, OCPDRating, BreakerType, DPNumber, DistancetoMain, Imped"& _ 
-                "anceImag, ImpedanceReal FROM tblDistribution WHERE (ProjectCode = @project)"
+            Me._commandCollection(4).CommandText = "SELECT * FROM tblDistribution WHERE (ProjectCode = @project)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT Code, ProjectCode, DPNumber, CurrentRating, WireType, WireSize, [Set], Con"& _ 
-                "ductor, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMain, Imped"& _ 
-                "anceImag, ImpedanceReal FROM tblDistribution WHERE (ProjectCode = @project) AND "& _ 
-                "(ImpedanceImag IS NOT NULL) AND (ImpedanceReal IS NOT NULL)"
+            Me._commandCollection(5).CommandText = "SELECT * FROM tblDistribution WHERE (ProjectCode = @project) AND (ImpedanceImag I"& _ 
+                "S NOT NULL) AND (ImpedanceReal IS NOT NULL)"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
@@ -9719,15 +9712,11 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 "                                                     tblBranch ON tblSubfeeder.C"& _ 
                 "ode = tblBranch.Subfeeder"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 WHERE        (tblDis"& _ 
                 "tribution.Code = @dp) AND (NOT EXISTS"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                         "& _ 
-                "                     (SELECT        Code, Project, CircuitNo, Type, Subfeeder, V"& _ 
-                "oltage, PowerRating, Phase, MotorType, MotorRating, FullLoadCurrent, MinimumAmpa"& _ 
-                "city, WireType, WireSize, [Set], Conductor, ConduitType, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
-                "                                                                     ConduitSize"& _ 
-                ", OCPDRating, BreakerType, GroundWire, GroundWireSize, GroundConductor"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
-                "                                                        FROM            tblBranc"& _ 
-                "h AS tblBranch_1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                              "& _ 
-                "  WHERE        (Phase = '3')))"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 ORDER BY tblBra"& _ 
-                "nch.MotorRating DESC), 0) AS Expr1"
+                "                     (SELECT        *"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                         "& _ 
+                "                       FROM            tblBranch AS tblBranch_1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"               "& _ 
+                "                                                 WHERE        (Phase = '3')))"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" "& _ 
+                "                                ORDER BY tblBranch.MotorRating DESC), 0) AS Expr"& _ 
+                "1"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(7) = New Global.System.Data.SqlClient.SqlCommand()
@@ -10424,7 +10413,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function GetHRMLSinglePhase(ByVal dp As String) As Global.System.Nullable(Of Double)
+        Public Overloads Overridable Function GetHRMLSinglePhase(ByVal dp As String) As Object
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(6)
             If (dp Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("dp")
@@ -10446,9 +10435,9 @@ Namespace ESD_DatabaseDataSetTableAdapters
             End Try
             If ((returnValue Is Nothing)  _
                         OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
-                Return New Global.System.Nullable(Of Double)()
+                Return Nothing
             Else
-                Return New Global.System.Nullable(Of Double)(CType(returnValue,Double))
+                Return CType(returnValue,Object)
             End If
         End Function
         
@@ -10931,18 +10920,12 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT Code, Project, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, "& _ 
-                "MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], Conduc"& _ 
-                "tor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSi"& _ 
-                "ze, GroundConductor FROM tblBranch WHERE (Project = @project)"
+            Me._commandCollection(3).CommandText = "SELECT * FROM tblBranch WHERE (Project = @project)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Project", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT Code, Project, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, "& _ 
-                "MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], Conduc"& _ 
-                "tor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSi"& _ 
-                "ze, GroundConductor FROM tblBranch WHERE (Subfeeder = @subfeeder)"
+            Me._commandCollection(4).CommandText = "SELECT * FROM tblBranch WHERE (Subfeeder = @subfeeder)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
@@ -10951,29 +10934,20 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 "rRating"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch AS tbl1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"   "& _ 
                 "                              WHERE        (Subfeeder = @subfeeder) AND (NOT EXI"& _ 
                 "STS"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                              (SELECT      "& _ 
-                "  Code, Project, CircuitNo, Type, Subfeeder, Voltage, PowerRating, Phase, MotorT"& _ 
-                "ype, MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], C"& _ 
-                "onductor, ConduitType, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                       "& _ 
-                "                                   ConduitSize, OCPDRating, BreakerType, GroundW"& _ 
-                "ire, GroundWireSize, GroundConductor"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                          "& _ 
-                "                      FROM            tblBranch AS tbl2"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                       "& _ 
-                "                                         WHERE        (Phase = '3')))"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"         "& _ 
-                "                        ORDER BY MotorRating DESC), 0) AS Expr1"
+                "  *"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                                FROM       "& _ 
+                "     tblBranch AS tbl2"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                        "& _ 
+                "        WHERE        (Phase = '3')))"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 ORDER BY "& _ 
+                "MotorRating DESC), 0) AS Expr1"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(6).Connection = Me.Connection
             Me._commandCollection(6).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) Moto"& _ 
                 "rRating"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch AS tbl1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"   "& _ 
-                "                              WHERE        (Project = @project) AND (NOT EXISTS"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                              (SELECT        Co"& _ 
-                "de, Project, CircuitNo, Type, Subfeeder, Voltage, PowerRating, Phase, MotorType,"& _ 
-                " MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], Condu"& _ 
-                "ctor, ConduitType, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                           "& _ 
-                "                               ConduitSize, OCPDRating, BreakerType, GroundWire,"& _ 
-                " GroundWireSize, GroundConductor"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                              "& _ 
-                "                  FROM            tblBranch AS tbl2"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                           "& _ 
-                "                                     WHERE        (Phase = '3')))"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"             "& _ 
-                "                    ORDER BY MotorRating DESC), 0) AS Expr1"
+                "                              WHERE        (Project = @project) AND (NOT EXISTS"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                              (SELECT        *"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                                FROM           "& _ 
+                " tblBranch AS tbl2"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                            "& _ 
+                "    WHERE        (Phase = '3')))"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 ORDER BY Moto"& _ 
+                "rRating DESC), 0) AS Expr1"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(7) = New Global.System.Data.SqlClient.SqlCommand()
@@ -11831,7 +11805,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function GetHRMLSinglePhase(ByVal subfeeder As String) As Global.System.Nullable(Of Double)
+        Public Overloads Overridable Function GetHRMLSinglePhase(ByVal subfeeder As String) As Object
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(5)
             If (subfeeder Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("subfeeder")
@@ -11853,16 +11827,16 @@ Namespace ESD_DatabaseDataSetTableAdapters
             End Try
             If ((returnValue Is Nothing)  _
                         OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
-                Return New Global.System.Nullable(Of Double)()
+                Return Nothing
             Else
-                Return New Global.System.Nullable(Of Double)(CType(returnValue,Double))
+                Return CType(returnValue,Object)
             End If
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function GetHRMLSinglePhaseProject(ByVal project As String) As Global.System.Nullable(Of Double)
+        Public Overloads Overridable Function GetHRMLSinglePhaseProject(ByVal project As String) As Object
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(6)
             If (project Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("project")
@@ -11884,9 +11858,9 @@ Namespace ESD_DatabaseDataSetTableAdapters
             End Try
             If ((returnValue Is Nothing)  _
                         OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
-                Return New Global.System.Nullable(Of Double)()
+                Return Nothing
             Else
-                Return New Global.System.Nullable(Of Double)(CType(returnValue,Double))
+                Return CType(returnValue,Object)
             End If
         End Function
         
@@ -12551,30 +12525,18 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT Code, ProjectCode, Number, DPCode, CurrentRating, MinimumAmpacity, WireTyp"& _ 
-                "e, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize, NeutralConduct"& _ 
-                "or, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMai"& _ 
-                "n, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, Impe"& _ 
-                "danceImag FROM tblSubfeeder WHERE (DPCode = @dp)"
+            Me._commandCollection(4).CommandText = "SELECT * FROM tblSubfeeder WHERE (DPCode = @dp)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT Code, ProjectCode, Number, DPCode, CurrentRating, MinimumAmpacity, WireTyp"& _ 
-                "e, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize, NeutralConduct"& _ 
-                "or, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMai"& _ 
-                "n, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, Impe"& _ 
-                "danceImag FROM tblSubfeeder WHERE (ProjectCode = @project)"
+            Me._commandCollection(5).CommandText = "SELECT * FROM tblSubfeeder WHERE (ProjectCode = @project)"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(6).Connection = Me.Connection
-            Me._commandCollection(6).CommandText = "SELECT Code, ProjectCode, Number, DPCode, CurrentRating, MinimumAmpacity, WireTyp"& _ 
-                "e, WireSize, [Set], Conductor, Neutral, NeutralWire, NeutralSize, NeutralConduct"& _ 
-                "or, NeutralSet, ConduitType, ConduitSize, OCPDRating, BreakerType, DistancetoMai"& _ 
-                "n, VoltageDrop, GroundWire, GroundWireSize, GroundConductor, ImpedanceReal, Impe"& _ 
-                "danceImag FROM tblSubfeeder WHERE (DPCode = @dp) AND (ImpedanceReal IS NOT NULL)"& _ 
-                " AND (ImpedanceImag IS NOT NULL)"
+            Me._commandCollection(6).CommandText = "SELECT * FROM tblSubfeeder WHERE (DPCode = @dp) AND (ImpedanceReal IS NOT NULL) A"& _ 
+                "ND (ImpedanceImag IS NOT NULL)"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub

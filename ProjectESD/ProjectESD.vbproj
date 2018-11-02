@@ -304,6 +304,9 @@
     </None>
     <None Include="App.config" />
     <None Include="ProjectESD_TemporaryKey.pfx" />
+    <Content Include="User-Manual.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
