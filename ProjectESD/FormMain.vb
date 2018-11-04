@@ -293,12 +293,13 @@ Public Class FormMain
 
             equip = TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Motor Equipment") +
                 TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Non-Motor Equipment") +
-                TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Spare") +
+                TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Spare - Lighting") +
+                TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Spare - General") +
                 (TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Electric Range") * 0.8)
 
             load = equip + demandload
 
-            idp = load / VoltageLevelComboBox.Text
+            idp = load / voltage
 
             CurrentRatingTextBoxDP.Text = Math.Round(idp * 1.25, 4)
 
@@ -1128,6 +1129,17 @@ ErrorLine: End Sub
                 ConduitSizeTextBox1.Text = conduit
             End If
         ElseIf TypeComboBox.SelectedIndex = 5 Then
+            PowerRatingTextBox.Text = 1200
+            If TypeComboBox1.SelectedIndex <= 1 Then
+                OCPDRatingTextBox1.Text = 15
+            Else
+                OCPDRatingTextBox1.Text = 20
+            End If
+            FullLoadCurrentTextBox.Text = ""
+            MinimumAmpacityTextBox.Text = ""
+            WireSizeTextBox1.Text = ""
+            ConduitSizeTextBox1.Text = ""
+        ElseIf TypeComboBox.SelectedIndex = 6 Then
             PowerRatingTextBox.Text = 1500
             OCPDRatingTextBox1.Text = 20
             FullLoadCurrentTextBox.Text = ""
@@ -1248,7 +1260,7 @@ ErrorLine: End Sub
                 WireTypeComboBox.Enabled = True
                 ConductorComboBox.Enabled = True
                 ConduitTypeComboBox.Enabled = True
-            ElseIf TypeComboBox.SelectedIndex = 5 Then
+            ElseIf TypeComboBox.SelectedIndex >= 5 Then
                 GrpPower.Enabled = False
                 GrpLighting.Enabled = False
                 WireTypeComboBox.Enabled = False

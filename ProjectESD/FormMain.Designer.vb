@@ -312,10 +312,11 @@ Partial Class FormMain
         Me.TransformerRatingTextBox = New System.Windows.Forms.TextBox()
         Me.GeneratorRatingTextBox = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.VoltageLevelComboBox = New System.Windows.Forms.ComboBox()
+        Me.TblProjectBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.BtnPreviousProject = New System.Windows.Forms.Button()
         Me.BtnNextProject = New System.Windows.Forms.Button()
         Me.TypeComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.TblProjectBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.BtnDeleteProject = New System.Windows.Forms.Button()
         Me.BtnSaveProject = New System.Windows.Forms.Button()
         Me.BtnAddProject = New System.Windows.Forms.Button()
@@ -363,7 +364,6 @@ Partial Class FormMain
         Me.TblDistributionTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblDistributionTableAdapter()
         Me.TblBranchTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblBranchTableAdapter()
         Me.TblSubfeederTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblSubfeederTableAdapter()
-        Me.VoltageLevelComboBox = New System.Windows.Forms.ComboBox()
         ProjectCodeLabel = New System.Windows.Forms.Label()
         NameLabel = New System.Windows.Forms.Label()
         OwnerLabel = New System.Windows.Forms.Label()
@@ -1337,6 +1337,15 @@ Partial Class FormMain
         TransformerZpuLabel.TabIndex = 15
         TransformerZpuLabel.Text = "Transformer Zpu:*"
         '
+        'VoltageLevelLabel
+        '
+        VoltageLevelLabel.AutoSize = True
+        VoltageLevelLabel.Location = New System.Drawing.Point(45, 172)
+        VoltageLevelLabel.Name = "VoltageLevelLabel"
+        VoltageLevelLabel.Size = New System.Drawing.Size(75, 13)
+        VoltageLevelLabel.TabIndex = 60
+        VoltageLevelLabel.Text = "Voltage Level:"
+        '
         'MenuStrip1
         '
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ViewToolStripMenuItem, Me.HelpToolStripMenuItem})
@@ -1395,13 +1404,13 @@ Partial Class FormMain
         '
         Me.ManualToolStripMenuItem.Name = "ManualToolStripMenuItem"
         Me.ManualToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1
-        Me.ManualToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ManualToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.ManualToolStripMenuItem.Text = "Manual"
         '
         'AboutUsToolStripMenuItem
         '
         Me.AboutUsToolStripMenuItem.Name = "AboutUsToolStripMenuItem"
-        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.AboutUsToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.AboutUsToolStripMenuItem.Text = "About us"
         '
         'TabControl1
@@ -1460,7 +1469,7 @@ Partial Class FormMain
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(675, 813)
+        Me.TabPage4.Size = New System.Drawing.Size(675, 758)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Distribution Panelboard"
         '
@@ -1753,7 +1762,7 @@ Partial Class FormMain
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(675, 813)
+        Me.TabPage2.Size = New System.Drawing.Size(675, 758)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Subfeeder"
         '
@@ -2922,7 +2931,7 @@ Partial Class FormMain
         '
         Me.TypeComboBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "Type", True))
         Me.TypeComboBox.FormattingEnabled = True
-        Me.TypeComboBox.Items.AddRange(New Object() {"Lighting", "Power", "Motor Equipment", "Non-Motor Equipment", "Electric Range", "Spare"})
+        Me.TypeComboBox.Items.AddRange(New Object() {"Lighting", "Power", "Motor Equipment", "Non-Motor Equipment", "Electric Range", "Spare - Lighting", "Spare - General"})
         Me.TypeComboBox.Location = New System.Drawing.Point(167, 109)
         Me.TypeComboBox.Name = "TypeComboBox"
         Me.TypeComboBox.Size = New System.Drawing.Size(121, 21)
@@ -3133,7 +3142,7 @@ Partial Class FormMain
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(675, 785)
+        Me.TabPage3.Size = New System.Drawing.Size(675, 758)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Transformer/Generator"
         '
@@ -3271,6 +3280,21 @@ Partial Class FormMain
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Project"
         '
+        'VoltageLevelComboBox
+        '
+        Me.VoltageLevelComboBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblProjectBindingSource, "VoltageLevel", True))
+        Me.VoltageLevelComboBox.FormattingEnabled = True
+        Me.VoltageLevelComboBox.Items.AddRange(New Object() {"115", "200", "208", "230", "400", "460", "575", "2300"})
+        Me.VoltageLevelComboBox.Location = New System.Drawing.Point(126, 169)
+        Me.VoltageLevelComboBox.Name = "VoltageLevelComboBox"
+        Me.VoltageLevelComboBox.Size = New System.Drawing.Size(121, 21)
+        Me.VoltageLevelComboBox.TabIndex = 61
+        '
+        'TblProjectBindingSource
+        '
+        Me.TblProjectBindingSource.DataMember = "tblProject"
+        Me.TblProjectBindingSource.DataSource = Me.ESD_DatabaseDataSet
+        '
         'BtnPreviousProject
         '
         Me.BtnPreviousProject.Location = New System.Drawing.Point(281, 121)
@@ -3298,11 +3322,6 @@ Partial Class FormMain
         Me.TypeComboBox1.Name = "TypeComboBox1"
         Me.TypeComboBox1.Size = New System.Drawing.Size(121, 21)
         Me.TypeComboBox1.TabIndex = 13
-        '
-        'TblProjectBindingSource
-        '
-        Me.TblProjectBindingSource.DataMember = "tblProject"
-        Me.TblProjectBindingSource.DataSource = Me.ESD_DatabaseDataSet
         '
         'BtnDeleteProject
         '
@@ -3713,25 +3732,6 @@ Partial Class FormMain
         'TblSubfeederTableAdapter
         '
         Me.TblSubfeederTableAdapter.ClearBeforeFill = True
-        '
-        'VoltageLevelLabel
-        '
-        VoltageLevelLabel.AutoSize = True
-        VoltageLevelLabel.Location = New System.Drawing.Point(45, 172)
-        VoltageLevelLabel.Name = "VoltageLevelLabel"
-        VoltageLevelLabel.Size = New System.Drawing.Size(75, 13)
-        VoltageLevelLabel.TabIndex = 60
-        VoltageLevelLabel.Text = "Voltage Level:"
-        '
-        'VoltageLevelComboBox
-        '
-        Me.VoltageLevelComboBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblProjectBindingSource, "VoltageLevel", True))
-        Me.VoltageLevelComboBox.FormattingEnabled = True
-        Me.VoltageLevelComboBox.Items.AddRange(New Object() {"115", "200", "208", "230", "400", "460", "575", "2300"})
-        Me.VoltageLevelComboBox.Location = New System.Drawing.Point(126, 169)
-        Me.VoltageLevelComboBox.Name = "VoltageLevelComboBox"
-        Me.VoltageLevelComboBox.Size = New System.Drawing.Size(121, 21)
-        Me.VoltageLevelComboBox.TabIndex = 61
         '
         'FormMain
         '
