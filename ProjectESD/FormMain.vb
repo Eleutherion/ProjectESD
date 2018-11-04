@@ -827,7 +827,7 @@ ErrorLine: End Sub
         Dim conduit As Integer
 
         'Do the data checking part
-        If TypeComboBox.Text = "" Or VoltageLevelComboBox.Text = "" Or PhaseComboBox.Text = "" Or ((WireTypeComboBox.Text = "" Or ConductorComboBox.Text = "" Or ConduitTypeComboBox.Text = "") And TypeComboBox.SelectedIndex <> 5) Then
+        If TypeComboBox.Text = "" Or VoltageLevelComboBox.Text = "" Or PhaseComboBox.Text = "" Or ((WireTypeComboBox.Text = "" Or ConductorComboBox.Text = "" Or ConduitTypeComboBox.Text = "") And TypeComboBox.SelectedIndex < 5) Then
             MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             GoTo ErrorLine
 
