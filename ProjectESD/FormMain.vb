@@ -397,8 +397,6 @@ Public Class FormMain
             End If
         End If
 
-
-
         Dim count As Integer = TblSubfeederTableAdapter.CountSubfeeder(CodeTextBoxDP.Text)
         Dim zreal(count - 1), zimag(count - 1) As Double
 

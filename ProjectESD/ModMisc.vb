@@ -60,9 +60,9 @@
         TrueXL = NominalXL(x) * Length / 305
 
         If ThreePhase = True Then
-            VD = Math.Sqrt(3) * LineCurrent * ((TrueR * 0.85) + (TrueXL * Math.Sin(Math.Acos(0.85)))) * 100 / Voltage
+            VD = Math.Sqrt(3) * LineCurrent * Math.Sqrt(TrueR ^ 2 + TrueXL ^ 2) * 100 / Voltage
         Else
-            VD = 2 * LineCurrent * ((TrueR * 0.85) + (TrueXL * Math.Sin(Math.Acos(0.85)))) * 100 / Voltage
+            VD = 2 * LineCurrent * Math.Sqrt(TrueR ^ 2 + TrueXL ^ 2) * 100 / Voltage
         End If
 
         Return VD
