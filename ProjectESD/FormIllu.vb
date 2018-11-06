@@ -106,6 +106,9 @@
             End If
 
         ElseIf RdoOutdoor.Checked Then
+            If TxtCU.Text = "" Or TxtCU.Text = 0 Then
+                TxtCU.Text = 0.67
+            End If
             If RadioP.Checked Then
                 area = TxtArea.Text
                 perimeter = TxtPerimeter.Text
@@ -162,7 +165,9 @@
             llf = lat * lv * bf * lsd * lbo * ld * ldd * rsdd
             TxtLLF.Text = Math.Round(llf, 4)
 
-            lum = lux * area / (rating * llf * lamp * cuf)
+            cu = TxtCU.Text
+
+            lum = lux * area / (rating * llf * lamp * cu)
 
             TxtLuminaire.Text = Math.Round(lum, 4)
 
@@ -236,6 +241,7 @@ ErrorLine: End Sub
     End Sub
 
     Private Sub RdoOutdoor_CheckedChanged(sender As Object, e As EventArgs) Handles RdoOutdoor.CheckedChanged
+        TxtCU.ReadOnly = False
         Txtpc.Enabled = False
         Txtpw.Enabled = False
         Txtpf.Enabled = False
@@ -252,6 +258,7 @@ ErrorLine: End Sub
     End Sub
 
     Private Sub RdoIndoor_CheckedChanged(sender As Object, e As EventArgs) Handles RdoIndoor.CheckedChanged
+        TxtCU.ReadOnly = True
         Txtpc.Enabled = True
         Txtpw.Enabled = True
         Txtpf.Enabled = True
