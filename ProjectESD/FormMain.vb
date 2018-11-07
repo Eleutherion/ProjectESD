@@ -1161,7 +1161,7 @@ ErrorLine: End Sub
 
         vd = VoltageDrop(setcurrent, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
 
-        Do While vd > 2
+        Do While vd > 3
             Dim size = {"2.0", "3.5", "5.5", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "150", "175", "200", "250", "325", "375", "400", "500"}
             For i As Integer = 0 To 20 Step 1
                 If size(i) = WireSizeTextBoxSub.Text And i <> 20 Then
