@@ -647,7 +647,7 @@ ErrorLine: End Sub
             MessageBox.Show("Balancing not necessary.")
             Balanced = True
         Else
-            ave = (CDec(TxtPhaseALoad.Text) + CDec(TxtPhaseALoad.Text) + CDec(TxtPhaseALoad.Text)) / 3
+            ave = (CDec(TxtPhaseALoad.Text) + CDec(TxtPhaseBLoad.Text) + CDec(TxtPhaseCLoad.Text)) / 3
 
             tolerance(0) = Math.Abs(ave - CDec(TxtPhaseALoad.Text)) / ave * 100
             tolerance(1) = Math.Abs(ave - CDec(TxtPhaseBLoad.Text)) / ave * 100
@@ -659,6 +659,8 @@ ErrorLine: End Sub
                     GoTo ErrorLine
                 End If
             Next i
+
+
 
             MessageBox.Show("Balanced subfeeder.")
             Balanced = True
@@ -819,10 +821,17 @@ ErrorLine: End Sub
 
 #Region "Branch Circuit"
     Private Sub BtnComputeBranch_Click(sender As Object, e As EventArgs) Handles BtnComputeBranch.Click
-        Dim current, power, ocpd, setcurrent As Decimal
+        Dim current, power, ocpd, setcurrent, vd As Decimal
         Dim truerating As Decimal = ConvertFraction(MotorRatingTextBox.Text)
         Dim wirenumber As Integer = 1
         Dim conduit As Integer
+        Dim ThreePhase As Boolean
+
+        If PhaseComboBox.Text = 3 Then
+            ThreePhase = True
+        Else
+            ThreePhase = False
+        End If
 
         'Do the data checking part
         If TypeComboBox.Text = "" Or VoltageLevelComboBox.Text = "" Or PhaseComboBox.Text = "" Or ((WireTypeComboBox.Text = "" Or ConductorComboBox.Text = "" Or ConduitTypeComboBox.Text = "") And TypeComboBox.SelectedIndex < 5) Then
@@ -1149,6 +1158,22 @@ ErrorLine: End Sub
         If GroundWireCheckBox1.Checked = True Then
             GroundWireSizeTextBox.Text = GroundWire(CInt(OCPDRatingTextBox1.Text), GroundConductorComboBox.Text)
         End If
+
+        vd = VoltageDrop(setcurrent, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
+
+        Do While vd > 2
+            Dim size = {"2.0", "3.5", "5.5", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "150", "175", "200", "250", "325", "375", "400", "500"}
+            For i As Integer = 0 To 20 Step 1
+                If size(i) = WireSizeTextBoxSub.Text And i <> 20 Then
+                    WireSizeTextBoxSub.Text = size(i + 1)
+                    GoTo vdline
+                ElseIf i = 20 Then
+                    MessageBox.Show("Voltage drop exceeds standard voltage drop for largest available wire. Consider adding wire set.")
+                    GoTo ErrorLine
+                End If
+            Next
+vdline:     vd = VoltageDrop(setcurrent, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
+        Loop
 
 ErrorLine: End Sub
 

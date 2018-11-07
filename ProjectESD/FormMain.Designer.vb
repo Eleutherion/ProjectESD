@@ -117,6 +117,8 @@ Partial Class FormMain
         Dim TransformerXRRatioLabel As System.Windows.Forms.Label
         Dim TransformerZpuLabel As System.Windows.Forms.Label
         Dim VoltageLevelLabel As System.Windows.Forms.Label
+        Dim VoltageDropLabel1 As System.Windows.Forms.Label
+        Dim DistancetoSFLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -212,10 +214,12 @@ Partial Class FormMain
         Me.GroundWireCheckBoxSub = New System.Windows.Forms.CheckBox()
         Me.SetTextBoxSub = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.DistancetoSFTextBox = New System.Windows.Forms.TextBox()
+        Me.TblBranchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.VoltageDropTextBox1 = New System.Windows.Forms.TextBox()
         Me.BtnPreviousBranch = New System.Windows.Forms.Button()
         Me.BtnNextBranch = New System.Windows.Forms.Button()
         Me.GroundConductorComboBox = New System.Windows.Forms.ComboBox()
-        Me.TblBranchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.TblConductorBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.GroundWireSizeTextBox = New System.Windows.Forms.TextBox()
         Me.CircuitNoTextBox = New System.Windows.Forms.TextBox()
@@ -458,6 +462,8 @@ Partial Class FormMain
         TransformerXRRatioLabel = New System.Windows.Forms.Label()
         TransformerZpuLabel = New System.Windows.Forms.Label()
         VoltageLevelLabel = New System.Windows.Forms.Label()
+        VoltageDropLabel1 = New System.Windows.Forms.Label()
+        DistancetoSFLabel = New System.Windows.Forms.Label()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage4.SuspendLayout()
@@ -1346,12 +1352,30 @@ Partial Class FormMain
         VoltageLevelLabel.TabIndex = 60
         VoltageLevelLabel.Text = "Voltage Level:"
         '
+        'VoltageDropLabel1
+        '
+        VoltageDropLabel1.AutoSize = True
+        VoltageDropLabel1.Location = New System.Drawing.Point(75, 669)
+        VoltageDropLabel1.Name = "VoltageDropLabel1"
+        VoltageDropLabel1.Size = New System.Drawing.Size(72, 13)
+        VoltageDropLabel1.TabIndex = 72
+        VoltageDropLabel1.Text = "Voltage Drop:"
+        '
+        'DistancetoSFLabel
+        '
+        DistancetoSFLabel.AutoSize = True
+        DistancetoSFLabel.Location = New System.Drawing.Point(63, 643)
+        DistancetoSFLabel.Name = "DistancetoSFLabel"
+        DistancetoSFLabel.Size = New System.Drawing.Size(84, 13)
+        DistancetoSFLabel.TabIndex = 73
+        DistancetoSFLabel.Text = "Distance to SF:*"
+        '
         'MenuStrip1
         '
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ViewToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1175, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1178, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -1420,7 +1444,7 @@ Partial Class FormMain
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.TabControl1.Location = New System.Drawing.Point(492, 24)
+        Me.TabControl1.Location = New System.Drawing.Point(495, 24)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(683, 784)
@@ -2258,6 +2282,10 @@ Partial Class FormMain
         '
         Me.TabPage1.AutoScroll = True
         Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage1.Controls.Add(DistancetoSFLabel)
+        Me.TabPage1.Controls.Add(Me.DistancetoSFTextBox)
+        Me.TabPage1.Controls.Add(VoltageDropLabel1)
+        Me.TabPage1.Controls.Add(Me.VoltageDropTextBox1)
         Me.TabPage1.Controls.Add(Me.BtnPreviousBranch)
         Me.TabPage1.Controls.Add(Me.BtnNextBranch)
         Me.TabPage1.Controls.Add(GroundConductorLabel)
@@ -2320,6 +2348,28 @@ Partial Class FormMain
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Branch Circuit"
         '
+        'DistancetoSFTextBox
+        '
+        Me.DistancetoSFTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "DistancetoSF", True))
+        Me.DistancetoSFTextBox.Location = New System.Drawing.Point(167, 640)
+        Me.DistancetoSFTextBox.Name = "DistancetoSFTextBox"
+        Me.DistancetoSFTextBox.Size = New System.Drawing.Size(121, 20)
+        Me.DistancetoSFTextBox.TabIndex = 74
+        '
+        'TblBranchBindingSource
+        '
+        Me.TblBranchBindingSource.DataMember = "tblBranch"
+        Me.TblBranchBindingSource.DataSource = Me.ESD_DatabaseDataSet
+        '
+        'VoltageDropTextBox1
+        '
+        Me.VoltageDropTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "VoltageDrop", True))
+        Me.VoltageDropTextBox1.Location = New System.Drawing.Point(167, 666)
+        Me.VoltageDropTextBox1.Name = "VoltageDropTextBox1"
+        Me.VoltageDropTextBox1.ReadOnly = True
+        Me.VoltageDropTextBox1.Size = New System.Drawing.Size(121, 20)
+        Me.VoltageDropTextBox1.TabIndex = 73
+        '
         'BtnPreviousBranch
         '
         Me.BtnPreviousBranch.Location = New System.Drawing.Point(503, 559)
@@ -2350,11 +2400,6 @@ Partial Class FormMain
         Me.GroundConductorComboBox.Size = New System.Drawing.Size(121, 21)
         Me.GroundConductorComboBox.TabIndex = 54
         Me.GroundConductorComboBox.ValueMember = "Code"
-        '
-        'TblBranchBindingSource
-        '
-        Me.TblBranchBindingSource.DataMember = "tblBranch"
-        Me.TblBranchBindingSource.DataSource = Me.ESD_DatabaseDataSet
         '
         'TblConductorBindingSource2
         '
@@ -3738,7 +3783,7 @@ Partial Class FormMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1175, 808)
+        Me.ClientSize = New System.Drawing.Size(1178, 808)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.TabControl1)
@@ -4041,4 +4086,6 @@ Partial Class FormMain
     Friend WithEvents TblSubfeederBindingSource As BindingSource
     Friend WithEvents TblSubfeederTableAdapter As ESD_DatabaseDataSetTableAdapters.tblSubfeederTableAdapter
     Friend WithEvents VoltageLevelComboBox As ComboBox
+    Friend WithEvents VoltageDropTextBox1 As TextBox
+    Friend WithEvents DistancetoSFTextBox As TextBox
 End Class
