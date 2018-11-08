@@ -11023,20 +11023,12 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT Code, Project, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, "& _ 
-                "MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], Conduc"& _ 
-                "tor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSi"& _ 
-                "ze, GroundConductor, VoltageDrop, DistancetoSF FROM tblBranch WHERE (Project = @"& _ 
-                "project)"
+            Me._commandCollection(3).CommandText = "SELECT * FROM tblBranch WHERE (Project = @project)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Project", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT Code, Project, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, "& _ 
-                "MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize, [Set], Conduc"& _ 
-                "tor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSi"& _ 
-                "ze, GroundConductor, VoltageDrop, DistancetoSF FROM tblBranch WHERE (Subfeeder ="& _ 
-                " @subfeeder)"
+            Me._commandCollection(4).CommandText = "SELECT * FROM tblBranch WHERE (Subfeeder = @subfeeder)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()

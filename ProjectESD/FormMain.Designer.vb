@@ -1375,7 +1375,7 @@ Partial Class FormMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ViewToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1178, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1169, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -1444,10 +1444,10 @@ Partial Class FormMain
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.TabControl1.Location = New System.Drawing.Point(495, 24)
+        Me.TabControl1.Location = New System.Drawing.Point(486, 24)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(683, 784)
+        Me.TabControl1.Size = New System.Drawing.Size(683, 779)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage4
@@ -1493,7 +1493,7 @@ Partial Class FormMain
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(675, 758)
+        Me.TabPage4.Size = New System.Drawing.Size(675, 753)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Distribution Panelboard"
         '
@@ -2344,7 +2344,7 @@ Partial Class FormMain
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(675, 758)
+        Me.TabPage1.Size = New System.Drawing.Size(675, 753)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Branch Circuit"
         '
@@ -3783,7 +3783,7 @@ Partial Class FormMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1178, 808)
+        Me.ClientSize = New System.Drawing.Size(1178, 749)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.TabControl1)

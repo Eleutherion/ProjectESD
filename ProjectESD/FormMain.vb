@@ -827,7 +827,7 @@ ErrorLine: End Sub
         Dim conduit As Integer
         Dim ThreePhase As Boolean
 
-        If PhaseComboBox.Text = 3 Then
+        If PhaseComboBox.Text = "3" Then
             ThreePhase = True
         Else
             ThreePhase = False
@@ -1159,21 +1159,23 @@ ErrorLine: End Sub
             GroundWireSizeTextBox.Text = GroundWire(CInt(OCPDRatingTextBox1.Text), GroundConductorComboBox.Text)
         End If
 
-        vd = VoltageDrop(setcurrent, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
+        vd = VoltageDrop(FullLoadCurrentTextBox.Text / SetTextBox.Text, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
 
         Do While vd > 3
             Dim size = {"2.0", "3.5", "5.5", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "150", "175", "200", "250", "325", "375", "400", "500"}
             For i As Integer = 0 To 20 Step 1
-                If size(i) = WireSizeTextBoxSub.Text And i <> 20 Then
-                    WireSizeTextBoxSub.Text = size(i + 1)
+                If size(i) = WireSizeTextBox1.Text And i <> 20 Then
+                    WireSizeTextBox1.Text = size(i + 1)
                     GoTo vdline
                 ElseIf i = 20 Then
                     MessageBox.Show("Voltage drop exceeds standard voltage drop for largest available wire. Consider adding wire set.")
                     GoTo ErrorLine
                 End If
             Next
-vdline:     vd = VoltageDrop(setcurrent, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
+vdline:     vd = VoltageDrop(FullLoadCurrentTextBox.Text / SetTextBox.Text, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
         Loop
+
+        VoltageDropTextBox1.Text = Math.Round(vd, 4)
 
 ErrorLine: End Sub
 
@@ -1249,6 +1251,19 @@ ErrorLine: End Sub
             WireTypeComboBox.Enabled = True
             ConductorComboBox.Enabled = True
             ConduitTypeComboBox.Enabled = True
+
+            For Each c As Control In GrpLighting.Controls
+                If c.GetType Is GetType(TextBox) Or c.GetType Is GetType(ComboBox) Then
+                    c.Text = ""
+                End If
+            Next
+
+            For Each c As Control In GrpPower.Controls
+                If c.GetType Is GetType(TextBox) Or c.GetType Is GetType(ComboBox) Then
+                    c.Text = ""
+                End If
+            Next
+
         Else
             MotorRatingTextBox.ReadOnly = True
             CboRatingUnit.SelectedIndex = -1
@@ -1265,6 +1280,13 @@ ErrorLine: End Sub
                 WireTypeComboBox.Enabled = True
                 ConductorComboBox.Enabled = True
                 ConduitTypeComboBox.Enabled = True
+
+                For Each c As Control In GrpPower.Controls
+                    If c.GetType Is GetType(TextBox) Or c.GetType Is GetType(ComboBox) Then
+                        c.Text = ""
+                    End If
+                Next
+
             ElseIf TypeComboBox.SelectedIndex = 1 Then
                 GrpPower.Enabled = True
                 GrpLighting.Enabled = False
@@ -1274,6 +1296,13 @@ ErrorLine: End Sub
                 WireTypeComboBox.Enabled = True
                 ConductorComboBox.Enabled = True
                 ConduitTypeComboBox.Enabled = True
+
+                For Each c As Control In GrpLighting.Controls
+                    If c.GetType Is GetType(TextBox) Or c.GetType Is GetType(ComboBox) Then
+                        c.Text = ""
+                    End If
+                Next
+
             ElseIf TypeComboBox.SelectedIndex = 3 Or TypeComboBox.SelectedIndex = 4 Then
                 GrpPower.Enabled = False
                 GrpLighting.Enabled = False
@@ -1283,12 +1312,37 @@ ErrorLine: End Sub
                 WireTypeComboBox.Enabled = True
                 ConductorComboBox.Enabled = True
                 ConduitTypeComboBox.Enabled = True
+
+                For Each c As Control In GrpLighting.Controls
+                    If c.GetType Is GetType(TextBox) Or c.GetType Is GetType(ComboBox) Then
+                        c.Text = ""
+                    End If
+                Next
+
+                For Each c As Control In GrpPower.Controls
+                    If c.GetType Is GetType(TextBox) Or c.GetType Is GetType(ComboBox) Then
+                        c.Text = ""
+                    End If
+                Next
+
             ElseIf TypeComboBox.SelectedIndex >= 5 Then
                 GrpPower.Enabled = False
                 GrpLighting.Enabled = False
                 WireTypeComboBox.Enabled = False
                 ConductorComboBox.Enabled = False
                 ConduitTypeComboBox.Enabled = False
+
+                For Each c As Control In GrpLighting.Controls
+                    If c.GetType Is GetType(TextBox) Or c.GetType Is GetType(ComboBox) Then
+                        c.Text = ""
+                    End If
+                Next
+
+                For Each c As Control In GrpPower.Controls
+                    If c.GetType Is GetType(TextBox) Or c.GetType Is GetType(ComboBox) Then
+                        c.Text = ""
+                    End If
+                Next
             End If
         End If
     End Sub
@@ -1303,74 +1357,30 @@ ErrorLine: End Sub
 
     Private Sub BtnSaveBranch_Click(sender As Object, e As EventArgs) Handles BtnSaveBranch.Click
         CodeTextBox.Text = SubfeederTextBox.Text + "-BC" + CircuitNoTextBox.Text
-        'Dim con As New SqlConnection(constring)
-
-        'Dim query As String
-
-        'If TblSubfeederTableAdapter.CountRow(CodeTextBoxSub.Text) = 0 Then
-        '    query = "INSERT INTO tblBranch (Code, Project, CircuitNo, Type, Subfeeder, Voltage, PowerRating, Phase, MotorType, MotorRating, FullLoadCurrent, MinimumAmpacity, WireType, WireSize,
-        '                [Set], Conductor, ConduitType, ConduitSize, OCPDRating, BreakerType, GroundWire, GroundWireSize, GroundConductor) VALUES 
-        '                (@Code,@Project,@CircuitNo,@Type,@Subfeeder,@Voltage,@PowerRating,@Phase,@MotorType,@MotorRating,@FullLoadCurrent,@MinimumAmpacity,@WireType,
-        '                @WireSize,@Set,@Conductor,@ConduitType,@ConduitSize,@OCPDRating,@BreakerType,@GroundWire,@GroundWireSize,@GroundConductor)"
-        'Else
-        '    query = "UPDATE tblBranch SET Code = @Code, Project = @Project, CircuitNo = @CircuitNo, Type = @Type, Subfeeder = @Subfeeder, Voltage = @Voltage, PowerRating = @PowerRating, Phase = @Phase, MotorType = @MotorType, 
-        '                MotorRating = @MotorRating, FullLoadCurrent = @FullLoadCurrent, MinimumAmpacity = @MinimumAmpacity, WireType = @WireType, WireSize = @WireSize, [Set] = @Set, Conductor = @Conductor, 
-        '                ConduitType = @ConduitType, ConduitSize = @ConduitSize, OCPDRating = @OCPDRating, BreakerType = @BreakerType, GroundWire = @GroundWire, GroundWireSize = @GroundWireSize, 
-        '                GroundConductor = @GroundConductor WHERE (Code = @Code)"
-        'End If
-
-        'Dim cmd As New SqlCommand(query, con)
 
         Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
         If dr = DialogResult.Yes Then
-            'Using con
-            '    con.Open()
-            '    Try
-            '        Using cmd
-            '            cmd.Parameters.AddWithValue("@Code", CodeTextBox.Text)
-            '            cmd.Parameters.AddWithValue("@Project", ProjectTextBox.Text)
-            '            cmd.Parameters.AddWithValue("@CircuitNo", CircuitNoTextBox.Text)
-            '            cmd.Parameters.AddWithValue("@Type", TypeComboBox.Text)
-            '            cmd.Parameters.AddWithValue("@Subfeeder", SubfeederTextBox.Text)
-            '            cmd.Parameters.AddWithValue("@Voltage", VoltageComboBox.Text)
-            '            cmd.Parameters.AddWithValue("@PowerRating", PowerRatingTextBox.Text)
-            '            cmd.Parameters.AddWithValue("@Phase", PhaseComboBox.Text)
-            '            cmd.Parameters.AddWithValue("@MotorType", MotorTypeComboBox.Text)
-            '            cmd.Parameters.AddWithValue("@MotorRating", MotorRatingTextBox.Text)
-            '            cmd.Parameters.AddWithValue("@FullLoadCurrent", FullLoadCurrentTextBox.Text)
-            '            cmd.Parameters.AddWithValue("@MinimumAmpacity", MinimumAmpacityTextBox.Text)
-            '            cmd.Parameters.AddWithValue("@WireType", WireTypeComboBox.Text)
-            '            cmd.Parameters.AddWithValue("@WireSize", WireSizeTextBox1.Text)
-            '            cmd.Parameters.AddWithValue("@Set", SetTextBox.Text)
-            '            cmd.Parameters.AddWithValue("@Conductor", ConductorComboBox.Text)
-            '            cmd.Parameters.AddWithValue("@ConduitType", ConduitTypeComboBox.Text)
-            '            cmd.Parameters.AddWithValue("@ConduitSize", ConduitSizeTextBox1.Text)
-            '            cmd.Parameters.AddWithValue("@OCPDRating", OCPDRatingTextBox1.Text)
-            '            cmd.Parameters.AddWithValue("@BreakerType", BreakerTypeTextBox1.Text)
-            '            cmd.Parameters.AddWithValue("@GroundWire", GroundWireCheckBox1.CheckState)
-            '            cmd.Parameters.AddWithValue("@GroundWireSize", GroundWireSizeTextBox.Text)
-            '            cmd.Parameters.AddWithValue("@GroundConductor", GroundConductorComboBox.Text)
-
-            '            If cmd.ExecuteNonQuery() = 1 Then
-            '                MessageBox.Show("Record saved.")
-            '            End If
-            '        End Using
-            '    Catch ex As Exception
-            '        MessageBox.Show(ex.GetHashCode().ToString(), "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            '    Finally
-            '        con.Close()
-            '    End Try
-            'End Using
             Try
                 Validate()
                 TblBranchBindingSource.EndEdit()
                 TblBranchTableAdapter.Update(ESD_DatabaseDataSet.tblBranch)
 
                 MessageBox.Show("Record saved.")
+
+                For Each c As Control In GrpLighting.Controls
+                    If c.GetType Is GetType(TextBox) Or c.GetType Is GetType(ComboBox) Then
+                        c.Text = ""
+                    End If
+                Next
+
+                For Each c As Control In GrpPower.Controls
+                    If c.GetType Is GetType(TextBox) Or c.GetType Is GetType(ComboBox) Then
+                        c.Text = ""
+                    End If
+                Next
             Catch ex As Exception
                 MessageBox.Show(ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
-
         End If
 
     End Sub
