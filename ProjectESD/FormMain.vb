@@ -1287,6 +1287,13 @@ ErrorLine: End Sub
                     End If
                 Next
 
+                TxtRatingLighting1.Text = "0"
+                TxtRatingLighting2.Text = "0"
+                TxtRatingLighting3.Text = "0"
+                TxtItemsLighting1.Text = "0"
+                TxtItemsLighting2.Text = "0"
+                TxtItemsLighting3.Text = "0"
+
             ElseIf TypeComboBox.SelectedIndex = 1 Then
                 GrpPower.Enabled = True
                 GrpLighting.Enabled = False
@@ -1302,6 +1309,11 @@ ErrorLine: End Sub
                         c.Text = ""
                     End If
                 Next
+
+                TxtItemsPower1.Text = "0"
+                TxtItemsPower2.Text = "0"
+                TxtItemsPower3.Text = "0"
+                TxtItemsPower4.Text = "0"
 
             ElseIf TypeComboBox.SelectedIndex = 3 Or TypeComboBox.SelectedIndex = 4 Then
                 GrpPower.Enabled = False
