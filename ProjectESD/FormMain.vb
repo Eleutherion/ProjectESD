@@ -886,6 +886,10 @@ ErrorLine: End Sub
         ElseIf (TypeComboBox.SelectedIndex = 3 Or TypeComboBox.SelectedIndex = 4) And PowerRatingTextBox.Text = "" Then
             MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             GoTo ErrorLine
+
+        ElseIf TypeComboBox.SelectedIndex < 5 And DistancetoSFTextBox.Text = "" Then
+            MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            GoTo ErrorLine
         End If
 
         'Computation for Lighting
@@ -1147,8 +1151,15 @@ ErrorLine: End Sub
             WireSizeTextBox1.Text = ""
             ConduitSizeTextBox1.Text = ""
         ElseIf TypeComboBox.SelectedIndex = 6 Then
-            PowerRatingTextBox.Text = 1500
-            OCPDRatingTextBox1.Text = 20
+            If PowerRatingTextBox.Text = "" Then
+                PowerRatingTextBox.Text = "1500"
+            End If
+
+            If PhaseComboBox.Text IsNot "3" Then
+                OCPDRatingTextBox1.Text = OCPDRating(PowerRatingTextBox.Text / VoltageLevelComboBox.Text)
+            Else
+                OCPDRatingTextBox1.Text = OCPDRating(PowerRatingTextBox.Text / (VoltageLevelComboBox.Text / Math.Sqrt(3)))
+            End If
             FullLoadCurrentTextBox.Text = ""
             MinimumAmpacityTextBox.Text = ""
             WireSizeTextBox1.Text = ""
@@ -1159,23 +1170,25 @@ ErrorLine: End Sub
             GroundWireSizeTextBox.Text = GroundWire(CInt(OCPDRatingTextBox1.Text), GroundConductorComboBox.Text)
         End If
 
-        vd = VoltageDrop(FullLoadCurrentTextBox.Text / SetTextBox.Text, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
+        If TypeComboBox.SelectedIndex < 5 Then
+            vd = VoltageDrop(FullLoadCurrentTextBox.Text / SetTextBox.Text, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
 
-        Do While vd > 3
-            Dim size = {"2.0", "3.5", "5.5", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "150", "175", "200", "250", "325", "375", "400", "500"}
-            For i As Integer = 0 To 20 Step 1
-                If size(i) = WireSizeTextBox1.Text And i <> 20 Then
-                    WireSizeTextBox1.Text = size(i + 1)
-                    GoTo vdline
-                ElseIf i = 20 Then
-                    MessageBox.Show("Voltage drop exceeds standard voltage drop for largest available wire. Consider adding wire set.")
-                    GoTo ErrorLine
-                End If
-            Next
-vdline:     vd = VoltageDrop(FullLoadCurrentTextBox.Text / SetTextBox.Text, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
-        Loop
+            Do While vd > 3
+                Dim size = {"2.0", "3.5", "5.5", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "150", "175", "200", "250", "325", "375", "400", "500"}
+                For i As Integer = 0 To 20 Step 1
+                    If size(i) = WireSizeTextBox1.Text And i <> 20 Then
+                        WireSizeTextBox1.Text = size(i + 1)
+                        GoTo vdline
+                    ElseIf i = 20 Then
+                        MessageBox.Show("Voltage drop exceeds standard voltage drop for largest available wire. Consider adding wire set.")
+                        GoTo ErrorLine
+                    End If
+                Next
+vdline:         vd = VoltageDrop(FullLoadCurrentTextBox.Text / SetTextBox.Text, DistancetoSFTextBox.Text, ConduitTypeComboBox.Text, WireSizeTextBox1.Text, ConductorComboBox.Text, ThreePhase, VoltageLevelComboBox.Text)
+            Loop
 
-        VoltageDropTextBox1.Text = Math.Round(vd, 4)
+            VoltageDropTextBox1.Text = Math.Round(vd, 4)
+        End If
 
 ErrorLine: End Sub
 
@@ -1237,6 +1250,12 @@ ErrorLine: End Sub
     End Sub
 
     Private Sub TypeComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeComboBox.SelectedIndexChanged
+        If TypeComboBox.SelectedIndex = 6 Then
+            PowerRatingTextBox.ReadOnly = False
+        Else
+            PowerRatingTextBox.ReadOnly = True
+        End If
+
         If TypeComboBox.SelectedIndex = 2 Then
             TxtMotorItem.ReadOnly = False
             MotorRatingTextBox.ReadOnly = False
