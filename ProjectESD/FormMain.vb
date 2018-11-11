@@ -1156,9 +1156,15 @@ ErrorLine: End Sub
             End If
 
             If PhaseComboBox.Text IsNot "3" Then
-                OCPDRatingTextBox1.Text = OCPDRating(PowerRatingTextBox.Text / VoltageLevelComboBox.Text)
+                ocpd = OCPDRating(PowerRatingTextBox.Text * 1.5 / VoltageLevelComboBox.Text)
             Else
-                OCPDRatingTextBox1.Text = OCPDRating(PowerRatingTextBox.Text / (VoltageLevelComboBox.Text / Math.Sqrt(3)))
+                ocpd = OCPDRating(PowerRatingTextBox.Text * 1.5 / (VoltageLevelComboBox.Text / Math.Sqrt(3)))
+            End If
+
+            If ocpd = 15 Then
+                OCPDRatingTextBox1.Text = 20
+            Else
+                OCPDRatingTextBox1.Text = ocpd
             End If
             FullLoadCurrentTextBox.Text = ""
             MinimumAmpacityTextBox.Text = ""
