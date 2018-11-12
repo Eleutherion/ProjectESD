@@ -110,7 +110,7 @@ Public Class FormMain
         If PhaseTextBox.Text = "3" Then
             If TblBranchTableAdapter.GetHRMLSinglePhaseProject(ProjectCodeTextBox.Text) > TblBranchTableAdapter.GetHRMLThreePhaseProject(ProjectCodeTextBox.Text) Then
                 hrml = TblBranchTableAdapter.GetHRMLSinglePhaseProject(ProjectCodeTextBox.Text)
-                imf = (TCL / (voltage * Math.Sqrt(3))) + ((Math.Sqrt(3) * hrml * 0.25) / voltage)
+                imf = (TCL / (voltage * Math.Sqrt(3))) + (Math.Sqrt(3) * hrml * 0.25 / voltage)
             Else
                 hrml = TblBranchTableAdapter.GetHRMLThreePhaseProject(ProjectCodeTextBox.Text)
                 imf = (TCL + 0.25 * hrml) / (voltage * Math.Sqrt(3))
@@ -332,10 +332,10 @@ endline: End If
 
                 If TblDistributionTableAdapter.GetHRMLThreePhase(CodeTextBoxDP.Text) >= TblDistributionTableAdapter.GetHRMLSinglePhase(CodeTextBoxDP.Text) Then
                     hrml = TblDistributionTableAdapter.GetHRMLThreePhase(CodeTextBoxDP.Text)
-                    idp = ((load + (0.25 * hrml)) / (Math.Sqrt(3) * voltage)) + (phaseload(2) / voltage)
+                    idp = ((load + (0.25 * hrml)) / (Math.Sqrt(3) * voltage)) + (Math.Sqrt(3) * phaseload(2) / voltage)
                 Else
                     hrml = TblDistributionTableAdapter.GetHRMLSinglePhase(CodeTextBoxDP.Text)
-                    idp = ((phaseload(2) + (0.25 * hrml)) / voltage) + (load / (Math.Sqrt(3) * voltage))
+                    idp = (Math.Sqrt(3) * (phaseload(2) + (0.25 * hrml)) / voltage) + (load / (Math.Sqrt(3) * voltage))
                 End If
 
                 CurrentRatingTextBoxDP.Text = Math.Round(idp, 4)
@@ -487,6 +487,7 @@ ErrorLine: End Sub
         Dim voltage As Integer = VoltageLevelComboBox.Text
         Dim isf, load, hrml, phaseload(2), setcurrent, vd As Decimal
         Dim wirenumber As Integer
+        Dim phase As String
         Dim Z As Complex
 
         If VoltageLevelComboBox.Text = "" Or WireTypeComboBoxSub.Text = "" Or ConductorComboBoxSub.Text = "" Or ConduitTypeComboBoxSub.Text = "" Or SetTextBoxSub.Text = "" Or DistancetoMainTextBox.Text = "" Then
@@ -504,71 +505,110 @@ ErrorLine: End Sub
 
         If PhaseTextBox.Text = "3" Then
             ThreePhase = True
-        Else
-            ThreePhase = False
-        End If
+            phase = 3
 
-        If TblBranchTableAdapter.CountThreePhaseLoad(CodeTextBoxSub.Text) > 0 Then
-            load = TblBranchTableAdapter.TotalThreePhasePower(CodeTextBoxSub.Text)
-            hrml = TblBranchTableAdapter.GetHRMLThreePhase(CodeTextBoxSub.Text)
-
-            isf = (load + (0.25 * hrml)) / (Math.Sqrt(3) * voltage)
-
-            CurrentRatingTextBox.Text = Math.Round(isf, 4)
-            MinimumAmpacityTextBoxSub.Text = Math.Round(isf * 1.25, 4)
-
-            OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.55)
-
-            If WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = 1 Then
-                wirenumber = SetTextBoxSub.Text
-            ElseIf WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) <= SetTextBoxSub.Text Then
-                wirenumber = SetTextBoxSub.Text
-            Else
-                wirenumber = WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
-                SetTextBoxSub.Text = wirenumber
-            End If
-
-            setcurrent = OCPDRatingTextBoxSub.Text / wirenumber
-
-            WireSizeTextBoxSub.Text = WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
-
-            ConduitSizeTextBoxSub.Text = ConduitSize(WireTypeComboBoxSub.Text, ConductorComboBoxSub.Text, GroundWireCheckBoxSub.Checked, "3", ConduitTypeComboBoxSub.Text, True)
-        Else
-            phaseload = {TblBranchTableAdapter.TotalPhaseAPower(CodeTextBoxSub.Text), TblBranchTableAdapter.TotalPhaseBPower(CodeTextBoxSub.Text), TblBranchTableAdapter.TotalPhaseCPower(CodeTextBoxSub.Text)}
-            If IsNothing(TblBranchTableAdapter.GetHRMLSinglePhase(CodeTextBoxSub.Text)) Then
-                hrml = 0
-            Else
-                hrml = TblBranchTableAdapter.GetHRMLSinglePhase(CodeTextBoxSub.Text)
-            End If
+            phaseload = {TxtPhaseALoad.Text, TxtPhaseBLoad.Text, TxtPhaseCLoad.Text}
+            load = TxtThreePhaseLoad.Text
 
             Array.Sort(phaseload)
 
-            isf = (phaseload(2) + (0.25 * hrml)) / voltage
-
-            CurrentRatingTextBox.Text = Math.Round(isf, 4)
-            MinimumAmpacityTextBoxSub.Text = Math.Round(isf * 1.25, 4)
-
-            OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.5)
-
-            If WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRating(isf * 1.5), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = 1 Then
-                wirenumber = SetTextBoxSub.Text
-            ElseIf WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRating(isf * 1.5), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) <= SetTextBoxSub.Text Then
-                wirenumber = SetTextBoxSub.Text
+            If TextBox6.Text > TextBox5.Text Then
+                hrml = TextBox6.Text
+                isf = ((Math.Sqrt(3) * phaseload(2) + (0.25 * hrml)) / voltage) + (load / (Math.Sqrt(3) * voltage))
             Else
-                wirenumber = WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), OCPDRating(isf * 1.5), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
-                SetTextBoxSub.Text = wirenumber
+                hrml = TextBox5.Text
+                isf = (Math.Sqrt(3) * phaseload(2) / voltage) + (load + (0.25 * hrml)) / (Math.Sqrt(3) * voltage)
             End If
-
-            setcurrent = OCPDRatingTextBoxSub.Text / wirenumber
-
-            If WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = "2.0" Then
-                WireSizeTextBoxSub.Text = "3.5"
-            Else
-                WireSizeTextBoxSub.Text = WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
-            End If
-
-            ConduitSizeTextBoxSub.Text = ConduitSize(WireTypeComboBoxSub.Text, ConductorComboBoxSub.Text, GroundWireCheckBoxSub.Checked, "3", ConduitTypeComboBoxSub.Text, False)
+        Else
+            ThreePhase = False
+            phase = 1
         End If
+
+        CurrentRatingTextBox.Text = Math.Round(isf, 4)
+        MinimumAmpacityTextBoxSub.Text = Math.Round(isf * 1.25, 4)
+
+        OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.5)
+
+        If WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = 1 Then
+            wirenumber = SetTextBoxSub.Text
+        ElseIf WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) <= SetTextBoxSub.Text Then
+            wirenumber = SetTextBoxSub.Text
+        Else
+            wirenumber = WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+            SetTextBoxSub.Text = wirenumber
+        End If
+
+        setcurrent = OCPDRatingTextBoxSub.Text / wirenumber
+
+        If WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = "2.0" Then
+            WireSizeTextBoxSub.Text = "3.5"
+        Else
+            WireSizeTextBoxSub.Text = WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+        End If
+
+        ConduitSizeTextBoxSub.Text = ConduitSize(WireTypeComboBoxSub.Text, ConductorComboBoxSub.Text, GroundWireCheckBoxSub.Checked, phase, ConduitTypeComboBoxSub.Text, NeutralCheckBox.Checked)
+
+        'If TblBranchTableAdapter.CountThreePhaseLoad(CodeTextBoxSub.Text) > 0 Then
+        '    load = TblBranchTableAdapter.TotalThreePhasePower(CodeTextBoxSub.Text)
+        '    hrml = TblBranchTableAdapter.GetHRMLThreePhase(CodeTextBoxSub.Text)
+
+        '    isf = (load + (0.25 * hrml)) / (Math.Sqrt(3) * voltage)
+
+        '    CurrentRatingTextBox.Text = Math.Round(isf, 4)
+        '    MinimumAmpacityTextBoxSub.Text = Math.Round(isf * 1.25, 4)
+
+        '    OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.5)
+
+        '    If WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = 1 Then
+        '        wirenumber = SetTextBoxSub.Text
+        '    ElseIf WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) <= SetTextBoxSub.Text Then
+        '        wirenumber = SetTextBoxSub.Text
+        '    Else
+        '        wirenumber = WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRatingTextBoxSub.Text, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+        '        SetTextBoxSub.Text = wirenumber
+        '    End If
+
+        '    setcurrent = OCPDRatingTextBoxSub.Text / wirenumber
+
+        '    WireSizeTextBoxSub.Text = WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+
+        '    ConduitSizeTextBoxSub.Text = ConduitSize(WireTypeComboBoxSub.Text, ConductorComboBoxSub.Text, GroundWireCheckBoxSub.Checked, "3", ConduitTypeComboBoxSub.Text, True)
+        'Else
+        '    phaseload = {TblBranchTableAdapter.TotalPhaseAPower(CodeTextBoxSub.Text), TblBranchTableAdapter.TotalPhaseBPower(CodeTextBoxSub.Text), TblBranchTableAdapter.TotalPhaseCPower(CodeTextBoxSub.Text)}
+        '    If IsNothing(TblBranchTableAdapter.GetHRMLSinglePhase(CodeTextBoxSub.Text)) Then
+        '        hrml = 0
+        '    Else
+        '        hrml = TblBranchTableAdapter.GetHRMLSinglePhase(CodeTextBoxSub.Text)
+        '    End If
+
+        '    Array.Sort(phaseload)
+
+        '    isf = Math.Sqrt(3) * (phaseload(2) + (0.25 * hrml)) / voltage
+
+        '    CurrentRatingTextBox.Text = Math.Round(isf, 4)
+        '    MinimumAmpacityTextBoxSub.Text = Math.Round(isf * 1.25, 4)
+
+        '    OCPDRatingTextBoxSub.Text = OCPDRating(isf * 1.5)
+
+        '    If WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRating(isf * 1.5), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = 1 Then
+        '        wirenumber = SetTextBoxSub.Text
+        '    ElseIf WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBox.Text), OCPDRating(isf * 1.5), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) <= SetTextBoxSub.Text Then
+        '        wirenumber = SetTextBoxSub.Text
+        '    Else
+        '        wirenumber = WireSet(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), OCPDRating(isf * 1.5), ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+        '        SetTextBoxSub.Text = wirenumber
+        '    End If
+
+        '    setcurrent = OCPDRatingTextBoxSub.Text / wirenumber
+
+        '    If WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text) = "2.0" Then
+        '        WireSizeTextBoxSub.Text = "3.5"
+        '    Else
+        '        WireSizeTextBoxSub.Text = WireSize(ConductorComboBoxSub.Text, TblWireTableAdapter.GetNominalTemp(WireTypeComboBoxSub.Text), setcurrent, ConduitTypeComboBoxSub.Text, WireTypeComboBoxSub.Text)
+        '    End If
+
+        '    ConduitSizeTextBoxSub.Text = ConduitSize(WireTypeComboBoxSub.Text, ConductorComboBoxSub.Text, GroundWireCheckBoxSub.Checked, "3", ConduitTypeComboBoxSub.Text, False)
+        'End If
 
         vd = VoltageDrop(isf / SetTextBoxSub.Text, DistancetoMainTextBox.Text, ConduitTypeComboBoxSub.Text, WireSizeTextBoxSub.Text, ConductorComboBoxSub.Text, ThreePhase, VoltageLevelComboBox.Text)
 
@@ -659,8 +699,6 @@ ErrorLine: End Sub
                     GoTo ErrorLine
                 End If
             Next i
-
-
 
             MessageBox.Show("Balanced subfeeder.")
             Balanced = True
