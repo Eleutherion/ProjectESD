@@ -295,7 +295,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>yfaqwwgdGdJ7IcMERxAGXtUXp5SdxHqQSUSn9T84B8E=</dsig:DigestValue>
+        <dsig:DigestValue>dU4E5ZpjJHFl5O/t2PfPn3UfzGEV6syR3RKakj+XQjE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -329,7 +329,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>OsZO13g64PI3dtPiTrINpfik8jbJkTPQt5sb46ML/aw=</dsig:DigestValue>
+      <dsig:DigestValue>gD4DR78K66bKQVEeXO4k2G80TKFAJcaI9VjdIEsYqUs=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ESD_Database_log.ldf" size="8388608" writeableType="applicationData">
@@ -338,7 +338,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>xJB3sGZBG3/o7P80lfI+pbk1KGALwUjHnHZbAeHWU/w=</dsig:DigestValue>
+      <dsig:DigestValue>XmRRhZYq46PWiDowBkxNhxsfi+QutmGYOWgj3WE1+hU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ESD_DatabaseDataSet.xsd" size="318793">
