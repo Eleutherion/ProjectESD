@@ -178,9 +178,9 @@ Partial Class FormMain
         Me.DPCodeTextBox = New System.Windows.Forms.TextBox()
         Me.BtnBalance = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TxtMotorThreePhase = New System.Windows.Forms.TextBox()
         Me.Label34 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TxtMotorSinglePhase = New System.Windows.Forms.TextBox()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TxtThreePhaseLoad = New System.Windows.Forms.TextBox()
@@ -1950,9 +1950,9 @@ Partial Class FormMain
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.TextBox5)
+        Me.GroupBox4.Controls.Add(Me.TxtMotorThreePhase)
         Me.GroupBox4.Controls.Add(Me.Label34)
-        Me.GroupBox4.Controls.Add(Me.TextBox6)
+        Me.GroupBox4.Controls.Add(Me.TxtMotorSinglePhase)
         Me.GroupBox4.Controls.Add(Me.Label35)
         Me.GroupBox4.Location = New System.Drawing.Point(308, 169)
         Me.GroupBox4.Name = "GroupBox4"
@@ -1961,13 +1961,13 @@ Partial Class FormMain
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Motor Loads"
         '
-        'TextBox5
+        'TxtMotorThreePhase
         '
-        Me.TextBox5.Location = New System.Drawing.Point(164, 72)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.ReadOnly = True
-        Me.TextBox5.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox5.TabIndex = 7
+        Me.TxtMotorThreePhase.Location = New System.Drawing.Point(164, 72)
+        Me.TxtMotorThreePhase.Name = "TxtMotorThreePhase"
+        Me.TxtMotorThreePhase.ReadOnly = True
+        Me.TxtMotorThreePhase.Size = New System.Drawing.Size(100, 20)
+        Me.TxtMotorThreePhase.TabIndex = 7
         '
         'Label34
         '
@@ -1978,13 +1978,13 @@ Partial Class FormMain
         Me.Label34.TabIndex = 6
         Me.Label34.Text = "Three Phase"
         '
-        'TextBox6
+        'TxtMotorSinglePhase
         '
-        Me.TextBox6.Location = New System.Drawing.Point(164, 46)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.ReadOnly = True
-        Me.TextBox6.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox6.TabIndex = 5
+        Me.TxtMotorSinglePhase.Location = New System.Drawing.Point(164, 46)
+        Me.TxtMotorSinglePhase.Name = "TxtMotorSinglePhase"
+        Me.TxtMotorSinglePhase.ReadOnly = True
+        Me.TxtMotorSinglePhase.Size = New System.Drawing.Size(100, 20)
+        Me.TxtMotorSinglePhase.TabIndex = 5
         '
         'Label35
         '
@@ -4002,9 +4002,9 @@ Partial Class FormMain
     Friend WithEvents DPCodeTextBox As TextBox
     Friend WithEvents BtnBalance As Button
     Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents TxtMotorThreePhase As TextBox
     Friend WithEvents Label34 As Label
-    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents TxtMotorSinglePhase As TextBox
     Friend WithEvents Label35 As Label
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents TxtThreePhaseLoad As TextBox

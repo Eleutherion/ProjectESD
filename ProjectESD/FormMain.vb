@@ -512,11 +512,11 @@ ErrorLine: End Sub
 
             Array.Sort(phaseload)
 
-            If TextBox6.Text > TextBox5.Text Then
-                hrml = TextBox6.Text
+            If TblBranchTableAdapter.GetHRMLSinglePhase(CodeTextBoxSub.Text) > TblBranchTableAdapter.GetHRMLThreePhase(CodeTextBoxSub.Text) Then
+                hrml = TblBranchTableAdapter.GetHRMLSinglePhase(CodeTextBoxSub.Text)
                 isf = (Math.Sqrt(3) * ((phaseload(2) + (0.25 * hrml)) / voltage)) + (load / (Math.Sqrt(3) * voltage))
             Else
-                hrml = TextBox5.Text
+                hrml = TblBranchTableAdapter.GetHRMLThreePhase(CodeTextBoxSub.Text)
                 isf = (Math.Sqrt(3) * phaseload(2) / voltage) + (load + (0.25 * hrml)) / (Math.Sqrt(3) * voltage)
             End If
         Else
@@ -524,7 +524,7 @@ ErrorLine: End Sub
             phase = 1
 
             load = TxtPhaseALoad.Text
-            hrml = TextBox6.Text
+            hrml = TxtMotorSinglePhase.Text
 
             isf = (load + (0.25 * hrml)) / voltage
         End If
@@ -673,8 +673,8 @@ ErrorLine: End Sub
         TxtPhaseBLoad.Text = TblBranchTableAdapter.TotalPhaseBPower(CodeTextBoxSub.Text)
         TxtPhaseCLoad.Text = TblBranchTableAdapter.TotalPhaseCPower(CodeTextBoxSub.Text)
         TxtThreePhaseLoad.Text = TblBranchTableAdapter.TotalThreePhasePower(CodeTextBoxSub.Text)
-        TextBox6.Text = TblBranchTableAdapter.GetHRMLSinglePhase(CodeTextBoxSub.Text)
-        TextBox5.Text = TblBranchTableAdapter.GetHRMLThreePhase(CodeTextBoxSub.Text)
+        TxtMotorSinglePhase.Text = TblBranchTableAdapter.GetHRMLSinglePhase(CodeTextBoxSub.Text)
+        TxtMotorThreePhase.Text = TblBranchTableAdapter.GetHRMLThreePhase(CodeTextBoxSub.Text)
 
         If TxtPhaseALoad.Text = "" Then
             TxtPhaseALoad.Text = 0
