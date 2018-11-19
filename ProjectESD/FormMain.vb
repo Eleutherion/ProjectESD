@@ -21,6 +21,16 @@ Public Class FormMain
         TblProjectBindingSource.AddNew()
     End Sub
 
+    Private Sub TypeComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeComboBox1.SelectedIndexChanged
+        If TypeComboBox1.SelectedIndex < 2 Then
+            PhaseComboBox.SelectedIndex = 0
+            PhaseComboBox.Enabled = False
+        Else
+            PhaseComboBox.SelectedIndex = -1
+            PhaseComboBox.Enabled = True
+        End If
+    End Sub
+
     Private Sub BtnSaveProject_Click(sender As Object, e As EventArgs) Handles BtnSaveProject.Click
         Dim dr As DialogResult = MessageBox.Show("Do you wish to save?", "Save", MessageBoxButtons.YesNo)
         If dr = DialogResult.Yes Then
@@ -278,6 +288,18 @@ endline: End If
             MessageBox.Show("Fill in the required fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             GoTo ErrorLine
         End If
+
+        If IsNothing(TblSubfeederTableAdapter.CurrentSum(CodeTextBoxDP.Text)) Then
+            MessageBox.Show("Compute for subfeeders before proceeding to the distribution panelboard computation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            GoTo ErrorLine
+        End If
+
+        TextBox6.Text = TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "A")
+        TextBox5.Text = TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "B")
+        TextBox4.Text = TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "C")
+        TextBox3.Text = TblDistributionTableAdapter.TotalPhaseLoad(CodeTextBoxDP.Text, "3")
+        TextBox2.Text = TblDistributionTableAdapter.GetHRMLSinglePhase(CodeTextBoxDP.Text)
+        TextBox1.Text = TblDistributionTableAdapter.GetHRMLThreePhase(CodeTextBoxDP.Text)
 
         If TypeComboBox1.SelectedIndex <= 1 Then
             lighting = TblDistributionTableAdapter.TotalLoadperType(CodeTextBoxDP.Text, "Lighting")
@@ -669,6 +691,11 @@ vdline:     vd = VoltageDrop(isf / SetTextBoxSub.Text, DistancetoMainTextBox.Tex
 ErrorLine: End Sub
 
     Private Sub BtnBalance_Click(sender As Object, e As EventArgs) Handles BtnBalance.Click
+        If TblBranchTableAdapter.CountBranch(CodeTextBoxSub.Text) = 0 Then
+            MessageBox.Show("No branch circuit input yet. Add necessary branch circuit.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            GoTo ErrorLine
+        End If
+
         TxtPhaseALoad.Text = TblBranchTableAdapter.TotalPhaseAPower(CodeTextBoxSub.Text)
         TxtPhaseBLoad.Text = TblBranchTableAdapter.TotalPhaseBPower(CodeTextBoxSub.Text)
         TxtPhaseCLoad.Text = TblBranchTableAdapter.TotalPhaseCPower(CodeTextBoxSub.Text)
@@ -1306,7 +1333,6 @@ ErrorLine: End Sub
         End If
 
         If TypeComboBox.SelectedIndex = 2 Then
-            TxtMotorItem.ReadOnly = False
             MotorRatingTextBox.ReadOnly = False
             CboRatingUnit.Enabled = True
             CboRatingUnit.SelectedIndex = 0
@@ -1387,7 +1413,6 @@ ErrorLine: End Sub
                 GrpPower.Enabled = False
                 GrpLighting.Enabled = False
                 PowerRatingTextBox.ReadOnly = False
-                TxtMotorItem.ReadOnly = False
                 TxtMotorItem.Text = "1"
                 WireTypeComboBox.Enabled = True
                 ConductorComboBox.Enabled = True
@@ -1433,6 +1458,7 @@ ErrorLine: End Sub
         SubfeederTextBox.Text = CodeTextBoxSub.Text
         SetTextBox.Text = "1"
         GroundWireCheckBox1.CheckState = False
+        TypeComboBox.Enabled = True
     End Sub
 
     Private Sub BtnSaveBranch_Click(sender As Object, e As EventArgs) Handles BtnSaveBranch.Click
@@ -1503,54 +1529,63 @@ ErrorLine: End Sub
 
 #Region "Transformer/Generator"
     Private Sub BtnComputeTG_Click(sender As Object, e As EventArgs) Handles BtnComputeTG.Click
-        If DemandFactorTextBox.Text = "" Then
-            DemandFactorTextBox.Text = 0.6
+        If IsNothing(TblDistributionTableAdapter.CurrentSum(ProjectCodeTextBox.Text)) Then
+            MessageBox.Show("Compute for distribution panelboards before proceeding to the transformer/generator computation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            GoTo ErrorLine
         End If
 
-        If DiversityFactorTextBox.Text = "" Then
-            DiversityFactorTextBox.Text = 1.3
-        End If
+        If TypeComboBox1.SelectedIndex >= 2 Then
+            If DemandFactorTextBox.Text = "" Then
+                DemandFactorTextBox.Text = 0.6
+            End If
 
-        If TransformerXRRatioTextBox.Text = "" Then
-            TransformerXRRatioTextBox.Text = 10
-        End If
+            If DiversityFactorTextBox.Text = "" Then
+                DiversityFactorTextBox.Text = 1.3
+            End If
 
-        If TransformerZpuTextBox.Text = "" Then
-            TransformerZpuTextBox.Text = 5.75
-        End If
+            If TransformerXRRatioTextBox.Text = "" Then
+                TransformerXRRatioTextBox.Text = 10
+            End If
 
-        If NumberofGeneratorsTextBox.Text = "" Or NumberofGeneratorsTextBox.Text = "0" Then
-            NumberofGeneratorsTextBox.Text = 1
-        End If
+            If TransformerZpuTextBox.Text = "" Then
+                TransformerZpuTextBox.Text = 5.75
+            End If
 
-        Dim singlephaseload, threephaseload, phaseload(2) As Decimal
-        Dim voltage As Integer = VoltageLevelComboBox.Text
+            If NumberofGeneratorsTextBox.Text = "" Or NumberofGeneratorsTextBox.Text = "0" Then
+                NumberofGeneratorsTextBox.Text = 1
+            End If
 
-        If PhaseTextBox.Text = "3" Then
-            phaseload = {TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "A"),
-                TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "B"),
-                TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "C")}
+            Dim singlephaseload, threephaseload, phaseload(2) As Decimal
+            Dim voltage As Integer = VoltageLevelComboBox.Text
 
-            Array.Sort(phaseload)
+            If PhaseTextBox.Text = "3" Then
+                phaseload = {TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "A"),
+                    TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "B"),
+                    TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "C")}
 
-            singlephaseload = phaseload(2)
+                Array.Sort(phaseload)
 
-            threephaseload = TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "3")
+                singlephaseload = phaseload(2)
 
-            TCL = (3 * singlephaseload) + threephaseload
+                threephaseload = TblBranchTableAdapter.TotalLoadperPhase(ProjectCodeTextBox.Text, "3")
 
-            TotalLoadTextBox.Text = Math.Round(TCL, 4)
+                TCL = (3 * singlephaseload) + threephaseload
+
+                TotalLoadTextBox.Text = Math.Round(TCL, 4)
+            Else
+                singlephaseload = TblBranchTableAdapter.TotalLoadperPhase(ProjectTextBox.Text, "A")
+                TCL = singlephaseload
+                TotalLoadTextBox.Text = Math.Round(singlephaseload, 4)
+            End If
+
+            TransformerRatingTextBox.Text = CStr(TransformerRating(TCL * CDec(DemandFactorTextBox.Text) / CDec(DiversityFactorTextBox.Text)))
+
+            GeneratorRatingTextBox.Text = CStr(TransformerRating(TCL * 1.25 / CDec(NumberofGeneratorsTextBox.Text)))
         Else
-            singlephaseload = TblBranchTableAdapter.TotalLoadperPhase(ProjectTextBox.Text, "A")
-            TCL = singlephaseload
-            TotalLoadTextBox.Text = Math.Round(singlephaseload, 4)
+            GeneratorRatingTextBox.Text = CStr(TransformerRating(TCL * 1.25 / CDec(NumberofGeneratorsTextBox.Text)))
         End If
 
-        TransformerRatingTextBox.Text = CStr(TransformerRating(TCL * CDec(DemandFactorTextBox.Text) / CDec(DiversityFactorTextBox.Text)))
-
-        GeneratorRatingTextBox.Text = CStr(TransformerRating(TCL * 1.25 / CDec(NumberofGeneratorsTextBox.Text)))
-
-    End Sub
+ErrorLine: End Sub
 
     Private Sub BtnAddTG_Click(sender As Object, e As EventArgs) Handles BtnAddTG.Click
         TblTransGenBindingSource.AddNew()
@@ -1739,6 +1774,8 @@ ErrorLine: End Sub
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Application.Exit()
     End Sub
+
+
 
 
 #End Region

@@ -7,14 +7,14 @@
     <framework targetVersion="4.7.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="ProjectESD.exe.manifest" size="22862">
+    <dependentAssembly dependencyType="install" codebase="ProjectESD.exe.manifest" size="22576">
       <assemblyIdentity name="ProjectESD.exe" version="0.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="amd64" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>zt1U6FyNcRZ8A2M62vFhMNy705o0oAZgUcggNFL1ys4=</dsig:DigestValue>
+        <dsig:DigestValue>zlzSTPMzHB6EyRnhgUIQoDDH/7TfVXxreC7C7LMRBWw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

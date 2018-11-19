@@ -43,11 +43,6 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
-      <assemblyIdentity name="log4net" version="1.2.10.0" publicKeyToken="692FBEA5521E1304" language="neutral" processorArchitecture="amd64" />
-    </dependentAssembly>
-  </dependency>
-  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CrystalDecisions.CrystalReports.Design.dll" size="98304">
       <assemblyIdentity name="CrystalDecisions.CrystalReports.Design" version="13.0.3500.0" publicKeyToken="692FBEA5521E1304" language="neutral" processorArchitecture="msil" />
       <hash>
@@ -288,14 +283,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ProjectESD.exe" size="849376">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ProjectESD.exe" size="877024">
       <assemblyIdentity name="ProjectESD" version="0.0.0.1" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FdeuDFCUgkZPM7j+h0IzpFy9pvioUWIyggN9PgSm6Og=</dsig:DigestValue>
+        <dsig:DigestValue>88he/iYWUDuhTka8QQ8rlqvNzvUJGxf+0JO0Y659J9s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -329,7 +324,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Faavx+ElpIz/RkTka1xyR9f4+rfDssgu9HSc5fKAjmc=</dsig:DigestValue>
+      <dsig:DigestValue>KhHOEF8uYamm09Dp3SCE/rHy62pg9JgQJMuMDKUdk48=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ESD_Database_log.ldf" size="8388608" writeableType="applicationData">
@@ -338,16 +333,16 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>oAf9dblcjVJlaWlrpZM9mgtNWeF+/VwG02KwdWRAkoQ=</dsig:DigestValue>
+      <dsig:DigestValue>tSs1ux7ifrcvTSr4L3dQm1gub8SMsUKz+cG086mPtp4=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ESD_DatabaseDataSet.xsd" size="318447">
+  <file name="ESD_DatabaseDataSet.xsd" size="326069">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>pkRrMXmB8oiElNtHG58b8/y+LjbRYmga8Hpv5F6v19s=</dsig:DigestValue>
+      <dsig:DigestValue>ZeKV1WNNUIXYtRZm8V1wiQkWFOgzhalGQh+FeM1c/C0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="facebook_profile_image_kHI_icon.ico" size="24915">

@@ -1730,6 +1730,10 @@ Partial Public Class ESD_DatabaseDataSet
         
         Private columnProjectCode As Global.System.Data.DataColumn
         
+        Private columnTransformerXRRatio As Global.System.Data.DataColumn
+        
+        Private columnTransformerZpu As Global.System.Data.DataColumn
+        
         Private columnDemandFactor As Global.System.Data.DataColumn
         
         Private columnDiversityFactor As Global.System.Data.DataColumn
@@ -1739,10 +1743,6 @@ Partial Public Class ESD_DatabaseDataSet
         Private columnGeneratorRating As Global.System.Data.DataColumn
         
         Private columnNumberofGenerators As Global.System.Data.DataColumn
-        
-        Private columnTransformerXRRatio As Global.System.Data.DataColumn
-        
-        Private columnTransformerZpu As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
@@ -1789,6 +1789,22 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public ReadOnly Property TransformerXRRatioColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTransformerXRRatio
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public ReadOnly Property TransformerZpuColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTransformerZpu
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public ReadOnly Property DemandFactorColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnDemandFactor
@@ -1824,22 +1840,6 @@ Partial Public Class ESD_DatabaseDataSet
         Public ReadOnly Property NumberofGeneratorsColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnNumberofGenerators
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public ReadOnly Property TransformerXRRatioColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTransformerXRRatio
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public ReadOnly Property TransformerZpuColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnTransformerZpu
             End Get
         End Property
         
@@ -1880,9 +1880,9 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function AddtblTransGenRow(ByVal parenttblProjectRowByFK_tblTransGen_tblProject As tblProjectRow, ByVal DemandFactor As Double, ByVal DiversityFactor As Double, ByVal TransformerRating As Double, ByVal GeneratorRating As Double, ByVal NumberofGenerators As Integer, ByVal TransformerXRRatio As Double, ByVal TransformerZpu As Double) As tblTransGenRow
+        Public Overloads Function AddtblTransGenRow(ByVal parenttblProjectRowByFK_tblTransGen_tblProject As tblProjectRow, ByVal TransformerXRRatio As Double, ByVal TransformerZpu As Double, ByVal DemandFactor As Double, ByVal DiversityFactor As Double, ByVal TransformerRating As Double, ByVal GeneratorRating As Double, ByVal NumberofGenerators As Integer) As tblTransGenRow
             Dim rowtblTransGenRow As tblTransGenRow = CType(Me.NewRow,tblTransGenRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, DemandFactor, DiversityFactor, TransformerRating, GeneratorRating, NumberofGenerators, TransformerXRRatio, TransformerZpu}
+            Dim columnValuesArray() As Object = New Object() {Nothing, TransformerXRRatio, TransformerZpu, DemandFactor, DiversityFactor, TransformerRating, GeneratorRating, NumberofGenerators}
             If (Not (parenttblProjectRowByFK_tblTransGen_tblProject) Is Nothing) Then
                 columnValuesArray(0) = parenttblProjectRowByFK_tblTransGen_tblProject(0)
             End If
@@ -1915,13 +1915,13 @@ Partial Public Class ESD_DatabaseDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Friend Sub InitVars()
             Me.columnProjectCode = MyBase.Columns("ProjectCode")
+            Me.columnTransformerXRRatio = MyBase.Columns("TransformerXRRatio")
+            Me.columnTransformerZpu = MyBase.Columns("TransformerZpu")
             Me.columnDemandFactor = MyBase.Columns("DemandFactor")
             Me.columnDiversityFactor = MyBase.Columns("DiversityFactor")
             Me.columnTransformerRating = MyBase.Columns("TransformerRating")
             Me.columnGeneratorRating = MyBase.Columns("GeneratorRating")
             Me.columnNumberofGenerators = MyBase.Columns("NumberofGenerators")
-            Me.columnTransformerXRRatio = MyBase.Columns("TransformerXRRatio")
-            Me.columnTransformerZpu = MyBase.Columns("TransformerZpu")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1929,6 +1929,10 @@ Partial Public Class ESD_DatabaseDataSet
         Private Sub InitClass()
             Me.columnProjectCode = New Global.System.Data.DataColumn("ProjectCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnProjectCode)
+            Me.columnTransformerXRRatio = New Global.System.Data.DataColumn("TransformerXRRatio", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTransformerXRRatio)
+            Me.columnTransformerZpu = New Global.System.Data.DataColumn("TransformerZpu", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTransformerZpu)
             Me.columnDemandFactor = New Global.System.Data.DataColumn("DemandFactor", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnDemandFactor)
             Me.columnDiversityFactor = New Global.System.Data.DataColumn("DiversityFactor", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
@@ -1939,19 +1943,10 @@ Partial Public Class ESD_DatabaseDataSet
             MyBase.Columns.Add(Me.columnGeneratorRating)
             Me.columnNumberofGenerators = New Global.System.Data.DataColumn("NumberofGenerators", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnNumberofGenerators)
-            Me.columnTransformerXRRatio = New Global.System.Data.DataColumn("TransformerXRRatio", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTransformerXRRatio)
-            Me.columnTransformerZpu = New Global.System.Data.DataColumn("TransformerZpu", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTransformerZpu)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnProjectCode}, true))
             Me.columnProjectCode.AllowDBNull = false
             Me.columnProjectCode.Unique = true
             Me.columnProjectCode.MaxLength = 20
-            Me.columnDemandFactor.AllowDBNull = false
-            Me.columnDiversityFactor.AllowDBNull = false
-            Me.columnTransformerRating.AllowDBNull = false
-            Me.columnGeneratorRating.AllowDBNull = false
-            Me.columnNumberofGenerators.AllowDBNull = false
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -4704,61 +4699,6 @@ Partial Public Class ESD_DatabaseDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property DemandFactor() As Double
-            Get
-                Return CType(Me(Me.tabletblTransGen.DemandFactorColumn),Double)
-            End Get
-            Set
-                Me(Me.tabletblTransGen.DemandFactorColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property DiversityFactor() As Double
-            Get
-                Return CType(Me(Me.tabletblTransGen.DiversityFactorColumn),Double)
-            End Get
-            Set
-                Me(Me.tabletblTransGen.DiversityFactorColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property TransformerRating() As Double
-            Get
-                Return CType(Me(Me.tabletblTransGen.TransformerRatingColumn),Double)
-            End Get
-            Set
-                Me(Me.tabletblTransGen.TransformerRatingColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property GeneratorRating() As Double
-            Get
-                Return CType(Me(Me.tabletblTransGen.GeneratorRatingColumn),Double)
-            End Get
-            Set
-                Me(Me.tabletblTransGen.GeneratorRatingColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Property NumberofGenerators() As Integer
-            Get
-                Return CType(Me(Me.tabletblTransGen.NumberofGeneratorsColumn),Integer)
-            End Get
-            Set
-                Me(Me.tabletblTransGen.NumberofGeneratorsColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Property TransformerXRRatio() As Double
             Get
                 Try 
@@ -4784,6 +4724,81 @@ Partial Public Class ESD_DatabaseDataSet
             End Get
             Set
                 Me(Me.tabletblTransGen.TransformerZpuColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property DemandFactor() As Double
+            Get
+                Try 
+                    Return CType(Me(Me.tabletblTransGen.DemandFactorColumn),Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DemandFactor' in table 'tblTransGen' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabletblTransGen.DemandFactorColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property DiversityFactor() As Double
+            Get
+                Try 
+                    Return CType(Me(Me.tabletblTransGen.DiversityFactorColumn),Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DiversityFactor' in table 'tblTransGen' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabletblTransGen.DiversityFactorColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property TransformerRating() As Double
+            Get
+                Try 
+                    Return CType(Me(Me.tabletblTransGen.TransformerRatingColumn),Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TransformerRating' in table 'tblTransGen' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabletblTransGen.TransformerRatingColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property GeneratorRating() As Double
+            Get
+                Try 
+                    Return CType(Me(Me.tabletblTransGen.GeneratorRatingColumn),Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'GeneratorRating' in table 'tblTransGen' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabletblTransGen.GeneratorRatingColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property NumberofGenerators() As Integer
+            Get
+                Try 
+                    Return CType(Me(Me.tabletblTransGen.NumberofGeneratorsColumn),Integer)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'NumberofGenerators' in table 'tblTransGen' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabletblTransGen.NumberofGeneratorsColumn) = value
             End Set
         End Property
         
@@ -4820,6 +4835,66 @@ Partial Public Class ESD_DatabaseDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub SetTransformerZpuNull()
             Me(Me.tabletblTransGen.TransformerZpuColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsDemandFactorNull() As Boolean
+            Return Me.IsNull(Me.tabletblTransGen.DemandFactorColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetDemandFactorNull()
+            Me(Me.tabletblTransGen.DemandFactorColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsDiversityFactorNull() As Boolean
+            Return Me.IsNull(Me.tabletblTransGen.DiversityFactorColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetDiversityFactorNull()
+            Me(Me.tabletblTransGen.DiversityFactorColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsTransformerRatingNull() As Boolean
+            Return Me.IsNull(Me.tabletblTransGen.TransformerRatingColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetTransformerRatingNull()
+            Me(Me.tabletblTransGen.TransformerRatingColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsGeneratorRatingNull() As Boolean
+            Return Me.IsNull(Me.tabletblTransGen.GeneratorRatingColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetGeneratorRatingNull()
+            Me(Me.tabletblTransGen.GeneratorRatingColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsNumberofGeneratorsNull() As Boolean
+            Return Me.IsNull(Me.tabletblTransGen.NumberofGeneratorsColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetNumberofGeneratorsNull()
+            Me(Me.tabletblTransGen.NumberofGeneratorsColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
@@ -8709,88 +8784,106 @@ Namespace ESD_DatabaseDataSetTableAdapters
             tableMapping.SourceTable = "Table"
             tableMapping.DataSetTable = "tblTransGen"
             tableMapping.ColumnMappings.Add("ProjectCode", "ProjectCode")
+            tableMapping.ColumnMappings.Add("TransformerXRRatio", "TransformerXRRatio")
+            tableMapping.ColumnMappings.Add("TransformerZpu", "TransformerZpu")
             tableMapping.ColumnMappings.Add("DemandFactor", "DemandFactor")
             tableMapping.ColumnMappings.Add("DiversityFactor", "DiversityFactor")
             tableMapping.ColumnMappings.Add("TransformerRating", "TransformerRating")
             tableMapping.ColumnMappings.Add("GeneratorRating", "GeneratorRating")
             tableMapping.ColumnMappings.Add("NumberofGenerators", "NumberofGenerators")
-            tableMapping.ColumnMappings.Add("TransformerXRRatio", "TransformerXRRatio")
-            tableMapping.ColumnMappings.Add("TransformerZpu", "TransformerZpu")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [tblTransGen] WHERE (([ProjectCode] = @Original_ProjectCode) AND ([De"& _ 
-                "mandFactor] = @Original_DemandFactor) AND ([DiversityFactor] = @Original_Diversi"& _ 
-                "tyFactor) AND ([TransformerRating] = @Original_TransformerRating) AND ([Generato"& _ 
-                "rRating] = @Original_GeneratorRating) AND ([NumberofGenerators] = @Original_Numb"& _ 
-                "erofGenerators) AND ((@IsNull_TransformerXRRatio = 1 AND [TransformerXRRatio] IS"& _ 
-                " NULL) OR ([TransformerXRRatio] = @Original_TransformerXRRatio)) AND ((@IsNull_T"& _ 
-                "ransformerZpu = 1 AND [TransformerZpu] IS NULL) OR ([TransformerZpu] = @Original"& _ 
-                "_TransformerZpu)))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [tblTransGen] WHERE (([ProjectCode] = @Original_ProjectCode) AND ((@I"& _ 
+                "sNull_TransformerXRRatio = 1 AND [TransformerXRRatio] IS NULL) OR ([TransformerX"& _ 
+                "RRatio] = @Original_TransformerXRRatio)) AND ((@IsNull_TransformerZpu = 1 AND [T"& _ 
+                "ransformerZpu] IS NULL) OR ([TransformerZpu] = @Original_TransformerZpu)) AND (("& _ 
+                "@IsNull_DemandFactor = 1 AND [DemandFactor] IS NULL) OR ([DemandFactor] = @Origi"& _ 
+                "nal_DemandFactor)) AND ((@IsNull_DiversityFactor = 1 AND [DiversityFactor] IS NU"& _ 
+                "LL) OR ([DiversityFactor] = @Original_DiversityFactor)) AND ((@IsNull_GeneratorR"& _ 
+                "ating = 1 AND [GeneratorRating] IS NULL) OR ([GeneratorRating] = @Original_Gener"& _ 
+                "atorRating)) AND ((@IsNull_NumberofGenerators = 1 AND [NumberofGenerators] IS NU"& _ 
+                "LL) OR ([NumberofGenerators] = @Original_NumberofGenerators)) AND ((@IsNull_Tran"& _ 
+                "sformerRating = 1 AND [TransformerRating] IS NULL) OR ([TransformerRating] = @Or"& _ 
+                "iginal_TransformerRating)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DemandFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DemandFactor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DiversityFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DiversityFactor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransformerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_GeneratorRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneratorRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_NumberofGenerators", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumberofGenerators", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TransformerXRRatio", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerXRRatio", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransformerXRRatio", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerXRRatio", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TransformerZpu", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerZpu", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransformerZpu", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerZpu", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_DemandFactor", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DemandFactor", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DemandFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DemandFactor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_DiversityFactor", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DiversityFactor", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DiversityFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DiversityFactor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_GeneratorRating", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneratorRating", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_GeneratorRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneratorRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_NumberofGenerators", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumberofGenerators", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_NumberofGenerators", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumberofGenerators", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TransformerRating", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerRating", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransformerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [tblTransGen] ([ProjectCode], [DemandFactor], [DiversityFactor], [Tra"& _ 
-                "nsformerRating], [GeneratorRating], [NumberofGenerators], [TransformerXRRatio], "& _ 
-                "[TransformerZpu]) VALUES (@ProjectCode, @DemandFactor, @DiversityFactor, @Transf"& _ 
-                "ormerRating, @GeneratorRating, @NumberofGenerators, @TransformerXRRatio, @Transf"& _ 
-                "ormerZpu);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProjectCode, DemandFactor, DiversityFactor, TransformerRating"& _ 
-                ", GeneratorRating, NumberofGenerators, TransformerXRRatio, TransformerZpu FROM t"& _ 
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [tblTransGen] ([ProjectCode], [TransformerXRRatio], [TransformerZpu],"& _ 
+                " [DemandFactor], [DiversityFactor], [GeneratorRating], [NumberofGenerators], [Tr"& _ 
+                "ansformerRating]) VALUES (@ProjectCode, @TransformerXRRatio, @TransformerZpu, @D"& _ 
+                "emandFactor, @DiversityFactor, @GeneratorRating, @NumberofGenerators, @Transform"& _ 
+                "erRating);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProjectCode, TransformerXRRatio, TransformerZpu, DemandFactor"& _ 
+                ", DiversityFactor, GeneratorRating, NumberofGenerators, TransformerRating FROM t"& _ 
                 "blTransGen WHERE (ProjectCode = @ProjectCode)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DemandFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DemandFactor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DiversityFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DiversityFactor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransformerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GeneratorRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneratorRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumberofGenerators", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumberofGenerators", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransformerXRRatio", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerXRRatio", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransformerZpu", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerZpu", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DemandFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DemandFactor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DiversityFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DiversityFactor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GeneratorRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneratorRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumberofGenerators", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumberofGenerators", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransformerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [tblTransGen] SET [ProjectCode] = @ProjectCode, [DemandFactor] = @DemandFa"& _ 
-                "ctor, [DiversityFactor] = @DiversityFactor, [TransformerRating] = @TransformerRa"& _ 
-                "ting, [GeneratorRating] = @GeneratorRating, [NumberofGenerators] = @NumberofGene"& _ 
-                "rators, [TransformerXRRatio] = @TransformerXRRatio, [TransformerZpu] = @Transfor"& _ 
-                "merZpu WHERE (([ProjectCode] = @Original_ProjectCode) AND ([DemandFactor] = @Ori"& _ 
-                "ginal_DemandFactor) AND ([DiversityFactor] = @Original_DiversityFactor) AND ([Tr"& _ 
-                "ansformerRating] = @Original_TransformerRating) AND ([GeneratorRating] = @Origin"& _ 
-                "al_GeneratorRating) AND ([NumberofGenerators] = @Original_NumberofGenerators) AN"& _ 
-                "D ((@IsNull_TransformerXRRatio = 1 AND [TransformerXRRatio] IS NULL) OR ([Transf"& _ 
-                "ormerXRRatio] = @Original_TransformerXRRatio)) AND ((@IsNull_TransformerZpu = 1 "& _ 
-                "AND [TransformerZpu] IS NULL) OR ([TransformerZpu] = @Original_TransformerZpu)))"& _ 
-                ";"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProjectCode, DemandFactor, DiversityFactor, TransformerRating, Generat"& _ 
-                "orRating, NumberofGenerators, TransformerXRRatio, TransformerZpu FROM tblTransGe"& _ 
-                "n WHERE (ProjectCode = @ProjectCode)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [tblTransGen] SET [ProjectCode] = @ProjectCode, [TransformerXRRatio] = @Tr"& _ 
+                "ansformerXRRatio, [TransformerZpu] = @TransformerZpu, [DemandFactor] = @DemandFa"& _ 
+                "ctor, [DiversityFactor] = @DiversityFactor, [GeneratorRating] = @GeneratorRating"& _ 
+                ", [NumberofGenerators] = @NumberofGenerators, [TransformerRating] = @Transformer"& _ 
+                "Rating WHERE (([ProjectCode] = @Original_ProjectCode) AND ((@IsNull_TransformerX"& _ 
+                "RRatio = 1 AND [TransformerXRRatio] IS NULL) OR ([TransformerXRRatio] = @Origina"& _ 
+                "l_TransformerXRRatio)) AND ((@IsNull_TransformerZpu = 1 AND [TransformerZpu] IS "& _ 
+                "NULL) OR ([TransformerZpu] = @Original_TransformerZpu)) AND ((@IsNull_DemandFact"& _ 
+                "or = 1 AND [DemandFactor] IS NULL) OR ([DemandFactor] = @Original_DemandFactor))"& _ 
+                " AND ((@IsNull_DiversityFactor = 1 AND [DiversityFactor] IS NULL) OR ([Diversity"& _ 
+                "Factor] = @Original_DiversityFactor)) AND ((@IsNull_GeneratorRating = 1 AND [Gen"& _ 
+                "eratorRating] IS NULL) OR ([GeneratorRating] = @Original_GeneratorRating)) AND ("& _ 
+                "(@IsNull_NumberofGenerators = 1 AND [NumberofGenerators] IS NULL) OR ([NumberofG"& _ 
+                "enerators] = @Original_NumberofGenerators)) AND ((@IsNull_TransformerRating = 1 "& _ 
+                "AND [TransformerRating] IS NULL) OR ([TransformerRating] = @Original_Transformer"& _ 
+                "Rating)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ProjectCode, TransformerXRRatio, TransformerZpu, DemandFactor"& _ 
+                ", DiversityFactor, GeneratorRating, NumberofGenerators, TransformerRating FROM t"& _ 
+                "blTransGen WHERE (ProjectCode = @ProjectCode)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DemandFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DemandFactor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DiversityFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DiversityFactor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransformerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GeneratorRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneratorRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumberofGenerators", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumberofGenerators", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransformerXRRatio", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerXRRatio", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransformerZpu", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerZpu", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DemandFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DemandFactor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DiversityFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DiversityFactor", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@GeneratorRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneratorRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NumberofGenerators", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumberofGenerators", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TransformerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerRating", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ProjectCode", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DemandFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DemandFactor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DiversityFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DiversityFactor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransformerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_GeneratorRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneratorRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_NumberofGenerators", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumberofGenerators", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TransformerXRRatio", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerXRRatio", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransformerXRRatio", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerXRRatio", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TransformerZpu", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerZpu", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransformerZpu", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerZpu", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_DemandFactor", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DemandFactor", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DemandFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DemandFactor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_DiversityFactor", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DiversityFactor", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DiversityFactor", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DiversityFactor", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_GeneratorRating", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneratorRating", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_GeneratorRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "GeneratorRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_NumberofGenerators", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumberofGenerators", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_NumberofGenerators", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NumberofGenerators", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TransformerRating", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerRating", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TransformerRating", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TransformerRating", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -8806,8 +8899,8 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(2) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT ProjectCode, DemandFactor, DiversityFactor, TransformerRating, GeneratorRa"& _ 
-                "ting, NumberofGenerators, TransformerXRRatio, TransformerZpu FROM tblTransGen"
+            Me._commandCollection(0).CommandText = "SELECT ProjectCode, TransformerXRRatio, TransformerZpu, DemandFactor, DiversityFa"& _ 
+                "ctor, GeneratorRating, NumberofGenerators, TransformerRating FROM tblTransGen"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
@@ -8816,9 +8909,9 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ProjectCode", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "SELECT        ProjectCode, DemandFactor, DiversityFactor, TransformerRating, Gene"& _ 
-                "ratorRating, NumberofGenerators, TransformerXRRatio, TransformerZpu"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM       "& _ 
-                "     tblTransGen"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (ProjectCode = @project)"
+            Me._commandCollection(2).CommandText = "SELECT ProjectCode, TransformerXRRatio, TransformerZpu, DemandFactor, DiversityFa"& _ 
+                "ctor, GeneratorRating, NumberofGenerators, TransformerRating FROM tblTransGen WH"& _ 
+                "ERE (ProjectCode = @project)"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
@@ -8897,30 +8990,60 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_ProjectCode As String, ByVal Original_DemandFactor As Double, ByVal Original_DiversityFactor As Double, ByVal Original_TransformerRating As Double, ByVal Original_GeneratorRating As Double, ByVal Original_NumberofGenerators As Integer, ByVal Original_TransformerXRRatio As Global.System.Nullable(Of Double), ByVal Original_TransformerZpu As Global.System.Nullable(Of Double)) As Integer
+        Public Overloads Overridable Function Delete(ByVal Original_ProjectCode As String, ByVal Original_TransformerXRRatio As Global.System.Nullable(Of Double), ByVal Original_TransformerZpu As Global.System.Nullable(Of Double), ByVal Original_DemandFactor As Global.System.Nullable(Of Double), ByVal Original_DiversityFactor As Global.System.Nullable(Of Double), ByVal Original_GeneratorRating As Global.System.Nullable(Of Double), ByVal Original_NumberofGenerators As Global.System.Nullable(Of Integer), ByVal Original_TransformerRating As Global.System.Nullable(Of Double)) As Integer
             If (Original_ProjectCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_ProjectCode")
             Else
                 Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ProjectCode,String)
             End If
-            Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_DemandFactor,Double)
-            Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_DiversityFactor,Double)
-            Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_TransformerRating,Double)
-            Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_GeneratorRating,Double)
-            Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_NumberofGenerators,Integer)
             If (Original_TransformerXRRatio.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_TransformerXRRatio.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_TransformerXRRatio.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(7).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
             If (Original_TransformerZpu.HasValue = true) Then
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(0,Object)
-                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(Original_TransformerZpu.Value,Double)
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_TransformerZpu.Value,Double)
             Else
-                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(1,Object)
-                Me.Adapter.DeleteCommand.Parameters(9).Value = Global.System.DBNull.Value
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (Original_DemandFactor.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_DemandFactor.Value,Double)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            If (Original_DiversityFactor.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_DiversityFactor.Value,Double)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
+            End If
+            If (Original_GeneratorRating.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_GeneratorRating.Value,Double)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
+            End If
+            If (Original_NumberofGenerators.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_NumberofGenerators.Value,Integer)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = Global.System.DBNull.Value
+            End If
+            If (Original_TransformerRating.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_TransformerRating.Value,Double)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -8941,24 +9064,44 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal ProjectCode As String, ByVal DemandFactor As Double, ByVal DiversityFactor As Double, ByVal TransformerRating As Double, ByVal GeneratorRating As Double, ByVal NumberofGenerators As Integer, ByVal TransformerXRRatio As Global.System.Nullable(Of Double), ByVal TransformerZpu As Global.System.Nullable(Of Double)) As Integer
+        Public Overloads Overridable Function Insert(ByVal ProjectCode As String, ByVal TransformerXRRatio As Global.System.Nullable(Of Double), ByVal TransformerZpu As Global.System.Nullable(Of Double), ByVal DemandFactor As Global.System.Nullable(Of Double), ByVal DiversityFactor As Global.System.Nullable(Of Double), ByVal GeneratorRating As Global.System.Nullable(Of Double), ByVal NumberofGenerators As Global.System.Nullable(Of Integer), ByVal TransformerRating As Global.System.Nullable(Of Double)) As Integer
             If (ProjectCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("ProjectCode")
             Else
                 Me.Adapter.InsertCommand.Parameters(0).Value = CType(ProjectCode,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(1).Value = CType(DemandFactor,Double)
-            Me.Adapter.InsertCommand.Parameters(2).Value = CType(DiversityFactor,Double)
-            Me.Adapter.InsertCommand.Parameters(3).Value = CType(TransformerRating,Double)
-            Me.Adapter.InsertCommand.Parameters(4).Value = CType(GeneratorRating,Double)
-            Me.Adapter.InsertCommand.Parameters(5).Value = CType(NumberofGenerators,Integer)
             If (TransformerXRRatio.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(6).Value = CType(TransformerXRRatio.Value,Double)
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(TransformerXRRatio.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (TransformerZpu.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(TransformerZpu.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (DemandFactor.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(DemandFactor.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (DiversityFactor.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(DiversityFactor.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (GeneratorRating.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(GeneratorRating.Value,Double)
+            Else
+                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (NumberofGenerators.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(NumberofGenerators.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (TransformerZpu.HasValue = true) Then
-                Me.Adapter.InsertCommand.Parameters(7).Value = CType(TransformerZpu.Value,Double)
+            If (TransformerRating.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(TransformerRating.Value,Double)
             Else
                 Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
             End If
@@ -8983,38 +9126,58 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
         Public Overloads Overridable Function Update( _
                     ByVal ProjectCode As String,  _
-                    ByVal DemandFactor As Double,  _
-                    ByVal DiversityFactor As Double,  _
-                    ByVal TransformerRating As Double,  _
-                    ByVal GeneratorRating As Double,  _
-                    ByVal NumberofGenerators As Integer,  _
                     ByVal TransformerXRRatio As Global.System.Nullable(Of Double),  _
                     ByVal TransformerZpu As Global.System.Nullable(Of Double),  _
+                    ByVal DemandFactor As Global.System.Nullable(Of Double),  _
+                    ByVal DiversityFactor As Global.System.Nullable(Of Double),  _
+                    ByVal GeneratorRating As Global.System.Nullable(Of Double),  _
+                    ByVal NumberofGenerators As Global.System.Nullable(Of Integer),  _
+                    ByVal TransformerRating As Global.System.Nullable(Of Double),  _
                     ByVal Original_ProjectCode As String,  _
-                    ByVal Original_DemandFactor As Double,  _
-                    ByVal Original_DiversityFactor As Double,  _
-                    ByVal Original_TransformerRating As Double,  _
-                    ByVal Original_GeneratorRating As Double,  _
-                    ByVal Original_NumberofGenerators As Integer,  _
                     ByVal Original_TransformerXRRatio As Global.System.Nullable(Of Double),  _
-                    ByVal Original_TransformerZpu As Global.System.Nullable(Of Double)) As Integer
+                    ByVal Original_TransformerZpu As Global.System.Nullable(Of Double),  _
+                    ByVal Original_DemandFactor As Global.System.Nullable(Of Double),  _
+                    ByVal Original_DiversityFactor As Global.System.Nullable(Of Double),  _
+                    ByVal Original_GeneratorRating As Global.System.Nullable(Of Double),  _
+                    ByVal Original_NumberofGenerators As Global.System.Nullable(Of Integer),  _
+                    ByVal Original_TransformerRating As Global.System.Nullable(Of Double)) As Integer
             If (ProjectCode Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("ProjectCode")
             Else
                 Me.Adapter.UpdateCommand.Parameters(0).Value = CType(ProjectCode,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(1).Value = CType(DemandFactor,Double)
-            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(DiversityFactor,Double)
-            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(TransformerRating,Double)
-            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(GeneratorRating,Double)
-            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(NumberofGenerators,Integer)
             If (TransformerXRRatio.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(TransformerXRRatio.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(TransformerXRRatio.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (TransformerZpu.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(TransformerZpu.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (DemandFactor.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(DemandFactor.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (DiversityFactor.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(DiversityFactor.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (GeneratorRating.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(GeneratorRating.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (NumberofGenerators.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(NumberofGenerators.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (TransformerZpu.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(TransformerZpu.Value,Double)
+            If (TransformerRating.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(TransformerRating.Value,Double)
             Else
                 Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
             End If
@@ -9023,24 +9186,54 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_ProjectCode,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_DemandFactor,Double)
-            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_DiversityFactor,Double)
-            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_TransformerRating,Double)
-            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_GeneratorRating,Double)
-            Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_NumberofGenerators,Integer)
             If (Original_TransformerXRRatio.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_TransformerXRRatio.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_TransformerXRRatio.Value,Double)
             Else
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
             End If
             If (Original_TransformerZpu.HasValue = true) Then
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(0,Object)
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(Original_TransformerZpu.Value,Double)
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_TransformerZpu.Value,Double)
             Else
-                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(1,Object)
-                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
+            End If
+            If (Original_DemandFactor.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_DemandFactor.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+            End If
+            If (Original_DiversityFactor.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(Original_DiversityFactor.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
+            End If
+            If (Original_GeneratorRating.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(Original_GeneratorRating.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
+            End If
+            If (Original_NumberofGenerators.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(Original_NumberofGenerators.Value,Integer)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(20).Value = Global.System.DBNull.Value
+            End If
+            If (Original_TransformerRating.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(Original_TransformerRating.Value,Double)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
@@ -9061,8 +9254,8 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal DemandFactor As Double, ByVal DiversityFactor As Double, ByVal TransformerRating As Double, ByVal GeneratorRating As Double, ByVal NumberofGenerators As Integer, ByVal TransformerXRRatio As Global.System.Nullable(Of Double), ByVal TransformerZpu As Global.System.Nullable(Of Double), ByVal Original_ProjectCode As String, ByVal Original_DemandFactor As Double, ByVal Original_DiversityFactor As Double, ByVal Original_TransformerRating As Double, ByVal Original_GeneratorRating As Double, ByVal Original_NumberofGenerators As Integer, ByVal Original_TransformerXRRatio As Global.System.Nullable(Of Double), ByVal Original_TransformerZpu As Global.System.Nullable(Of Double)) As Integer
-            Return Me.Update(Original_ProjectCode, DemandFactor, DiversityFactor, TransformerRating, GeneratorRating, NumberofGenerators, TransformerXRRatio, TransformerZpu, Original_ProjectCode, Original_DemandFactor, Original_DiversityFactor, Original_TransformerRating, Original_GeneratorRating, Original_NumberofGenerators, Original_TransformerXRRatio, Original_TransformerZpu)
+        Public Overloads Overridable Function Update(ByVal TransformerXRRatio As Global.System.Nullable(Of Double), ByVal TransformerZpu As Global.System.Nullable(Of Double), ByVal DemandFactor As Global.System.Nullable(Of Double), ByVal DiversityFactor As Global.System.Nullable(Of Double), ByVal GeneratorRating As Global.System.Nullable(Of Double), ByVal NumberofGenerators As Global.System.Nullable(Of Integer), ByVal TransformerRating As Global.System.Nullable(Of Double), ByVal Original_ProjectCode As String, ByVal Original_TransformerXRRatio As Global.System.Nullable(Of Double), ByVal Original_TransformerZpu As Global.System.Nullable(Of Double), ByVal Original_DemandFactor As Global.System.Nullable(Of Double), ByVal Original_DiversityFactor As Global.System.Nullable(Of Double), ByVal Original_GeneratorRating As Global.System.Nullable(Of Double), ByVal Original_NumberofGenerators As Global.System.Nullable(Of Integer), ByVal Original_TransformerRating As Global.System.Nullable(Of Double)) As Integer
+            Return Me.Update(Original_ProjectCode, TransformerXRRatio, TransformerZpu, DemandFactor, DiversityFactor, GeneratorRating, NumberofGenerators, TransformerRating, Original_ProjectCode, Original_TransformerXRRatio, Original_TransformerZpu, Original_DemandFactor, Original_DiversityFactor, Original_GeneratorRating, Original_NumberofGenerators, Original_TransformerRating)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9748,7 +9941,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(9) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(10) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT Code, ProjectCode, CurrentRating, WireType, WireSize, [Set], Conductor, Co"& _ 
@@ -9771,23 +9964,29 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "DELETE FROM tblDistribution"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Code = @Code)"
+            Me._commandCollection(3).CommandText = "SELECT        SUM(CurrentRating) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tblDistribution"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE"& _ 
+                "        (ProjectCode = @project)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT * FROM tblDistribution WHERE (ProjectCode = @project)"
+            Me._commandCollection(4).CommandText = "DELETE FROM tblDistribution"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Code = @Code)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT * FROM tblDistribution WHERE (ProjectCode = @project) AND (ImpedanceImag I"& _ 
-                "S NOT NULL) AND (ImpedanceReal IS NOT NULL)"
+            Me._commandCollection(5).CommandText = "SELECT * FROM tblDistribution WHERE (ProjectCode = @project)"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(6).Connection = Me.Connection
-            Me._commandCollection(6).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) tblB"& _ 
+            Me._commandCollection(6).CommandText = "SELECT * FROM tblDistribution WHERE (ProjectCode = @project) AND (ImpedanceImag I"& _ 
+                "S NOT NULL) AND (ImpedanceReal IS NOT NULL)"
+            Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(7) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(7).Connection = Me.Connection
+            Me._commandCollection(7).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) tblB"& _ 
                 "ranch.MotorRating"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblDistribut"& _ 
                 "ion LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                          t"& _ 
                 "blSubfeeder ON tblDistribution.Code = tblSubfeeder.DPCode LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
@@ -9797,11 +9996,11 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 "                               tblBranch.Phase = 'B' OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                       "& _ 
                 "                                   tblBranch.Phase = 'C')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                     "& _ 
                 "            ORDER BY tblBranch.MotorRating DESC), 0) AS Expr1"
-            Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(7) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(7).Connection = Me.Connection
-            Me._commandCollection(7).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) tblB"& _ 
+            Me._commandCollection(7).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(8) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(8).Connection = Me.Connection
+            Me._commandCollection(8).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) tblB"& _ 
                 "ranch.MotorRating"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblDistribut"& _ 
                 "ion LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                          t"& _ 
                 "blSubfeeder ON tblDistribution.Code = tblSubfeeder.DPCode LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
@@ -9809,21 +10008,8 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 "ode = tblBranch.Subfeeder"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 WHERE        (tblBra"& _ 
                 "nch.Phase = '3') AND (tblDistribution.Code = @dp)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             "& _ 
                 "    ORDER BY tblBranch.MotorRating DESC), 0) AS Expr1"
-            Me._commandCollection(7).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(8) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(8).Connection = Me.Connection
-            Me._commandCollection(8).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        SUM(tblBranc"& _ 
-                "h.PowerRating) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBra"& _ 
-                "nch LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                          t"& _ 
-                "blSubfeeder ON tblBranch.Subfeeder = tblSubfeeder.Code LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
-                "                                                  tblDistribution ON tblSubfeede"& _ 
-                "r.DPCode = tblDistribution.Code"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 WHERE        ("& _ 
-                "tblDistribution.Code = @code) AND (tblBranch.Phase = 'A') AND (tblBranch.Type = "& _ 
-                "@type)), 0) AS Expr1"
             Me._commandCollection(8).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@type", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(9) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(9).Connection = Me.Connection
             Me._commandCollection(9).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        SUM(tblBranc"& _ 
@@ -9832,10 +10018,23 @@ Namespace ESD_DatabaseDataSetTableAdapters
                 "blSubfeeder ON tblBranch.Subfeeder = tblSubfeeder.Code LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
                 "                                                  tblDistribution ON tblSubfeede"& _ 
                 "r.DPCode = tblDistribution.Code"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 WHERE        ("& _ 
-                "tblDistribution.Code = @code) AND (tblBranch.Phase = @phase)), 0) AS Expr1"
+                "tblDistribution.Code = @code) AND (tblBranch.Phase = 'A') AND (tblBranch.Type = "& _ 
+                "@type)), 0) AS Expr1"
             Me._commandCollection(9).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@phase", Global.System.Data.SqlDbType.VarChar, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@type", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(10) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(10).Connection = Me.Connection
+            Me._commandCollection(10).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        SUM(tblBranc"& _ 
+                "h.PowerRating) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBra"& _ 
+                "nch LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                          t"& _ 
+                "blSubfeeder ON tblBranch.Subfeeder = tblSubfeeder.Code LEFT OUTER JOIN"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"        "& _ 
+                "                                                  tblDistribution ON tblSubfeede"& _ 
+                "r.DPCode = tblDistribution.Code"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 WHERE        ("& _ 
+                "tblDistribution.Code = @code) AND (tblBranch.Phase = @phase)), 0) AS Expr1"
+            Me._commandCollection(10).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@phase", Global.System.Data.SqlDbType.VarChar, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -9867,7 +10066,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
         Public Overloads Overridable Function FillByProject(ByVal dataTable As ESD_DatabaseDataSet.tblDistributionDataTable, ByVal project As String) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(4)
+            Me.Adapter.SelectCommand = Me.CommandCollection(5)
             If (project Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("project")
             Else
@@ -9885,7 +10084,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
         Public Overloads Overridable Function FillImpedance(ByVal dataTable As ESD_DatabaseDataSet.tblDistributionDataTable, ByVal project As String) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(5)
+            Me.Adapter.SelectCommand = Me.CommandCollection(6)
             If (project Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("project")
             Else
@@ -9903,7 +10102,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
         Public Overloads Overridable Function GetImpedance(ByVal project As String) As ESD_DatabaseDataSet.tblDistributionDataTable
-            Me.Adapter.SelectCommand = Me.CommandCollection(5)
+            Me.Adapter.SelectCommand = Me.CommandCollection(6)
             If (project Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("project")
             Else
@@ -10465,10 +10664,41 @@ Namespace ESD_DatabaseDataSetTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function CurrentSum(ByVal project As String) As Global.System.Nullable(Of Double)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(3)
+            If (project Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("project")
+            Else
+                command.Parameters(0).Value = CType(project,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Object
+            Try 
+                returnValue = command.ExecuteScalar
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            If ((returnValue Is Nothing)  _
+                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
+                Return New Global.System.Nullable(Of Double)()
+            Else
+                Return New Global.System.Nullable(Of Double)(CType(returnValue,Double))
+            End If
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, false)>  _
         Public Overloads Overridable Function DeletebyPrimary(ByVal Code As String) As Integer
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(3)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(4)
             If (Code Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Code")
             Else
@@ -10494,7 +10724,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function GetHRMLSinglePhase(ByVal dp As String) As Object
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(6)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(7)
             If (dp Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("dp")
             Else
@@ -10525,7 +10755,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function GetHRMLThreePhase(ByVal dp As String) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(7)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(8)
             If (dp Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("dp")
             Else
@@ -10556,7 +10786,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function TotalLoadperType(ByVal code As String, ByVal type As String) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(8)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(9)
             If (code Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("code")
             Else
@@ -10592,7 +10822,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function TotalPhaseLoad(ByVal code As String, ByVal phase As String) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(9)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(10)
             If (code Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("code")
             Else
@@ -11000,7 +11230,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(13) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(14) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT Code, Project, CircuitNo, Type, Subfeeder, PowerRating, Phase, MotorType, "& _ 
@@ -11011,83 +11241,81 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
             Me._commandCollection(1).CommandText = "SELECT        COUNT(*) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Subfeed"& _ 
-                "er = @subfeeder) AND (Phase = '3')"
+                "er = @subfeeder)"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
-            Me._commandCollection(2).CommandText = "DELETE FROM tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Code = @Original_Code)"
+            Me._commandCollection(2).CommandText = "SELECT        COUNT(*) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Subfeed"& _ 
+                "er = @subfeeder) AND (Phase = '3')"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "SELECT * FROM tblBranch WHERE (Project = @project)"
+            Me._commandCollection(3).CommandText = "DELETE FROM tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Code = @Original_Code)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Project", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT * FROM tblBranch WHERE (Subfeeder = @subfeeder)"
+            Me._commandCollection(4).CommandText = "SELECT * FROM tblBranch WHERE (Project = @project)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Project", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) Moto"& _ 
+            Me._commandCollection(5).CommandText = "SELECT * FROM tblBranch WHERE (Subfeeder = @subfeeder)"
+            Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Subfeeder", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(6).Connection = Me.Connection
+            Me._commandCollection(6).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) Moto"& _ 
                 "rRating"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch AS tbl1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"   "& _ 
                 "                              WHERE        (Subfeeder = @subfeeder) AND (Phase ="& _ 
                 " 'A' OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                          Phase = 'B' O"& _ 
                 "R"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                          Phase = 'C')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
                 "                            ORDER BY MotorRating DESC), 0) AS Expr1"
-            Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(6).Connection = Me.Connection
-            Me._commandCollection(6).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) Moto"& _ 
+            Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(7) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(7).Connection = Me.Connection
+            Me._commandCollection(7).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) Moto"& _ 
                 "rRating"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch AS tbl1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"   "& _ 
                 "                              WHERE        (Project = @project) AND (Phase = 'A'"& _ 
                 " OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                                          Phase = 'B' OR"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" "& _ 
                 "                                                         Phase = 'C')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"         "& _ 
                 "                        ORDER BY MotorRating DESC), 0) AS Expr1"
-            Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(7) = New Global.System.Data.SqlClient.SqlCommand()
-            Me._commandCollection(7).Connection = Me.Connection
-            Me._commandCollection(7).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) Moto"& _ 
-                "rRating"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"           "& _ 
-                "                      WHERE        (Subfeeder = @subfeeder) AND (Phase = '3')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" "& _ 
-                "                                ORDER BY MotorRating DESC), 0) AS Expr1"
             Me._commandCollection(7).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(8) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(8).Connection = Me.Connection
             Me._commandCollection(8).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) Moto"& _ 
                 "rRating"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"           "& _ 
-                "                      WHERE        (Project = @project) AND (Phase = '3')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
-                "                            ORDER BY MotorRating DESC), 0) AS Expr1"
+                "                      WHERE        (Subfeeder = @subfeeder) AND (Phase = '3')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&" "& _ 
+                "                                ORDER BY MotorRating DESC), 0) AS Expr1"
             Me._commandCollection(8).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(9) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(9).Connection = Me.Connection
-            Me._commandCollection(9).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        SUM(PowerRat"& _ 
-                "ing) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
-                "                            WHERE        (Project = @project) AND (Phase = @phas"& _ 
-                "e)), 0) AS Expr1"
+            Me._commandCollection(9).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        TOP (1) Moto"& _ 
+                "rRating"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"           "& _ 
+                "                      WHERE        (Project = @project) AND (Phase = '3')"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
+                "                            ORDER BY MotorRating DESC), 0) AS Expr1"
             Me._commandCollection(9).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@phase", Global.System.Data.SqlDbType.VarChar, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(10) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(10).Connection = Me.Connection
             Me._commandCollection(10).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        SUM(PowerRat"& _ 
                 "ing) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
-                "                            WHERE        (Subfeeder = @subfeeder) AND (Phase = '"& _ 
-                "A')), 0) AS Expr1"
+                "                            WHERE        (Project = @project) AND (Phase = @phas"& _ 
+                "e)), 0) AS Expr1"
             Me._commandCollection(10).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@phase", Global.System.Data.SqlDbType.VarChar, 5, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(11) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(11).Connection = Me.Connection
             Me._commandCollection(11).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        SUM(PowerRat"& _ 
                 "ing) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
                 "                            WHERE        (Subfeeder = @subfeeder) AND (Phase = '"& _ 
-                "B')), 0) AS Expr1"
+                "A')), 0) AS Expr1"
             Me._commandCollection(11).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(12) = New Global.System.Data.SqlClient.SqlCommand()
@@ -11095,7 +11323,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(12).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        SUM(PowerRat"& _ 
                 "ing) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
                 "                            WHERE        (Subfeeder = @subfeeder) AND (Phase = '"& _ 
-                "C')), 0) AS Expr1"
+                "B')), 0) AS Expr1"
             Me._commandCollection(12).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(13) = New Global.System.Data.SqlClient.SqlCommand()
@@ -11103,9 +11331,17 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(13).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        SUM(PowerRat"& _ 
                 "ing) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
                 "                            WHERE        (Subfeeder = @subfeeder) AND (Phase = '"& _ 
-                "3')), 0) AS Expr1"
+                "C')), 0) AS Expr1"
             Me._commandCollection(13).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(14) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(14).Connection = Me.Connection
+            Me._commandCollection(14).CommandText = "SELECT        COALESCE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                             ((SELECT        SUM(PowerRat"& _ 
+                "ing) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                                 FROM            tblBranch"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
+                "                            WHERE        (Subfeeder = @subfeeder) AND (Phase = '"& _ 
+                "3')), 0) AS Expr1"
+            Me._commandCollection(14).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@subfeeder", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -11137,7 +11373,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
         Public Overloads Overridable Function FillByProject(ByVal dataTable As ESD_DatabaseDataSet.tblBranchDataTable, ByVal project As String) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(3)
+            Me.Adapter.SelectCommand = Me.CommandCollection(4)
             If (project Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("project")
             Else
@@ -11155,7 +11391,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
         Public Overloads Overridable Function FillBySubfeeder(ByVal dataTable As ESD_DatabaseDataSet.tblBranchDataTable, ByVal subfeeder As String) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(4)
+            Me.Adapter.SelectCommand = Me.CommandCollection(5)
             If (subfeeder Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("subfeeder")
             Else
@@ -11173,7 +11409,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
         Public Overloads Overridable Function GetDataBySubfeeder(ByVal subfeeder As String) As ESD_DatabaseDataSet.tblBranchDataTable
-            Me.Adapter.SelectCommand = Me.CommandCollection(4)
+            Me.Adapter.SelectCommand = Me.CommandCollection(5)
             If (subfeeder Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("subfeeder")
             Else
@@ -11906,8 +12142,39 @@ Namespace ESD_DatabaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function CountThreePhaseLoad(ByVal subfeeder As String) As Global.System.Nullable(Of Integer)
+        Public Overloads Overridable Function CountBranch(ByVal subfeeder As String) As Global.System.Nullable(Of Integer)
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(1)
+            If (subfeeder Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("subfeeder")
+            Else
+                command.Parameters(0).Value = CType(subfeeder,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Object
+            Try 
+                returnValue = command.ExecuteScalar
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            If ((returnValue Is Nothing)  _
+                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
+                Return New Global.System.Nullable(Of Integer)()
+            Else
+                Return New Global.System.Nullable(Of Integer)(CType(returnValue,Integer))
+            End If
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function CountThreePhaseLoad(ByVal subfeeder As String) As Global.System.Nullable(Of Integer)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(2)
             If (subfeeder Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("subfeeder")
             Else
@@ -11939,7 +12206,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, false)>  _
         Public Overloads Overridable Function DeleteByPrimary(ByVal Original_Code As String) As Integer
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(2)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(3)
             If (Original_Code Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Code")
             Else
@@ -11965,7 +12232,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function GetHRMLSinglePhase(ByVal subfeeder As String) As Object
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(5)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(6)
             If (subfeeder Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("subfeeder")
             Else
@@ -11996,7 +12263,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function GetHRMLSinglePhaseProject(ByVal project As String) As Object
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(6)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(7)
             If (project Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("project")
             Else
@@ -12027,7 +12294,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function GetHRMLThreePhase(ByVal subfeeder As String) As Object
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(7)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(8)
             If (subfeeder Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("subfeeder")
             Else
@@ -12058,7 +12325,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function GetHRMLThreePhaseProject(ByVal project As String) As Object
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(8)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(9)
             If (project Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("project")
             Else
@@ -12089,7 +12356,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function TotalLoadperPhase(ByVal project As String, ByVal phase As String) As Object
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(9)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(10)
             If (project Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("project")
             Else
@@ -12125,37 +12392,6 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
         Public Overloads Overridable Function TotalPhaseAPower(ByVal subfeeder As String) As Global.System.Nullable(Of Double)
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(10)
-            If (subfeeder Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("subfeeder")
-            Else
-                command.Parameters(0).Value = CType(subfeeder,String)
-            End If
-            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
-            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
-                        <> Global.System.Data.ConnectionState.Open) Then
-                command.Connection.Open
-            End If
-            Dim returnValue As Object
-            Try 
-                returnValue = command.ExecuteScalar
-            Finally
-                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    command.Connection.Close
-                End If
-            End Try
-            If ((returnValue Is Nothing)  _
-                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
-                Return New Global.System.Nullable(Of Double)()
-            Else
-                Return New Global.System.Nullable(Of Double)(CType(returnValue,Double))
-            End If
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function TotalPhaseBPower(ByVal subfeeder As String) As Global.System.Nullable(Of Double)
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(11)
             If (subfeeder Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("subfeeder")
@@ -12186,7 +12422,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function TotalPhaseCPower(ByVal subfeeder As String) As Global.System.Nullable(Of Double)
+        Public Overloads Overridable Function TotalPhaseBPower(ByVal subfeeder As String) As Global.System.Nullable(Of Double)
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(12)
             If (subfeeder Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("subfeeder")
@@ -12217,8 +12453,39 @@ Namespace ESD_DatabaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
-        Public Overloads Overridable Function TotalThreePhasePower(ByVal subfeeder As String) As Object
+        Public Overloads Overridable Function TotalPhaseCPower(ByVal subfeeder As String) As Global.System.Nullable(Of Double)
             Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(13)
+            If (subfeeder Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("subfeeder")
+            Else
+                command.Parameters(0).Value = CType(subfeeder,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Object
+            Try 
+                returnValue = command.ExecuteScalar
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            If ((returnValue Is Nothing)  _
+                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
+                Return New Global.System.Nullable(Of Double)()
+            Else
+                Return New Global.System.Nullable(Of Double)(CType(returnValue,Double))
+            End If
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function TotalThreePhasePower(ByVal subfeeder As String) As Object
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(14)
             If (subfeeder Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("subfeeder")
             Else
@@ -12656,7 +12923,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(6) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(7) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
             Me._commandCollection(0).CommandText = "SELECT Code, ProjectCode, Number, DPCode, CurrentRating, MinimumAmpacity, WireTyp"& _ 
@@ -12679,25 +12946,31 @@ Namespace ESD_DatabaseDataSetTableAdapters
             Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
-            Me._commandCollection(3).CommandText = "DELETE FROM tblSubfeeder"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Code = @Original_Code)"
+            Me._commandCollection(3).CommandText = "SELECT        SUM(CurrentRating) AS Expr1"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM            tblSubfeeder"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE   "& _ 
+                "     (DPCode = @dp)"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
-            Me._commandCollection(4).CommandText = "SELECT * FROM tblSubfeeder WHERE (DPCode = @dp)"
+            Me._commandCollection(4).CommandText = "DELETE FROM tblSubfeeder"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE        (Code = @Original_Code)"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Code", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "Code", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
-            Me._commandCollection(5).CommandText = "SELECT * FROM tblSubfeeder WHERE (ProjectCode = @project)"
+            Me._commandCollection(5).CommandText = "SELECT * FROM tblSubfeeder WHERE (DPCode = @dp)"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(6).Connection = Me.Connection
-            Me._commandCollection(6).CommandText = "SELECT * FROM tblSubfeeder WHERE (DPCode = @dp) AND (ImpedanceReal IS NOT NULL) A"& _ 
-                "ND (ImpedanceImag IS NOT NULL)"
+            Me._commandCollection(6).CommandText = "SELECT * FROM tblSubfeeder WHERE (ProjectCode = @project)"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@project", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "ProjectCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(7) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(7).Connection = Me.Connection
+            Me._commandCollection(7).CommandText = "SELECT * FROM tblSubfeeder WHERE (DPCode = @dp) AND (ImpedanceReal IS NOT NULL) A"& _ 
+                "ND (ImpedanceImag IS NOT NULL)"
+            Me._commandCollection(7).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@dp", Global.System.Data.SqlDbType.VarChar, 20, Global.System.Data.ParameterDirection.Input, 0, 0, "DPCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -12729,7 +13002,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
         Public Overloads Overridable Function FillByDP(ByVal dataTable As ESD_DatabaseDataSet.tblSubfeederDataTable, ByVal dp As String) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(4)
+            Me.Adapter.SelectCommand = Me.CommandCollection(5)
             If (dp Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("dp")
             Else
@@ -12747,7 +13020,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
         Public Overloads Overridable Function FillByProject(ByVal dataTable As ESD_DatabaseDataSet.tblSubfeederDataTable, ByVal project As String) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(5)
+            Me.Adapter.SelectCommand = Me.CommandCollection(6)
             If (project Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("project")
             Else
@@ -12765,7 +13038,7 @@ Namespace ESD_DatabaseDataSetTableAdapters
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
         Public Overloads Overridable Function FillImpedance(ByVal dataTable As ESD_DatabaseDataSet.tblSubfeederDataTable, ByVal dp As String) As Integer
-            Me.Adapter.SelectCommand = Me.CommandCollection(6)
+            Me.Adapter.SelectCommand = Me.CommandCollection(7)
             If (dp Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("dp")
             Else
@@ -13665,10 +13938,41 @@ Namespace ESD_DatabaseDataSetTableAdapters
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function CurrentSum(ByVal dp As String) As Global.System.Nullable(Of Double)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(3)
+            If (dp Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("dp")
+            Else
+                command.Parameters(0).Value = CType(dp,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Object
+            Try 
+                returnValue = command.ExecuteScalar
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            If ((returnValue Is Nothing)  _
+                        OrElse (returnValue.GetType Is GetType(Global.System.DBNull))) Then
+                Return New Global.System.Nullable(Of Double)()
+            Else
+                Return New Global.System.Nullable(Of Double)(CType(returnValue,Double))
+            End If
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, false)>  _
         Public Overloads Overridable Function DeletebyPrimary(ByVal Original_Code As String) As Integer
-            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(3)
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(4)
             If (Original_Code Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Code")
             Else

@@ -132,6 +132,31 @@ Partial Class FormMain
         Me.AboutUsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Label78 = New System.Windows.Forms.Label()
+        Me.Label79 = New System.Windows.Forms.Label()
+        Me.Label80 = New System.Windows.Forms.Label()
+        Me.Label77 = New System.Windows.Forms.Label()
+        Me.Label76 = New System.Windows.Forms.Label()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.Label74 = New System.Windows.Forms.Label()
+        Me.Label75 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.Label70 = New System.Windows.Forms.Label()
+        Me.Label71 = New System.Windows.Forms.Label()
+        Me.Label72 = New System.Windows.Forms.Label()
+        Me.Label73 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Label50 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.Label51 = New System.Windows.Forms.Label()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.Label52 = New System.Windows.Forms.Label()
         Me.Label38 = New System.Windows.Forms.Label()
         Me.ImpedanceImagTextBoxDP = New System.Windows.Forms.TextBox()
         Me.TblDistributionBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -159,6 +184,16 @@ Partial Class FormMain
         Me.BreakerTypeTextBoxDP = New System.Windows.Forms.TextBox()
         Me.DPNumberTextBox = New System.Windows.Forms.TextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.Label62 = New System.Windows.Forms.Label()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.Label57 = New System.Windows.Forms.Label()
+        Me.Label55 = New System.Windows.Forms.Label()
+        Me.Label54 = New System.Windows.Forms.Label()
+        Me.Label53 = New System.Windows.Forms.Label()
         Me.Label36 = New System.Windows.Forms.Label()
         Me.ImpedanceImagTextBox = New System.Windows.Forms.TextBox()
         Me.TblSubfeederBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -178,11 +213,17 @@ Partial Class FormMain
         Me.DPCodeTextBox = New System.Windows.Forms.TextBox()
         Me.BtnBalance = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.Label69 = New System.Windows.Forms.Label()
         Me.TxtMotorThreePhase = New System.Windows.Forms.TextBox()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.TxtMotorSinglePhase = New System.Windows.Forms.TextBox()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label66 = New System.Windows.Forms.Label()
+        Me.Label67 = New System.Windows.Forms.Label()
+        Me.Label65 = New System.Windows.Forms.Label()
+        Me.Label64 = New System.Windows.Forms.Label()
         Me.TxtThreePhaseLoad = New System.Windows.Forms.TextBox()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.TxtPhaseCLoad = New System.Windows.Forms.TextBox()
@@ -214,6 +255,15 @@ Partial Class FormMain
         Me.GroundWireCheckBoxSub = New System.Windows.Forms.CheckBox()
         Me.SetTextBoxSub = New System.Windows.Forms.TextBox()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label56 = New System.Windows.Forms.Label()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
         Me.DistancetoSFTextBox = New System.Windows.Forms.TextBox()
         Me.TblBranchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.VoltageDropTextBox1 = New System.Windows.Forms.TextBox()
@@ -316,6 +366,7 @@ Partial Class FormMain
         Me.TransformerRatingTextBox = New System.Windows.Forms.TextBox()
         Me.GeneratorRatingTextBox = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label90 = New System.Windows.Forms.Label()
         Me.VoltageLevelComboBox = New System.Windows.Forms.ComboBox()
         Me.TblProjectBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.BtnPreviousProject = New System.Windows.Forms.Button()
@@ -329,6 +380,15 @@ Partial Class FormMain
         Me.NameTextBox = New System.Windows.Forms.TextBox()
         Me.ProjectCodeTextBox = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label89 = New System.Windows.Forms.Label()
+        Me.Label88 = New System.Windows.Forms.Label()
+        Me.Label87 = New System.Windows.Forms.Label()
+        Me.Label86 = New System.Windows.Forms.Label()
+        Me.Label84 = New System.Windows.Forms.Label()
+        Me.Label85 = New System.Windows.Forms.Label()
+        Me.Label83 = New System.Windows.Forms.Label()
+        Me.Label82 = New System.Windows.Forms.Label()
+        Me.Label81 = New System.Windows.Forms.Label()
         Me.XRRatioTextBox = New System.Windows.Forms.TextBox()
         Me.TblMainFeederBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ShortCircuitCapTextBox = New System.Windows.Forms.TextBox()
@@ -467,6 +527,8 @@ Partial Class FormMain
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         CType(Me.TblDistributionBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ESD_DatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TblWireBindingSource4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -628,11 +690,11 @@ Partial Class FormMain
         'PowerRatingLabel
         '
         PowerRatingLabel.AutoSize = True
-        PowerRatingLabel.Location = New System.Drawing.Point(50, 165)
+        PowerRatingLabel.Location = New System.Drawing.Point(73, 165)
         PowerRatingLabel.Name = "PowerRatingLabel"
-        PowerRatingLabel.Size = New System.Drawing.Size(97, 13)
+        PowerRatingLabel.Size = New System.Drawing.Size(74, 13)
         PowerRatingLabel.TabIndex = 8
-        PowerRatingLabel.Text = "Power Rating (VA):"
+        PowerRatingLabel.Text = "Power Rating:"
         '
         'MotorRatingLabel
         '
@@ -675,11 +737,11 @@ Partial Class FormMain
         'WireSizeLabel1
         '
         WireSizeLabel1.AutoSize = True
-        WireSizeLabel1.Location = New System.Drawing.Point(61, 376)
+        WireSizeLabel1.Location = New System.Drawing.Point(92, 376)
         WireSizeLabel1.Name = "WireSizeLabel1"
-        WireSizeLabel1.Size = New System.Drawing.Size(86, 13)
+        WireSizeLabel1.Size = New System.Drawing.Size(55, 13)
         WireSizeLabel1.TabIndex = 20
-        WireSizeLabel1.Text = "Wire Size (mm2):"
+        WireSizeLabel1.Text = "Wire Size:"
         '
         'ConductorLabel1
         '
@@ -704,11 +766,11 @@ Partial Class FormMain
         'ConduitSizeLabel1
         '
         ConduitSizeLabel1.AutoSize = True
-        ConduitSizeLabel1.Location = New System.Drawing.Point(44, 482)
+        ConduitSizeLabel1.Location = New System.Drawing.Point(78, 482)
         ConduitSizeLabel1.Name = "ConduitSizeLabel1"
-        ConduitSizeLabel1.Size = New System.Drawing.Size(103, 13)
+        ConduitSizeLabel1.Size = New System.Drawing.Size(69, 13)
         ConduitSizeLabel1.TabIndex = 26
-        ConduitSizeLabel1.Text = "Conduit Size (mm d):"
+        ConduitSizeLabel1.Text = "Conduit Size:"
         '
         'OCPDRatingLabel1
         '
@@ -851,11 +913,11 @@ Partial Class FormMain
         'SetLabel
         '
         SetLabel.AutoSize = True
-        SetLabel.Location = New System.Drawing.Point(117, 402)
+        SetLabel.Location = New System.Drawing.Point(58, 402)
         SetLabel.Name = "SetLabel"
-        SetLabel.Size = New System.Drawing.Size(30, 13)
+        SetLabel.Size = New System.Drawing.Size(89, 13)
         SetLabel.TabIndex = 48
-        SetLabel.Text = "Set:*"
+        SetLabel.Text = "Conductors/Set:*"
         '
         'TypeLabel
         '
@@ -1013,11 +1075,11 @@ Partial Class FormMain
         'SetLabel1
         '
         SetLabel1.AutoSize = True
-        SetLabel1.Location = New System.Drawing.Point(113, 270)
+        SetLabel1.Location = New System.Drawing.Point(54, 270)
         SetLabel1.Name = "SetLabel1"
-        SetLabel1.Size = New System.Drawing.Size(30, 13)
+        SetLabel1.Size = New System.Drawing.Size(89, 13)
         SetLabel1.TabIndex = 30
-        SetLabel1.Text = "Set:*"
+        SetLabel1.Text = "Conductors/Set:*"
         '
         'GroundWireSizeLabel
         '
@@ -1094,11 +1156,11 @@ Partial Class FormMain
         'SetLabel2
         '
         SetLabel2.AutoSize = True
-        SetLabel2.Location = New System.Drawing.Point(117, 191)
+        SetLabel2.Location = New System.Drawing.Point(54, 191)
         SetLabel2.Name = "SetLabel2"
-        SetLabel2.Size = New System.Drawing.Size(30, 13)
+        SetLabel2.Size = New System.Drawing.Size(89, 13)
         SetLabel2.TabIndex = 10
-        SetLabel2.Text = "Set:*"
+        SetLabel2.Text = "Conductors/Set:*"
         '
         'ConductorLabel3
         '
@@ -1220,11 +1282,11 @@ Partial Class FormMain
         'SetLabel3
         '
         SetLabel3.AutoSize = True
-        SetLabel3.Location = New System.Drawing.Point(90, 248)
+        SetLabel3.Location = New System.Drawing.Point(31, 248)
         SetLabel3.Name = "SetLabel3"
-        SetLabel3.Size = New System.Drawing.Size(26, 13)
+        SetLabel3.Size = New System.Drawing.Size(85, 13)
         SetLabel3.TabIndex = 30
-        SetLabel3.Text = "Set:"
+        SetLabel3.Text = "Conductors/Set:"
         '
         'NumberofGeneratorsLabel
         '
@@ -1310,11 +1372,11 @@ Partial Class FormMain
         'ShortCircuitCapLabel
         '
         ShortCircuitCapLabel.AutoSize = True
-        ShortCircuitCapLabel.Location = New System.Drawing.Point(53, 64)
+        ShortCircuitCapLabel.Location = New System.Drawing.Point(85, 64)
         ShortCircuitCapLabel.Name = "ShortCircuitCapLabel"
-        ShortCircuitCapLabel.Size = New System.Drawing.Size(63, 13)
+        ShortCircuitCapLabel.Size = New System.Drawing.Size(31, 13)
         ShortCircuitCapLabel.TabIndex = 72
-        ShortCircuitCapLabel.Text = "SCC (MVA):"
+        ShortCircuitCapLabel.Text = "SCC:"
         '
         'XRRatioLabel
         '
@@ -1375,7 +1437,7 @@ Partial Class FormMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ViewToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1169, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1230, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -1444,16 +1506,23 @@ Partial Class FormMain
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.TabControl1.Location = New System.Drawing.Point(486, 24)
+        Me.TabControl1.Location = New System.Drawing.Point(509, 24)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(683, 779)
+        Me.TabControl1.Size = New System.Drawing.Size(721, 779)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage4
         '
         Me.TabPage4.AutoScroll = True
         Me.TabPage4.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage4.Controls.Add(Me.Label78)
+        Me.TabPage4.Controls.Add(Me.Label79)
+        Me.TabPage4.Controls.Add(Me.Label80)
+        Me.TabPage4.Controls.Add(Me.Label77)
+        Me.TabPage4.Controls.Add(Me.Label76)
+        Me.TabPage4.Controls.Add(Me.GroupBox5)
+        Me.TabPage4.Controls.Add(Me.GroupBox6)
         Me.TabPage4.Controls.Add(Me.Label38)
         Me.TabPage4.Controls.Add(Me.ImpedanceImagTextBoxDP)
         Me.TabPage4.Controls.Add(ImpedanceRealLabel2)
@@ -1493,9 +1562,256 @@ Partial Class FormMain
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(675, 753)
+        Me.TabPage4.Size = New System.Drawing.Size(713, 753)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Distribution Panelboard"
+        '
+        'Label78
+        '
+        Me.Label78.AutoSize = True
+        Me.Label78.Location = New System.Drawing.Point(294, 297)
+        Me.Label78.Name = "Label78"
+        Me.Label78.Size = New System.Drawing.Size(21, 13)
+        Me.Label78.TabIndex = 86
+        Me.Label78.Text = "AT"
+        '
+        'Label79
+        '
+        Me.Label79.AutoSize = True
+        Me.Label79.Location = New System.Drawing.Point(294, 271)
+        Me.Label79.Name = "Label79"
+        Me.Label79.Size = New System.Drawing.Size(36, 13)
+        Me.Label79.TabIndex = 85
+        Me.Label79.Text = "Metric"
+        '
+        'Label80
+        '
+        Me.Label80.AutoSize = True
+        Me.Label80.Location = New System.Drawing.Point(295, 375)
+        Me.Label80.Name = "Label80"
+        Me.Label80.Size = New System.Drawing.Size(25, 13)
+        Me.Label80.TabIndex = 84
+        Me.Label80.Text = "p.u."
+        '
+        'Label77
+        '
+        Me.Label77.AutoSize = True
+        Me.Label77.Location = New System.Drawing.Point(294, 165)
+        Me.Label77.Name = "Label77"
+        Me.Label77.Size = New System.Drawing.Size(26, 13)
+        Me.Label77.TabIndex = 79
+        Me.Label77.Text = "mm²"
+        '
+        'Label76
+        '
+        Me.Label76.AutoSize = True
+        Me.Label76.Location = New System.Drawing.Point(294, 112)
+        Me.Label76.Name = "Label76"
+        Me.Label76.Size = New System.Drawing.Size(14, 13)
+        Me.Label76.TabIndex = 77
+        Me.Label76.Text = "A"
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.Label74)
+        Me.GroupBox5.Controls.Add(Me.Label75)
+        Me.GroupBox5.Controls.Add(Me.TextBox1)
+        Me.GroupBox5.Controls.Add(Me.Label47)
+        Me.GroupBox5.Controls.Add(Me.TextBox2)
+        Me.GroupBox5.Controls.Add(Me.Label48)
+        Me.GroupBox5.Location = New System.Drawing.Point(343, 169)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(351, 132)
+        Me.GroupBox5.TabIndex = 72
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Motor Loads"
+        '
+        'Label74
+        '
+        Me.Label74.AutoSize = True
+        Me.Label74.Location = New System.Drawing.Point(270, 75)
+        Me.Label74.Name = "Label74"
+        Me.Label74.Size = New System.Drawing.Size(21, 13)
+        Me.Label74.TabIndex = 86
+        Me.Label74.Text = "VA"
+        '
+        'Label75
+        '
+        Me.Label75.AutoSize = True
+        Me.Label75.Location = New System.Drawing.Point(270, 49)
+        Me.Label75.Name = "Label75"
+        Me.Label75.Size = New System.Drawing.Size(21, 13)
+        Me.Label75.TabIndex = 85
+        Me.Label75.Text = "VA"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.Color.Silver
+        Me.TextBox1.Location = New System.Drawing.Point(164, 72)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.TabIndex = 7
+        '
+        'Label47
+        '
+        Me.Label47.AutoSize = True
+        Me.Label47.Location = New System.Drawing.Point(27, 75)
+        Me.Label47.Name = "Label47"
+        Me.Label47.Size = New System.Drawing.Size(68, 13)
+        Me.Label47.TabIndex = 6
+        Me.Label47.Text = "Three Phase"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.BackColor = System.Drawing.Color.Silver
+        Me.TextBox2.Location = New System.Drawing.Point(164, 46)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox2.TabIndex = 5
+        '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Location = New System.Drawing.Point(26, 49)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(69, 13)
+        Me.Label48.TabIndex = 4
+        Me.Label48.Text = "Single Phase"
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.Label70)
+        Me.GroupBox6.Controls.Add(Me.Label71)
+        Me.GroupBox6.Controls.Add(Me.Label72)
+        Me.GroupBox6.Controls.Add(Me.Label73)
+        Me.GroupBox6.Controls.Add(Me.TextBox3)
+        Me.GroupBox6.Controls.Add(Me.Label49)
+        Me.GroupBox6.Controls.Add(Me.TextBox4)
+        Me.GroupBox6.Controls.Add(Me.Label50)
+        Me.GroupBox6.Controls.Add(Me.TextBox5)
+        Me.GroupBox6.Controls.Add(Me.Label51)
+        Me.GroupBox6.Controls.Add(Me.TextBox6)
+        Me.GroupBox6.Controls.Add(Me.Label52)
+        Me.GroupBox6.Location = New System.Drawing.Point(343, 31)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(351, 132)
+        Me.GroupBox6.TabIndex = 71
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Phase Loads"
+        '
+        'Label70
+        '
+        Me.Label70.AutoSize = True
+        Me.Label70.Location = New System.Drawing.Point(270, 103)
+        Me.Label70.Name = "Label70"
+        Me.Label70.Size = New System.Drawing.Size(21, 13)
+        Me.Label70.TabIndex = 84
+        Me.Label70.Text = "VA"
+        '
+        'Label71
+        '
+        Me.Label71.AutoSize = True
+        Me.Label71.Location = New System.Drawing.Point(270, 77)
+        Me.Label71.Name = "Label71"
+        Me.Label71.Size = New System.Drawing.Size(21, 13)
+        Me.Label71.TabIndex = 83
+        Me.Label71.Text = "VA"
+        '
+        'Label72
+        '
+        Me.Label72.AutoSize = True
+        Me.Label72.Location = New System.Drawing.Point(270, 51)
+        Me.Label72.Name = "Label72"
+        Me.Label72.Size = New System.Drawing.Size(21, 13)
+        Me.Label72.TabIndex = 82
+        Me.Label72.Text = "VA"
+        '
+        'Label73
+        '
+        Me.Label73.AutoSize = True
+        Me.Label73.Location = New System.Drawing.Point(270, 25)
+        Me.Label73.Name = "Label73"
+        Me.Label73.Size = New System.Drawing.Size(21, 13)
+        Me.Label73.TabIndex = 81
+        Me.Label73.Text = "VA"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.BackColor = System.Drawing.Color.Silver
+        Me.TextBox3.Location = New System.Drawing.Point(164, 100)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
+        Me.TextBox3.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox3.TabIndex = 7
+        Me.TextBox3.Text = "0"
+        '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.Location = New System.Drawing.Point(27, 103)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(68, 13)
+        Me.Label49.TabIndex = 6
+        Me.Label49.Text = "Three Phase"
+        '
+        'TextBox4
+        '
+        Me.TextBox4.BackColor = System.Drawing.Color.Silver
+        Me.TextBox4.Location = New System.Drawing.Point(164, 74)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.ReadOnly = True
+        Me.TextBox4.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox4.TabIndex = 5
+        Me.TextBox4.Text = "0"
+        '
+        'Label50
+        '
+        Me.Label50.AutoSize = True
+        Me.Label50.Location = New System.Drawing.Point(48, 77)
+        Me.Label50.Name = "Label50"
+        Me.Label50.Size = New System.Drawing.Size(47, 13)
+        Me.Label50.TabIndex = 4
+        Me.Label50.Text = "Phase C"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.BackColor = System.Drawing.Color.Silver
+        Me.TextBox5.Location = New System.Drawing.Point(164, 48)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.ReadOnly = True
+        Me.TextBox5.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox5.TabIndex = 3
+        Me.TextBox5.Text = "0"
+        '
+        'Label51
+        '
+        Me.Label51.AutoSize = True
+        Me.Label51.Location = New System.Drawing.Point(48, 51)
+        Me.Label51.Name = "Label51"
+        Me.Label51.Size = New System.Drawing.Size(47, 13)
+        Me.Label51.TabIndex = 2
+        Me.Label51.Text = "Phase B"
+        '
+        'TextBox6
+        '
+        Me.TextBox6.BackColor = System.Drawing.Color.Silver
+        Me.TextBox6.Location = New System.Drawing.Point(164, 22)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.ReadOnly = True
+        Me.TextBox6.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox6.TabIndex = 1
+        Me.TextBox6.Text = "0"
+        '
+        'Label52
+        '
+        Me.Label52.AutoSize = True
+        Me.Label52.Location = New System.Drawing.Point(48, 25)
+        Me.Label52.Name = "Label52"
+        Me.Label52.Size = New System.Drawing.Size(47, 13)
+        Me.Label52.TabIndex = 0
+        Me.Label52.Text = "Phase A"
         '
         'Label38
         '
@@ -1508,6 +1824,7 @@ Partial Class FormMain
         '
         'ImpedanceImagTextBoxDP
         '
+        Me.ImpedanceImagTextBoxDP.BackColor = System.Drawing.Color.Silver
         Me.ImpedanceImagTextBoxDP.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblDistributionBindingSource, "ImpedanceImag", True))
         Me.ImpedanceImagTextBoxDP.Location = New System.Drawing.Point(238, 372)
         Me.ImpedanceImagTextBoxDP.Name = "ImpedanceImagTextBoxDP"
@@ -1527,6 +1844,7 @@ Partial Class FormMain
         '
         'ImpedanceRealTextBoxDP
         '
+        Me.ImpedanceRealTextBoxDP.BackColor = System.Drawing.Color.Silver
         Me.ImpedanceRealTextBoxDP.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblDistributionBindingSource, "ImpedanceReal", True))
         Me.ImpedanceRealTextBoxDP.Location = New System.Drawing.Point(167, 372)
         Me.ImpedanceRealTextBoxDP.Name = "ImpedanceRealTextBoxDP"
@@ -1598,6 +1916,7 @@ Partial Class FormMain
         '
         'CodeTextBoxDP
         '
+        Me.CodeTextBoxDP.BackColor = System.Drawing.Color.Silver
         Me.CodeTextBoxDP.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblDistributionBindingSource, "Code", True))
         Me.CodeTextBoxDP.Location = New System.Drawing.Point(167, 31)
         Me.CodeTextBoxDP.Name = "CodeTextBoxDP"
@@ -1607,6 +1926,7 @@ Partial Class FormMain
         '
         'ProjectCodeTextBoxDP
         '
+        Me.ProjectCodeTextBoxDP.BackColor = System.Drawing.Color.Silver
         Me.ProjectCodeTextBoxDP.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblDistributionBindingSource, "ProjectCode", True))
         Me.ProjectCodeTextBoxDP.Location = New System.Drawing.Point(167, 83)
         Me.ProjectCodeTextBoxDP.Name = "ProjectCodeTextBoxDP"
@@ -1616,6 +1936,7 @@ Partial Class FormMain
         '
         'CurrentRatingTextBoxDP
         '
+        Me.CurrentRatingTextBoxDP.BackColor = System.Drawing.Color.Silver
         Me.CurrentRatingTextBoxDP.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblDistributionBindingSource, "CurrentRating", True))
         Me.CurrentRatingTextBoxDP.Location = New System.Drawing.Point(167, 109)
         Me.CurrentRatingTextBoxDP.Name = "CurrentRatingTextBoxDP"
@@ -1642,6 +1963,7 @@ Partial Class FormMain
         '
         'WireSizeTextBoxDP
         '
+        Me.WireSizeTextBoxDP.BackColor = System.Drawing.Color.Silver
         Me.WireSizeTextBoxDP.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblDistributionBindingSource, "WireSize", True))
         Me.WireSizeTextBoxDP.Location = New System.Drawing.Point(167, 162)
         Me.WireSizeTextBoxDP.Name = "WireSizeTextBoxDP"
@@ -1686,6 +2008,7 @@ Partial Class FormMain
         '
         'ConduitSizeTextBoxDP
         '
+        Me.ConduitSizeTextBoxDP.BackColor = System.Drawing.Color.Silver
         Me.ConduitSizeTextBoxDP.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblDistributionBindingSource, "ConduitSize", True))
         Me.ConduitSizeTextBoxDP.Location = New System.Drawing.Point(167, 268)
         Me.ConduitSizeTextBoxDP.Name = "ConduitSizeTextBoxDP"
@@ -1695,6 +2018,7 @@ Partial Class FormMain
         '
         'OCPDRatingTextBoxDP
         '
+        Me.OCPDRatingTextBoxDP.BackColor = System.Drawing.Color.Silver
         Me.OCPDRatingTextBoxDP.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblDistributionBindingSource, "OCPDRating", True))
         Me.OCPDRatingTextBoxDP.Location = New System.Drawing.Point(167, 294)
         Me.OCPDRatingTextBoxDP.Name = "OCPDRatingTextBoxDP"
@@ -1722,6 +2046,16 @@ Partial Class FormMain
         '
         Me.TabPage2.AutoScroll = True
         Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage2.Controls.Add(Me.Label63)
+        Me.TabPage2.Controls.Add(Me.Label62)
+        Me.TabPage2.Controls.Add(Me.Label61)
+        Me.TabPage2.Controls.Add(Me.Label60)
+        Me.TabPage2.Controls.Add(Me.Label59)
+        Me.TabPage2.Controls.Add(Me.Label58)
+        Me.TabPage2.Controls.Add(Me.Label57)
+        Me.TabPage2.Controls.Add(Me.Label55)
+        Me.TabPage2.Controls.Add(Me.Label54)
+        Me.TabPage2.Controls.Add(Me.Label53)
         Me.TabPage2.Controls.Add(Me.Label36)
         Me.TabPage2.Controls.Add(Me.ImpedanceImagTextBox)
         Me.TabPage2.Controls.Add(ImpedanceRealLabel)
@@ -1786,9 +2120,99 @@ Partial Class FormMain
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(675, 753)
+        Me.TabPage2.Size = New System.Drawing.Size(713, 753)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Subfeeder"
+        '
+        'Label63
+        '
+        Me.Label63.AutoSize = True
+        Me.Label63.Location = New System.Drawing.Point(294, 563)
+        Me.Label63.Name = "Label63"
+        Me.Label63.Size = New System.Drawing.Size(15, 13)
+        Me.Label63.TabIndex = 85
+        Me.Label63.Text = "%"
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.Location = New System.Drawing.Point(294, 537)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(15, 13)
+        Me.Label62.TabIndex = 84
+        Me.Label62.Text = "m"
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Location = New System.Drawing.Point(294, 485)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(21, 13)
+        Me.Label61.TabIndex = 83
+        Me.Label61.Text = "AT"
+        '
+        'Label60
+        '
+        Me.Label60.AutoSize = True
+        Me.Label60.Location = New System.Drawing.Point(294, 459)
+        Me.Label60.Name = "Label60"
+        Me.Label60.Size = New System.Drawing.Size(36, 13)
+        Me.Label60.TabIndex = 82
+        Me.Label60.Text = "Metric"
+        '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.Location = New System.Drawing.Point(294, 672)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(25, 13)
+        Me.Label59.TabIndex = 81
+        Me.Label59.Text = "p.u."
+        '
+        'Label58
+        '
+        Me.Label58.AutoSize = True
+        Me.Label58.Location = New System.Drawing.Point(294, 619)
+        Me.Label58.Name = "Label58"
+        Me.Label58.Size = New System.Drawing.Size(26, 13)
+        Me.Label58.TabIndex = 80
+        Me.Label58.Text = "mm²"
+        '
+        'Label57
+        '
+        Me.Label57.AutoSize = True
+        Me.Label57.Location = New System.Drawing.Point(294, 380)
+        Me.Label57.Name = "Label57"
+        Me.Label57.Size = New System.Drawing.Size(26, 13)
+        Me.Label57.TabIndex = 79
+        Me.Label57.Text = "mm²"
+        '
+        'Label55
+        '
+        Me.Label55.AutoSize = True
+        Me.Label55.Location = New System.Drawing.Point(294, 217)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(26, 13)
+        Me.Label55.TabIndex = 78
+        Me.Label55.Text = "mm²"
+        '
+        'Label54
+        '
+        Me.Label54.AutoSize = True
+        Me.Label54.Location = New System.Drawing.Point(294, 164)
+        Me.Label54.Name = "Label54"
+        Me.Label54.Size = New System.Drawing.Size(14, 13)
+        Me.Label54.TabIndex = 77
+        Me.Label54.Text = "A"
+        '
+        'Label53
+        '
+        Me.Label53.AutoSize = True
+        Me.Label53.Location = New System.Drawing.Point(294, 138)
+        Me.Label53.Name = "Label53"
+        Me.Label53.Size = New System.Drawing.Size(14, 13)
+        Me.Label53.TabIndex = 76
+        Me.Label53.Text = "A"
         '
         'Label36
         '
@@ -1801,6 +2225,7 @@ Partial Class FormMain
         '
         'ImpedanceImagTextBox
         '
+        Me.ImpedanceImagTextBox.BackColor = System.Drawing.Color.Silver
         Me.ImpedanceImagTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "ImpedanceImag", True))
         Me.ImpedanceImagTextBox.Location = New System.Drawing.Point(238, 669)
         Me.ImpedanceImagTextBox.Name = "ImpedanceImagTextBox"
@@ -1815,6 +2240,7 @@ Partial Class FormMain
         '
         'ImpedanceRealTextBox
         '
+        Me.ImpedanceRealTextBox.BackColor = System.Drawing.Color.Silver
         Me.ImpedanceRealTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "ImpedanceReal", True))
         Me.ImpedanceRealTextBox.Location = New System.Drawing.Point(167, 669)
         Me.ImpedanceRealTextBox.Name = "ImpedanceRealTextBox"
@@ -1841,6 +2267,7 @@ Partial Class FormMain
         '
         'GroundWireSizeTextBoxSub
         '
+        Me.GroundWireSizeTextBoxSub.BackColor = System.Drawing.Color.Silver
         Me.GroundWireSizeTextBoxSub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "GroundWireSize", True))
         Me.GroundWireSizeTextBoxSub.Location = New System.Drawing.Point(167, 616)
         Me.GroundWireSizeTextBoxSub.Name = "GroundWireSizeTextBoxSub"
@@ -1850,6 +2277,7 @@ Partial Class FormMain
         '
         'NeutralSetTextBox
         '
+        Me.NeutralSetTextBox.BackColor = System.Drawing.Color.Silver
         Me.NeutralSetTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "NeutralSet", True))
         Me.NeutralSetTextBox.Location = New System.Drawing.Point(167, 403)
         Me.NeutralSetTextBox.Name = "NeutralSetTextBox"
@@ -1895,6 +2323,7 @@ Partial Class FormMain
         '
         'NeutralSizeTextBox
         '
+        Me.NeutralSizeTextBox.BackColor = System.Drawing.Color.Silver
         Me.NeutralSizeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "NeutralSize", True))
         Me.NeutralSizeTextBox.Location = New System.Drawing.Point(167, 377)
         Me.NeutralSizeTextBox.Name = "NeutralSizeTextBox"
@@ -1932,6 +2361,7 @@ Partial Class FormMain
         '
         'DPCodeTextBox
         '
+        Me.DPCodeTextBox.BackColor = System.Drawing.Color.Silver
         Me.DPCodeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "DPCode", True))
         Me.DPCodeTextBox.Location = New System.Drawing.Point(167, 109)
         Me.DPCodeTextBox.Name = "DPCodeTextBox"
@@ -1950,19 +2380,40 @@ Partial Class FormMain
         '
         'GroupBox4
         '
+        Me.GroupBox4.Controls.Add(Me.Label68)
+        Me.GroupBox4.Controls.Add(Me.Label69)
         Me.GroupBox4.Controls.Add(Me.TxtMotorThreePhase)
         Me.GroupBox4.Controls.Add(Me.Label34)
         Me.GroupBox4.Controls.Add(Me.TxtMotorSinglePhase)
         Me.GroupBox4.Controls.Add(Me.Label35)
-        Me.GroupBox4.Location = New System.Drawing.Point(308, 169)
+        Me.GroupBox4.Location = New System.Drawing.Point(343, 169)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(351, 132)
         Me.GroupBox4.TabIndex = 44
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Motor Loads"
         '
+        'Label68
+        '
+        Me.Label68.AutoSize = True
+        Me.Label68.Location = New System.Drawing.Point(270, 75)
+        Me.Label68.Name = "Label68"
+        Me.Label68.Size = New System.Drawing.Size(21, 13)
+        Me.Label68.TabIndex = 80
+        Me.Label68.Text = "VA"
+        '
+        'Label69
+        '
+        Me.Label69.AutoSize = True
+        Me.Label69.Location = New System.Drawing.Point(270, 49)
+        Me.Label69.Name = "Label69"
+        Me.Label69.Size = New System.Drawing.Size(21, 13)
+        Me.Label69.TabIndex = 79
+        Me.Label69.Text = "VA"
+        '
         'TxtMotorThreePhase
         '
+        Me.TxtMotorThreePhase.BackColor = System.Drawing.Color.Silver
         Me.TxtMotorThreePhase.Location = New System.Drawing.Point(164, 72)
         Me.TxtMotorThreePhase.Name = "TxtMotorThreePhase"
         Me.TxtMotorThreePhase.ReadOnly = True
@@ -1980,6 +2431,7 @@ Partial Class FormMain
         '
         'TxtMotorSinglePhase
         '
+        Me.TxtMotorSinglePhase.BackColor = System.Drawing.Color.Silver
         Me.TxtMotorSinglePhase.Location = New System.Drawing.Point(164, 46)
         Me.TxtMotorSinglePhase.Name = "TxtMotorSinglePhase"
         Me.TxtMotorSinglePhase.ReadOnly = True
@@ -1997,6 +2449,10 @@ Partial Class FormMain
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Label66)
+        Me.GroupBox3.Controls.Add(Me.Label67)
+        Me.GroupBox3.Controls.Add(Me.Label65)
+        Me.GroupBox3.Controls.Add(Me.Label64)
         Me.GroupBox3.Controls.Add(Me.TxtThreePhaseLoad)
         Me.GroupBox3.Controls.Add(Me.Label33)
         Me.GroupBox3.Controls.Add(Me.TxtPhaseCLoad)
@@ -2005,15 +2461,52 @@ Partial Class FormMain
         Me.GroupBox3.Controls.Add(Me.Label31)
         Me.GroupBox3.Controls.Add(Me.TxtPhaseALoad)
         Me.GroupBox3.Controls.Add(Me.Label30)
-        Me.GroupBox3.Location = New System.Drawing.Point(308, 31)
+        Me.GroupBox3.Location = New System.Drawing.Point(343, 31)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(351, 132)
         Me.GroupBox3.TabIndex = 43
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Phase Loads"
         '
+        'Label66
+        '
+        Me.Label66.AutoSize = True
+        Me.Label66.Location = New System.Drawing.Point(270, 103)
+        Me.Label66.Name = "Label66"
+        Me.Label66.Size = New System.Drawing.Size(21, 13)
+        Me.Label66.TabIndex = 80
+        Me.Label66.Text = "VA"
+        '
+        'Label67
+        '
+        Me.Label67.AutoSize = True
+        Me.Label67.Location = New System.Drawing.Point(270, 77)
+        Me.Label67.Name = "Label67"
+        Me.Label67.Size = New System.Drawing.Size(21, 13)
+        Me.Label67.TabIndex = 79
+        Me.Label67.Text = "VA"
+        '
+        'Label65
+        '
+        Me.Label65.AutoSize = True
+        Me.Label65.Location = New System.Drawing.Point(270, 51)
+        Me.Label65.Name = "Label65"
+        Me.Label65.Size = New System.Drawing.Size(21, 13)
+        Me.Label65.TabIndex = 78
+        Me.Label65.Text = "VA"
+        '
+        'Label64
+        '
+        Me.Label64.AutoSize = True
+        Me.Label64.Location = New System.Drawing.Point(270, 25)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(21, 13)
+        Me.Label64.TabIndex = 77
+        Me.Label64.Text = "VA"
+        '
         'TxtThreePhaseLoad
         '
+        Me.TxtThreePhaseLoad.BackColor = System.Drawing.Color.Silver
         Me.TxtThreePhaseLoad.Location = New System.Drawing.Point(164, 100)
         Me.TxtThreePhaseLoad.Name = "TxtThreePhaseLoad"
         Me.TxtThreePhaseLoad.ReadOnly = True
@@ -2032,6 +2525,7 @@ Partial Class FormMain
         '
         'TxtPhaseCLoad
         '
+        Me.TxtPhaseCLoad.BackColor = System.Drawing.Color.Silver
         Me.TxtPhaseCLoad.Location = New System.Drawing.Point(164, 74)
         Me.TxtPhaseCLoad.Name = "TxtPhaseCLoad"
         Me.TxtPhaseCLoad.ReadOnly = True
@@ -2050,6 +2544,7 @@ Partial Class FormMain
         '
         'TxtPhaseBLoad
         '
+        Me.TxtPhaseBLoad.BackColor = System.Drawing.Color.Silver
         Me.TxtPhaseBLoad.Location = New System.Drawing.Point(164, 48)
         Me.TxtPhaseBLoad.Name = "TxtPhaseBLoad"
         Me.TxtPhaseBLoad.ReadOnly = True
@@ -2068,6 +2563,7 @@ Partial Class FormMain
         '
         'TxtPhaseALoad
         '
+        Me.TxtPhaseALoad.BackColor = System.Drawing.Color.Silver
         Me.TxtPhaseALoad.Location = New System.Drawing.Point(164, 22)
         Me.TxtPhaseALoad.Name = "TxtPhaseALoad"
         Me.TxtPhaseALoad.ReadOnly = True
@@ -2122,6 +2618,7 @@ Partial Class FormMain
         '
         'CodeTextBoxSub
         '
+        Me.CodeTextBoxSub.BackColor = System.Drawing.Color.Silver
         Me.CodeTextBoxSub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "Code", True))
         Me.CodeTextBoxSub.Location = New System.Drawing.Point(167, 31)
         Me.CodeTextBoxSub.Name = "CodeTextBoxSub"
@@ -2131,6 +2628,7 @@ Partial Class FormMain
         '
         'ProjectCodeTextBoxSub
         '
+        Me.ProjectCodeTextBoxSub.BackColor = System.Drawing.Color.Silver
         Me.ProjectCodeTextBoxSub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "ProjectCode", True))
         Me.ProjectCodeTextBoxSub.Location = New System.Drawing.Point(167, 57)
         Me.ProjectCodeTextBoxSub.Name = "ProjectCodeTextBoxSub"
@@ -2148,6 +2646,7 @@ Partial Class FormMain
         '
         'CurrentRatingTextBox
         '
+        Me.CurrentRatingTextBox.BackColor = System.Drawing.Color.Silver
         Me.CurrentRatingTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "CurrentRating", True))
         Me.CurrentRatingTextBox.Location = New System.Drawing.Point(167, 135)
         Me.CurrentRatingTextBox.Name = "CurrentRatingTextBox"
@@ -2157,6 +2656,7 @@ Partial Class FormMain
         '
         'MinimumAmpacityTextBoxSub
         '
+        Me.MinimumAmpacityTextBoxSub.BackColor = System.Drawing.Color.Silver
         Me.MinimumAmpacityTextBoxSub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "MinimumAmpacity", True))
         Me.MinimumAmpacityTextBoxSub.Location = New System.Drawing.Point(167, 161)
         Me.MinimumAmpacityTextBoxSub.Name = "MinimumAmpacityTextBoxSub"
@@ -2183,6 +2683,7 @@ Partial Class FormMain
         '
         'WireSizeTextBoxSub
         '
+        Me.WireSizeTextBoxSub.BackColor = System.Drawing.Color.Silver
         Me.WireSizeTextBoxSub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "WireSize", True))
         Me.WireSizeTextBoxSub.Location = New System.Drawing.Point(167, 214)
         Me.WireSizeTextBoxSub.Name = "WireSizeTextBoxSub"
@@ -2219,6 +2720,7 @@ Partial Class FormMain
         '
         'ConduitSizeTextBoxSub
         '
+        Me.ConduitSizeTextBoxSub.BackColor = System.Drawing.Color.Silver
         Me.ConduitSizeTextBoxSub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "ConduitSize", True))
         Me.ConduitSizeTextBoxSub.Location = New System.Drawing.Point(167, 456)
         Me.ConduitSizeTextBoxSub.Name = "ConduitSizeTextBoxSub"
@@ -2228,6 +2730,7 @@ Partial Class FormMain
         '
         'OCPDRatingTextBoxSub
         '
+        Me.OCPDRatingTextBoxSub.BackColor = System.Drawing.Color.Silver
         Me.OCPDRatingTextBoxSub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "OCPDRating", True))
         Me.OCPDRatingTextBoxSub.Location = New System.Drawing.Point(167, 482)
         Me.OCPDRatingTextBoxSub.Name = "OCPDRatingTextBoxSub"
@@ -2253,6 +2756,7 @@ Partial Class FormMain
         '
         'VoltageDropTextBox
         '
+        Me.VoltageDropTextBox.BackColor = System.Drawing.Color.Silver
         Me.VoltageDropTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblSubfeederBindingSource, "VoltageDrop", True))
         Me.VoltageDropTextBox.Location = New System.Drawing.Point(167, 560)
         Me.VoltageDropTextBox.Name = "VoltageDropTextBox"
@@ -2282,6 +2786,15 @@ Partial Class FormMain
         '
         Me.TabPage1.AutoScroll = True
         Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage1.Controls.Add(Me.Label56)
+        Me.TabPage1.Controls.Add(Me.Label46)
+        Me.TabPage1.Controls.Add(Me.Label45)
+        Me.TabPage1.Controls.Add(Me.Label44)
+        Me.TabPage1.Controls.Add(Me.Label43)
+        Me.TabPage1.Controls.Add(Me.Label42)
+        Me.TabPage1.Controls.Add(Me.Label41)
+        Me.TabPage1.Controls.Add(Me.Label40)
+        Me.TabPage1.Controls.Add(Me.Label37)
         Me.TabPage1.Controls.Add(DistancetoSFLabel)
         Me.TabPage1.Controls.Add(Me.DistancetoSFTextBox)
         Me.TabPage1.Controls.Add(VoltageDropLabel1)
@@ -2344,9 +2857,90 @@ Partial Class FormMain
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(675, 753)
+        Me.TabPage1.Size = New System.Drawing.Size(713, 753)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Branch Circuit"
+        '
+        'Label56
+        '
+        Me.Label56.AutoSize = True
+        Me.Label56.Location = New System.Drawing.Point(294, 482)
+        Me.Label56.Name = "Label56"
+        Me.Label56.Size = New System.Drawing.Size(36, 13)
+        Me.Label56.TabIndex = 83
+        Me.Label56.Text = "Metric"
+        '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.Location = New System.Drawing.Point(294, 165)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(21, 13)
+        Me.Label46.TabIndex = 82
+        Me.Label46.Text = "VA"
+        '
+        'Label45
+        '
+        Me.Label45.AutoSize = True
+        Me.Label45.Location = New System.Drawing.Point(294, 669)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(15, 13)
+        Me.Label45.TabIndex = 81
+        Me.Label45.Text = "%"
+        '
+        'Label44
+        '
+        Me.Label44.AutoSize = True
+        Me.Label44.Location = New System.Drawing.Point(294, 643)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(15, 13)
+        Me.Label44.TabIndex = 80
+        Me.Label44.Text = "m"
+        '
+        'Label43
+        '
+        Me.Label43.AutoSize = True
+        Me.Label43.Location = New System.Drawing.Point(294, 376)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(26, 13)
+        Me.Label43.TabIndex = 79
+        Me.Label43.Text = "mm²"
+        '
+        'Label42
+        '
+        Me.Label42.AutoSize = True
+        Me.Label42.Location = New System.Drawing.Point(294, 590)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(26, 13)
+        Me.Label42.TabIndex = 78
+        Me.Label42.Text = "mm²"
+        '
+        'Label41
+        '
+        Me.Label41.AutoSize = True
+        Me.Label41.Location = New System.Drawing.Point(294, 508)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(21, 13)
+        Me.Label41.TabIndex = 77
+        Me.Label41.Text = "AT"
+        '
+        'Label40
+        '
+        Me.Label40.AutoSize = True
+        Me.Label40.Location = New System.Drawing.Point(294, 323)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(14, 13)
+        Me.Label40.TabIndex = 76
+        Me.Label40.Text = "A"
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Location = New System.Drawing.Point(294, 297)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(14, 13)
+        Me.Label37.TabIndex = 75
+        Me.Label37.Text = "A"
         '
         'DistancetoSFTextBox
         '
@@ -2363,6 +2957,7 @@ Partial Class FormMain
         '
         'VoltageDropTextBox1
         '
+        Me.VoltageDropTextBox1.BackColor = System.Drawing.Color.Silver
         Me.VoltageDropTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "VoltageDrop", True))
         Me.VoltageDropTextBox1.Location = New System.Drawing.Point(167, 666)
         Me.VoltageDropTextBox1.Name = "VoltageDropTextBox1"
@@ -2408,6 +3003,7 @@ Partial Class FormMain
         '
         'GroundWireSizeTextBox
         '
+        Me.GroundWireSizeTextBox.BackColor = System.Drawing.Color.Silver
         Me.GroundWireSizeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "GroundWireSize", True))
         Me.GroundWireSizeTextBox.Location = New System.Drawing.Point(167, 587)
         Me.GroundWireSizeTextBox.Name = "GroundWireSizeTextBox"
@@ -2444,6 +3040,7 @@ Partial Class FormMain
         '
         'ProjectTextBox
         '
+        Me.ProjectTextBox.BackColor = System.Drawing.Color.Silver
         Me.ProjectTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "Project", True))
         Me.ProjectTextBox.Location = New System.Drawing.Point(167, 57)
         Me.ProjectTextBox.Name = "ProjectTextBox"
@@ -2474,6 +3071,7 @@ Partial Class FormMain
         '
         'TxtMotorItem
         '
+        Me.TxtMotorItem.BackColor = System.Drawing.Color.Silver
         Me.TxtMotorItem.Location = New System.Drawing.Point(167, 268)
         Me.TxtMotorItem.Name = "TxtMotorItem"
         Me.TxtMotorItem.ReadOnly = True
@@ -2519,7 +3117,7 @@ Partial Class FormMain
         Me.GrpPower.Controls.Add(Me.TxtItemsPower1)
         Me.GrpPower.Controls.Add(Me.Label18)
         Me.GrpPower.Enabled = False
-        Me.GrpPower.Location = New System.Drawing.Point(308, 169)
+        Me.GrpPower.Location = New System.Drawing.Point(343, 169)
         Me.GrpPower.Name = "GrpPower"
         Me.GrpPower.Size = New System.Drawing.Size(351, 152)
         Me.GrpPower.TabIndex = 40
@@ -2573,6 +3171,7 @@ Partial Class FormMain
         '
         'TxtTotalPower4
         '
+        Me.TxtTotalPower4.BackColor = System.Drawing.Color.Silver
         Me.TxtTotalPower4.Location = New System.Drawing.Point(280, 117)
         Me.TxtTotalPower4.Name = "TxtTotalPower4"
         Me.TxtTotalPower4.ReadOnly = True
@@ -2661,6 +3260,7 @@ Partial Class FormMain
         '
         'TxtTotalPower3
         '
+        Me.TxtTotalPower3.BackColor = System.Drawing.Color.Silver
         Me.TxtTotalPower3.Location = New System.Drawing.Point(280, 91)
         Me.TxtTotalPower3.Name = "TxtTotalPower3"
         Me.TxtTotalPower3.ReadOnly = True
@@ -2669,6 +3269,7 @@ Partial Class FormMain
         '
         'TxtTotalPower2
         '
+        Me.TxtTotalPower2.BackColor = System.Drawing.Color.Silver
         Me.TxtTotalPower2.Location = New System.Drawing.Point(280, 64)
         Me.TxtTotalPower2.Name = "TxtTotalPower2"
         Me.TxtTotalPower2.ReadOnly = True
@@ -2677,6 +3278,7 @@ Partial Class FormMain
         '
         'TxtTotalPower1
         '
+        Me.TxtTotalPower1.BackColor = System.Drawing.Color.Silver
         Me.TxtTotalPower1.Location = New System.Drawing.Point(280, 37)
         Me.TxtTotalPower1.Name = "TxtTotalPower1"
         Me.TxtTotalPower1.ReadOnly = True
@@ -2785,7 +3387,7 @@ Partial Class FormMain
         Me.GrpLighting.Controls.Add(Me.TxtItemsLighting2)
         Me.GrpLighting.Controls.Add(Me.TxtItemsLighting1)
         Me.GrpLighting.Enabled = False
-        Me.GrpLighting.Location = New System.Drawing.Point(308, 31)
+        Me.GrpLighting.Location = New System.Drawing.Point(343, 31)
         Me.GrpLighting.Name = "GrpLighting"
         Me.GrpLighting.Size = New System.Drawing.Size(351, 132)
         Me.GrpLighting.TabIndex = 39
@@ -2872,6 +3474,7 @@ Partial Class FormMain
         '
         'TxtTotalLighting3
         '
+        Me.TxtTotalLighting3.BackColor = System.Drawing.Color.Silver
         Me.TxtTotalLighting3.Location = New System.Drawing.Point(280, 91)
         Me.TxtTotalLighting3.Name = "TxtTotalLighting3"
         Me.TxtTotalLighting3.ReadOnly = True
@@ -2880,6 +3483,7 @@ Partial Class FormMain
         '
         'TxtTotalLighting2
         '
+        Me.TxtTotalLighting2.BackColor = System.Drawing.Color.Silver
         Me.TxtTotalLighting2.Location = New System.Drawing.Point(280, 64)
         Me.TxtTotalLighting2.Name = "TxtTotalLighting2"
         Me.TxtTotalLighting2.ReadOnly = True
@@ -2888,6 +3492,7 @@ Partial Class FormMain
         '
         'TxtTotalLighting1
         '
+        Me.TxtTotalLighting1.BackColor = System.Drawing.Color.Silver
         Me.TxtTotalLighting1.Location = New System.Drawing.Point(280, 37)
         Me.TxtTotalLighting1.Name = "TxtTotalLighting1"
         Me.TxtTotalLighting1.ReadOnly = True
@@ -3020,6 +3625,7 @@ Partial Class FormMain
         '
         'CodeTextBox
         '
+        Me.CodeTextBox.BackColor = System.Drawing.Color.Silver
         Me.CodeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "Code", True))
         Me.CodeTextBox.Location = New System.Drawing.Point(167, 31)
         Me.CodeTextBox.Name = "CodeTextBox"
@@ -3029,6 +3635,7 @@ Partial Class FormMain
         '
         'SubfeederTextBox
         '
+        Me.SubfeederTextBox.BackColor = System.Drawing.Color.Silver
         Me.SubfeederTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "Subfeeder", True))
         Me.SubfeederTextBox.Location = New System.Drawing.Point(167, 136)
         Me.SubfeederTextBox.Name = "SubfeederTextBox"
@@ -3038,6 +3645,7 @@ Partial Class FormMain
         '
         'PowerRatingTextBox
         '
+        Me.PowerRatingTextBox.BackColor = System.Drawing.Color.Silver
         Me.PowerRatingTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "PowerRating", True))
         Me.PowerRatingTextBox.Location = New System.Drawing.Point(167, 162)
         Me.PowerRatingTextBox.Name = "PowerRatingTextBox"
@@ -3047,6 +3655,7 @@ Partial Class FormMain
         '
         'MotorRatingTextBox
         '
+        Me.MotorRatingTextBox.BackColor = System.Drawing.Color.Silver
         Me.MotorRatingTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "MotorRating", True))
         Me.MotorRatingTextBox.Location = New System.Drawing.Point(167, 242)
         Me.MotorRatingTextBox.Name = "MotorRatingTextBox"
@@ -3056,6 +3665,7 @@ Partial Class FormMain
         '
         'FullLoadCurrentTextBox
         '
+        Me.FullLoadCurrentTextBox.BackColor = System.Drawing.Color.Silver
         Me.FullLoadCurrentTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "FullLoadCurrent", True))
         Me.FullLoadCurrentTextBox.Location = New System.Drawing.Point(167, 294)
         Me.FullLoadCurrentTextBox.Name = "FullLoadCurrentTextBox"
@@ -3065,6 +3675,7 @@ Partial Class FormMain
         '
         'MinimumAmpacityTextBox
         '
+        Me.MinimumAmpacityTextBox.BackColor = System.Drawing.Color.Silver
         Me.MinimumAmpacityTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "MinimumAmpacity", True))
         Me.MinimumAmpacityTextBox.Location = New System.Drawing.Point(167, 320)
         Me.MinimumAmpacityTextBox.Name = "MinimumAmpacityTextBox"
@@ -3091,6 +3702,7 @@ Partial Class FormMain
         '
         'WireSizeTextBox1
         '
+        Me.WireSizeTextBox1.BackColor = System.Drawing.Color.Silver
         Me.WireSizeTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "WireSize", True))
         Me.WireSizeTextBox1.Location = New System.Drawing.Point(167, 373)
         Me.WireSizeTextBox1.Name = "WireSizeTextBox1"
@@ -3127,6 +3739,7 @@ Partial Class FormMain
         '
         'ConduitSizeTextBox1
         '
+        Me.ConduitSizeTextBox1.BackColor = System.Drawing.Color.Silver
         Me.ConduitSizeTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "ConduitSize", True))
         Me.ConduitSizeTextBox1.Location = New System.Drawing.Point(167, 479)
         Me.ConduitSizeTextBox1.Name = "ConduitSizeTextBox1"
@@ -3136,6 +3749,7 @@ Partial Class FormMain
         '
         'OCPDRatingTextBox1
         '
+        Me.OCPDRatingTextBox1.BackColor = System.Drawing.Color.Silver
         Me.OCPDRatingTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblBranchBindingSource, "OCPDRating", True))
         Me.OCPDRatingTextBox1.Location = New System.Drawing.Point(167, 505)
         Me.OCPDRatingTextBox1.Name = "OCPDRatingTextBox1"
@@ -3187,7 +3801,7 @@ Partial Class FormMain
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(675, 753)
+        Me.TabPage3.Size = New System.Drawing.Size(713, 753)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Transformer/Generator"
         '
@@ -3258,6 +3872,7 @@ Partial Class FormMain
         '
         'ProjectCodeTextBox3
         '
+        Me.ProjectCodeTextBox3.BackColor = System.Drawing.Color.Silver
         Me.ProjectCodeTextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblTransGenBindingSource, "ProjectCode", True))
         Me.ProjectCodeTextBox3.Location = New System.Drawing.Point(167, 57)
         Me.ProjectCodeTextBox3.Name = "ProjectCodeTextBox3"
@@ -3283,6 +3898,7 @@ Partial Class FormMain
         '
         'TransformerRatingTextBox
         '
+        Me.TransformerRatingTextBox.BackColor = System.Drawing.Color.Silver
         Me.TransformerRatingTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblTransGenBindingSource, "TransformerRating", True))
         Me.TransformerRatingTextBox.Location = New System.Drawing.Point(167, 135)
         Me.TransformerRatingTextBox.Name = "TransformerRatingTextBox"
@@ -3292,6 +3908,7 @@ Partial Class FormMain
         '
         'GeneratorRatingTextBox
         '
+        Me.GeneratorRatingTextBox.BackColor = System.Drawing.Color.Silver
         Me.GeneratorRatingTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblTransGenBindingSource, "GeneratorRating", True))
         Me.GeneratorRatingTextBox.Location = New System.Drawing.Point(167, 213)
         Me.GeneratorRatingTextBox.Name = "GeneratorRatingTextBox"
@@ -3301,6 +3918,7 @@ Partial Class FormMain
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label90)
         Me.GroupBox1.Controls.Add(VoltageLevelLabel)
         Me.GroupBox1.Controls.Add(Me.VoltageLevelComboBox)
         Me.GroupBox1.Controls.Add(Me.BtnPreviousProject)
@@ -3324,6 +3942,15 @@ Partial Class FormMain
         Me.GroupBox1.TabIndex = 3
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Project"
+        '
+        'Label90
+        '
+        Me.Label90.AutoSize = True
+        Me.Label90.Location = New System.Drawing.Point(253, 172)
+        Me.Label90.Name = "Label90"
+        Me.Label90.Size = New System.Drawing.Size(14, 13)
+        Me.Label90.TabIndex = 79
+        Me.Label90.Text = "V"
         '
         'VoltageLevelComboBox
         '
@@ -3429,6 +4056,15 @@ Partial Class FormMain
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Label89)
+        Me.GroupBox2.Controls.Add(Me.Label88)
+        Me.GroupBox2.Controls.Add(Me.Label87)
+        Me.GroupBox2.Controls.Add(Me.Label86)
+        Me.GroupBox2.Controls.Add(Me.Label84)
+        Me.GroupBox2.Controls.Add(Me.Label85)
+        Me.GroupBox2.Controls.Add(Me.Label83)
+        Me.GroupBox2.Controls.Add(Me.Label82)
+        Me.GroupBox2.Controls.Add(Me.Label81)
         Me.GroupBox2.Controls.Add(XRRatioLabel)
         Me.GroupBox2.Controls.Add(Me.XRRatioTextBox)
         Me.GroupBox2.Controls.Add(ShortCircuitCapLabel)
@@ -3480,6 +4116,87 @@ Partial Class FormMain
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Main Feeder"
         '
+        'Label89
+        '
+        Me.Label89.AutoSize = True
+        Me.Label89.Location = New System.Drawing.Point(253, 514)
+        Me.Label89.Name = "Label89"
+        Me.Label89.Size = New System.Drawing.Size(20, 13)
+        Me.Label89.TabIndex = 92
+        Me.Label89.Text = "kA"
+        '
+        'Label88
+        '
+        Me.Label88.AutoSize = True
+        Me.Label88.Location = New System.Drawing.Point(253, 435)
+        Me.Label88.Name = "Label88"
+        Me.Label88.Size = New System.Drawing.Size(26, 13)
+        Me.Label88.TabIndex = 91
+        Me.Label88.Text = "mm²"
+        '
+        'Label87
+        '
+        Me.Label87.AutoSize = True
+        Me.Label87.Location = New System.Drawing.Point(253, 195)
+        Me.Label87.Name = "Label87"
+        Me.Label87.Size = New System.Drawing.Size(26, 13)
+        Me.Label87.TabIndex = 90
+        Me.Label87.Text = "mm²"
+        '
+        'Label86
+        '
+        Me.Label86.AutoSize = True
+        Me.Label86.Location = New System.Drawing.Point(253, 488)
+        Me.Label86.Name = "Label86"
+        Me.Label86.Size = New System.Drawing.Size(25, 13)
+        Me.Label86.TabIndex = 89
+        Me.Label86.Text = "p.u."
+        '
+        'Label84
+        '
+        Me.Label84.AutoSize = True
+        Me.Label84.Location = New System.Drawing.Point(253, 327)
+        Me.Label84.Name = "Label84"
+        Me.Label84.Size = New System.Drawing.Size(21, 13)
+        Me.Label84.TabIndex = 88
+        Me.Label84.Text = "AT"
+        '
+        'Label85
+        '
+        Me.Label85.AutoSize = True
+        Me.Label85.Location = New System.Drawing.Point(253, 301)
+        Me.Label85.Name = "Label85"
+        Me.Label85.Size = New System.Drawing.Size(36, 13)
+        Me.Label85.TabIndex = 87
+        Me.Label85.Text = "Metric"
+        '
+        'Label83
+        '
+        Me.Label83.AutoSize = True
+        Me.Label83.Location = New System.Drawing.Point(253, 142)
+        Me.Label83.Name = "Label83"
+        Me.Label83.Size = New System.Drawing.Size(14, 13)
+        Me.Label83.TabIndex = 80
+        Me.Label83.Text = "A"
+        '
+        'Label82
+        '
+        Me.Label82.AutoSize = True
+        Me.Label82.Location = New System.Drawing.Point(253, 116)
+        Me.Label82.Name = "Label82"
+        Me.Label82.Size = New System.Drawing.Size(21, 13)
+        Me.Label82.TabIndex = 79
+        Me.Label82.Text = "VA"
+        '
+        'Label81
+        '
+        Me.Label81.AutoSize = True
+        Me.Label81.Location = New System.Drawing.Point(253, 64)
+        Me.Label81.Name = "Label81"
+        Me.Label81.Size = New System.Drawing.Size(30, 13)
+        Me.Label81.TabIndex = 78
+        Me.Label81.Text = "MVA"
+        '
         'XRRatioTextBox
         '
         Me.XRRatioTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "XRRatio", True))
@@ -3503,6 +4220,7 @@ Partial Class FormMain
         '
         'KAICRatingTextBox
         '
+        Me.KAICRatingTextBox.BackColor = System.Drawing.Color.Silver
         Me.KAICRatingTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "kAICRating", True))
         Me.KAICRatingTextBox.Location = New System.Drawing.Point(126, 511)
         Me.KAICRatingTextBox.Name = "KAICRatingTextBox"
@@ -3521,6 +4239,7 @@ Partial Class FormMain
         '
         'ImpedanceImagTextBoxMain
         '
+        Me.ImpedanceImagTextBoxMain.BackColor = System.Drawing.Color.Silver
         Me.ImpedanceImagTextBoxMain.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "ImpedanceImag", True))
         Me.ImpedanceImagTextBoxMain.Location = New System.Drawing.Point(197, 485)
         Me.ImpedanceImagTextBoxMain.Name = "ImpedanceImagTextBoxMain"
@@ -3530,6 +4249,7 @@ Partial Class FormMain
         '
         'ImpedanceRealTextBoxMain
         '
+        Me.ImpedanceRealTextBoxMain.BackColor = System.Drawing.Color.Silver
         Me.ImpedanceRealTextBoxMain.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "ImpedanceReal", True))
         Me.ImpedanceRealTextBoxMain.Location = New System.Drawing.Point(126, 485)
         Me.ImpedanceRealTextBoxMain.Name = "ImpedanceRealTextBoxMain"
@@ -3539,6 +4259,7 @@ Partial Class FormMain
         '
         'GroundWireSizeTextBoxMain
         '
+        Me.GroundWireSizeTextBoxMain.BackColor = System.Drawing.Color.Silver
         Me.GroundWireSizeTextBoxMain.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "GroundWireSize", True))
         Me.GroundWireSizeTextBoxMain.Enabled = False
         Me.GroundWireSizeTextBoxMain.Location = New System.Drawing.Point(126, 432)
@@ -3681,6 +4402,7 @@ Partial Class FormMain
         '
         'OCPDRatingTextBox
         '
+        Me.OCPDRatingTextBox.BackColor = System.Drawing.Color.Silver
         Me.OCPDRatingTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "OCPDRating", True))
         Me.OCPDRatingTextBox.Location = New System.Drawing.Point(126, 324)
         Me.OCPDRatingTextBox.Name = "OCPDRatingTextBox"
@@ -3690,6 +4412,7 @@ Partial Class FormMain
         '
         'ConduitSizeTextBox
         '
+        Me.ConduitSizeTextBox.BackColor = System.Drawing.Color.Silver
         Me.ConduitSizeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "ConduitSize", True))
         Me.ConduitSizeTextBox.Location = New System.Drawing.Point(126, 298)
         Me.ConduitSizeTextBox.Name = "ConduitSizeTextBox"
@@ -3699,6 +4422,7 @@ Partial Class FormMain
         '
         'WireSizeTextBox
         '
+        Me.WireSizeTextBox.BackColor = System.Drawing.Color.Silver
         Me.WireSizeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "WireSize", True))
         Me.WireSizeTextBox.Location = New System.Drawing.Point(126, 192)
         Me.WireSizeTextBox.Name = "WireSizeTextBox"
@@ -3708,6 +4432,7 @@ Partial Class FormMain
         '
         'LineCurrentTextBox
         '
+        Me.LineCurrentTextBox.BackColor = System.Drawing.Color.Silver
         Me.LineCurrentTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "LineCurrent", True))
         Me.LineCurrentTextBox.Location = New System.Drawing.Point(126, 139)
         Me.LineCurrentTextBox.Name = "LineCurrentTextBox"
@@ -3717,6 +4442,7 @@ Partial Class FormMain
         '
         'TotalLoadTextBox
         '
+        Me.TotalLoadTextBox.BackColor = System.Drawing.Color.Silver
         Me.TotalLoadTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "TotalLoad", True))
         Me.TotalLoadTextBox.Location = New System.Drawing.Point(126, 113)
         Me.TotalLoadTextBox.Name = "TotalLoadTextBox"
@@ -3726,6 +4452,7 @@ Partial Class FormMain
         '
         'ProjectCodeTextBox1
         '
+        Me.ProjectCodeTextBox1.BackColor = System.Drawing.Color.Silver
         Me.ProjectCodeTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.TblMainFeederBindingSource, "ProjectCode", True))
         Me.ProjectCodeTextBox1.Location = New System.Drawing.Point(126, 35)
         Me.ProjectCodeTextBox1.Name = "ProjectCodeTextBox1"
@@ -3783,7 +4510,7 @@ Partial Class FormMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(1178, 749)
+        Me.ClientSize = New System.Drawing.Size(1247, 749)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.TabControl1)
@@ -3798,6 +4525,10 @@ Partial Class FormMain
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         CType(Me.TblDistributionBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ESD_DatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TblWireBindingSource4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4088,4 +4819,64 @@ Partial Class FormMain
     Friend WithEvents VoltageLevelComboBox As ComboBox
     Friend WithEvents VoltageDropTextBox1 As TextBox
     Friend WithEvents DistancetoSFTextBox As TextBox
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label47 As Label
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label48 As Label
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents Label49 As Label
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Label50 As Label
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents Label51 As Label
+    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents Label52 As Label
+    Friend WithEvents Label55 As Label
+    Friend WithEvents Label54 As Label
+    Friend WithEvents Label53 As Label
+    Friend WithEvents Label46 As Label
+    Friend WithEvents Label45 As Label
+    Friend WithEvents Label44 As Label
+    Friend WithEvents Label43 As Label
+    Friend WithEvents Label42 As Label
+    Friend WithEvents Label41 As Label
+    Friend WithEvents Label40 As Label
+    Friend WithEvents Label37 As Label
+    Friend WithEvents Label78 As Label
+    Friend WithEvents Label79 As Label
+    Friend WithEvents Label80 As Label
+    Friend WithEvents Label77 As Label
+    Friend WithEvents Label76 As Label
+    Friend WithEvents Label74 As Label
+    Friend WithEvents Label75 As Label
+    Friend WithEvents Label70 As Label
+    Friend WithEvents Label71 As Label
+    Friend WithEvents Label72 As Label
+    Friend WithEvents Label73 As Label
+    Friend WithEvents Label63 As Label
+    Friend WithEvents Label62 As Label
+    Friend WithEvents Label61 As Label
+    Friend WithEvents Label60 As Label
+    Friend WithEvents Label59 As Label
+    Friend WithEvents Label58 As Label
+    Friend WithEvents Label57 As Label
+    Friend WithEvents Label68 As Label
+    Friend WithEvents Label69 As Label
+    Friend WithEvents Label66 As Label
+    Friend WithEvents Label67 As Label
+    Friend WithEvents Label65 As Label
+    Friend WithEvents Label64 As Label
+    Friend WithEvents Label56 As Label
+    Friend WithEvents Label90 As Label
+    Friend WithEvents Label89 As Label
+    Friend WithEvents Label88 As Label
+    Friend WithEvents Label87 As Label
+    Friend WithEvents Label86 As Label
+    Friend WithEvents Label84 As Label
+    Friend WithEvents Label85 As Label
+    Friend WithEvents Label83 As Label
+    Friend WithEvents Label82 As Label
+    Friend WithEvents Label81 As Label
 End Class
