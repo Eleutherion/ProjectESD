@@ -428,6 +428,9 @@ Partial Class FormMain
         Me.TblDistributionTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblDistributionTableAdapter()
         Me.TblBranchTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblBranchTableAdapter()
         Me.TblSubfeederTableAdapter = New ProjectESD.ESD_DatabaseDataSetTableAdapters.tblSubfeederTableAdapter()
+        Me.BtnSearch = New System.Windows.Forms.Button()
+        Me.TxtSearch = New System.Windows.Forms.TextBox()
+        Me.CboSearch = New System.Windows.Forms.ComboBox()
         ProjectCodeLabel = New System.Windows.Forms.Label()
         NameLabel = New System.Windows.Forms.Label()
         OwnerLabel = New System.Windows.Forms.Label()
@@ -1509,7 +1512,7 @@ Partial Class FormMain
         Me.TabControl1.Location = New System.Drawing.Point(509, 24)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(721, 779)
+        Me.TabControl1.Size = New System.Drawing.Size(721, 804)
         Me.TabControl1.TabIndex = 2
         '
         'TabPage4
@@ -1562,7 +1565,7 @@ Partial Class FormMain
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(713, 753)
+        Me.TabPage4.Size = New System.Drawing.Size(713, 778)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Distribution Panelboard"
         '
@@ -2120,7 +2123,7 @@ Partial Class FormMain
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(713, 753)
+        Me.TabPage2.Size = New System.Drawing.Size(713, 778)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Subfeeder"
         '
@@ -2857,7 +2860,7 @@ Partial Class FormMain
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(713, 753)
+        Me.TabPage1.Size = New System.Drawing.Size(713, 778)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Branch Circuit"
         '
@@ -3801,7 +3804,7 @@ Partial Class FormMain
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(713, 753)
+        Me.TabPage3.Size = New System.Drawing.Size(713, 778)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Transformer/Generator"
         '
@@ -3936,7 +3939,7 @@ Partial Class FormMain
         Me.GroupBox1.Controls.Add(Me.NameTextBox)
         Me.GroupBox1.Controls.Add(ProjectCodeLabel)
         Me.GroupBox1.Controls.Add(Me.ProjectCodeTextBox)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 46)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 71)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(474, 205)
         Me.GroupBox1.TabIndex = 3
@@ -4109,7 +4112,7 @@ Partial Class FormMain
         Me.GroupBox2.Controls.Add(Me.TotalLoadTextBox)
         Me.GroupBox2.Controls.Add(ProjectCodeLabel1)
         Me.GroupBox2.Controls.Add(Me.ProjectCodeTextBox1)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 257)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 282)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(474, 546)
         Me.GroupBox2.TabIndex = 4
@@ -4505,12 +4508,40 @@ Partial Class FormMain
         '
         Me.TblSubfeederTableAdapter.ClearBeforeFill = True
         '
+        'BtnSearch
+        '
+        Me.BtnSearch.Location = New System.Drawing.Point(374, 42)
+        Me.BtnSearch.Name = "BtnSearch"
+        Me.BtnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.BtnSearch.TabIndex = 5
+        Me.BtnSearch.Text = "Search"
+        Me.BtnSearch.UseVisualStyleBackColor = True
+        '
+        'TxtSearch
+        '
+        Me.TxtSearch.Location = New System.Drawing.Point(29, 42)
+        Me.TxtSearch.Name = "TxtSearch"
+        Me.TxtSearch.Size = New System.Drawing.Size(132, 20)
+        Me.TxtSearch.TabIndex = 6
+        '
+        'CboSearch
+        '
+        Me.CboSearch.FormattingEnabled = True
+        Me.CboSearch.Items.AddRange(New Object() {"Project Code", "Project Name", "Project Owner", "DP Number", "Subfeeder Number", "Branch Circuit Number"})
+        Me.CboSearch.Location = New System.Drawing.Point(167, 42)
+        Me.CboSearch.Name = "CboSearch"
+        Me.CboSearch.Size = New System.Drawing.Size(121, 21)
+        Me.CboSearch.TabIndex = 7
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(1247, 749)
+        Me.Controls.Add(Me.CboSearch)
+        Me.Controls.Add(Me.TxtSearch)
+        Me.Controls.Add(Me.BtnSearch)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.TabControl1)
@@ -4879,4 +4910,7 @@ Partial Class FormMain
     Friend WithEvents Label83 As Label
     Friend WithEvents Label82 As Label
     Friend WithEvents Label81 As Label
+    Friend WithEvents BtnSearch As Button
+    Friend WithEvents TxtSearch As TextBox
+    Friend WithEvents CboSearch As ComboBox
 End Class

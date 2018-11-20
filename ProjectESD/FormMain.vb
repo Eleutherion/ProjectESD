@@ -1775,8 +1775,47 @@ ErrorLine: End Sub
         Application.Exit()
     End Sub
 
-
-
-
+    Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
+        Select Case CboSearch.SelectedIndex
+            Case 0
+                TblProjectTableAdapter.FillByProject(ESD_DatabaseDataSet.tblProject, TxtSearch.Text)
+                TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+                TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+                MessageBox.Show("Search results ended. Record/s found.")
+            Case 1
+                TblProjectTableAdapter.FillByProjectName(ESD_DatabaseDataSet.tblProject, TxtSearch.Text)
+                TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+                TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+                MessageBox.Show("Search results ended. Record/s found.")
+            Case 2
+                TblProjectTableAdapter.FillByOwner(ESD_DatabaseDataSet.tblProject, TxtSearch.Text)
+                TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+                TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+                MessageBox.Show("Search results ended. Record/s found.")
+            Case 3
+                TblDistributionTableAdapter.FillByCode(ESD_DatabaseDataSet.tblDistribution, DPNumberTextBox.Text, ProjectCodeTextBox.Text)
+                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                MessageBox.Show("Search results ended. Record/s found.")
+            Case 4
+                TblSubfeederTableAdapter.FillByCode(ESD_DatabaseDataSet.tblSubfeeder, NumberTextBox.Text, CodeTextBoxDP.Text)
+                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                MessageBox.Show("Search results ended. Record/s found.")
+            Case 5
+                TblBranchTableAdapter.FillByCode(ESD_DatabaseDataSet.tblBranch, CircuitNoTextBox.Text, CodeTextBoxSub.Text)
+                MessageBox.Show("Search results ended. Record/s found.")
+            Case Else
+                MessageBox.Show("Search results ended. No records found.")
+        End Select
+    End Sub
 #End Region
 End Class
