@@ -1,7 +1,6 @@
 ﻿Option Infer On
 Imports System.Text.RegularExpressions
 Imports System.Numerics
-Imports System.Data.SqlClient
 
 Public Class FormMain
     Private Balanced As Boolean = False
@@ -851,13 +850,17 @@ ErrorLine: End Sub
             NeutralWireComboBox.Enabled = True
             NeutralConductorComboBox.Enabled = True
             NeutralSizeTextBox.ReadOnly = False
+            NeutralSizeTextBox.BackColor = SystemColors.Window
             NeutralSetTextBox.ReadOnly = False
+            NeutralSetTextBox.BackColor = SystemColors.Window
             NeutralSetTextBox.Text = 1
         Else
             NeutralSizeTextBox.ReadOnly = True
+            NeutralSizeTextBox.BackColor = Color.Silver
             NeutralWireComboBox.Enabled = False
             NeutralConductorComboBox.Enabled = False
             NeutralSetTextBox.ReadOnly = True
+            NeutralSetTextBox.BackColor = Color.Silver
             NeutralSetTextBox.Text = ""
         End If
     End Sub
@@ -1328,12 +1331,15 @@ ErrorLine: End Sub
     Private Sub TypeComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TypeComboBox.SelectedIndexChanged
         If TypeComboBox.SelectedIndex = 6 Then
             PowerRatingTextBox.ReadOnly = False
+            PowerRatingTextBox.BackColor = SystemColors.Window
         Else
             PowerRatingTextBox.ReadOnly = True
+            PowerRatingTextBox.BackColor = Color.Silver
         End If
 
         If TypeComboBox.SelectedIndex = 2 Then
             MotorRatingTextBox.ReadOnly = False
+            MotorRatingTextBox.BackColor = Color.Silver
             CboRatingUnit.Enabled = True
             CboRatingUnit.SelectedIndex = 0
             MotorTypeComboBox.Enabled = True
@@ -1342,6 +1348,7 @@ ErrorLine: End Sub
             GrpPower.Enabled = False
             TxtMotorItem.Text = "1"
             PowerRatingTextBox.ReadOnly = True
+            PowerRatingTextBox.BackColor = Color.Silver
             WireTypeComboBox.Enabled = True
             ConductorComboBox.Enabled = True
             ConduitTypeComboBox.Enabled = True
@@ -1360,6 +1367,7 @@ ErrorLine: End Sub
 
         Else
             MotorRatingTextBox.ReadOnly = True
+            MotorRatingTextBox.BackColor = Color.Silver
             CboRatingUnit.SelectedIndex = -1
             CboRatingUnit.Enabled = False
             MotorTypeComboBox.SelectedIndex = -1
@@ -1369,7 +1377,9 @@ ErrorLine: End Sub
                 GrpPower.Enabled = False
                 GrpLighting.Enabled = True
                 PowerRatingTextBox.ReadOnly = True
+                PowerRatingTextBox.BackColor = Color.Silver
                 TxtMotorItem.ReadOnly = True
+                TxtMotorItem.BackColor = Color.Silver
                 TxtMotorItem.Text = ""
                 WireTypeComboBox.Enabled = True
                 ConductorComboBox.Enabled = True
@@ -1392,7 +1402,9 @@ ErrorLine: End Sub
                 GrpPower.Enabled = True
                 GrpLighting.Enabled = False
                 PowerRatingTextBox.ReadOnly = True
+                PowerRatingTextBox.BackColor = Color.Silver
                 TxtMotorItem.ReadOnly = True
+                TxtMotorItem.BackColor = Color.Silver
                 TxtMotorItem.Text = ""
                 WireTypeComboBox.Enabled = True
                 ConductorComboBox.Enabled = True
@@ -1413,6 +1425,7 @@ ErrorLine: End Sub
                 GrpPower.Enabled = False
                 GrpLighting.Enabled = False
                 PowerRatingTextBox.ReadOnly = False
+                PowerRatingTextBox.BackColor = Color.Silver
                 TxtMotorItem.Text = "1"
                 WireTypeComboBox.Enabled = True
                 ConductorComboBox.Enabled = True
@@ -1778,43 +1791,65 @@ ErrorLine: End Sub
     Private Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
         Select Case CboSearch.SelectedIndex
             Case 0
-                TblProjectTableAdapter.FillByProject(ESD_DatabaseDataSet.tblProject, TxtSearch.Text)
-                TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
-                TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
-                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
-                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-                TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
-                MessageBox.Show("Search results ended. Record/s found.")
+                If TblProjectTableAdapter.CountCode(TxtSearch.Text) > 0 Then
+                    TblProjectTableAdapter.FillByProject(ESD_DatabaseDataSet.tblProject, TxtSearch.Text)
+                    TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+                    TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+                    TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+                    TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                    TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+                    MessageBox.Show("Search results ended. " + CStr(TblProjectTableAdapter.CountCode(TxtSearch.Text)) + " record/s found.")
+                Else
+                    MessageBox.Show("No records found.")
+                End If
             Case 1
-                TblProjectTableAdapter.FillByProjectName(ESD_DatabaseDataSet.tblProject, TxtSearch.Text)
-                TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
-                TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
-                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
-                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-                TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
-                MessageBox.Show("Search results ended. Record/s found.")
+                If TblProjectTableAdapter.CountName(TxtSearch.Text) > 0 Then
+                    TblProjectTableAdapter.FillByProjectName(ESD_DatabaseDataSet.tblProject, TxtSearch.Text)
+                    TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+                    TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+                    TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+                    TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                    TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+                    MessageBox.Show("Search results ended. " + CStr(TblProjectTableAdapter.CountName(TxtSearch.Text)) + " record/s found.")
+                Else
+                    MessageBox.Show("No records found.")
+                End If
             Case 2
-                TblProjectTableAdapter.FillByOwner(ESD_DatabaseDataSet.tblProject, TxtSearch.Text)
-                TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
-                TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
-                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
-                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-                TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
-                MessageBox.Show("Search results ended. Record/s found.")
+                If TblProjectTableAdapter.CountOwner(TxtSearch.Text) > 0 Then
+                    TblProjectTableAdapter.FillByOwner(ESD_DatabaseDataSet.tblProject, TxtSearch.Text)
+                    TblMainFeederTableAdapter.FillByProject(ESD_DatabaseDataSet.tblMainFeeder, ProjectCodeTextBox.Text)
+                    TblDistributionTableAdapter.FillByProject(ESD_DatabaseDataSet.tblDistribution, ProjectCodeTextBox.Text)
+                    TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+                    TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                    TblTransGenTableAdapter.FillByProject(ESD_DatabaseDataSet.tblTransGen, ProjectCodeTextBox.Text)
+                    MessageBox.Show("Search results ended. " + CStr(TblProjectTableAdapter.CountOwner(TxtSearch.Text)) + " record/s found.")
+                Else
+                    MessageBox.Show("No records found.")
+                End If
             Case 3
-                TblDistributionTableAdapter.FillByCode(ESD_DatabaseDataSet.tblDistribution, DPNumberTextBox.Text, ProjectCodeTextBox.Text)
-                TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
-                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-                MessageBox.Show("Search results ended. Record/s found.")
+                If TblDistributionTableAdapter.VerifySearch(TxtSearch.Text, ProjectCodeTextBox.Text) = 1 Then
+                    TblDistributionTableAdapter.FillByCode(ESD_DatabaseDataSet.tblDistribution, DPNumberTextBox.Text, ProjectCodeTextBox.Text)
+                    TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
+                    TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                    MessageBox.Show("Search results ended. Record/s found.")
+                Else
+                    MessageBox.Show("No records found.")
+                End If
             Case 4
-                TblSubfeederTableAdapter.FillByCode(ESD_DatabaseDataSet.tblSubfeeder, NumberTextBox.Text, CodeTextBoxDP.Text)
-                TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-                MessageBox.Show("Search results ended. Record/s found.")
+                If TblSubfeederTableAdapter.VerifySearch(TxtSearch.Text, CodeTextBoxDP.Text) = 1 Then
+                    TblSubfeederTableAdapter.FillByCode(ESD_DatabaseDataSet.tblSubfeeder, NumberTextBox.Text, CodeTextBoxDP.Text)
+                    TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
+                    MessageBox.Show("Search results ended. Record/s found.")
+                Else
+                    MessageBox.Show("No records found.")
+                End If
             Case 5
-                TblBranchTableAdapter.FillByCode(ESD_DatabaseDataSet.tblBranch, CircuitNoTextBox.Text, CodeTextBoxSub.Text)
-                MessageBox.Show("Search results ended. Record/s found.")
-            Case Else
-                MessageBox.Show("Search results ended. No records found.")
+                If TblBranchTableAdapter.VerifySearch(TxtSearch.Text, CodeTextBoxSub.Text) = 1 Then
+                    TblBranchTableAdapter.FillByCode(ESD_DatabaseDataSet.tblBranch, CircuitNoTextBox.Text, CodeTextBoxSub.Text)
+                    MessageBox.Show("Search results ended. Record/s found.")
+                Else
+                    MessageBox.Show("No records found.")
+                End If
         End Select
     End Sub
 #End Region
