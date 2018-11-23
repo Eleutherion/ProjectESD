@@ -1472,6 +1472,10 @@ ErrorLine: End Sub
         SetTextBox.Text = "1"
         GroundWireCheckBox1.CheckState = False
         TypeComboBox.Enabled = True
+
+        If PhaseTextBox.Text = "1" Then
+            PhaseComboBox.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub BtnSaveBranch_Click(sender As Object, e As EventArgs) Handles BtnSaveBranch.Click
@@ -1851,6 +1855,15 @@ ErrorLine: End Sub
                     MessageBox.Show("No records found.")
                 End If
         End Select
+    End Sub
+
+    Private Sub PhaseTextBox_Leave(sender As Object, e As EventArgs) Handles PhaseTextBox.Leave
+        If PhaseTextBox.Text = 1 Then
+            PhaseComboBox.SelectedIndex = 0
+            PhaseComboBox.Enabled = False
+        Else
+            PhaseComboBox.Enabled = True
+        End If
     End Sub
 #End Region
 End Class
