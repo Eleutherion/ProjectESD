@@ -1832,25 +1832,25 @@ ErrorLine: End Sub
                 End If
             Case 3
                 If TblDistributionTableAdapter.VerifySearch(TxtSearch.Text, ProjectCodeTextBox.Text) = 1 Then
-                    TblDistributionTableAdapter.FillByCode(ESD_DatabaseDataSet.tblDistribution, DPNumberTextBox.Text, ProjectCodeTextBox.Text)
+                    TblDistributionTableAdapter.FillByCode(ESD_DatabaseDataSet.tblDistribution, TxtSearch.Text, ProjectCodeTextBox.Text)
                     TblSubfeederTableAdapter.FillByDP(ESD_DatabaseDataSet.tblSubfeeder, CodeTextBoxDP.Text)
                     TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-                    MessageBox.Show("Search results ended. Record/s found.")
+                    MessageBox.Show("Search results ended. " + CStr(TblDistributionTableAdapter.VerifySearch(TxtSearch.Text, ProjectCodeTextBox.Text)) + " record/s found.")
                 Else
                     MessageBox.Show("No records found.")
                 End If
             Case 4
                 If TblSubfeederTableAdapter.VerifySearch(TxtSearch.Text, CodeTextBoxDP.Text) = 1 Then
-                    TblSubfeederTableAdapter.FillByCode(ESD_DatabaseDataSet.tblSubfeeder, NumberTextBox.Text, CodeTextBoxDP.Text)
+                    TblSubfeederTableAdapter.FillByCode(ESD_DatabaseDataSet.tblSubfeeder, TxtSearch.Text, CodeTextBoxDP.Text)
                     TblBranchTableAdapter.FillBySubfeeder(ESD_DatabaseDataSet.tblBranch, CodeTextBoxSub.Text)
-                    MessageBox.Show("Search results ended. Record/s found.")
+                    MessageBox.Show("Search results ended. " + CStr(TblSubfeederTableAdapter.VerifySearch(TxtSearch.Text, CodeTextBoxDP.Text)) + " record/s found.")
                 Else
                     MessageBox.Show("No records found.")
                 End If
             Case 5
                 If TblBranchTableAdapter.VerifySearch(TxtSearch.Text, CodeTextBoxSub.Text) = 1 Then
-                    TblBranchTableAdapter.FillByCode(ESD_DatabaseDataSet.tblBranch, CircuitNoTextBox.Text, CodeTextBoxSub.Text)
-                    MessageBox.Show("Search results ended. Record/s found.")
+                    TblBranchTableAdapter.FillByCode(ESD_DatabaseDataSet.tblBranch, TxtSearch.Text, CodeTextBoxSub.Text)
+                    MessageBox.Show("Search results ended. " + CStr(TblBranchTableAdapter.VerifySearch(TxtSearch.Text, CodeTextBoxSub.Text)) + " record/s found.")
                 Else
                     MessageBox.Show("No records found.")
                 End If
