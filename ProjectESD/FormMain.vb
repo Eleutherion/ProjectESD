@@ -1339,7 +1339,7 @@ ErrorLine: End Sub
 
         If TypeComboBox.SelectedIndex = 2 Then
             MotorRatingTextBox.ReadOnly = False
-            MotorRatingTextBox.BackColor = Color.Silver
+            MotorRatingTextBox.BackColor = SystemColors.Window
             CboRatingUnit.Enabled = True
             CboRatingUnit.SelectedIndex = 0
             MotorTypeComboBox.Enabled = True
@@ -1473,8 +1473,8 @@ ErrorLine: End Sub
         GroundWireCheckBox1.CheckState = False
         TypeComboBox.Enabled = True
 
-        If PhaseTextBox.Text = "1" Then
-            PhaseComboBox.SelectedIndex = 0
+        If TypeComboBox1.SelectedIndex < 2 Then
+            PhaseComboBox.Text = "A"
         End If
     End Sub
 
@@ -1725,19 +1725,19 @@ ErrorLine: End Sub
         End If
     End Sub
 
-    Private Sub IntegerKeyPress(sender As Object, e As KeyPressEventArgs) Handles PhaseTextBox.KeyPress, SetTextBoxDP.KeyPress, SetTextBox1.KeyPress, DPNumberTextBox.KeyPress, TxtItemsPower4.KeyPress, TxtItemsPower3.KeyPress, TxtItemsPower2.KeyPress, TxtItemsPower1.KeyPress, TxtItemsLighting3.KeyPress, TxtItemsLighting2.KeyPress, TxtItemsLighting1.KeyPress, SetTextBoxSub.KeyPress, SetTextBox.KeyPress, NumberTextBox.KeyPress, NumberofGeneratorsTextBox.KeyPress, CircuitNoTextBox.KeyPress
+    Private Sub IntegerKeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtItemsPower4.KeyPress, TxtItemsPower3.KeyPress, TxtItemsPower2.KeyPress, TxtItemsPower1.KeyPress, TxtItemsLighting3.KeyPress, TxtItemsLighting2.KeyPress, TxtItemsLighting1.KeyPress, SetTextBoxSub.KeyPress, SetTextBoxDP.KeyPress, SetTextBox1.KeyPress, SetTextBox.KeyPress, PhaseTextBox.KeyPress, NumberTextBox.KeyPress, NumberofGeneratorsTextBox.KeyPress, DPNumberTextBox.KeyPress, CircuitNoTextBox.KeyPress
         If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub NumericKeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtRatingLighting3.KeyPress, TxtRatingLighting2.KeyPress, TxtRatingLighting1.KeyPress, ShortCircuitCapTextBox.KeyPress, XRRatioTextBox.KeyPress, DistancetoSETextBox.KeyPress, TransformerZpuTextBox.KeyPress, TransformerXRRatioTextBox.KeyPress, DiversityFactorTextBox.KeyPress, DistancetoMainTextBoxDP.KeyPress, DistancetoMainTextBox.KeyPress, DemandFactorTextBox.KeyPress
+    Private Sub NumericKeyPress(sender As Object, e As KeyPressEventArgs) Handles XRRatioTextBox.KeyPress, TxtRatingLighting3.KeyPress, TxtRatingLighting2.KeyPress, TxtRatingLighting1.KeyPress, TransformerZpuTextBox.KeyPress, TransformerXRRatioTextBox.KeyPress, ShortCircuitCapTextBox.KeyPress, DiversityFactorTextBox.KeyPress, DistancetoSETextBox.KeyPress, DistancetoMainTextBoxDP.KeyPress, DistancetoMainTextBox.KeyPress, DemandFactorTextBox.KeyPress
         If Not Char.IsNumber(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso Not e.KeyChar = "." Then
             e.Handled = True
         End If
     End Sub
 
-    Private Sub NumericTextChange(sender As Object, e As EventArgs) Handles CircuitNoTextBox.TextChanged, TxtItemsPower4.TextChanged, TxtItemsPower3.TextChanged, TxtItemsPower2.TextChanged, TxtItemsPower1.TextChanged, TxtItemsLighting3.TextChanged, TxtItemsLighting2.TextChanged, TxtItemsLighting1.TextChanged, SetTextBox.TextChanged, PhaseTextBox.TextChanged, SetTextBox1.TextChanged, SetTextBoxDP.TextChanged, DPNumberTextBox.TextChanged, SetTextBoxSub.TextChanged, NumberTextBox.TextChanged, NumberofGeneratorsTextBox.TextChanged
+    Private Sub NumericTextChange(sender As Object, e As EventArgs) Handles TxtItemsPower4.TextChanged, TxtItemsPower3.TextChanged, TxtItemsPower2.TextChanged, TxtItemsPower1.TextChanged, TxtItemsLighting3.TextChanged, TxtItemsLighting2.TextChanged, TxtItemsLighting1.TextChanged, SetTextBoxSub.TextChanged, SetTextBoxDP.TextChanged, SetTextBox1.TextChanged, SetTextBox.TextChanged, PhaseTextBox.TextChanged, NumberTextBox.TextChanged, NumberofGeneratorsTextBox.TextChanged, DPNumberTextBox.TextChanged, CircuitNoTextBox.TextChanged
         Dim digitsOnly As Regex = New Regex("[^\d]")
         sender.Text = digitsOnly.Replace(sender.Text, "")
     End Sub
@@ -1855,15 +1855,6 @@ ErrorLine: End Sub
                     MessageBox.Show("No records found.")
                 End If
         End Select
-    End Sub
-
-    Private Sub PhaseTextBox_Leave(sender As Object, e As EventArgs) Handles PhaseTextBox.Leave
-        If PhaseTextBox.Text = 1 Then
-            PhaseComboBox.SelectedIndex = 0
-            PhaseComboBox.Enabled = False
-        Else
-            PhaseComboBox.Enabled = True
-        End If
     End Sub
 #End Region
 End Class
