@@ -154,3 +154,4 @@ C:\Users\ambal\Documents\Visual Studio 2017\Projects\ProjectESD\ProjectESD\obj\x
 C:\Users\ambal\Documents\Visual Studio 2017\Projects\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.exe
 C:\Users\ambal\Documents\Visual Studio 2017\Projects\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.xml
 C:\Users\ambal\Documents\Visual Studio 2017\Projects\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.pdb
+C:\Users\ambal\Documents\Visual Studio 2017\Projects\ProjectESD\ProjectESD\obj\x64\Debug\ProjectESD.vbprojAssemblyReference.cache

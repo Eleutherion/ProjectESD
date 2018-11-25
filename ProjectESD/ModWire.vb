@@ -237,7 +237,7 @@ ReturnLine: Return Size(v)
 
     Public Function ConduitSize(ByVal WireType As String, ConductorSize As String, Ground As Boolean, Phase As String, ConduitType As String, Neutral As Boolean) As Integer
         Dim WireSize = {"2.0", "3.5", "5.5", "8.0", "14", "22", "30", "38", "50", "60", "80", "100", "125", "150", "175", "200", "250", "325", "375", "400", "500"}
-        Dim NominalSize = {10, 15, 20, 25, 32, 40, 50, 65, 80, 90, 100, 125, 150}
+        Dim NominalSize = {12, 16, 21, 27, 35, 41, 53, 63, 78, 91, 103, 129, 155}
         Dim v, w, z As Integer
         Dim Conduit(20, 12) As Integer
 
